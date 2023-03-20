@@ -25,14 +25,16 @@
                 <v-text-field v-model="password" label="비밀번호" type="password" color="teal" 
                               :rules="password_rule" clearable prepend-icon="mdi-lock-outline"/>
               </div>
-              <v-col style="padding-bottom: 100px>
-              </v-col>
               
+              <div style="padding: 15px;">
+              <input type="checkbox" v-model="arr" value="idRemember">아이디 기억하기
+              </div>
               <!--회원가입 버튼-->
+              <div style="padding: 15px;">
               <v-btn @click="loginsubmit">회원가입</v-btn>              
               <!--로그인 버튼-->
               <v-btn @click="loginsubmit">로그인</v-btn>
-
+              </div>
             </v-form>
           </v-card-text>
         </v-card>
