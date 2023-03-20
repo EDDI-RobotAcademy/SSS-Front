@@ -1,25 +1,23 @@
 <template>
   <v-app>
-    <!-- <navigation-menu-page/> -->
+    <Header/>
     <v-main>
       <router-view/>
     </v-main>
-    <!-- <Footer/> -->
   </v-app>
 </template>
 
 <script>
-// import Footer ;
-// import Navigation ;
-
+import Header from '@/views/NavigationMenu/HeaderUi.vue';
+  
 export default {
   name: 'App',
+
   data: () => ({
     //
   }),
   components: {
-    // Navigation,
-    // Footer
-  },
+    Header,
+  }
 };
 </script>
