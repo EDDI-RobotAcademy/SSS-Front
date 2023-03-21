@@ -34,6 +34,10 @@
 
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn onclick="location.href='http://localhost:8080/member/sign-up'">
+        <span>signUp</span>
+        <v-icon right>mdi-account-plus</v-icon>
+      </v-btn>
       <v-btn>
         <span>login</span>
         <v-icon right>mdi-test-tube</v-icon>
