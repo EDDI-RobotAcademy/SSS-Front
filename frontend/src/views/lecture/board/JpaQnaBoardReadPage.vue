@@ -1,9 +1,9 @@
 <template>
     <v-container>
       <div align="center">
-        <h2>Vue + Spring 게시판 읽기</h2>
+        <h2>게시판 읽기</h2>
         <jpa-qna-board-read v-if="board" :board="board"/>
-        <p v-else>로딩중 .......... </p>
+        <p v-else>로딩중 ......... </p>
         <router-link :to="{ name: 'JpaQnaBoardModifyPage', params: { boardId } }">
           게시물 수정
         </router-link>
@@ -39,7 +39,7 @@
           ]),
           async onDelete () {
               await this.requestDeleteBoardToSpring(this.boardId)
-              await this.$router.push({ name: 'JpaBoardListPage' })
+              await this.$router.push({ name: 'JpaQnaBoardListPage' })
           }
       },
       created () {
