@@ -2,7 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+
 import SignUpPage from "@/views/Member/SignUpPage";
+
+import LoginPage from '../views/Acount/LoginPage.vue'
 
 Vue.use(VueRouter)
 
@@ -14,9 +17,15 @@ const routes = [
   },
   {
     path: '/member/sign-up',
-    name: 'SignUpPage',
-    component: SignUpPage 
+    name: 'sign-up',
+    component: SignUpPage
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginPage
+  },
+
 ]
 
 const router = new VueRouter({
