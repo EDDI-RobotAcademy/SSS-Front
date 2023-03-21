@@ -4,7 +4,7 @@
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
             <v-img
-                :src="require('@/assets/3sss-kr.png')" width="250" class="mx-auto mb-6"/>
+                :src="require('@/assets/3sss-kr.png')" width="300" class="mx-auto mb-6"/>
           </router-link>
           <v-card width="460">
             <v-card-text class="text-center px-12 py-16">
@@ -119,7 +119,7 @@
         const emailValid = this.email.match(
             /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
-        
+
         if (emailValid) {
           const {email} = this
           axios.post(`http://localhost:7777/member/check-email/${email}`)
@@ -147,7 +147,6 @@
                 }
             })
       },
-      
     }
   }
   </script>
