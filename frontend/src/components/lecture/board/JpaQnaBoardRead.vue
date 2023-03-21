@@ -31,13 +31,16 @@
             <textarea cols="50" rows="20" :value="board.content" readonly/>
           </td>
         </tr>
+        <tr>
+          <td>댓글</td>
+        </tr>
       </table>
     </div>
   </template>
   
   <script>
   export default {
-      name: "JpaBoardRead",
+      name: "JpaQnaBoardRead",
       props: {
           board: {
               type: Object,
@@ -48,5 +51,4 @@
   </script>
   
   <style>
-  
   </style>
