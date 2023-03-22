@@ -1,13 +1,12 @@
 <template>
   <nav>
-    <v-app-bar color="dark" class="flex-grow-0" app dark >
+    <v-app-bar class="flex-grow-0" >
       <v-toolbar-title class="text-uppercase text--darken-4">
         <ul class="menu">
           <li class="logo">
-            <v-btn
-            >
-            logo img
-            </v-btn>
+            <router-link :to="{ name: 'home' }">
+              <img src="@/assets/logo/3sss-2.jpg" width="100" class="mt-3">
+            </router-link>
           </li>
           <li>
             <v-btn
