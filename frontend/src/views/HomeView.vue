@@ -6,10 +6,9 @@
 
 import PopupForm from "@/components/main/PopupForm.vue";
 export default {
-  name: 'HomeView',
+  name: 'HomeView', 
   components: {
     PopupForm
   },
-
 }
 </script>
