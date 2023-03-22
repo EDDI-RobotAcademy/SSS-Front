@@ -7,6 +7,9 @@ import JpaQnaBoardRegisterPage from "@/views/lecture/board/JpaQnaBoardRegisterPa
 import JpaQnaBoardReadPage from "@/views/lecture/board/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/lecture/board/JpaQnaBoardModifyPage.vue"
 
+import LoginPage from '../views/Acount/LoginPage.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,6 +47,12 @@ const routes = [
     props: {
       default: true
     }
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginPage
   },
 
 ]
