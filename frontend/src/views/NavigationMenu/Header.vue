@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-app-bar class="flex-grow-0" >
+    <v-app-bar class="flex-grow-0" color="white">
       <v-toolbar-title class="text-uppercase text--darken-4">
         <ul class="menu">
           <li class="logo">
