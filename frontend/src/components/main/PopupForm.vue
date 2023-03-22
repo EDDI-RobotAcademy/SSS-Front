@@ -12,7 +12,9 @@
       <p>샐러드 설명</p>
       <p>샐러드 설명</p>
       <p>샐러드 설명</p>
-      <v-btn>회원가입 하러...</v-btn>
+      <router-link to="/member/sign-up">
+        <v-btn>회원가입 하러...</v-btn>
+      </router-link>
       <v-btn>이벤트 자세히...</v-btn>
     </div>
   </v-container>
