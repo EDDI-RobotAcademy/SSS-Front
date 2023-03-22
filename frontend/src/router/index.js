@@ -55,6 +55,12 @@ const routes = [
     component: LoginPage
   },
 
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginPage
+  },
+
 ]
 
 const router = new VueRouter({
