@@ -1,13 +1,13 @@
 <template>
-
+  <popup-form/>
 </template>
 
 <script>
 
-
+import PopupForm from "@/components/main/PopupForm.vue";
 export default {
   name: 'HomeView', 
-  comments: {
+  components: {
     PopupForm
   },
 }

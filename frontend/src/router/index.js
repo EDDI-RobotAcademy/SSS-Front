@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import JpaQnaBoardListPage from "@/views/lecture/board/JpaQnaBoardListPage.vue"
+import JpaQnaBoardRegisterPage from "@/views/lecture/board/JpaQnaBoardRegisterPage.vue"
+import JpaQnaBoardReadPage from "@/views/lecture/board/JpaQnaBoardReadPage.vue"
+import JpaQnaBoardModifyPage from "@/views/lecture/board/JpaQnaBoardModifyPage.vue"
 
 import SignUpPage from "@/views/Member/SignUpPage";
 
