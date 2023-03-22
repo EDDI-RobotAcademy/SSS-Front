@@ -16,7 +16,7 @@
             </v-btn>
           </li>
           <li>
-            <v-btn>
+            <v-btn onclick="location.href='http://localhost:8080/companyBoard/companyIntroduction'">
             회사소개
             </v-btn>
           </li>
