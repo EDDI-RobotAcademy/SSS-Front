@@ -7,7 +7,7 @@
         <router-link to="/">
           <!-- 로고 이미지칸 클릭하면 홈페이지로 가지는데...음..louter-link 때문인듯! 링크걸려있으니 이미지 수정해서 넣으면 끗-->
           <v-img
-              :src="require('@/assets/logo.png')" width="120" class="mx-auto mb-6"/>
+              :src="require('@/assets/logo/3sss-ko.jpg')" width="120" class="mx-auto mb-6"/>
         </router-link>
               <!--로그인창크기-->
         <v-card width="500">
@@ -31,9 +31,9 @@
               </div>
               <!--회원가입 버튼-->
               <div style="padding: 15px;">
-              <v-btn @click="loginsubmit">회원가입</v-btn>              
+              <v-btn @click="SignInsubmit">회원가입</v-btn>              
               <!--로그인 버튼-->
-              <v-btn @click="loginsubmit">로그인</v-btn>
+              <v-btn @click="SignInsubmit">로그인</v-btn>
               </div>
             </v-form>
           </v-card-text>
@@ -47,7 +47,7 @@
   <script>
   
 export default {
-    name: "LoginForm",
+    name: "SignInForm",
     data () {
         return {
             id: "",

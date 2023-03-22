@@ -8,8 +8,8 @@ import JpaQnaBoardReadPage from "@/views/lecture/board/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/lecture/board/JpaQnaBoardModifyPage.vue"
 
 
-import SignUpPage from "@/views/Member/SignUpPage";
-import LoginPage from '../views/Acount/LoginPage.vue'
+import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
+import SignInPage from '@/views/Acount/Member/SignInPage.vue';
 
 Vue.use(VueRouter)
 
@@ -20,12 +20,16 @@ const routes = [
     component: HomeView
   },
   {
-
+    path: '/member/sign-in',
+    name: 'SignIn',
+    component: SignInPage
+  },
+  {
     path: '/member/sign-up',
-    name: 'sign-up',
+    name: 'SignUp',
     component: SignUpPage
   },
-
+  {
     path: '/board-list-page',
     name: 'JpaQnaBoardListPage',
     component: JpaQnaBoardListPage
@@ -54,12 +58,6 @@ const routes = [
     props: {
       default: true
     }
-  },
-
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginPage
   },
 
 ]
