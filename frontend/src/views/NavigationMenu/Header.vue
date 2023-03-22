@@ -1,37 +1,23 @@
 <template>
   <nav>
     <v-app-bar class="flex-grow-0" color="white">
-      <v-toolbar-title class="text-uppercase text--darken-4">
-        <ul class="menu">
+        <ul class="menu mt-3">
           <li class="logo">
             <router-link :to="{ name: 'home' }">
-              <img src="@/assets/logo/3sss-2.jpg" width="100" class="mt-3">
+              <img src="@/assets/logo/3sss-2.jpg" width="100">
             </router-link>
           </li>
           <li>
-            <v-btn
-            >
-            HOME
-            </v-btn>
+            <router-link :to="{ name: 'about' }">회사 소개</router-link>
           </li>
           <li>
-            <v-btn>
-            회사소개
-            </v-btn>
+            <router-link :to="{ name: 'about' }">상품 페이지</router-link>
           </li>
           <li>
-            <v-btn>
-            상품페이지
-            </v-btn>
-          </li>
-          <li>
-            <v-btn>
-            FAQ
-            </v-btn>
+            <router-link :to="{ name: 'JpaQnaBoardListPage' }">FAQ</router-link>
           </li>
         </ul>
 
-      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn onclick="location.href='http://localhost:8080/member/sign-up'">
         <span>signUp</span>
@@ -58,4 +44,14 @@ export default {
 
 <style scoped>
   ul.menu li{ display: inline;}
+  .menu a:hover {
+    color: #3d7e27 !important;
+  }
+  .menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    margin-right: 80px;
+    transition: all 0.3s ease 0s;
+  }
 </style>
