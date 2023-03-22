@@ -38,8 +38,8 @@
         <span>signUp</span>
         <v-icon right>mdi-account-plus</v-icon>
       </v-btn>
-      <v-btn>
-        <span>login</span>
+      <v-btn onclick="location.href='http://localhost:8080/member/sign-in'">
+        <span>signIn</span>
         <v-icon right>mdi-test-tube</v-icon>
       </v-btn>
       <v-btn>
