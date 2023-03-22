@@ -29,25 +29,38 @@
 
     <div class="py-5">
       <p>이미지 슬라이드 샐러드 메뉴</p>
-      <div id="mainTopCarousel" class=" container carousel slide" data-bs-ride="carousel">
+      <div id="mainTopCarousel" class=" container carousel slide" >
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="main-top-promotion row row-cols-1 row-cols-sm-2 row-cols-md-3">
-            <div class="col" style="padding:100px 200px; background-color:gray;">
-              <img src="" alt="샐러드 메뉴1">
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
             </div>
-            <div class="col" style="padding:100px 200px; background-color:green;">
-              샐러드 메뉴2
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
             </div>
-            <div class="col" style="padding:100px 200px; background-color:gray;">
-              샐러드 메뉴3
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item ">
+          <div class="main-top-promotion row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
+            </div>
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
+            </div>
+            <div class="col">
+              <v-img src="@/assets/popup/SSS.jpeg"/>
             </div>
           </div>
         </div>
       </div>
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#mainTopCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#mainTopCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#mainTopCarouse" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#mainTopCarouse" data-bs-slide-to="1" aria-label="Slide 2"></button>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#mainTopCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -25,7 +25,7 @@ export default {
 	name: 'PopupForm',
   data() {
     return {
-      name: '팝업 창 입니다.',
+      title: '팝업 창 입니다.',
       popup: true,
     }
   },
