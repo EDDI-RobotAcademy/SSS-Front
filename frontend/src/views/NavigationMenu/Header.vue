@@ -19,32 +19,49 @@
         </ul>
 
       <v-spacer></v-spacer>
-      <!--btn(화면이 새로고침 된다) / router-link(spa가 사용되며 로딩없이 바로 적용) .feat 2정우-->
-      <v-btn> 
-        <router-link to="/member/sign-up">
-        <span>signUp</span>
-        <v-icon right>mdi-account-plus</v-icon>
-      </router-link>
-      </v-btn>
-      <!--btn(화면이 새로고침 된다) / router-link(spa가 사용되며 로딩없이 바로 적용) 밑에는 router index 파일의 name 링크 타고 오는 것 .feat 2정우-->
-      <v-btn> 
-        <router-link :to="{ name: 'SignIn' }">
-        <span>signIn</span>
-        <v-icon right>mdi-test-tube</v-icon>
-      </router-link>
-      </v-btn>
-      <v-btn>
-        <span>logout</span>
-        <v-icon right>mdi-history</v-icon>
-      </v-btn>
+      <template v-if="!this.$store.state.signInValue">
+        <v-btn onclick="location.href='http://localhost:8080/member/sign-up'">
+          <span>signUp</span>
+          <v-icon right>mdi-account-plus</v-icon>
+        </v-btn>
+        <v-btn onclick="location.href='http://localhost:8080/member/sign-in'">
+          <span>login</span>
+          <v-icon right>mdi-test-tube</v-icon>
+        </v-btn>
+      </template>
+
+      <template v-else>
+          <v-btn @click="logoutBtn">
+            <span>logout</span>
+            <v-icon right>mdi-history</v-icon>
+          </v-btn>
+        </template>
+
+        <!--마이페이지 링크-->
     </v-app-bar>
   </nav>
   
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    ...mapState([
+      'signInValue'
+    ]),
+    logoutBtn() {
+      this.$store.commit("SIGN_IN_VALUE", false)
+      localStorage.removeItem("vuex")
+      localStorage.removeItem("userToken")
+      alert("로그아웃 되었습니다.")
+      this.$router.push({ name: "home" })
+      // 현재 경로에서 새로고침 시 필요
+      history.go(0)
+    }
+  }
 }
 </script>
 
