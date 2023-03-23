@@ -23,7 +23,7 @@
         })
             .then((res) => {
               alert("회원 가입 완료!")
-              this.$router.push("/")
+              this.$router.push("/member/sign-in")
             })
             .catch((res) => {
               alert(res.response.data.message)
