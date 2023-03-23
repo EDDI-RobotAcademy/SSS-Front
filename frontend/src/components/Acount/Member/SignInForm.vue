@@ -14,7 +14,7 @@
           <v-card-text class="text-center px-15 py-16">
             <v-form @submit.prevent="onSubmit">
               <!--상단 문구 로그인 지우고 로고로..?통일?-->
-              <div class="text-h4 font-weight-black mb-10">셀샐셀</div>
+              <div class="text-h4 font-weight-black mb-10">로그인</div>
               <!--아이디 입력칸-->
               <div class="d-flex">
                 <v-text-field v-model="email" label="이메일" color="teal"
@@ -27,7 +27,7 @@
               </div>
               
               <div style="padding: 15px;">
-              <input type="checkbox" value="emailRemember">이메일 기억하기
+              <input type="checkbox" v-model="rememberStatus" value="emailRemember">이메일 기억하기
               </div> <!-- v-model="arr" -->
 
               <v-btn type="submit" block x-large rounded color="green lighten-1" 
@@ -65,6 +65,7 @@ export default {
     data () {
         return {
             email: "",
+            rememberStatus: false,
             password: "",
 
             //이메일 형식 룰
@@ -84,13 +85,21 @@ export default {
                            ],
                 }
             },
+    created() {
+      if (this.$cookies.get("rememberEmail")) {
+        this.rememberStatus = true
+        this.email = this.$cookies.get("rememberEmail")
+      } else {
+        this.rememberStatus = false
+      }
+    },
     methods: {
         //버튼 눌렀을때 전송되는 데이터
         onSubmit () {
         const { email, password } = this
         this.$emit("submit", { email, password })
-                    }
-             }
+        },
+    }
 }
 </script>
 
