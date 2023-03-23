@@ -76,6 +76,7 @@ export default {
 .main-top-promotion {
 	position: relative;
 	width: 100%;
+	height: 700px;
 }
 
 .main-top-promotion-video {
