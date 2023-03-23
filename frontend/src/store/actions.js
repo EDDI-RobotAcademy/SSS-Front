@@ -1,9 +1,12 @@
 import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
+    REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
 } from './mutation-types'
 
 import axios from 'axios'
+import states from "@/store/states";
+import store from "@/store/index";
 
 export default {
     requestCreateBoardToSpring ({}, payload) {
@@ -52,5 +55,26 @@ export default {
                 alert("문제 발생!")
             })
     },
-   
+    requestMemberSignInToSpring({ commit }, payload) {
+        const { email, password } = payload
+            axios
+              .post("http://localhost:7777/member/sign-in", { email, password })
+              .then((res) => {
+                if (localStorage.getItem("userToken") == null) {
+                  alert("로그인 성공!");
+                  commit(REQUEST_SIGN_IN_TOKEN_FROM_SPRING, res.data)
+                  states.userToken = res.data.userToken
+
+                  if(localStorage.getItem("userToken") != states.userToken) {
+                    store.commit("USER_TOKEN", res.data.userToken)
+                  }
+                  store.commit("SIGN_IN_VALUE", true)
+                } else {
+                  alert("이미 로그인된 상태입니다.");
+                }
+              })
+            //   .catch(() => {
+            //     alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.");
+            //   });
+    },
 }
