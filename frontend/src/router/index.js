@@ -6,12 +6,10 @@ import JpaQnaBoardListPage from "@/views/Board/QnaBoard/JpaQnaBoardListPage.vue"
 import JpaQnaBoardRegisterPage from "@/views/Board/QnaBoard/JpaQnaBoardRegisterPage.vue"
 import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
-
+import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionBoardPage.vue"
 
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
-
-
 
 Vue.use(VueRouter)
 
@@ -23,16 +21,14 @@ const routes = [
   },
   {
     path: '/member/sign-in',
-    name: 'SignInPage',
+    name: 'SignIn',
     component: SignInPage
   },
   {
     path: '/member/sign-up',
-    name: 'SignUpPage',
+    name: 'SignUp',
     component: SignUpPage
   },
-
-  //회사소개
   {
     path: '/qnaboard/jpa-qna-board-list-page',
     name: 'JpaQnaBoardListPage',
@@ -63,6 +59,13 @@ const routes = [
       default: true
     }
   },
+//회사소개
+{
+  path: '/introduction-board/introduction-board-page',
+  name: 'IntroductionBoardPage',
+  component: IntroductionBoardPage
+},
+
 
 ]
 
