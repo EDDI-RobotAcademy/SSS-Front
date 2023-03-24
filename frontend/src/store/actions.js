@@ -22,6 +22,19 @@ export default {
                 alert('문제 발생!')
             })
     },
+    requestCreateReplyToSpring ({}, payload) {
+
+        const { replyWriter, replyContent } = payload
+        return axios.post('http://localhost:7777/board/register',
+            { replyWriter, replyContent })
+            .then((res) => {
+                alert('댓글 등록 성공: ' + JSON.stringify(res.data))
+                return res
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    },
     requestBoardListToSpring ({ commit }) {
         return axios.get('http://localhost:7777/board/list')
             .then((res) => {
