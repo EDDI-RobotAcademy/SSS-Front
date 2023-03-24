@@ -27,8 +27,8 @@
               </div>
               
               <div style="padding: 15px;">
-              <input type="checkbox" v-model="rememberStatus" value="emailRemember">이메일 기억하기
-              </div> <!-- v-model="arr" -->
+              <input type="checkbox" v-model="rememberStatus">이메일 기억하기
+              </div>
 
               <v-btn type="submit" block x-large rounded color="green lighten-1" 
               class="mt-6" :disabled="false">로그인</v-btn>
@@ -82,23 +82,28 @@ export default {
             password_rule: [
                 v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
                 v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
-                           ],
-                }
-            },
-    created() {
-      if (this.$cookies.get("rememberEmail")) {
-        this.rememberStatus = true
-        this.email = this.$cookies.get("rememberEmail")
-      } else {
-        this.rememberStatus = false
-      }
+                           ],  
+        }
+    },      
+    mounted() {
+        const rememberEmail = localStorage.getItem("rememberEmail")
+        if (rememberEmail) {
+           this.email = rememberEmail
+           this.rememberStatus = true
+        }
     },
     methods: {
-        //버튼 눌렀을때 전송되는 데이터
-        onSubmit () {
+              //버튼 눌렀을때 전송되는 데이터
+       onSubmit () {
         const { email, password } = this
-        this.$emit("submit", { email, password })
-        },
+           this.$emit("submit", { email, password })
+                
+          if(this.rememberStatus) {
+              localStorage.setItem("rememberEmail", this.email)
+          } else {
+              localStorage.removeItem("rememberEmail")
+          }
+       },
     }
 }
 </script>
