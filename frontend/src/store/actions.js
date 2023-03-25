@@ -78,6 +78,19 @@ export default {
             //     alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.");
             //   });
     },
+//등록
+    requestCreateSideProductToSpring ({}, payload){
+        const { title, content, price } = payload
+        return axios.post('http://localhost:7777/sideproduct/register', 
+        { title, content, price })
+        .then((res) => {
+            alert('게시물 등록 성공: ' + JSON.stringify(res.data))
+            return res
+        })
+        .catch(() => {
+            alert('문제 발생!')
+        })
+    },
 //리스트
     requestSideProductListToSpring({commit}){
         return axios.get('http://localhost:7777/sideproduct/list')
