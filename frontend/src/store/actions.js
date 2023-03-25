@@ -3,6 +3,7 @@ import {
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
+    REQUEST_SIDEPRODUCT_TO_SPRING
 } from './mutation-types'
 
 import axios from 'axios'
@@ -99,4 +100,12 @@ export default {
             commit(REQUEST_SIDEPRODUCT_LIST_TO_SPRING, res.data)
         })
 },
+//읽기
+    requestSideProductToSpring({commit},productId){
+        return axios.get(`http://localhost:7777/sideproduct/read/${productId}`)
+        .then((res) => {
+            commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
+        })
+    }
+
 }

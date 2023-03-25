@@ -8,6 +8,7 @@ import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
 import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionBoardPage.vue"
 
+import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
 import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
 import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
 
@@ -67,6 +68,17 @@ const routes = [
     props: {
       default: true
     }
+  },
+  //사이드메뉴
+  {
+  path: '/side-Product-read/:productId',
+  name: 'SideProductReadPage',
+  components: {
+    default: SideProductReadPage
+  },
+  props: {
+    default: true
+  }
   },
   {
   path: '/side-Product-register',
