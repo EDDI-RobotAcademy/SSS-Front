@@ -12,7 +12,7 @@ import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
-
+import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
 
 Vue.use(VueRouter)
 
@@ -73,7 +73,11 @@ const routes = [
   name: 'ProductListPage',
   component: ProductListPage
 },
-
+{
+  path: '/product-register',
+  name: 'ProductRegisterPage',
+  component: ProductRegisterPage
+},
 
 ]
 

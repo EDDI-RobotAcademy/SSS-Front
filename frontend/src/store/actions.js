@@ -84,5 +84,13 @@ export default {
             commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
         })
     },
-
+    requestCreateProductToSpring ({}, payload) {
+        return axios.post('http://localhost:7777/products/register', payload)
+            .then(() => {
+                alert('상품 등록 성공!')
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    },
 }
