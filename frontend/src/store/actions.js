@@ -107,5 +107,17 @@ export default {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
     }
+//수정
+requestSideProductModifyToSpring({}, payload){
+    const {productId, title, content, price} = payload
+    return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,
+    { title, content, price})
+    .then(() => {
+        alert("수정 성공")
+    })
+    .catch(() => {
+        alert("아 뭔가 문제 발생..")
+    })
+}
 
 }

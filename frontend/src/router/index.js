@@ -90,6 +90,16 @@ const routes = [
   name: 'SideProductListPage',
   component: SideProductListPage
   },
+  {
+  path: '/side-Product-modify',
+  name: 'SideProductModifyPage',
+  components: {
+    default: SideProductModifyPage
+  },
+  props: {
+    default: true
+  }
+},
 //회사소개
 {
   path: '/introduction-board/introduction-board-page',
