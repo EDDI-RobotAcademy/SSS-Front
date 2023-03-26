@@ -3,10 +3,10 @@
     <div align="center">
       <p><mark>작성한 게시글을 읽을 수 있으며 삭제 할 수 있는 페이지 입니다. <br>수정페이지로 이동 할 수 있습니다.</mark></p>
       <side-product-read-form :sideproduct="sideproduct"/>
-      <!-- <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
+      <router-link :to="{ name: 'SideProductModifyPage', params: { productId } }">
         <v-btn color="blue">수정</v-btn>
       </router-link>
-      <v-btn color="red" @click="onDelete">삭제</v-btn> -->
+      <v-btn color="red" @click="onDelete">삭제</v-btn>
       <router-link :to="{ name: 'SideProductListPage' }">
         <v-btn color="blue">돌아가기</v-btn>
       </router-link><br>
@@ -19,7 +19,7 @@
 import SideProductReadForm from '@/components/Board/SideProduct/SideProductReadForm'
 import {mapActions, mapState} from 'vuex'
 
-export default {
+export default {  
   components: { SideProductReadForm },
     name: "SideProductReadPage",
     props: {
@@ -32,8 +32,13 @@ export default {
     },
     methods:{
       ...mapActions([
-        'requestSideProductToSpring'
-      ])
+        'requestSideProductToSpring',
+        'requestDeleteSideProductToSpring'
+      ]),
+      async onDelete() {
+        await this.requestDeleteSideProductToSpring(this.productId)
+        await this.$router.push({name : 'SideProductListPage'})
+      }
     },
     created(){
       this.requestSideProductToSpring(this.productId)

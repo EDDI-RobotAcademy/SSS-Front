@@ -107,6 +107,17 @@ export default {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
     }
+    },
+//삭제
+requestDeleteSideProductToSpring({}, productId) {
+    return axios.delete(`http://localhost:7777/sideproduct/${productId}`)
+        .then(() => {
+            alert("삭제 성공")
+        })
+        .catch(() => {
+            alert("아 뭔가 문제 발생..")
+        })
+},
 //수정
 requestSideProductModifyToSpring({}, payload){
     const {productId, title, content, price} = payload
