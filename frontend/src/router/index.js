@@ -11,7 +11,9 @@ import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionB
 
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
-import MyPage from "@/views/Acount/MyPage/MyPage.vue"
+import MyPageView from "@/views/MyPage/MyPageView.vue"
+
+
 
 Vue.use(VueRouter)
 
@@ -33,8 +35,8 @@ const routes = [
   },
   {
     path: '/my-page',
-    name: 'MyPage',
-    component: MyPage
+    name: 'MyPageView',
+    component: MyPageView
   },
   {
     path: '/qnaboard/jpa-qna-board-list-page',
