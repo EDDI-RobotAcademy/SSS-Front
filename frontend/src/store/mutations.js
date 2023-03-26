@@ -3,7 +3,8 @@ import {
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     SIGN_IN_VALUE,
-    USER_TOKEN
+    USER_TOKEN,
+    REQUEST_PRODUCT_LIST_TO_SPRING
 } from './mutation-types'
 
 export default {
@@ -25,4 +26,7 @@ export default {
         state.userToken = passingData
     },
 
+    [REQUEST_PRODUCT_LIST_TO_SPRING] (state, passingData) {
+        state.products = passingData
+    },
 }

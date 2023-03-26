@@ -11,6 +11,9 @@ import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionB
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
 
+import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -64,6 +67,11 @@ const routes = [
   path: '/introduction-board/introduction-board-page',
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
+},
+{
+  path: '/product-list',
+  name: 'ProductListPage',
+  component: ProductListPage
 },
 
 
