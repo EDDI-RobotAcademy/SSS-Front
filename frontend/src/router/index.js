@@ -11,6 +11,7 @@ import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionB
 import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
 import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
 import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
+import SideProductModifyPage from "@/views/Board/SideProduct/SideProductModifyPage.vue"
 
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
@@ -20,6 +21,7 @@ import MyPageView from "@/views/MyPage/MyPageView.vue"
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
+import ProductReadPage from '@/views/Board/Product/ProductReadPage.vue'
 
 Vue.use(VueRouter)
 
@@ -111,6 +113,7 @@ const routes = [
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
 },
+//완제품
 {
   path: '/product-list',
   name: 'ProductListPage',
@@ -121,7 +124,16 @@ const routes = [
   name: 'ProductRegisterPage',
   component: ProductRegisterPage
 },
-
+{
+  path: '/product-read/:productId',
+  name: 'ProductReadPage',
+  components: {
+    default: ProductReadPage
+  },
+  props: {
+    default: true
+  }
+  },
 ]
 
 const router = new VueRouter({
