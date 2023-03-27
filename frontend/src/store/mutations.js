@@ -9,6 +9,7 @@ import {
     SIGN_IN_VALUE,
     USER_TOKEN,
     REQUEST_INGREDIENT_LIST_TO_SPRING,
+    REQUEST_INGREDIENT_TO_SPRING
 } from './mutation-types'
 
 export default {
@@ -41,4 +42,8 @@ export default {
     [REQUEST_INGREDIENT_LIST_TO_SPRING] (state, passingData) {
         state.ingredients = passingData
     },
+    [REQUEST_INGREDIENT_TO_SPRING] (state, passingData) {
+        state.ingredient = passingData
+    },
+
 }

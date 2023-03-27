@@ -112,6 +112,16 @@ const routes = [
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
 },
+{
+  path: '/selfsalad/ingredient-list-page',
+  name: 'IngredientListPage',
+  component: IngredientListPage
+},
+{
+  path: '/selfsalad/ingredient-register-page',
+  name: 'IngredientRegisterPage',
+  component: IngredientRegisterPage
+},
 
 
 ]
