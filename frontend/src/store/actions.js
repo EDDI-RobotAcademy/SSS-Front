@@ -3,7 +3,8 @@ import {
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
-    REQUEST_SIDEPRODUCT_TO_SPRING
+    REQUEST_SIDEPRODUCT_TO_SPRING,
+    REQUEST_INGREDIENT_LIST_TO_SPRING
 } from './mutation-types'
 
 import axios from 'axios'
@@ -106,8 +107,8 @@ export default {
         .then((res) => {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
-    }
     },
+
 //삭제
 requestDeleteSideProductToSpring({}, productId) {
     return axios.delete(`http://localhost:7777/sideproduct/${productId}`)
@@ -129,6 +130,17 @@ requestSideProductModifyToSpring({}, payload){
     .catch(() => {
         alert("아 뭔가 문제 발생..")
     })
-}
+},
+requestIngredientListToSpring ({ commit }) {
+    return axios.get('http://localhost:7777/selfsalad/list')
+        .then((res) => {
+            commit(REQUEST_INGREDIENT_LIST_TO_SPRING, res.data)
+        })
+        .catch(() => {
+            alert("문제 발생!")
+        })
+},
+
+
 
 }
