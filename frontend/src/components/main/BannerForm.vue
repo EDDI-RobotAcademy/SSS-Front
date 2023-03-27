@@ -6,7 +6,8 @@
         <p>이달의 샐러드 </p>
         <!-- 반복문 돌려서 예시로 틀 잡아뒀습니다. -->
         <v-row>
-          <v-col v-for="(boardItem, idx) in boardList" :key="idx" cols="3">
+          <div class="main-top-promotion row">
+          <v-col v-for="(boardItem, idx) in boardList" :key="idx">
             <router-link :to="{ name: 'home' }">
               <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
                 <template v-slot:placeholder>
@@ -18,6 +19,7 @@
             <p class="product-name">{{ boardItem.name }}</p>
             <p class="product-price">{{ boardItem.price }} won</p>
           </v-col>
+        </div>
         </v-row>
       </div>
     </div>
@@ -35,49 +37,46 @@
     </div>
 
     <div class="py-5">
-      <p>이미지 슬라이드 샐러드 메뉴</p>
-      <div id="mainTopCarousel" class=" container carousel slide">
+      <p>수동 이미지 슬라이드 샐러드 메뉴</p>
+      <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="main-top-promotion row row-cols-1 row-cols-sm-2 row-cols-md-3">
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
+            <div class="main-top-promotion row">
+                <v-col v-for="(boardItem, idx) in boardList" :key="idx">
+                  <router-link :to="{ name: 'home' }">
+                    <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
+                      <template v-slot:placeholder>
+                        <v-progress-circular indeterminate color="lighten-5-grey" />
+                      </template>
+                    </v-img>
+                  </router-link>
+                  <p class="product-brand">{{ boardItem.title }}</p>
+                  <p class="product-name">{{ boardItem.name }}</p>
+                  <p class="product-price">{{ boardItem.price }} won</p>
+                </v-col>
             </div>
           </div>
-          <div class="carousel-item ">
-            <div class="main-top-promotion row row-cols-1 row-cols-sm-2 row-cols-md-3">
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
-              <div class="col">
-                <v-img src="@/assets/popup/SSS.jpeg" />
-              </div>
+          <div class="carousel-item">
+            <div class="main-top-promotion row">
+                <v-col v-for="(boardItem, idx) in boardList" :key="idx">
+                  <router-link :to="{ name: 'home' }">
+                    <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
+                      <template v-slot:placeholder>
+                        <v-progress-circular indeterminate color="lighten-5-grey" />
+                      </template>
+                    </v-img>
+                  </router-link>
+                  <p class="product-brand">{{ boardItem.title }}</p>
+                  <p class="product-name">{{ boardItem.name }}</p>
+                  <p class="product-price">{{ boardItem.price }} won</p>
+                </v-col>
             </div>
           </div>
         </div>
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#mainTopCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#mainTopCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#mainTopCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="carousel-control-prev-icon carousel-control-prev" aria-hidden="true" data-bs-target="#mainTopCarousel-1" data-bs-slide="prev"></span>
           <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#mainTopCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="carousel-control-next-icon carousel-control-next" aria-hidden="true" data-bs-target="#mainTopCarousel-1" data-bs-slide="next"></span>
           <span class="visually-hidden">Next</span>
-        </button>
       </div>
     </div>
   </v-container>
@@ -90,10 +89,9 @@ export default {
     return {
       // 백엔드에서 리스트 받을 꺼 생각하고 예시로 만듬
       boardList: [
-        { title: 'title', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
+        { title: 'title1', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
+        { title: 'title2', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
+        { title: 'title3', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
       ]
     }
   }
@@ -101,4 +99,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1) sepia(1) hue-rotate(180deg); 
+}
+.carousel-control-prev-icon{
+  margin-left: -100px;
+  margin-top: 190px;
+}
+.carousel-control-next-icon {
+  margin-right: -70px;
+  margin-top: 190px;
+}
+
+</style>

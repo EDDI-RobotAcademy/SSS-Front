@@ -8,10 +8,18 @@ import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
 import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionBoardPage.vue"
 
+import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
+import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
+import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
 
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
-import MyPage from "@/views/Acount/MyPage/MyPage.vue"
+import MyPageView from "@/views/MyPage/MyPageView.vue"
+
+
+
+import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
+import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
 
 Vue.use(VueRouter)
 
@@ -33,8 +41,8 @@ const routes = [
   },
   {
     path: '/my-page',
-    name: 'MyPage',
-    component: MyPage
+    name: 'MyPageView',
+    component: MyPageView
   },
   {
     path: '/qnaboard/jpa-qna-board-list-page',
@@ -66,13 +74,53 @@ const routes = [
       default: true
     }
   },
+  //사이드메뉴
+  {
+  path: '/side-Product-read/:productId',
+  name: 'SideProductReadPage',
+  components: {
+    default: SideProductReadPage
+  },
+  props: {
+    default: true
+  }
+  },
+  {
+  path: '/side-Product-register',
+  name: 'SideProductRegisterPage',
+  component: SideProductRegisterPage
+  },
+  {
+  path: '/side-Product-list',
+  name: 'SideProductListPage',
+  component: SideProductListPage
+  },
+  {
+  path: '/side-Product-modify',
+  name: 'SideProductModifyPage',
+  components: {
+    default: SideProductModifyPage
+  },
+  props: {
+    default: true
+  }
+},
 //회사소개
 {
   path: '/introduction-board/introduction-board-page',
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
 },
-
+{
+  path: '/product-list',
+  name: 'ProductListPage',
+  component: ProductListPage
+},
+{
+  path: '/product-register',
+  name: 'ProductRegisterPage',
+  component: ProductRegisterPage
+},
 
 ]
 
