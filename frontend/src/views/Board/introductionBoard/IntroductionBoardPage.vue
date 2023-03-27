@@ -7,21 +7,47 @@
             </header>
             <!--글 내용-->
             <body>
-                <h2 style="text-align: center;"> 당신의 건강한 하루를 시작하세요.</h2>
-                <h3 style="text-align: center;"> 찾아오시는 길</h3>
+                <div>
+                <h3 style="text-align: center; margin-block:30px;"> 당신의 건강한 하루를 지금 바로 시작하세요.</h3>
+
+                <h1 class="mainImage" style="text-align: center;">
+                    <video class="rounded-3" autoplay="autoplay" loop="loop" muted="muted" style="height: 800px;">
+                    <source src="@/assets/Introduction/SSS3.mp4" type="video/mp4">
+                    </video>
+                </h1>
+            </div>
             </body>
         </div>
+
+        <!--회사 소개의 글-->
+        <div style="text-align: center; margin-block:30px;">
+            <h1>Self Salad Sell</h1>
+            <p>저희는 신선하고 좋은 상품만 취급합니다.<br>
+            SSS는 시중에서 쉽게 접할 수 없는 멀티리프 계열의 유럽형 채소를 직접 재배함으로써 메뉴의 맛과 식감을 극대화하고 있습니다.<br>
+            특히 최근 도입한 수경재배방식(NFT)은 공급의 안정성은 물론 원물의 신선도를 한층 높이는데 기여하고 있습니다.</p>
+        </div>
+
+        <div style="text-align: center; margin-block:30px;">
+            <span><img class="border-bottom rounded-3" src="@/assets/popup/SSS.jpeg" style="max-width: 300px; max-height: 300px; margin: 10px;"></span>
+            <span><img class="border-bottom rounded-3" src="@/assets/popup/SSS.jpeg" style="max-width: 300px; max-height: 300px; margin: 10px;"></span>
+            <span><img class="border-bottom rounded-3" src="@/assets/popup/SSS.jpeg" style="max-width: 300px; max-height: 300px; margin: 10px;"></span>    
+        </div>
+
+        <div style="background-color: #f6f6f6; padding: 10px;">   
+            <h3 style="text-align: center; margin-block:30px;"> 찾아오시는 길</h3>
         <!-- 중앙정렬 div태그 안에 만들어서 넣어줄 것 -->
         <div style= "display: flex; justify-content: center; align-items: center;">
             <!-- 지도의 크기 -->
-            <div id="map" style ="width:800px; height:400px;"></div>
+            <div class="rounded-3" id="map" style ="width:800px; height:400px;"></div>
         </div>
+        
         <div style= "display: flex; justify-content: center; align-items: center;">
             <div>
                 <hr>
                 <table class="table">
                 <table class="table table-striped table-bordered table-hover">
                 <t-body>
+                    
                     <tr>
                         <td>주소</td>
                         <td>
@@ -46,6 +72,7 @@
             </table>
             </div>
         </div>
+    </div>
     </container>
 </template>
  
@@ -128,5 +155,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+
+.mainImage {
+    filter: blur(1px);
+}
+
+#content .conTit:after {
+    display: block;
+    content: '';
+    width: 30px;
+    height: 3px;
+    background: #333;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -15px;
 }
 </style>

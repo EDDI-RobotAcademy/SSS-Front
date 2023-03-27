@@ -14,6 +14,9 @@
             <router-link :to="{ name: 'ProductListPage' }">상품 페이지</router-link>
           </li>
           <li>
+            <router-link :to="{ name: 'SideProductListPage' }">사이드 메뉴임</router-link>
+          </li>
+          <li>
             <router-link :to="{ name: 'JpaQnaBoardListPage' }">FAQ</router-link>
           </li>
         </ul>
@@ -31,6 +34,10 @@
       </template>
 
       <template v-else>
+        <v-btn onclick="location.href='http://localhost:8080/my-page'">
+          <span>MYPAGE</span>
+          <v-icon right>mdi-test-tube</v-icon>
+        </v-btn>
           <v-btn @click="logoutBtn">
             <span>logout</span>
             <v-icon right>mdi-history</v-icon>
