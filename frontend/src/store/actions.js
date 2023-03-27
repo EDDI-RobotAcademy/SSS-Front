@@ -86,7 +86,7 @@ export default {
             //   });
     },
     requestProductToSpring ({ commit }, productId) {
-        return axios.get(`/products/${productId}`)
+        return axios.get(`http://localhost:7777/products/${productId}`)
             .then((res) => {
                 commit(REQUEST_PRODUCT_TO_SPRING, res.data)
             })
@@ -107,7 +107,7 @@ export default {
             })
     },
     requestProductImageToSpring ({ commit }, productId) {
-        return axios.get(`/product/imageList/${productId}`)
+        return axios.get(`http://localhost:7777/products/imageList/${productId}`)
             .then((res) => {
                 commit(REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING, res.data)
             })
