@@ -18,6 +18,9 @@ import MyPageView from "@/views/MyPage/MyPageView.vue"
 
 
 
+import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
+import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -108,7 +111,16 @@ const routes = [
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
 },
-
+{
+  path: '/product-list',
+  name: 'ProductListPage',
+  component: ProductListPage
+},
+{
+  path: '/product-register',
+  name: 'ProductRegisterPage',
+  component: ProductRegisterPage
+},
 
 ]
 

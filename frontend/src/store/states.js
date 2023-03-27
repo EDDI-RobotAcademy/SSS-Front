@@ -8,4 +8,7 @@ export default {
     memberInfoAboutSignIn: {},
     signInValue: false,
     userToken: "",
+
+    products: [],
+    product: {},
 }
