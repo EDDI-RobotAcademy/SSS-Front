@@ -14,6 +14,9 @@
             <router-link :to="{ name: 'about' }">상품 페이지</router-link>
           </li>
           <li>
+            <router-link :to="{ name: 'SideProductListPage' }">사이드 메뉴임</router-link>
+          </li>
+          <li>
             <router-link :to="{ name: 'JpaQnaBoardListPage' }">FAQ</router-link>
           </li>
         </ul>
