@@ -17,27 +17,34 @@
             <div id="map" style ="width:800px; height:400px;"></div>
         </div>
         <div style= "display: flex; justify-content: center; align-items: center;">
-            <b-table striped hover :items="items">
-            <tr>
-                <td>주소</td>
-                    <td>
-                    서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F (T: 1544-9970 / F: 02-562-2378)
-                    </td>
-            </tr>
-            <tr>
-                <td>버스</td>
-                    <td>
-                    역삼역.포스코P&S타워 정류장
-                    지선 146 / 740 / 341 / 360         간선 1100 / 1700 / 2000 / 7007 / 8001
-                    </td>
-            </tr>
-            <tr>
-                <td>지하철</td>
-                    <td>
-                    지하철 2호선 역삼역 3번출구 100m
-                    </td>
-                </tr>
-            </b-table>
+            <div>
+                <hr>
+                <table class="table">
+                <table class="table table-striped table-bordered table-hover">
+                <t-body>
+                    <tr>
+                        <td>주소</td>
+                        <td>
+                            서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F (T: 1544-9970 / F: 02-562-2378)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>버스</td>
+                        <td>
+                             역삼역.포스코P&S타워 정류장
+                            지선 146 / 740 / 341 / 360         간선 1100 / 1700 / 2000 / 7007 / 8001
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>지하철</td>
+                        <td>
+                            지하철 2호선 역삼역 3번출구 100m
+                        </td>
+                    </tr>
+                </t-body>
+                </table>
+            </table>
+            </div>
         </div>
     </container>
 </template>
