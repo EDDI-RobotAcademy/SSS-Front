@@ -11,7 +11,7 @@
             <router-link :to="{ name: 'IntroductionBoardPage' }">회사 소개</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'about' }">상품 페이지</router-link>
+            <router-link :to="{ name: 'ProductListPage' }">상품 페이지</router-link>
           </li>
           <li>
             <router-link :to="{ name: 'SideProductListPage' }">사이드 메뉴임</router-link>

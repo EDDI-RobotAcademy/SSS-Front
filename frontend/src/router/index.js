@@ -20,7 +20,8 @@ import MyPageView from "@/views/MyPage/MyPageView.vue"
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
 
-
+import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
+import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
 
 Vue.use(VueRouter)
 
@@ -113,6 +114,16 @@ const routes = [
   component: IntroductionBoardPage
 },
 {
+  path: '/product-list',
+  name: 'ProductListPage',
+  component: ProductListPage
+},
+{
+  path: '/product-register',
+  name: 'ProductRegisterPage',
+  component: ProductRegisterPage
+},
+{
   path: '/selfsalad/ingredient-list-page',
   name: 'IngredientListPage',
   component: IngredientListPage
@@ -122,6 +133,7 @@ const routes = [
   name: 'IngredientRegisterPage',
   component: IngredientRegisterPage
 },
+
 
 
 ]

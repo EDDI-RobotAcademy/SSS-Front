@@ -9,5 +9,8 @@ export default {
     signInValue: false,
     userToken: "",
 
+    products: [],
+    product: {},
+
     ingredients: {}
 }

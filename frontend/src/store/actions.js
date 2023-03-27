@@ -2,9 +2,16 @@ import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
+
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
+    REQUEST_SIDEPRODUCT_TO_SPRING,
+
+    REQUEST_PRODUCT_LIST_TO_SPRING,
+
     REQUEST_INGREDIENT_LIST_TO_SPRING
+
+    
 } from './mutation-types'
 
 import axios from 'axios'
@@ -120,27 +127,43 @@ requestDeleteSideProductToSpring({}, productId) {
         })
 },
 //수정
-requestSideProductModifyToSpring({}, payload){
-    const {productId, title, content, price} = payload
-    return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,
-    { title, content, price})
-    .then(() => {
-        alert("수정 성공")
-    })
-    .catch(() => {
-        alert("아 뭔가 문제 발생..")
-    })
-},
-requestIngredientListToSpring ({ commit }) {
-    return axios.get('http://localhost:7777/selfsalad/list')
-        .then((res) => {
-            commit(REQUEST_INGREDIENT_LIST_TO_SPRING, res.data)
+    requestSideProductModifyToSpring({}, payload){
+        const {productId, title, content, price} = payload
+        return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,
+        { title, content, price})
+        .then(() => {
+            alert("수정 성공")
         })
         .catch(() => {
-            alert("문제 발생!")
+            alert("아 뭔가 문제 발생..")
         })
-},
+    },
+
+    requestProductListToSpring({ commit }) {
+        return axios.get('http://localhost:7777/products/list')
+        .then((res) => {
+            commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+        })
+    },
+    requestCreateProductToSpring ({}, payload) {
+        return axios.post('http://localhost:7777/products/register', payload)
+            .then(() => {
+                alert('상품 등록 성공!')
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    },
 
 
+    requestIngredientListToSpring ({ commit }) {
+        return axios.get('http://localhost:7777/selfsalad/list')
+            .then((res) => {
+                commit(REQUEST_INGREDIENT_LIST_TO_SPRING, res.data)
+            })
+            .catch(() => {
+                alert("문제 발생!")
+            })
+    },
 
 }
