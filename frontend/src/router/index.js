@@ -126,7 +126,6 @@ const routes = [
   component: ProductRegisterPage
 },
 {
-<<<<<<< HEAD
   path: '/product-read/:productId',
   name: 'ProductReadPage',
   components: {
@@ -135,8 +134,8 @@ const routes = [
   props: {
     default: true
   }
-  },
-=======
+},
+{
   path: '/selfsalad/ingredient-list-page',
   name: 'IngredientListPage',
   component: IngredientListPage
@@ -148,8 +147,6 @@ const routes = [
 },
 
 
-
->>>>>>> main
 ]
 
 const router = new VueRouter({
