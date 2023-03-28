@@ -7,7 +7,7 @@
   <script>
   
   import axios from "axios";
-  import SignUpForm from "@/components/Acount/Member/SignUpForm.vue";
+  import SignUpForm from "@/components/Member/SignUpForm.vue";
   
   export default {
     name: "SignUpPage",
