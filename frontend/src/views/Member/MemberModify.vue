@@ -16,10 +16,10 @@ export default {
   },
   methods: {
       onSubmit (payload) {
-        const { password, nickname, phonenumber } = payload;
+        const { nickname, password, phoneNumber,  } = payload;
   
         axios.post("http://localhost:7777/member/member-modify", {
-          password, nickname, phonenumber
+          password, nickname, phoneNumber, address
         })
             .then((res) => {
               alert("변경 완료!")
