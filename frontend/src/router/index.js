@@ -11,12 +11,14 @@ import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionB
 import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
 import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
 import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
+import SideProductModifyPage from "@/views/Board/SideProduct/SideProductModifyPage.vue"
 
 import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
 import MyPageView from "@/views/MyPage/MyPageView.vue"
 
-
+import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
+import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
@@ -121,6 +123,18 @@ const routes = [
   name: 'ProductRegisterPage',
   component: ProductRegisterPage
 },
+{
+  path: '/selfsalad/ingredient-list-page',
+  name: 'IngredientListPage',
+  component: IngredientListPage
+},
+{
+  path: '/selfsalad/ingredient-register-page',
+  name: 'IngredientRegisterPage',
+  component: IngredientRegisterPage
+},
+
+
 
 ]
 
