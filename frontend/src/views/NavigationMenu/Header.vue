@@ -19,6 +19,9 @@
           <li>
             <router-link :to="{ name: 'JpaQnaBoardListPage' }">FAQ</router-link>
           </li>
+          <li>
+            <router-link :to="{ name: 'IngredientListPage' }">Self Salad</router-link>
+          </li>
         </ul>
 
       <v-spacer></v-spacer>

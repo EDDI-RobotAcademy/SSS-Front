@@ -9,9 +9,17 @@ import {
     SIGN_IN_VALUE,
     USER_TOKEN,
     
+<<<<<<< HEAD
     REQUEST_PRODUCT_TO_SPRING,
     REQUEST_PRODUCT_LIST_TO_SPRING,
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING
+=======
+    REQUEST_PRODUCT_LIST_TO_SPRING,
+
+    REQUEST_INGREDIENT_LIST_TO_SPRING,
+    REQUEST_INGREDIENT_TO_SPRING,
+
+>>>>>>> main
 } from './mutation-types'
 
 export default {
@@ -47,7 +55,18 @@ export default {
     [REQUEST_PRODUCT_LIST_TO_SPRING] (state, passingData) {
         state.products = passingData
     },
+<<<<<<< HEAD
     [REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING] (state, passingData) {
         state.productImgs = passingData
     }
+=======
+
+    [REQUEST_INGREDIENT_LIST_TO_SPRING] (state, passingData) {
+        state.ingredients = passingData
+    },
+    [REQUEST_INGREDIENT_TO_SPRING] (state, passingData) {
+        state.ingredient = passingData
+    },
+
+>>>>>>> main
 }

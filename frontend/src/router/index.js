@@ -17,7 +17,8 @@ import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
 import SignInPage from '@/views/Acount/Member/SignInPage.vue';
 import MyPageView from "@/views/MyPage/MyPageView.vue"
 
-
+import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
+import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
@@ -125,6 +126,7 @@ const routes = [
   component: ProductRegisterPage
 },
 {
+<<<<<<< HEAD
   path: '/product-read/:productId',
   name: 'ProductReadPage',
   components: {
@@ -134,6 +136,20 @@ const routes = [
     default: true
   }
   },
+=======
+  path: '/selfsalad/ingredient-list-page',
+  name: 'IngredientListPage',
+  component: IngredientListPage
+},
+{
+  path: '/selfsalad/ingredient-register-page',
+  name: 'IngredientRegisterPage',
+  component: IngredientRegisterPage
+},
+
+
+
+>>>>>>> main
 ]
 
 const router = new VueRouter({

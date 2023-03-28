@@ -11,5 +11,10 @@ export default {
 
     products: [],
     product: {},
+<<<<<<< HEAD
     productImgs: [],
+=======
+
+    ingredients: {}
+>>>>>>> main
 }
