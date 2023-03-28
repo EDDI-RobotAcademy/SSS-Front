@@ -5,11 +5,10 @@ import {
 
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
-    REQUEST_SIDEPRODUCT_TO_SPRING,
 
     REQUEST_PRODUCT_LIST_TO_SPRING,
 
-    REQUEST_INGREDIENT_LIST_TO_SPRING
+    REQUEST_INGREDIENT_LIST_TO_SPRING,
 
     
 } from './mutation-types'
@@ -163,6 +162,16 @@ requestDeleteSideProductToSpring({}, productId) {
             })
             .catch(() => {
                 alert("문제 발생!")
+            })
+    },
+    requestCreateIngredientToSpring ({}, payload) {
+        return axios.post('http://localhost:7777/selfsalad/register',
+        payload )
+            .then(() => {
+                alert('재료 등록 성공')
+            })
+            .catch(() => {
+                alert('문제 발생!')
             })
     },
 
