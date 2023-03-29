@@ -45,29 +45,32 @@
               title: '샐러드명',
               price: 0,
               content: '샐샐샐',
-              productImgs: '',
+              files: '',
           }
       },
       methods: {
-          handleFileUpload () {
-            this.files = this.$refs.files.files
-          },
           onSubmit () {
               let formData = new FormData()
               for(let idx = 0; idx < this.files.length; idx++) {
                   formData.append('productImgList', this.files[idx])
-                }
-              const { title, price, content } = this
-              let productInfo = {
-                title: title,
-                price: price,
-                content: content,
               }
-              console.log('productInfo: ' + JSON.stringify(productInfo))
-              formData.append("productInfo", new Blob([JSON.stringify(productInfo)], { type: "application/json" }))
-              this.$emit('submit', formData)  
-            }
-      }
+              console.log('productImgList: ' + this.productImgList)
+
+                const { title, price, content } = this
+                let productInfo = {
+                    title: title,
+                    price: price,
+                    content: content,
+                }
+                console.log('productInfo: ' + JSON.stringify(productInfo))
+                formData.append("productInfo", new Blob([JSON.stringify(productInfo)], { type: "application/json" }))
+                console.log('formdata: ' + JSON.stringify(formData) )
+                this.$emit('submit', formData)  
+            },
+            handleFileUpload () {
+              this.files = this.$refs.files.files
+            },
+        }
   }
   </script>
   

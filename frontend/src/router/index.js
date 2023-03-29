@@ -24,6 +24,7 @@ import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
+import ProductReadPage from '@/views/Board/Product/ProductReadPage.vue'
 
 Vue.use(VueRouter)
 
@@ -126,6 +127,16 @@ const routes = [
   path: '/product-register',
   name: 'ProductRegisterPage',
   component: ProductRegisterPage
+},
+{
+  path: '/product-read/:productId',
+  name: 'ProductReadPage',
+  components: {
+    default: ProductReadPage
+  },
+  props: {
+    default: true
+  }
 },
 {
   path: '/selfsalad/ingredient-list-page',
