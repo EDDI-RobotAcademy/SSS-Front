@@ -2,6 +2,9 @@ export default {
     boards: [],
     board: {},
 
+    replys: [],
+    reply: {},
+
     sideproducts: [],
     sideproduct: {},
 
@@ -11,6 +14,7 @@ export default {
 
     products: [],
     product: {},
+    productImgs: [],
 
     ingredients: [],
 }

@@ -2,15 +2,18 @@ import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
+    REQUEST_REPLY_TO_SPRING,
+
+    REQUEST_PRODUCT_TO_SPRING,
+    REQUEST_PRODUCT_LIST_TO_SPRING,
+    REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
 
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
 
-    REQUEST_PRODUCT_LIST_TO_SPRING,
+    REQUEST_INGREDIENT_LIST_TO_SPRING
 
-    REQUEST_INGREDIENT_LIST_TO_SPRING,
 
-    
 } from './mutation-types'
 
 import axios from 'axios'
@@ -19,7 +22,6 @@ import store from "@/store/index";
 
 export default {
     requestCreateBoardToSpring ({}, payload) {
-
         const { title, content, writer } = payload
         return axios.post('http://localhost:7777/board/register',
             { title, content, writer })
@@ -32,10 +34,9 @@ export default {
             })
     },
     requestCreateReplyToSpring ({}, payload) {
-
-        const { replyWriter, replyContent } = payload
-        return axios.post('http://localhost:7777/board/register',
-            { replyWriter, replyContent })
+        const { replyContent } = payload
+        return axios.post('http://localhost:7777/reply/register',
+            { replyContent })
             .then((res) => {
                 alert('댓글 등록 성공: ' + JSON.stringify(res.data))
                 return res
@@ -99,6 +100,37 @@ export default {
             //     alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.");
             //   });
     },
+
+    requestProductToSpring ({ commit }, productId) {
+        return axios.get(`http://localhost:7777/products/${productId}`)
+            .then((res) => {
+                commit(REQUEST_PRODUCT_TO_SPRING, res.data)
+            })
+    },
+    requestProductListToSpring({ commit }) {
+        return axios.get('http://localhost:7777/products/list')
+        .then((res) => {
+            commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+        })
+    },
+    requestCreateProductToSpring ({}, payload) {
+        for (let key of payload.keys()) {
+            console.log(key, ":", payload.get(key))
+        }
+        try {
+          axios.post('http://localhost:7777/products/register', payload)
+                alert('상품 등록 성공!')
+            } catch {
+                alert('문제 발생!')
+            }    
+    },
+    requestProductImageToSpring ({ commit }, productId) {
+        return axios.get(`http://localhost:7777/products/imageList/${productId}`)
+            .then((res) => {
+                commit(REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING, res.data)
+            })
+    },
+
 //등록
     requestCreateSideProductToSpring ({}, payload){
         const { title, content, price } = payload
@@ -127,7 +159,6 @@ export default {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
     },
-
 //삭제
 requestDeleteSideProductToSpring({}, productId) {
     return axios.delete(`http://localhost:7777/sideproduct/${productId}`)
@@ -139,6 +170,18 @@ requestDeleteSideProductToSpring({}, productId) {
         })
 },
 //수정
+
+requestSideProductModifyToSpring({}, payload){
+    const {productId, title, content, price} = payload
+    return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,
+    { title, content, price})
+    .then(() => {
+        alert("수정 성공")
+    })
+    .catch(() => {
+        alert("아 뭔가 문제 발생..")
+    })
+},
     requestSideProductModifyToSpring({}, payload){
         const {productId, title, content, price} = payload
         return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,

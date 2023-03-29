@@ -9,7 +9,7 @@
   </template>
   
   <script>
-  import ProductListForm from '@/components/Board/Product/ProductListForm.vue'
+  import ProductListForm from '@/components/Product/ProductListForm.vue'
   import { mapActions, mapState } from 'vuex'
   
   export default {

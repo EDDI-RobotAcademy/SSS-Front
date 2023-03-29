@@ -75,8 +75,9 @@
     </div>
     </container>
 </template>
- 
+
 <script>
+
 export default {
 	name: 'KakaoMap',
 	data() {

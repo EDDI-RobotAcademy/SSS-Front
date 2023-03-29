@@ -6,7 +6,7 @@
 
 <script>
 import axios from "axios";
-import SignInForm from '@/components/Acount/Member/SignInForm.vue';
+import SignInForm from '@/components/Member/SignInForm.vue';
 // redis 이용 로그인 서비스를 위해 쿠키 추가
 import Vue from "vue";
 import cookies from "vue-cookies";

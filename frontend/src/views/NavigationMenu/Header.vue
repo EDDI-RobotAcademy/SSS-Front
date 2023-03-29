@@ -8,7 +8,7 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'IntroductionBoardPage' }">회사 소개</router-link>
+            <router-link :to="{ name: 'IntroductionPage' }">회사 소개</router-link>
           </li>
           <li>
             <router-link :to="{ name: 'ProductListPage' }">상품 페이지</router-link>

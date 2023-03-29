@@ -24,12 +24,7 @@
           <v-row align="center">
             <v-col>
               <div align="center" class="mb-10">
-                <button type="submit">등록</button>
-                <!-- <button-green
-                    btn-name="등록하기"
-                    @click="registerReply"
-                    style="width: 200px; height: 50px; font-size: 16px">
-                </button-green> -->
+                <button type="submit" style="width: 200px; height: 50px; font-size: 16px">등록</button>
               </div>
             </v-col>
           </v-row>
@@ -44,33 +39,24 @@
 import {mapActions, mapState} from "vuex";
 
 export default {
-  name: "RegisterQuestionreplyForm",
+  name: "ReplyRegisterForm",
   data () {
     return {
-      questionContent: this.questionBoard.content,
-      reply: '',
+      replyContent : '내용입력'
     }
   },
   methods: {
     ...mapActions([
-        'requestQuestionreplyRegisterToSpring'
+        'requestCreateReplyToSpring'
     ]),
-    async registerReply() {
-      const {reply} = this
-      const memberId = this.resMember.id
-      const questionNo = this.questionBoard.questionNo
-      await this.requestQuestionreplyRegisterToSpring({reply, memberId, questionNo})
-      await this.$router.go(this.$router.currentRoute)
+    async onSubmit (payload) {
+      const reply = await this.requestCreateReplyToSpring(payload)
+      console.log('reply: ' + JSON.stringify(reply.data))
+      // await this.$router.push({
+      //             name: 'JpaQnaBoardReadPage'
+      //         })
     }
   },
-  props: {
-    questionBoard: Object,
-  },
-  computed: {
-    ...mapState([
-        'resMember'
-    ])
-  }
 }
 </script>
 

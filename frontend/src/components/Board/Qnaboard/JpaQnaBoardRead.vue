@@ -68,7 +68,11 @@
           board: {
               type: Object,
               required: true,
-          }
+          },
+          reply: {
+              type: Object,
+              required: false,
+          },
       },
       // data () {
       //     return {

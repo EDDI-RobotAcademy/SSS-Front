@@ -4,7 +4,7 @@
         <h2>게시판 읽기</h2>
         <jpa-qna-board-read v-if="board" :board="board"/>
         <p v-else>로딩중 ......... </p>
-        <reply-register-form @submit="onSubmit" :board="board"/>
+        <reply-register-form @submit="onSubmit" :reply="reply"/>
         <router-link :to="{ name: 'JpaQnaBoardModifyPage', params: { boardId } }">
           게시물 수정
         </router-link>
@@ -29,27 +29,25 @@
           boardId: {
               type: String,
               required: true,
-          }
+          },
       },
       computed: {
-          ...mapState(['board'])
+          ...mapState(['board']),
+          ...mapState(['reply'])
       },
       methods: {
           ...mapActions([
               'requestBoardToSpring',
-              'requestDeleteBoardToSpring'
+              'requestDeleteBoardToSpring',
+              'requestCreateReplyToSpring',
           ]),
           async onDelete () {
               await this.requestDeleteBoardToSpring(this.boardId)
               await this.$router.push({ name: 'JpaQnaBoardListPage' })
           },
           async onSubmit (payload) {
-              const board = await this.requestCreateBoardToSpring(payload)
-              console.log('board: ' + JSON.stringify(board.data))
-              await this.$router.push({
-                  name: 'JpaQnaBoardReadPage',
-                  params: { boardId: board.data.boardId.toString() }
-              })
+              const reply = await this.requestCreateReplyToSpring(payload)
+              console.log('reply: ' + JSON.stringify(reply.data))
           }
       },
       created () {
