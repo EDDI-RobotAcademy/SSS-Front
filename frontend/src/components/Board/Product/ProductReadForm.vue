@@ -59,7 +59,7 @@
       },
       created() {
           console.log(this.productImgs)
-          for(let i = 0; i < this.product.productImgs.length; i++) {
+          for(let i = 0; i < this.product.productImgs?.length; i++) {
             console.log(this.product.productImgs[i].editedImg);
           }
       }
