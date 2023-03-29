@@ -21,7 +21,7 @@
   </template>
   
   <script>
-  import ProductCard from "@/components/Board/Product/ProductCard.vue";
+  import ProductCard from "@/components/Product/ProductCard.vue";
 
     export default {
         name: "ProductListForm",
