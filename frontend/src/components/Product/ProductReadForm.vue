@@ -17,19 +17,12 @@
             </v-img>
           </v-col>
           
-          <v-col cols="7">
-            
+          <v-col cols="7">           
             <table>
             <tr>
               <td>상품명</td>
               <td>
                 <input type="text" :value="product.title" readonly/>
-              </td>
-            </tr>
-            <tr>
-              <td>본문</td>
-              <td>
-                <textarea cols="50" rows="20" :value="product.content" readonly/>
               </td>
             </tr>
             <tr>
@@ -40,7 +33,15 @@
             </tr>
           </table>
         </v-col>
-        </v-row>  
+      </v-row>  
+      <v-row>
+        <div>
+          <td>본문</td>
+          <td>
+            <textarea cols="50" rows="20" :value="product.content" readonly/>
+          </td>
+        </div>
+      </v-row>
   
     </div>
   </template>
