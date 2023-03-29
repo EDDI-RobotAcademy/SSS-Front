@@ -10,10 +10,11 @@
   
   <script>
   import ProductListForm from '@/components/Board/Product/ProductListForm.vue'
+  import ProductCard from '@/components/Board/Product/ProductCard.vue'
   import { mapActions, mapState } from 'vuex'
   
   export default {
-    components: { ProductListForm },
+    components: { ProductListForm, ProductCard },
     name: "ProductListPage",
     computed:{
       ...mapState([
