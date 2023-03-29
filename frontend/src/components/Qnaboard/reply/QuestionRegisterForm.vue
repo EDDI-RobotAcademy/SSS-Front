@@ -6,14 +6,14 @@
         <br>
         <tr>
           <th scope="row">
-            {{ commentWriter }}
+            {{ replyWriter }}
           </th>
           &nbsp;&nbsp;&nbsp;
           <td>
           <textarea
               class="justify-center"
               style="border: solid thin"
-              cols="60" rows="3" v-model="comment"
+              cols="60" rows="3" v-model="reply"
               placeholder="내용을 입력해 주세요."
               onfocus="this.placeholder=''"
               onblur="this.placeholder='내용을 입력해 주세요.'">
@@ -34,20 +34,20 @@
 <script>
 
 export default {
-  name: "QuestionCommentRegisterForm",
+  name: "QuestionRegisterForm",
   data() {
     return {
-      comment: '',
-      memberId: this.$store.state.resMember.id, // 변수 지정 -> Request로 보냄
-      commentWriter: this.$store.state.resMember.username
+      reply: '',
+      // memberId: this.$store.state.resMember.id, // 변수 지정 -> Request로 보냄
+      replyWriter: this.$store.state.reWriter.username
     }
   },
   methods: {
     onSubmitRegister() {
-      this.commentWriter = this.$store.state.resMember.username
-      this.memberId = this.$store.state.resMember.id
-        const {comment, memberId} = this
-        this.$emit('submit', {comment, memberId})
+      this.replyWriter = this.$store.state.reWriter.username
+      // this.memberId = this.$store.state.resMember.id
+        const reply = this
+        this.$emit('submit', reply)
     },
   }
 }

@@ -37,7 +37,7 @@
         
         <div>
           <button type="submit">수정 완료</button>
-          <router-link :to="{ name: 'JpaQnaBoardReadPage',
+          <router-link :to="{ name: 'QnaBoardReadPage',
                               params: { boardId: board.boardId.toString() }}">
             취소
           </router-link>
@@ -49,7 +49,7 @@
   <script>
   
   export default {
-      name: "JpaQnaBoardModifyForm",
+      name: "QnaBoardModifyForm",
       props: {
           board: {
               type: Object,

@@ -23,7 +23,7 @@
 
     <div>
       <button type="submit">등록</button>
-      <router-link to="{ name: 'JpaQnaBoardListPage' }">
+      <router-link to="{ name: 'QnaBoardListPage' }">
         취소
       </router-link>
     </div>
@@ -33,7 +33,7 @@
 <script>
 
 export default {
-    name: "JpaQnaBoardRegisterForm",
+    name: "QnaBoardRegisterForm",
     data () {
         return {
             title: '제목을 입력하세요.',

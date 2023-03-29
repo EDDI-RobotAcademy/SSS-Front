@@ -68,8 +68,8 @@ export default {
 
     ]),
     async modifyComment() {
-      const memberId = this.resMember.id
-      const questionNo = this.questionBoard.questionNo
+      // const memberId = this.resMember.id
+      // const questionNo = this.questionBoard.questionNo
       const questionCommentNo = this.questionComment.questionCommentNo
       const {comment} = this
       await this.reqModifyQuestionCommentToSpring({memberId, questionNo, comment, questionCommentNo})
