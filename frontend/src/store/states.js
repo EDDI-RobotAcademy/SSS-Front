@@ -13,6 +13,5 @@ export default {
     product: {},
     productImgs: [],
 
-    ingredients: {}
-
+    ingredients: [],
 }
