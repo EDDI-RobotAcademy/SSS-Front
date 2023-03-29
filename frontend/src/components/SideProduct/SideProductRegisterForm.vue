@@ -21,6 +21,13 @@
               <textarea cols="50" rows="10" v-model="content" />
             </td>
           </tr>
+          <tr>
+            <td>사진 추가</td>
+            <td>
+              <input type="file" id="files" ref="files"
+                multiple @change="handleFileUpload"/>
+            </td>
+          </tr>
         </table>
       </div>
       <div>
@@ -40,12 +47,30 @@ export default {
           price: 0,
       }
   },
-  methods:{
-    onSubmit(){
-      const {title, content, price} = this
-      this.$emit('submit', {title, content, price})
+  methods: {
+        onSubmit () {
+            let formData = new FormData()
+            for (let idx = 0; idx < this.files.length; idx++) {
+                formData.append('fileList', this.files[idx])
+            }
+            const { title, content, price } = this
+            let productInfo = {
+                title: title,
+                content: content,
+                price: price,
+            }
+            console.log('productInfo: ' + JSON.stringify(productInfo))
+            formData.append(
+                "productInfo",
+                new Blob([JSON.stringify(productInfo)], { type: "application/json" })
+            )
+            console.log('formData: ' + JSON.stringify(formData))
+            this.$emit('submit', formData)
+        },
+        handleFileUpload () {
+            this.files = this.$refs.files.files
+        },
     }
-  }
 }
 
 
