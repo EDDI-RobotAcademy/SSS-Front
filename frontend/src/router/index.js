@@ -9,10 +9,10 @@ import JpaQnaBoardRegisterPage from "@/views/Board/QnaBoard/JpaQnaBoardRegisterP
 import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
 
-import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
-import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
-import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
-import SideProductModifyPage from "@/views/Board/SideProduct/SideProductModifyPage.vue"
+import SideProductReadPage from "@/views/SideProduct/SideProductReadPage.vue"
+import SideProductRegisterPage from "@/views/SideProduct/SideProductRegisterPage.vue"
+import SideProductListPage from "@/views/SideProduct/SideProductListPage.vue"
+import SideProductModifyPage from "@/views/SideProduct/SideProductModifyPage.vue"
 
 import SignUpPage from "@/views/Member/SignUpPage.vue";
 import SignInPage from '@/views/Member/SignInPage.vue';
@@ -22,9 +22,9 @@ import MemberModify from "@/views/Member/MemberModify.vue"
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
 
-import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
-import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
-import ProductReadPage from '@/views/Board/Product/ProductReadPage.vue'
+import ProductListPage from '@/views/Product/ProductListPage.vue'
+import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
+import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 
 Vue.use(VueRouter)
 
