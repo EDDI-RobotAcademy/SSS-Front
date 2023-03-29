@@ -115,6 +115,9 @@
       nicknameValidation () {
         this.nicknameBoxClick = true;
       },
+
+
+      
       checkDuplicateEmail () {
         const emailValid = this.email.match(
             /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -134,6 +137,8 @@
               })
         }
       },
+
+
       checkDuplicateNickName () {
         const {nickname} = this
         axios.post(`http://localhost:7777/member/check-nickname/${nickname}`)
@@ -145,6 +150,8 @@
                     alert("중복된 닉네임입니다!")
                     this.nicknamePass = false
                 }
+
+
             })
       },
     }

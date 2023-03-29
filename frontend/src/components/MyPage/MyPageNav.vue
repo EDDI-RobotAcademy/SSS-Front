@@ -24,19 +24,16 @@ export default {
   name: "MyPageNav",
   data() {
     return {
-      currentTab: "MyPageOrderManagement",
+      currentTab: "MemberModify",
       navi: [
-        { menu: "주문 관리", tab: "MyPageOrderManagement" },
-        { menu: "장바구니", tab: "MyPageFavoriteList" },
-        { menu: "1:1 문의", tab: "MyPageQna" },
-        { menu: "회원정보 변경", tab: "MyPageInfoModifyForm" },
+        { menu: "회원정보 변경", tab: "MemberModify" },
       ],
     };
   },
   computed: {
     componentLoader() {
       const tab = this.currentTab;
-      return () => import(`@/components/acount/mypage/${tab}`);
+      return () => import(`@/components/MyPage/${tab}`);
     },
   },
 };

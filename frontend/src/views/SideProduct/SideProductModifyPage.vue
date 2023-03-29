@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import SideProductModifyForm from '@/components/Board/SideProduct/SideProductModifyForm.vue'
+import SideProductModifyForm from '@/components/SideProduct/SideProductModifyForm.vue'
 import {mapActions, mapState} from 'vuex'
 export default {
   components:{SideProductModifyForm},
