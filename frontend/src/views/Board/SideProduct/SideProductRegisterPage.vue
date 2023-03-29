@@ -18,13 +18,10 @@ export default {
     ...mapActions([
       'requestCreateSideProductToSpring'
     ]),
-    async onSubmit (payload){
-      console.log("잘넘어오네")
-      const sideproduct = await this.requestCreateSideProductToSpring(payload)
-      console.log('sideproduct: ' + JSON.stringify(sideproduct.data))
-      await this.$router.push({
-        name: 'SideProductReadPage',
-        params: {productId: sideproduct.data.productId.toString()}
+    async onSubmit (payload) {
+            await this.requestCreateSideProductToSpring(payload)
+            await this.$router.push({
+                name: 'SideProductListPage'
       })
     }
   }
