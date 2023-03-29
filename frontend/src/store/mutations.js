@@ -9,7 +9,9 @@ import {
     SIGN_IN_VALUE,
     USER_TOKEN,
     
+    REQUEST_PRODUCT_TO_SPRING,
     REQUEST_PRODUCT_LIST_TO_SPRING,
+    REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
 
     REQUEST_INGREDIENT_LIST_TO_SPRING,
     REQUEST_INGREDIENT_TO_SPRING,
@@ -43,8 +45,15 @@ export default {
         state.userToken = passingData
     },
 
+    [REQUEST_PRODUCT_TO_SPRING] (state, passingData) {
+        state.product = passingData
+    },
     [REQUEST_PRODUCT_LIST_TO_SPRING] (state, passingData) {
         state.products = passingData
+    },
+
+    [REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING] (state, passingData) {
+        state.productImgs = passingData
     },
 
     [REQUEST_INGREDIENT_LIST_TO_SPRING] (state, passingData) {

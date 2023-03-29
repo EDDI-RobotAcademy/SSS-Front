@@ -22,6 +22,7 @@ import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue
 
 import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
+import ProductReadPage from '@/views/Board/Product/ProductReadPage.vue'
 
 Vue.use(VueRouter)
 
@@ -113,6 +114,7 @@ const routes = [
   name: 'IntroductionBoardPage',
   component: IntroductionBoardPage
 },
+//완제품
 {
   path: '/product-list',
   name: 'ProductListPage',
@@ -124,6 +126,16 @@ const routes = [
   component: ProductRegisterPage
 },
 {
+  path: '/product-read/:productId',
+  name: 'ProductReadPage',
+  components: {
+    default: ProductReadPage
+  },
+  props: {
+    default: true
+  }
+},
+{
   path: '/selfsalad/ingredient-list-page',
   name: 'IngredientListPage',
   component: IngredientListPage
@@ -133,7 +145,6 @@ const routes = [
   name: 'IngredientRegisterPage',
   component: IngredientRegisterPage
 },
-
 
 
 ]
