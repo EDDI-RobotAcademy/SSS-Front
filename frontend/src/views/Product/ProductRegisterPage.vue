@@ -6,7 +6,7 @@
   </template>
   
   <script>
-  import ProductRegisterForm from '@/components/Board/Product/ProductRegisterForm.vue';
+  import ProductRegisterForm from '@/components/Product/ProductRegisterForm.vue';
   import { mapActions } from 'vuex';
   
   export default {

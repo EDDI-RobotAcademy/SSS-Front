@@ -2,27 +2,29 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import IntroductionPage from "@/views/IntroductionPage.vue"
+
 import JpaQnaBoardListPage from "@/views/Board/QnaBoard/JpaQnaBoardListPage.vue"
 import JpaQnaBoardRegisterPage from "@/views/Board/QnaBoard/JpaQnaBoardRegisterPage.vue"
 import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
 import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
-import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionBoardPage.vue"
 
-import SideProductReadPage from "@/views/Board/SideProduct/SideProductReadPage.vue"
-import SideProductRegisterPage from "@/views/Board/SideProduct/SideProductRegisterPage.vue"
-import SideProductListPage from "@/views/Board/SideProduct/SideProductListPage.vue"
-import SideProductModifyPage from "@/views/Board/SideProduct/SideProductModifyPage.vue"
+import SideProductReadPage from "@/views/SideProduct/SideProductReadPage.vue"
+import SideProductRegisterPage from "@/views/SideProduct/SideProductRegisterPage.vue"
+import SideProductListPage from "@/views/SideProduct/SideProductListPage.vue"
+import SideProductModifyPage from "@/views/SideProduct/SideProductModifyPage.vue"
 
-import SignUpPage from "@/views/Acount/Member/SignUpPage.vue";
-import SignInPage from '@/views/Acount/Member/SignInPage.vue';
+import SignUpPage from "@/views/Member/SignUpPage.vue";
+import SignInPage from '@/views/Member/SignInPage.vue';
 import MyPageView from "@/views/MyPage/MyPageView.vue"
+import MemberModify from "@/views/Member/MemberModify.vue"
 
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
 
-import ProductListPage from '@/views/Board/Product/ProductListPage.vue'
-import ProductRegisterPage from '@/views/Board/Product/ProductRegisterPage.vue'
-import ProductReadPage from '@/views/Board/Product/ProductReadPage.vue'
+import ProductListPage from '@/views/Product/ProductListPage.vue'
+import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
+import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 
 Vue.use(VueRouter)
 
@@ -47,6 +49,14 @@ const routes = [
     name: 'MyPageView',
     component: MyPageView
   },
+
+  {
+    path: '/member/member-modify',
+    name: 'MemberModify',
+    component: MemberModify
+  },
+
+
   {
     path: '/qnaboard/jpa-qna-board-list-page',
     name: 'JpaQnaBoardListPage',
@@ -108,13 +118,6 @@ const routes = [
     default: true
   }
 },
-//회사소개
-{
-  path: '/introduction-board/introduction-board-page',
-  name: 'IntroductionBoardPage',
-  component: IntroductionBoardPage
-},
-//완제품
 {
   path: '/product-list',
   name: 'ProductListPage',
@@ -146,6 +149,12 @@ const routes = [
   component: IngredientRegisterPage
 },
 
+//회사소개
+{
+  path: '/introduction-page',
+  name: 'IntroductionPage',
+  component: IntroductionPage
+},
 
 ]
 

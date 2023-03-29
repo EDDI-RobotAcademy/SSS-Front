@@ -16,7 +16,7 @@
 
 <script>
 
-import SideProductReadForm from '@/components/Board/SideProduct/SideProductReadForm'
+import SideProductReadForm from '@/components/SideProduct/SideProductReadForm'
 import {mapActions, mapState} from 'vuex'
 
 export default {  

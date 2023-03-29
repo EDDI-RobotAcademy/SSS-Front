@@ -9,8 +9,12 @@
   </template>
   
   <script>
+<<<<<<< HEAD:frontend/src/views/Board/Product/ProductListPage.vue
   import ProductListForm from '@/components/Board/Product/ProductListForm.vue'
   import ProductCard from '@/components/Board/Product/ProductCard.vue'
+=======
+  import ProductListForm from '@/components/Product/ProductListForm.vue'
+>>>>>>> main:frontend/src/views/Product/ProductListPage.vue
   import { mapActions, mapState } from 'vuex'
   
   export default {
