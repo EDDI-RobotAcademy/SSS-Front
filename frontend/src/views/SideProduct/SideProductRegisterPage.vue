@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SideProductRegisterForm from '@/components/Board/SideProduct/SideProductRegisterForm.vue'
+import SideProductRegisterForm from '@/components/SideProduct/SideProductRegisterForm.vue'
 import {mapActions} from 'vuex'
 
 export default {

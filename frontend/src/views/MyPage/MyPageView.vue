@@ -5,8 +5,8 @@
     </div>
   </template>
   <script>
-  import MyPageNav from '@/components/Acount/MyPage/MyPageNav.vue';
-  import MyPageViewForm from "@/components/Acount/MyPage/MyPageViewForm.vue";
+  import MyPageNav from '@/components/MyPage/MyPageNav.vue';
+  import MyPageViewForm from "@/components/MyPage/MyPageViewForm.vue";
 
   export default {
     name: "MyPageView",
