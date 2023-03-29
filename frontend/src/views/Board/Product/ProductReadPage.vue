@@ -1,7 +1,7 @@
 <template>
     <v-container>
       <div align="center">
-        <h2>상품 상세정보</h2>
+        <!-- <h2>상품 상세정보</h2> -->
         <product-read-form v-if="product" :product="product" :productImgs="productImgs"/>
         <p v-else>로딩중 .......... </p>
         <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
