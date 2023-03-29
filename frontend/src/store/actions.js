@@ -133,11 +133,10 @@ export default {
 
 //등록
     requestCreateSideProductToSpring ({}, payload){
-        const { title, content, price } = payload
-        return axios.post('http://localhost:7777/sideproduct/register', 
-        { title, content, price })
+        return axios.post('http://localhost:7777/sideproduct/register',
+        payload )
         .then((res) => {
-            alert('게시물 등록 성공: ' + JSON.stringify(res.data))
+            alert('게시물 등록 성공')
             return res
         })
         .catch(() => {
