@@ -2,10 +2,14 @@ import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
+<<<<<<< HEAD
     // REQUEST_REPLY_TO_SPRING,
     
     REQUEST_REPLY_REGISTER_TO_SPRING,
     
+=======
+    REQUEST_REPLY_TO_SPRING,
+>>>>>>> main
 
     REQUEST_PRODUCT_TO_SPRING,
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
@@ -38,8 +42,14 @@ export default {
             })
     },
     requestCreateReplyToSpring ({}, payload) {
+<<<<<<< HEAD
         const replyContent = payload
         return axios.post('http://localhost:7777/reply/register', replyContent)
+=======
+        const { replyContent } = payload
+        return axios.post('http://localhost:7777/reply/register',
+            { replyContent })
+>>>>>>> main
             .then((res) => {
                 alert('댓글 등록 성공: ' + JSON.stringify(res.data))
                 return res
@@ -136,11 +146,10 @@ export default {
 
 //등록
     requestCreateSideProductToSpring ({}, payload){
-        const { title, content, price } = payload
-        return axios.post('http://localhost:7777/sideproduct/register', 
-        { title, content, price })
+        return axios.post('http://localhost:7777/sideproduct/register',
+        payload )
         .then((res) => {
-            alert('게시물 등록 성공: ' + JSON.stringify(res.data))
+            alert('게시물 등록 성공')
             return res
         })
         .catch(() => {

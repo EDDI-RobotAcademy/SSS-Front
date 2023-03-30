@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import SideProductListForm from '@/components/Board/SideProduct/SideProductListForm.vue'
+import SideProductListForm from '@/components/SideProduct/SideProductListForm.vue'
 import { mapActions, mapState } from 'vuex'
 
 

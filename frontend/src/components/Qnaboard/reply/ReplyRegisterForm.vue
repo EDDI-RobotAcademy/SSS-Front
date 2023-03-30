@@ -38,12 +38,16 @@
           <v-row align="center">
             <v-col>
               <div align="center" class="mb-10">
+<<<<<<< HEAD:frontend/src/components/Qnaboard/reply/ReplyRegisterForm.vue
                 <button
                     btn-name="등록하기"
                     tpye="submit"
                     style="width: 200px; height: 50px; font-size: 16px">
                     등록하기
                 </button>
+=======
+                <button type="submit" style="width: 200px; height: 50px; font-size: 16px">등록</button>
+>>>>>>> main:frontend/src/components/Board/Qnaboard/reply/ReplyRegisterForm.vue
               </div>
             </v-col>
           </v-row>
@@ -60,12 +64,17 @@ export default {
   name: "ReplyRegisterForm",
   data () {
     return {
+<<<<<<< HEAD:frontend/src/components/Qnaboard/reply/ReplyRegisterForm.vue
       replyContent: this.replyContent,
       reply: '',
+=======
+      replyContent : '내용입력'
+>>>>>>> main:frontend/src/components/Board/Qnaboard/reply/ReplyRegisterForm.vue
     }
   },
   methods: {
     ...mapActions([
+<<<<<<< HEAD:frontend/src/components/Qnaboard/reply/ReplyRegisterForm.vue
         'requestReplyRegisterToSpring'
     ]),
     async registerReply() {
@@ -85,6 +94,18 @@ export default {
   //       'resMember'
   //   ])
   // }
+=======
+        'requestCreateReplyToSpring'
+    ]),
+    async onSubmit (payload) {
+      const reply = await this.requestCreateReplyToSpring(payload)
+      console.log('reply: ' + JSON.stringify(reply.data))
+      // await this.$router.push({
+      //             name: 'JpaQnaBoardReadPage'
+      //         })
+    }
+  },
+>>>>>>> main:frontend/src/components/Board/Qnaboard/reply/ReplyRegisterForm.vue
 }
 </script>
 
