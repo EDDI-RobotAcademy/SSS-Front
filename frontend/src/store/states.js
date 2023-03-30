@@ -5,7 +5,6 @@ export default {
     replys: [],
     reply: {},
 
-<<<<<<< HEAD
     reWriter: {},
 
     // questionBoard: {}, // board
@@ -13,8 +12,6 @@ export default {
     // questionComment: {}, reply
     // questionComments: [], replys
 
-=======
->>>>>>> main
     sideproducts: [],
     sideproduct: {},
 
