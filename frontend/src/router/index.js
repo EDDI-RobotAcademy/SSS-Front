@@ -2,21 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-<<<<<<< HEAD
 import QnaBoardListPage from "@/views/QnaBoard/QnaBoardListPage.vue"
 import QnaBoardRegisterPage from "@/views/QnaBoard/QnaBoardRegisterPage.vue"
 import QnaBoardReadPage from "@/views/QnaBoard/QnaBoardReadPage.vue"
 import QnaBoardModifyPage from "@/views/QnaBoard/QnaBoardModifyPage.vue"
 
-import IntroductionBoardPage from "@/views/Board/introductionBoard/IntroductionBoardPage.vue"
-=======
 import IntroductionPage from "@/views/IntroductionPage.vue"
 
-import JpaQnaBoardListPage from "@/views/Board/QnaBoard/JpaQnaBoardListPage.vue"
-import JpaQnaBoardRegisterPage from "@/views/Board/QnaBoard/JpaQnaBoardRegisterPage.vue"
-import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
-import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
->>>>>>> main
 
 import SideProductReadPage from "@/views/SideProduct/SideProductReadPage.vue"
 import SideProductRegisterPage from "@/views/SideProduct/SideProductRegisterPage.vue"

@@ -16,7 +16,8 @@
                 <v-textarea
                     color="black"
                     height="200px"
-                    v-model="replyContent"
+                    v-model="questionContent"
+                    readonly
                     outlined>
                 </v-textarea>
               </v-col>
@@ -30,7 +31,7 @@
                   color="black"
                   height="200px"
                   placeholder="답변을 작성해주세요"
-                  v-model="reply"
+                  v-model="comment"
                   outlined>
               </v-textarea>
             </v-col>
@@ -52,10 +53,10 @@
 import {mapActions, mapState} from "vuex";
 
 export default {
-  name: "ReplyRegisterForm",
+  name: "QuestionCommentRegisterForm",
   data () {
     return {
-      replyContent : '내용입력'
+      questionContent : '내용입력'
     }
   },
   methods: {
