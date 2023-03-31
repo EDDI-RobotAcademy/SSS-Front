@@ -2,33 +2,46 @@
   <div class="ingredientCard">
     <div class="ingredientInfo">
       <div class="ingredientImage">
-        <img :src="
-            require(`../../assets/selfSalad/${ingredient.ingredientImage.randomName}`)"
-        />
+        <p>{{ingredient.editedImg}}</p>
+        <!-- <img :src="
+            require(`../../assets/selfSalad/${ingredient.editedImg}`)"
+        /> -->
       </div>
       <p class="ingredientName">{{ ingredient.name }}</p>
       <div>
-        <select id="selection" >
-          <option select>0 {{measure}}</option>
-          <option v-for="number in numbers" :key="number">{{ number }}  {{measure}} </option>       
-        </select>
-        <p style="display:inline-block">{{ this.ingredient.amount.calorie }} KCAL </p>
-        <p style="display:inline-block">가격 : {{ this.ingredient.amount.price }}원</p>
+        <select id="selection" v-model="selectedAmount" @change="onChange" >
+          <option disabled selected :value="option.value">선택해라</option>
+          <option>0</option>
+          <option v-for="number in numbers" :key="number" :value="number">{{ number }} </option>       
+        </select>{{amountType}}
+      </div>
+      <div class="amountInfo">
+        <span>{{ min }}({{amountType}}) 당 {{ ingredient.price }}원/{{ ingredient.calorie }} KCAL</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+export default{
   name: "IngredientCard",
   data(){
     return {
-      max : this.ingredient.amount.max,
-      min : this.ingredient.amount.min,
-      unit : this.ingredient.amount.unit,
-      measure : this.ingredient.amount.amountType,
-      numbers: []
+      max : Number(this.ingredient.max),
+      min : Number(this.ingredient.min),
+      unit : Number(this.ingredient.unit),
+      price : Number(this.ingredient.price),
+      calorie : Number(this.ingredient.calorie),
+
+      amountType : this.ingredient.amountType,
+
+      numbers: [],
+      prevSelectedAmount: 0,
+
+      selectedAmount: "default",
+      option: {
+        value: "default",
+      },      
     }
   },
   props: {
@@ -36,31 +49,43 @@ export default {
       type: Object,
       required: true,
     },
+    changeValue: {
+      type: String,
+      default: '',
+    }
+
   },
   mounted() {
     for (let i = this.min; i <= this.max; i += this.unit) {
       this.numbers.push(i)
     }
-
-
+  },
+  watch: {
+    changeValue(newVal) {
+      if ( newVal === 'default') {
+        this.selectedAmount = 'default'
+        this.prevSelectedAmount = 0
+      }
+    },
   },
   methods: {
-    increment () {
-      ingredient.amount.max
-      this.min += unit
-    },
-    changeToNumber(){
-      // 최소 수량 = min , n 씩 증가 = increase , n번 반복문 = repeat
-      this.increase = ingredient.amount.max/ingredient.amount.unit;
-      this.min = ingredient.amount.min;
-    }
-  // checkAmount() {
-  //   // 옵션의 값을 emit 하기
-  //   //this.$emit;
-  // },
-  }
-}
+    onChange(event){
+      // 재료 수량을 다시 선택했을 때 이전의 선택된 수량, 칼로리를 뺀 후에 다시 전달하기
+      console.log(Number(event.target.value)+"이벤트 타겟이란다..")
+      this.selectedAmount = Number(event.target.value);
 
+      const priceDiff = this.price * (this.selectedAmount - this.prevSelectedAmount);
+      const calorieDiff = this.calorie * (this.selectedAmount - this.prevSelectedAmount);
+      const optionValue = this.selectedAmount
+
+      this.prevSelectedAmount = this.selectedAmount;
+
+      this.$emit('change', priceDiff, calorieDiff, optionValue)
+    },
+  },
+  
+
+}
 
 </script>
 <style scoped>
@@ -69,7 +94,7 @@ export default {
   }
   .ingredientImage img{
     width :100%;
-    height: 250px;
+    height: 200px;
   }
 
   .ingredientName{
@@ -79,8 +104,14 @@ export default {
     margin-top: 30px;
     background-color: rgb(193, 218, 218);
   }
+  .amountInfo{
+    text-align: right;
+    font-size: 12px;
+    color: rgb(125, 125, 131);
+
+  }
   #selection{
-    width: 20%;
+    width: 30%;
     text-align: center;
     background-color : rgb(211, 200, 200);
   }

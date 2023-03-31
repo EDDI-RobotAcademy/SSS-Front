@@ -4,11 +4,18 @@
       <tr>
         <h2>{{ category }} 입니다.</h2>
         <select v-model="category">
-          <option selected value="vegetable" >채소</option>
-          <option value="meat">육류</option>
-          <option value="topping">토핑</option>
-        </select>
+          <option :selected="selected" value="VEGETABLE">채소</option>
+          <option value="MEAT">육류</option>
+          <option value="TOPPING">토핑</option>
+        </select>    
       </tr>
+      <div>
+        <p>최종 가격: {{ totalPrice }}</p>
+        <p>최종 칼로리: {{ totalCalorie }}</p>
+      </div>
+      <button type="button" @click="resetAll">
+        초기화
+      </button>
       <tr class="cardSession">
         <td v-if="!ingredients || (Array.isArray(ingredients) && ingredients.length === 0)">
           <p colspan="4">
@@ -17,19 +24,18 @@
         </td>
         <td class="card"
           v-else v-for="ingredient in ingredients" :key="ingredient.id">
-          <ingredient-card :ingredient="ingredient"/>
+          <ingredient-card :ingredient="ingredient"
+                            @change="onChange"
+                            :change-value="changeValue" />
         </td>
       </tr>
       <div>
         <button type="submit">바로 주문하기</button>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
           등록하기
-      </router-link>
+        </router-link>
       </div>
     </table>
-
-
- 
   </form>
 </template>
 
@@ -41,22 +47,39 @@ export default {
   data(){
     return {
       category: '채소',
+      totalPrice: 0,
+      totalCalorie: 0,
+      selectedAmount: 0,
+      changeValue : 0,
     }   
   },
   props: {
     ingredients: {
-      type : Array
-    }
-  }, 
+      type : Array,
+      require: true,
+    },
+  },
   methods: {
-    // onChange(){
-    //   this.$emit("change",this.category)
-    //   console.log(this.category)
-    // },
-    // defaultType(){
-    //   this.$emit('change', this.category) 
-    // }
-  }
+    onChange( selectPrice, selectCalorie, optionValue ){
+      this.totalPrice += selectPrice
+      this.totalCalorie += selectCalorie
+      console.log(optionValue)
+      this.changeValue = optionValue
+
+      console.log(selectPrice+": 전달받은 가격")
+      console.log(selectCalorie+": 전달받은 수량")
+      console.log(optionValue+": 전달받은 옵션값" )
+      //const amount = Number(selectedAmount)
+
+    },
+    resetAll() {
+        this.selectedAmount = 0;
+        this.totalCalorie = 0;
+        this.totalPrice = 0;
+        this.changeValue = "default";
+      },
+    },
+
 
 }
 </script>
@@ -64,7 +87,7 @@ export default {
 <style scoped>
   .cardSession{
     width: 100%;
-    background-color: rgb(216, 238, 224);
+
     margin-bottom: 50px;
     display: flex;
     flex-flow: row wrap;
@@ -72,8 +95,9 @@ export default {
 
   }
   .cardSession .card{
-    width: 21%;
-    height: 400px;
+    width: 16%;
+    margin: 0 3%;
+    height: 350px;
   }
   .cardSession .card:nth-child(4n){
     margin-bottom: 60px;
