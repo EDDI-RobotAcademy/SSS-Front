@@ -118,12 +118,12 @@ export default {
                 commit(REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING, res.data)
             })
     },
-    requestProductModifyToSpring({}, payload){
+    async requestProductModifyToSpring({}, payload){
         const {productId, formData} = payload
         for(let idx = 0, len = files.length; idx < len; idx++) {
             console.log(payload.formData[idx])
         }
-        return axios.put(`http://localhost:7777/products/modify/${productId}`,
+        return await axios.put(`http://localhost:7777/products/modify/${productId}`,
         formData, {headers: {
             'Content-Type': 'multipart/form-data'
         }})

@@ -22,7 +22,7 @@
           <tr>
             <td>상품 사진</td>
             <td>
-                  <input type="file" id="files" ref="files" multiple @change="handleFileUpload"/>
+                <input type="file" id="files" ref="files" multiple @change="handleFileUpload"/>
             </td>
         </tr>
       </table>

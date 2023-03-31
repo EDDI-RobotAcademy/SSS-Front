@@ -17,7 +17,7 @@
           <tr>
               <td>본문</td>
               <td>
-                  <textarea cols="50" rows="20" v-model="content"/>
+                  <textarea cols="50" rows="5" v-model="content"/>
               </td>
           </tr>
           <tr>
@@ -36,7 +36,7 @@
         </table>
   
         <v-row>
-          <v-col v-for="(imagePath, idx) in product.productImgs" :key="idx" cols="12">
+          <v-col v-for="(imagePath, idx) in product.productImgs" :key="idx" cols="4">
               <v-img :src="require(`@/assets/product/${imagePath.editedImg}`)" aspect-ratio="1" class="grey lighten-2">
               <template v-slot:placeholder>
                   <v-row class="fill-height ma-0" align="center" justify="center">
