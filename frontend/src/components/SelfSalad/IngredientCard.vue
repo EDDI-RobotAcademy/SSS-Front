@@ -41,7 +41,8 @@ export default{
       selectedAmount: -1,
       option: {
         value: -1,
-      },      
+      }, 
+      indentifier : 'option'+this.ingredient.id,     
     }
   },
   props: {
@@ -59,18 +60,33 @@ export default{
     for (let i = this.min; i <= this.max; i += this.unit) {
       this.numbers.push(i)
     }
+    // localStorage에서 선택한 값을 가져와 selectedAmount 변수에 할당
+    const selectedValue = localStorage.getItem(this.indentifier);
+    if (selectedValue) {
+      this.selectedAmount = selectedValue;
+    }
   },
   watch: {
     changeValue(newVal) {
       if ( newVal === -1) {
         this.selectedAmount = -1
         this.prevSelectedAmount = 0
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith('option')) {
+            localStorage.removeItem(key);
+          }
+        }
       }
     },
   },
   methods: {
     onChange(event){
       // 재료 수량을 다시 선택했을 때 이전의 선택된 수량, 칼로리를 뺀 후에 다시 전달하기
+       // 선택한 값을 localStorage에 저장
+       if(this.selectedAmount !== 0){
+       localStorage.setItem(this.indentifier, this.selectedAmount);
+       }
       this.selectedAmount = Number(event.target.value);
 
       const priceDiff = this.price * (this.selectedAmount - this.prevSelectedAmount);
