@@ -3,7 +3,7 @@
     <table>
       <tr>
         <h2>{{ category }} 입니다.</h2>
-        <select v-model="category">
+        <select v-model="category" @change="changeCategory">
           <option value="VEGETABLE">채소</option>
           <option value="MEAT">육류</option>
           <option value="TOPPING">토핑</option>
@@ -78,6 +78,10 @@ export default {
         this.totalPrice = 0;
         this.changeValue = -1;
       },
+    changeCategory(){
+      const categoryName = this.category
+      this.$emit('change', categoryName)
+    }
     },
 
 
