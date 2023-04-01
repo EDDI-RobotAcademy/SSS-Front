@@ -10,7 +10,8 @@ import {
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
 
-    REQUEST_INGREDIENT_LIST_TO_SPRING
+    REQUEST_INGREDIENT_LIST_TO_SPRING,
+    REQUEST_INGREDIENT_CATEGORY_TO_SPRING,
 
 
 } from './mutation-types'
@@ -215,6 +216,12 @@ requestSideProductModifyToSpring({}, payload){
             })
             .catch(() => {
                 alert('문제 발생!')
+            })
+    },
+    requestIngredientCategoryToSpring ({ commit }, categoryName) {
+        return axios.get(`http://localhost:7777/selfsalad/list/${categoryName}`)
+            .then((res) => {
+                commit(REQUEST_INGREDIENT_CATEGORY_TO_SPRING, res.data)
             })
     },
 

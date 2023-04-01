@@ -156,6 +156,18 @@ const routes = [
   component: IntroductionPage
 },
 
+
+{
+  path: '/selfsalad/ingredient-list-page/:categoryName',
+  name: 'IngredientListPage',
+  components: {
+    default: IngredientListPage
+  },
+  props: {
+    default: true
+  }
+},
+
 ]
 
 const router = new VueRouter({
