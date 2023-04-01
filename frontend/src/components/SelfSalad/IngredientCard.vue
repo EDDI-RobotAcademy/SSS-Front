@@ -2,7 +2,7 @@
   <div class="ingredientCard">
     <div class="ingredientInfo">
       <div class="ingredientImage">
-        <p>{{ingredient.editedImg}}</p>
+        <p>{{ingredient.editedName}}</p>
         <!-- <img :src="
             require(`../../assets/selfSalad/${ingredient.editedImg}`)"
         /> -->
@@ -10,7 +10,7 @@
       <p class="ingredientName">{{ ingredient.name }}</p>
       <div>
         <select id="selection" v-model="selectedAmount" @change="onChange" >
-          <option disabled selected :value="option.value">선택해라</option>
+          <option disabled :value="option.value">선택해라</option>
           <option>0</option>
           <option v-for="number in numbers" :key="number" :value="number">{{ number }} </option>       
         </select>{{amountType}}
@@ -38,9 +38,9 @@ export default{
       numbers: [],
       prevSelectedAmount: 0,
 
-      selectedAmount: "default",
+      selectedAmount: -1,
       option: {
-        value: "default",
+        value: -1,
       },      
     }
   },
@@ -50,8 +50,8 @@ export default{
       required: true,
     },
     changeValue: {
-      type: String,
-      default: '',
+      type: Number,
+      default: 0,
     }
 
   },
@@ -62,8 +62,8 @@ export default{
   },
   watch: {
     changeValue(newVal) {
-      if ( newVal === 'default') {
-        this.selectedAmount = 'default'
+      if ( newVal === -1) {
+        this.selectedAmount = -1
         this.prevSelectedAmount = 0
       }
     },
@@ -71,7 +71,6 @@ export default{
   methods: {
     onChange(event){
       // 재료 수량을 다시 선택했을 때 이전의 선택된 수량, 칼로리를 뺀 후에 다시 전달하기
-      console.log(Number(event.target.value)+"이벤트 타겟이란다..")
       this.selectedAmount = Number(event.target.value);
 
       const priceDiff = this.price * (this.selectedAmount - this.prevSelectedAmount);
@@ -83,6 +82,8 @@ export default{
       this.$emit('change', priceDiff, calorieDiff, optionValue)
     },
   },
+  
+  
   
 
 }

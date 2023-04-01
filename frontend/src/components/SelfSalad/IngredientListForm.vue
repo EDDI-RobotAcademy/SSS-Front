@@ -4,7 +4,7 @@
       <tr>
         <h2>{{ category }} 입니다.</h2>
         <select v-model="category">
-          <option :selected="selected" value="VEGETABLE">채소</option>
+          <option value="VEGETABLE">채소</option>
           <option value="MEAT">육류</option>
           <option value="TOPPING">토핑</option>
         </select>    
@@ -76,7 +76,7 @@ export default {
         this.selectedAmount = 0;
         this.totalCalorie = 0;
         this.totalPrice = 0;
-        this.changeValue = "default";
+        this.changeValue = -1;
       },
     },
 
