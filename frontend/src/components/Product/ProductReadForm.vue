@@ -2,7 +2,8 @@
   <div>
     <v-row>
       <v-col cols="5">
-        <v-img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)" aspect-ratio="1" class="grey lighten-2">
+        <v-img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)" 
+                aspect-ratio="1" class="grey lighten-2" width="500" height="500">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" justify="center">
               <v-progress-circular indeterminate color="grey lightesn-5"/>
@@ -19,11 +20,6 @@
               
                       <v-card width="80px" height="80px">
                         <v-img :src="require(`@/assets/product/${item.editedImg}`)" aspect-ratio="1" class="grey lighten-2">
-                          <!-- <template v-slot:placeholder>
-                            <v-row class="fill-height ma-0" justify="center">
-                              <v-progress-circular indeterminate color="grey lightesn-5"/>
-                            </v-row>
-                          </template> -->
                         </v-img>
                       </v-card>
               </v-tab>
@@ -34,42 +30,58 @@
       
       <v-col cols="7">           
         <table>
-          <tr>
+          <!-- <tr>
             <td>상품 번호</td>
             <td>
               <input type="text" :value="product.productId" readonly/>
             </td>
-          </tr>
+          </tr> -->
           <tr>
-            <td>상품명</td>
-            <td>
+            <h3>{{ product.title }}</h3>
+            <!-- <td>
               <input type="text" :value="product.title" readonly/>
-            </td>
+            </td> -->
           </tr>
           <tr>
-            <td>가격</td>
-            <td>
+            <h4>Price: {{ product.price | comma }}원</h4>
+            <!-- <td>
               <input type="number" :value="product.price" readonly/>
-            </td>
+            </td> -->
           </tr>
           <tr>
-            <td>본문</td>
-            <td>
-              <textarea cols="50" rows="5" :value="product.content" readonly/>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>배송비</p>
+            <v-row>
+              <p style="font-size: 0.7em">배송비(얼마이상무료배송)</p>
               <p>{{ deliveryFee | comma }}원</p>
-            </td>
+            </v-row>
           </tr>
+          <tr>
+            <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
+              <div>{{ product.title }}</div>
+                <div class="d-flex align-items-center">
+                  <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+                    <v-icon size="15">mdi-minus</v-icon>
+                  </v-btn>
+                  <div>{{ quantity }}</div>
+                  <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
+                    <v-icon size="15">mdi-plus</v-icon>
+                  </v-btn>
+              </div>
+            </div>
+          </tr>
+          <tr>  
+            <div class="row">
+              <p class="col-sm-4" style="text-align: left">총 합계</p>
+              <div class="col-sm-8" align="right">
+                <p>{{ totalPrice | comma }}원</p>
+              </div>
+            </div>
+          </tr>
+
           <div align="center" style="margin-top: 20px" >
             <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
                 <v-btn icon color="#568869" @click="btnFavorite" x-large><v-icon>mdi-heart-outline</v-icon></v-btn>
                 <v-btn icon color="red" @click="btnFavorite" x-large><v-icon>mdi-heart</v-icon></v-btn>
-          </div>      
-          
+          </div>
         </table>
         <v-row>
           <v-col>
@@ -104,6 +116,9 @@
             <v-card-title>
               상품설명
             </v-card-title>
+            <v-card-text class="mt-5">
+              <v-textarea solo flat auto-grow no-resize readonly :value="product.content"></v-textarea>
+            </v-card-text>
           </v-card>
         </v-tab-item>
 
@@ -135,12 +150,14 @@ export default {
       tab2: null,
       tab: null,
       idx: 0,
+      quantity: 1,
+      totalPrice: 0,
       items: [
         {tab: '상품설명'},
         {tab: '구매후기'},
         {tab: 'Q&A'},
       ],
-      deliveryFee: '',
+      deliveryFee: 3000,  //productInfo를 따로 만들것인지...(배송비, 찜 정보 등)
     }
   },
   filters: {
@@ -159,6 +176,16 @@ export default {
       // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
       this.idx = e;
     },
+    qtyDesc() {
+      if(this.quantity > 1) {
+        this.quantity--
+      } else {
+        this.quantity = 1
+      }
+    },
+    qtyInc() {
+      this.quantity++
+    },
     btnCart() {
       // 장바구니 클릭 이벤트
     },
@@ -168,6 +195,9 @@ export default {
     btnFavorite() {
       // 찜(좋아요) 클릭 이벤트
     },
+  },
+  beforeUpdate() {
+    this.totalPrice = this.product.price * this.quantity
   },
 };
 </script>
@@ -184,5 +214,8 @@ export default {
 .v-tab {
   padding: 0;
   position: relative;
+}
+.v-img {
+  background-color: white;
 }
 </style>
