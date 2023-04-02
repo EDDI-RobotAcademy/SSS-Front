@@ -4,7 +4,7 @@
           <img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)">
       </div>
       <p class="title">{{ product.title }}</p>
-      <p class="price">{{ product.price }}</p>
+      <p class="price">{{ product.price | comma }}원</p>
     </div>
 </template>
   
@@ -15,6 +15,11 @@
           return {
               idx: 0
           }
+      },
+      filters: {
+        comma(val) {
+          return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
       },
       props: {
           product: {
