@@ -56,6 +56,12 @@ export default{
     }
 
   },
+  created() {
+    window.addEventListener('beforeunload', this.refreshPage);
+  },
+  beforeUnmount() {
+    window.removeEventListener('beforeunload', this.refreshPage);
+  },
   mounted() {
     for (let i = this.min; i <= this.max; i += this.unit) {
       this.numbers.push(i)
@@ -80,6 +86,16 @@ export default{
       }
     },
   },
+  computed: {
+  convertedAmountType() {
+    if (this.ingredient.amountType === 'GRAM') {
+      return this.measure ='g';
+    } else if(this.ingredient.amountType === 'COUNT') {
+      return '개';
+    }
+    },
+  },
+
   methods: {
     onChange(event){
       // 재료 수량을 다시 선택했을 때 이전의 선택된 수량, 칼로리를 뺀 후에 다시 전달하기
@@ -97,6 +113,14 @@ export default{
 
       this.$emit('change', priceDiff, calorieDiff, optionValue)
     },
+    refreshPage(){
+      for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith('option')) {
+            localStorage.removeItem(key);
+          }
+        }
+    }
   },
   
   
