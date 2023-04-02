@@ -40,7 +40,7 @@
                   name: 'ProductReadPage',
                   params: { productId: this.productId, productImgs: this.productImgs }
               })
-              this.$router.go(0)  // 새로고침 해야지만 수정 사항 반영되서 추가했는데 로딩이 좀 이상하게 됨,,
+          //    this.$router.go(0)  // 새로고침 해야지만 수정 사항 반영되서 추가했는데 로딩이 좀 이상하게 됨,,
           }
       },
       async created () {

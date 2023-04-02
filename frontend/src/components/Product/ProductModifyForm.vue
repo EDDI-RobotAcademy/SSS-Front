@@ -59,6 +59,7 @@
   </template>
   
   <script>
+import axios from 'axios'
   
   export default {
       name: "ProductModifyForm",
@@ -105,18 +106,33 @@
   
               console.log('productInfo: ' + JSON.stringify(productInfo))
   
-              formData.append(
-                  "productInfo",
-                  new Blob([JSON.stringify(productInfo)], { type: "application/json" })
-              )
-  
-              console.log('before emit: ' + files)
-              for (let idx = 0, len = files.length; idx < len; idx++) {
-                console.log(files[idx])
+              if(this.files.length == 0) {
+                console.log("파일 없이 수정")
+
+                axios.put(`http://localhost:7777/products/modify-text/${productId}`, productInfo)
+                    .then(res => {
+                        if(res.data) {
+                            alert("수정 완료")
+                            this.$router.push('/product-list')
+                        }
+                    })
+                    .catch(res => {
+                        alert("수정 오류")
+                    })
+              } else {
+                  formData.append(
+                      "productInfo",
+                      new Blob([JSON.stringify(productInfo)], { type: "application/json" })
+                  )
+      
+                  console.log('before emit: ' + files)
+                  for (let idx = 0, len = files.length; idx < len; idx++) {
+                    console.log(files[idx])
+                  }
+                  console.log('productId: ' + productId)
+      
+                  this.$emit('submit', { productId, formData })
               }
-              console.log('productId: ' + productId)
-  
-              this.$emit('submit', { productId, formData })
           },
           handleFileUpload () {
             this.files = this.$refs.files.files
