@@ -2,27 +2,29 @@
   <div class="ingredientCard">
     <div class="ingredientInfo">
       <div class="ingredientImage">
-        <p>{{ingredient.editedName}}</p>
-        <!-- <img :src="
-            require(`../../assets/selfSalad/${ingredient.editedImg}`)"
-        /> -->
+        <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
+         />
       </div>
-      <p class="ingredientName">{{ ingredient.name }}</p>
-      <div>
-        <select id="selection" v-model="selectedAmount" @change="onChange" >
-          <option disabled :value="option.value">선택해라</option>
-          <option>0</option>
-          <option v-for="number in numbers" :key="number" :value="number">{{ number }} </option>       
-        </select>{{amountType}}
-      </div>
+      <div class="ingredientName">{{ ingredient.name }}</div>
       <div class="amountInfo">
-        <span>{{ min }}({{amountType}}) 당 {{ ingredient.price }}원/{{ ingredient.calorie }} KCAL</span>
+        <span>{{ min }}({{convertedAmountType}}) 당 {{ ingredient.price }}원/{{ ingredient.calorie }} KCAL</span>
+      </div>
+      <div class="backgroundImg">
+        <div class="white-box">
+          <select id="selection" class="form-select" v-model="selectedAmount" @change="onChange" >
+            <option disabled :value="option.value">수량</option>
+            <option>0</option>
+            <option v-for="number in numbers" :key="number" :value="number">{{ number }} </option>       
+          </select>
+          <span>({{convertedAmountType}})</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default{
   name: "IngredientCard",
   data(){
@@ -32,7 +34,6 @@ export default{
       unit : Number(this.ingredient.unit),
       price : Number(this.ingredient.price),
       calorie : Number(this.ingredient.calorie),
-
       amountType : this.ingredient.amountType,
 
       numbers: [],
@@ -42,7 +43,7 @@ export default{
       option: {
         value: -1,
       }, 
-      indentifier : 'option'+this.ingredient.id,     
+      indentifier : 'option'+this.ingredient.id,
     }
   },
   props: {
@@ -70,6 +71,7 @@ export default{
     const selectedValue = localStorage.getItem(this.indentifier);
     if (selectedValue) {
       this.selectedAmount = selectedValue;
+      this.prevSelectedAmount = selectedValue;
     }
   },
   watch: {
@@ -122,41 +124,111 @@ export default{
         }
     }
   },
-  
-  
-  
-
 }
-
 </script>
 <style scoped>
-  .ingredientCard, .ingredientImage, .ingredientImage img{
+  .ingredientCard, .ingredientInfo, .ingredientImage, .ingredientImage img{
     width: 100%;
+    height: auto;
+  }
+  .ingredientCard{
+    border: none;
+  }
+  .ingredientInfo{
+    padding-top: 1.8rem;
+    background-color: rgba(246, 242, 232, 0.854);
+    /*rgb(133, 173, 83);  rgb(246, 242, 232);*/
+    border-bottom-right-radius: 29px;
+    border-bottom-left-radius: 29px;
+  }
+  .ingredientImage{
+    padding:0 1rem;
+    position: relative;
+    
   }
   .ingredientImage img{
     width :100%;
-    height: 200px;
+    height: auto;
+    border-radius: 100%;
+  }
+  /**  .ingredientImage:hover::after{
+    border-radius: 100%;
+    z-index: 999;
+    display: inline-block;
+    position: absolute;
+    content: '이미지 수정';
+    top: 0; left:7%;
+    width:84%; height: 98%;
+    background-color: rgba(1, 1, 1, 0.204);
+    text-align: center;
+    align-items: center;
+  }
+
+      display: inline-block;
+    position: absolute;
+    content: '이미지 수정';
+  */
+  .ingredientName::before{
+    display: inline-block;
+    content: '';
+    
+    width: 8px; height: 8px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 0.5rem;
+    background-color: rgb(133, 173, 83);
   }
 
   .ingredientName{
-    font-size: 25px;
+    font-size: 2rem;
     padding: 10px 0;
-    text-align: center;
-    margin-top: 30px;
-    background-color: rgb(193, 218, 218);
+    text-align: left;
+    margin-top: 20px;
+    padding:0 1rem;
+    letter-spacing: 1px;
   }
   .amountInfo{
     text-align: right;
-    font-size: 12px;
-    color: rgb(125, 125, 131);
+    font-size: 15px;
+    color: rgb(176, 176, 176);
+    margin: 10px 0 20px 0;
+    padding-right: 1rem;
 
   }
-  #selection{
-    width: 30%;
-    text-align: center;
-    background-color : rgb(211, 200, 200);
+  .backgroundImg{
+    background-image: url("../../assets/selfSalad/vegetableBackground.png");
+    background-repeat: none;
+    background-position: center;
+    background-size:110% 100%;
+    padding: 1.8rem 1rem;
+    border-bottom-right-radius: 29px;
+    border-bottom-left-radius: 29px;
+  }
+  .white-box{
+    width:100%;
+    position: relative;
+  }
+  .white-box span{
+    font-size: 14px;
+    padding: 0.6rem 0;
+    position:absolute;
+    right: 28%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #selection{   
+    width:100%;
+    text-align: left;
+    color: rgb(90, 90, 90);
+    text-indent: 4px;
+    border-radius: 0;
+
   }
   #selection:focus{
     outline: none;
+    box-shadow: none;
+    border-color: transparent;
   }
 </style>

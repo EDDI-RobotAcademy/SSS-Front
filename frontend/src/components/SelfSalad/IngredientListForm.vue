@@ -1,17 +1,17 @@
 <template>
   <form @submit.prevent="onSubmit">
     <table>
-      <tr>
-        <h2>{{ category }} 입니다.</h2>
-        <select v-model="category" @change="changeCategory">
-          <option value="VEGETABLE">채소</option>
+      <!-- <tr class="background-category">{{ category }}</tr> -->
+      <tr class="categorySession">
+        <div class="background-category">{{ category }}</div>
+        <select v-model="category"  class="form-select" id="selection" @change="changeCategory">
+          <option value="VEGETABLE" selected>채소</option>
           <option value="MEAT">육류</option>
           <option value="TOPPING">토핑</option>
         </select>    
       </tr>
       <div>
-        <p>최종 가격: {{ totalPrice }}</p>
-        <p>최종 칼로리: {{ totalCalorie }}</p>
+        <p class="totalCalorie"><span> : {{ totalCalorie }} </span> ( 총 KCAL )</p>
       </div>
       <button type="button" @click="resetAll">
         초기화
@@ -30,6 +30,7 @@
         </td>
       </tr>
       <div>
+        <p>최종 가격: {{ totalPrice }}</p>
         <button type="submit">바로 주문하기</button>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
           등록하기
@@ -46,7 +47,7 @@ export default {
   components: { IngredientCard },
   data(){
     return {
-      category: '채소',
+      category: 'VEGETABLE',
       totalPrice: 0,
       totalCalorie: 0,
       selectedAmount: 0,
@@ -57,6 +58,17 @@ export default {
     ingredients: {
       type : Array,
       require: true,
+    },
+  },
+  computed: {
+  convertedCategoryType() {
+    if (this.category === 'VEGETABLE') {
+      return '채소';
+    } else if(this.category === 'MEAT') {
+      return '육류';
+    }else if(this.category === 'TOPPING') {
+      return '토핑';
+    }
     },
   },
   methods: {
@@ -89,29 +101,71 @@ export default {
 </script>
 
 <style scoped>
+  .background-category{
+    font-size: 13rem;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    font-weight: bolder;
+    color:  rgba(240, 242, 237);
+    letter-spacing: -15px;
+
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  table{
+    width: 100%;
+  }
+  .categorySession{
+    width: 100%
+  }
+  #selection{
+    margin-top: 150px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+    cursor: pointer;
+    padding: 1.5rem 0 0 0;
+    position: relative;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    background-color: transparent;
+    -webkit-appearance: none;
+    box-shadow: none;
+  }
+  #selection:focus{
+    outline: none;
+    box-shadow: none;
+  }
+  #selection option{
+    background: rgba(250, 250, 250, 0.057);
+    font-size: 1.2rem;
+    padding-left: 0.3rem;
+  }
+  .totalCalorie span{
+    color: rgb(133, 173, 83);
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .totalCalorie{
+    font-size: 17px;
+    text-align: right;
+    margin-top: 20px;    
+  }
+  
   .cardSession{
     width: 100%;
-
-    margin-bottom: 50px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-
   }
   .cardSession .card{
-    width: 16%;
-    margin: 0 3%;
-    height: 350px;
+    width: 260px;
+    height: auto;
+    border: none;
+    margin-bottom: 75px;
   }
-  .cardSession .card:nth-child(4n){
-    margin-bottom: 60px;
-  }
-
-</style>
-<!-- 최소 수량 당 기본 칼로리를 정하기
-  사용자가 선택한 수량에 기본 칼로리를 정해 최종 칼로리를 비동기로 구현
- ingredient.calory KCAL -->
-
-       <!-- 이전에 선택했던 모든 option들이 첫번째 option(0g/0개) 로 바뀌면서
-          칼로리 또한 0이 됨 -->
-      <!-- <button>모든 선택 취소</button> -->
