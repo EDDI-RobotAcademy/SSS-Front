@@ -1,6 +1,9 @@
 <template>
   <div class="ingredientCard">
     <div class="ingredientInfo">
+      <router-link :to="{ name: 'IngredientImgModifyPage', params: { id: this.ingredient.id.toString() } }">
+        이미지 수정
+      </router-link>
       <div class="ingredientImage">
         <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
          />

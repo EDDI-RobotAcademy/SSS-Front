@@ -14,4 +14,7 @@ export default {
     productImgs: [],
 
     ingredients: [],
+    ingredientImg: {},
+
+    
 }
