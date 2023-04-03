@@ -44,10 +44,6 @@ export default {
             type: Object,
             required: true,
         },
-        // reply: {
-        //     type: Object,
-        //     required: false,
-        // },
     },
 }
 </script>

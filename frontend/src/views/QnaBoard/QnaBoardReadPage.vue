@@ -4,6 +4,7 @@
       <h2>게시판 읽기</h2>
       <qna-board-read v-if="board" :board="board"/>
       <p v-else>로딩중 ......... </p>
+      <reply-list :reply="reply"/>
       <reply-register-form @submit="onSubmit" :reply="reply"/>
       <router-link :to="{ name: 'QnaBoardModifyPage', params: { boardId } }">
         게시물 수정
@@ -21,9 +22,10 @@
 import QnaBoardRead from '@/components/Qnaboard/QnaBoardRead.vue'
 import { mapActions, mapState } from 'vuex'
 import ReplyRegisterForm from '@/components/Qnaboard/reply/ReplyRegisterForm.vue'
+import ReplyList from '@/components/Qnaboard/reply/ReplyList.vue'
 
 export default {
-  components: { QnaBoardRead, ReplyRegisterForm },
+  components: { QnaBoardRead, ReplyRegisterForm, ReplyList },
     name: "QnaBoardReadPage",
     props: {
         boardId: {

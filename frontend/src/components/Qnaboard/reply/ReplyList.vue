@@ -1,39 +1,28 @@
 <template>
   <v-container>
-    <table class="boards"
+    <table class="reply"
            style="background-color: #eeeeee; border-radius: 10px"
-           v-if="!questionComments || (Array.isArray(questionComments) && questionComments.length === 0)">
+           v-if="!replyContent || (Array.isArray(replyContent) && replyContent.length === 0)">
       <div style="padding: 10px">
         <p>현재 등록된 댓글이 없습니다!</p>
       </div>
     </table>
-    <table class="boards"
+    <table class="reply"
            style="background-color: #eeeeee; border-radius: 10px"
            v-else
-           v-for="questionComment in questionComments" :key="questionComment.questionCommentNo"
+           v-for="replyContent in replyContent" :key="replyContent.replyId"
     >
       <tbody>
       <!--      댓글 리스트-->
       <tr>
-        <div class="comment">
+        <div class="reply">
           <v-row>
-            <pre style="font-family: naver2; height: fit-content">{{ questionComment.comment }}
+            <pre style="font-family: naver2; height: fit-content">{{ replyContent }}
             </pre>
           </v-row>
           <v-row>
-            <p class="mt-2">{{ questionComment.regDate }}</p>
+            <p class="mt-2">{{ replyContent.regDate }}</p>
           </v-row>
-          <v-row v-if="resMember.managerCheck" justify="end" class="mr-5 mb-5">
-            <button @click="modifyComment" class="mr-3">수정</button>
-            <button @click="onCommentDelete(questionComment.questionCommentNo)">삭제</button>
-          </v-row>
-          <template>
-            <v-dialog v-model="showModifyComment" max-width="1000">
-              <modify-question-comment-form
-                  :question-board="questionBoard"
-                  :question-comment="questionComment"/>
-            </v-dialog>
-          </template>
         </div>
       </tr>
       </tbody>
@@ -44,43 +33,16 @@
 <script>
 
 import {mapActions, mapState} from "vuex";
-import ModifyQuestionCommentForm from "@/components/boards/comment/ModifyQuestionCommentForm";
 
 export default {
-  name: "QuestionCommentList",
-  components: {ModifyQuestionCommentForm},
+  name: "ReplyList",
   data() {
     return {
-      commentWriter: this.$store.state.resMember.username,
-      deleteDialog: false,
-      deleteCommentTitle: "댓글 삭제",
-      showModifyComment: false
-    }
-  },
-  props: {
-    questionComments: {
-      type: Array
-    },
-    questionBoard: {
-      type: Object
+      replyContent: this.replyContent
     }
   },
   computed: {
-    ...mapState(['resMember'])
-  },
-  methods: {
-    ...mapActions([
-      'requestDeleteQuestionCommentToSpring',
-      'reqMemberInfoToSpring'
-    ]),
-    async onCommentDelete(commentNo) {
-      const questionCommentsNo = commentNo;
-      await this.requestDeleteQuestionCommentToSpring(questionCommentsNo);
-      await this.$router.push({name: 'QuestionListView'})
-    },
-    modifyComment() {
-      this.showModifyComment = true
-    }
+    ...mapState(['reply'])
   },
 }
 </script>
