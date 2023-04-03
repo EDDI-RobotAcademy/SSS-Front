@@ -2,7 +2,7 @@
     <v-container>
       <div align="center">
         <h2>게시물 수정</h2>
-        <jpa-qna-board-modify-form v-if="board" :board="board" @submit="onSubmit"/>
+        <qna-board-modify-form v-if="board" :board="board" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
       </div>
     </v-container>
@@ -10,12 +10,12 @@
   
   <script>
   
-  import JpaQnaBoardModifyForm from '@/components/Board/Qnaboard/JpaQnaBoardModifyForm.vue'
+  import QnaBoardModifyForm from '@/components/Qnaboard/QnaBoardModifyForm.vue'
   import { mapActions, mapState } from 'vuex'
   
   export default {
-      components: { JpaQnaBoardModifyForm },
-      name: "JpaQnaBoardModifyPage",
+      components: { QnaBoardModifyForm },
+      name: "QnaBoardModifyPage",
       props: {
           boardId: {
               type: String,
@@ -36,7 +36,7 @@
   
               await this.requestBoardModifyToSpring({ boardId, title, content, writer })
               await this.$router.push({
-                  name: 'JpaQnaBoardReadPage',
+                  name: 'QnaBoardReadPage',
                   params: { boardId: this.boardId }
               })
           }

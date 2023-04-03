@@ -1,25 +1,15 @@
 <template>
-  <div>
-    <carousel-form />
-    <banner-form />
-    <popup-form />
-    <top-button-form />
-  </div>
+  <hello-world />
 </template>
 
 <script>
+  import HelloWorld from '../components/HelloWorld'
 
-import PopupForm from "@/components/main/PopupForm.vue";
-import CarouselForm from "@/components/main/CarouselForm.vue";
-import BannerForm from "@/components/main/BannerForm.vue";
-import TopButtonForm from "@/components/main/TopButtonForm.vue";
-export default {
-  name: 'HomeView',
-  components: {
-    PopupForm,
-    CarouselForm,
-    BannerForm,
-    TopButtonForm
-  },
-}
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld,
+    },
+  }
 </script>
