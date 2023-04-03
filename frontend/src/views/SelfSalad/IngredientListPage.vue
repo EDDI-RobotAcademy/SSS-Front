@@ -32,6 +32,15 @@ import { mapActions, mapState } from 'vuex'
           await this.requestIngredientCategoryToSpring(payload) //카테고리 이름
         },
       },
+      beforeRouteLeave(to, from, next) {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith('option')) {
+            localStorage.removeItem(key);
+          }
+        }
+        next(); 
+      },
   // async onSubmit (payload) {
   //     await this.requestIngredientListToSpring(payload)
   //     await this.$router.push({
