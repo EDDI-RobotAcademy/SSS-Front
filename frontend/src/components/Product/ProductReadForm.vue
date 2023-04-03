@@ -10,7 +10,7 @@
             </v-row>
           </template>
         </v-img>
-        <v-row>
+        <!-- <v-row>
           <template>
             <v-tabs width="400" height="100"
                         show-arrows background-color="transparent"
@@ -25,7 +25,7 @@
               </v-tab>
             </v-tabs>
           </template>
-        </v-row>
+        </v-row> -->
       </v-col>
       
       <v-col cols="7">           
@@ -110,14 +110,48 @@
         </v-tab>
       </v-tabs>
 
-      <v-tabs-items>
+      <v-tabs-items v-model="tab">
         <v-tab-item>
           <v-card flat>
             <v-card-title>
-              상품설명
+              {{ product.content }}
             </v-card-title>
             <v-card-text class="mt-5">
-              <v-textarea solo flat auto-grow no-resize readonly :value="product.content"></v-textarea>
+              
+              <v-row>
+                <v-col cols="2" style="background-color: green;">
+                  <span><h2 style="color:white">채소 구성</h2></span>
+                </v-col>
+                <v-col align="center" v-for="(image, index) in product.productImgs.slice(1)" :key="index" cols="2">
+                  <v-img :src="require(`@/assets/product/${image.editedImg}`)" max-width="200" contain></v-img>
+                </v-col>
+              </v-row>
+              
+              <v-row style="margin-top: 80px;">
+                <h2>영양성분표</h2>
+                <table class="ingredient" style="width: 100%; margin: 0 auto; height: 100px; text-align: center;">                
+                    <tr style="background-color: green;">
+                      <th>메뉴</th>
+                      <th>열량(kcal)</th>
+                      <th>탄수화물(g)</th>
+                      <th>당류(g)</th>
+                      <th>단백질(g)</th>
+                      <th>지방(g)</th>
+                      <th>포화지방(g)</th>
+                      <th>나트륨(mg)</th>
+                    </tr>
+                    <tr>
+                      <td>{{product.title}}</td>
+                      <td>264.4</td>
+                      <td>36.4</td>
+                      <td>11.1</td>
+                      <td>7.3</td>
+                      <td>11.8</td>
+                      <td>1.6</td>
+                      <td>368.7</td>
+                    </tr>
+                </table>
+              </v-row>
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -210,12 +244,17 @@ export default {
 .detail {
   border: 1px solid
 }
-
 .v-tab {
   padding: 0;
   position: relative;
 }
 .v-img {
   background-color: white;
+}
+.ingredient th {
+  font-size: 1.4em;
+}
+.ingredient td {
+  font-size: 1.4em;
 }
 </style>
