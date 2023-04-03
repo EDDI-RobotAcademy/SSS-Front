@@ -7,15 +7,15 @@
             <hr>
             <div id="flex-box">
               <div>
-                <input type="radio" v-model="category" name="radioBtn" value="채소">
+                <input type="radio" v-model="category" name="radioBtn" value="VEGETABLE">
                 <label for="r1">채소</label>
               </div>
               <div>
-                <input type="radio" v-model="category" name="radioBtn" value="육류">
+                <input type="radio" v-model="category" name="radioBtn" value="MEAT">
                 <label for="r2">육류</label>
               </div>
               <div>
-                <input type="radio" v-model="category" name="radioBtn" value="토핑">
+                <input type="radio" v-model="category" name="radioBtn" value="TOPPING">
                 <label for="r3">토핑</label>
               </div>
             </div>
@@ -63,8 +63,8 @@
               <div>
                 <label>측정 단위</label>
                 <select v-model="measure">
-                  <option selected>g</option>
-                  <option>개</option>
+                  <option selected value="GRAM">g</option>
+                  <option value="COUNT">개</option>
                 </select>
               </div>
             </div>
@@ -88,8 +88,8 @@
       data () {
           return {
               name: 'put name',
-              category: '',
-              measure: 'g',
+              category: 'VEGETABLE',
+              measure: 'GRAM',
               max: '10',
               min: '1',
               unit: '2',
@@ -104,7 +104,7 @@
             for (let idx = 0; idx < this.files.length; idx++) {
                 formData.append('imageFile', this.files[idx])
             }
-            console.log('imageFile: '+ this.imageFile)
+            console.log('imageFile: '+ this.files)
 
             const { name, category, measure, max, min, unit, price, calorie } = this
             let ingredientInfo = {
