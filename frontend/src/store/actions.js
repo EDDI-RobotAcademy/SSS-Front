@@ -3,16 +3,23 @@ import {
     REQUEST_BOARD_TO_SPRING,
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
 
+    // REQUEST_REPLY_TO_SPRING,
+
     REQUEST_PRODUCT_TO_SPRING,
-    REQUEST_PRODUCT_LIST_TO_SPRING,
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
 
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
 
+<<<<<<< HEAD
     REQUEST_INGREDIENT_LIST_TO_SPRING,
     REQUEST_INGREDIENT_CATEGORY_TO_SPRING,
     REQUEST_INGREDIENT_IMG_TO_SPRING,
+=======
+    REQUEST_PRODUCT_LIST_TO_SPRING,
+
+    REQUEST_INGREDIENT_LIST_TO_SPRING,
+>>>>>>> main
 
 
 } from './mutation-types'
@@ -23,12 +30,23 @@ import store from "@/store/index";
 
 export default {
     requestCreateBoardToSpring ({}, payload) {
-
         const { title, content, writer } = payload
         return axios.post('http://localhost:7777/board/register',
             { title, content, writer })
             .then((res) => {
                 alert('게시물 등록 성공: ' + JSON.stringify(res.data))
+                return res
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    },
+    requestCreateReplyToSpring ({}, payload) {
+        const replyContent = payload
+        return axios.post('http://localhost:7777/reply/register', replyContent)
+
+            .then((res) => {
+                alert('댓글 등록 성공: ' + JSON.stringify(res.data))
                 return res
             })
             .catch(() => {
@@ -219,6 +237,7 @@ requestSideProductModifyToSpring({}, payload){
                 alert('문제 발생!')
             })
     },
+<<<<<<< HEAD
     requestIngredientCategoryToSpring ({ commit }, categoryName) {
         return axios.get(`http://localhost:7777/selfsalad/list/${categoryName}`)
             .then((res) => {
@@ -241,6 +260,29 @@ requestSideProductModifyToSpring({}, payload){
         .catch(() => {
             alert("수정 실패")
         })
+=======
+    // 댓글 리스트 등록 //requestQuestionCommentRegisterToSpring REQUEST_REPLY_REGISTER_TO_SPRING
+    // eslint-disable-next-line no-empty-pattern
+    requestReplyRegisterToSpring ({ }, payload) {
+        console.log('requestReplyRegisterToSpring()')
+        const { replyContent } = payload
+        console.log("댓글 등록" )
+        return axios.post('http://localhost:7777/reply/register',
+            { replyContent : replyContent })
+            .then(() => {
+                alert('댓글 등록을 완료하였습니다.')
+            })
+    },
+    // 댓글 삭제
+    // eslint-disable-next-line no-empty-pattern
+    requestDeleteQuestionCommentToSpring({}, questionCommentNo) {
+        console.log('requestDeleteQuestionToSpring()')
+
+        return axios.delete(`http://localhost:7777/ztz/boards/question/comment/${questionCommentNo}`)
+            .then(() => {
+                alert('삭제 완료했습니다!')
+            })
+>>>>>>> main
     },
 
 }
