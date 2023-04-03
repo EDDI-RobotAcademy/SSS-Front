@@ -11,9 +11,15 @@ import {
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
 
+<<<<<<< HEAD
+    REQUEST_INGREDIENT_LIST_TO_SPRING,
+    REQUEST_INGREDIENT_CATEGORY_TO_SPRING,
+    REQUEST_INGREDIENT_IMG_TO_SPRING,
+=======
     REQUEST_PRODUCT_LIST_TO_SPRING,
 
     REQUEST_INGREDIENT_LIST_TO_SPRING,
+>>>>>>> main
 
 
 } from './mutation-types'
@@ -229,6 +235,30 @@ requestSideProductModifyToSpring({}, payload){
                 alert('문제 발생!')
             })
     },
+<<<<<<< HEAD
+    requestIngredientCategoryToSpring ({ commit }, categoryName) {
+        return axios.get(`http://localhost:7777/selfsalad/list/${categoryName}`)
+            .then((res) => {
+                commit(REQUEST_INGREDIENT_CATEGORY_TO_SPRING, res.data)
+            })
+    },
+    requestIngredientImgToSpring({commit}, id){
+        const ingredientId = id
+        return axios.get(`http://localhost:7777/selfsalad/read/img/${ingredientId}`)
+        .then((res) => {
+            commit(REQUEST_INGREDIENT_IMG_TO_SPRING,res.data)
+        })
+    },
+    requestIngredientImgModifyToSpring({}, payload){
+        const { ingredientId, imageFile } = payload
+        return axios.put(`http://localhost:7777/selfsalad/modify/img/${ingredientId}`, imageFile)
+        .then(() => {
+            alert("수정 성공")
+        })
+        .catch(() => {
+            alert("수정 실패")
+        })
+=======
     // 댓글 리스트 등록 //requestQuestionCommentRegisterToSpring REQUEST_REPLY_REGISTER_TO_SPRING
     // eslint-disable-next-line no-empty-pattern
     requestReplyRegisterToSpring ({ }, payload) {
@@ -250,6 +280,7 @@ requestSideProductModifyToSpring({}, payload){
             .then(() => {
                 alert('삭제 완료했습니다!')
             })
+>>>>>>> main
     },
 
 }
