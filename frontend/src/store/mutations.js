@@ -1,6 +1,7 @@
 import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
+    REQUEST_REPLY_TO_SPRING,
 
     REQUEST_SIDEPRODUCT_LIST_TO_SPRING,
     REQUEST_SIDEPRODUCT_TO_SPRING,
@@ -26,8 +27,10 @@ export default {
     [REQUEST_BOARD_TO_SPRING] (state, passingData) {
         state.board = passingData
     },
+    [REQUEST_REPLY_TO_SPRING] (state, passingData) {
+        state.reply = passingData
+    },
 
-    
     [REQUEST_SIDEPRODUCT_LIST_TO_SPRING] (state, passingData) {
         state.sideproducts = passingData
     },

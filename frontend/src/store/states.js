@@ -2,6 +2,16 @@ export default {
     boards: [],
     board: {},
 
+    replys: [],
+    reply: {},
+
+    reWriter: {},
+
+    // questionBoard: {}, // board
+    // questionBoards: [], // boards
+    // questionComment: {}, reply
+    // questionComments: [], replys
+
     sideproducts: [],
     sideproduct: {},
 

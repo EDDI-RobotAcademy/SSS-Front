@@ -18,7 +18,7 @@
             {{ board.boardId }}
           </td>
           <td align="left">
-            <router-link :to="{ name: 'JpaQnaBoardReadPage',
+            <router-link :to="{ name: 'QnaBoardReadPage',
                               params: { boardId: board.boardId.toString() }}">
               {{ board.title }}
             </router-link>
@@ -38,7 +38,7 @@
   <script>
   
   export default {
-      name: "JpaQnaBoardList",
+      name: "QnaBoardList",
       props: {
           boards: {
               type: Array

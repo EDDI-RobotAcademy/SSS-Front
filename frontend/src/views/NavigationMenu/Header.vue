@@ -17,7 +17,7 @@
             <router-link :to="{ name: 'SideProductListPage' }">사이드 메뉴임</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'JpaQnaBoardListPage' }">FAQ</router-link>
+            <router-link :to="{ name: 'QnaBoardListPage' }">FAQ</router-link>
           </li>
           <li>
             <router-link :to="{ name: 'IngredientListPage' }">Self Salad</router-link>

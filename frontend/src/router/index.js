@@ -2,12 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import QnaBoardListPage from "@/views/QnaBoard/QnaBoardListPage.vue"
+import QnaBoardRegisterPage from "@/views/QnaBoard/QnaBoardRegisterPage.vue"
+import QnaBoardReadPage from "@/views/QnaBoard/QnaBoardReadPage.vue"
+import QnaBoardModifyPage from "@/views/QnaBoard/QnaBoardModifyPage.vue"
+
 import IntroductionPage from "@/views/IntroductionPage.vue"
 
-import JpaQnaBoardListPage from "@/views/Board/QnaBoard/JpaQnaBoardListPage.vue"
-import JpaQnaBoardRegisterPage from "@/views/Board/QnaBoard/JpaQnaBoardRegisterPage.vue"
-import JpaQnaBoardReadPage from "@/views/Board/QnaBoard/JpaQnaBoardReadPage.vue"
-import JpaQnaBoardModifyPage from "@/views/Board/QnaBoard/JpaQnaBoardModifyPage.vue"
 
 import SideProductReadPage from "@/views/SideProduct/SideProductReadPage.vue"
 import SideProductRegisterPage from "@/views/SideProduct/SideProductRegisterPage.vue"
@@ -58,30 +59,30 @@ const routes = [
 
 
   {
-    path: '/qnaboard/jpa-qna-board-list-page',
-    name: 'JpaQnaBoardListPage',
-    component: JpaQnaBoardListPage
+    path: '/qna-board-list-page',
+    name: 'QnaBoardListPage',
+    component: QnaBoardListPage
   },
   {
-    path: '/qnaboard/jpa-qna-board-register',
-    name: 'JpaQnaBoardRegisterPage',
-    component: JpaQnaBoardRegisterPage
+    path: '/qna-board-register',
+    name: 'QnaBoardRegisterPage',
+    component: QnaBoardRegisterPage
   },
   {
-    path: '/qnaboard/jpa-qna-board-read/:boardId',
-    name: 'JpaQnaBoardReadPage',
+    path: '/qna-board-read/:boardId',
+    name: 'QnaBoardReadPage',
     components: {
-      default: JpaQnaBoardReadPage
+      default: QnaBoardReadPage
     },
     props: {
       default: true
     }
   },
   {
-    path: '/qnaboard/jpa-qna-board-modify/:boardId',
-    name: 'JpaQnaBoardModifyPage',
+    path: '/qna-board-modify/:boardId',
+    name: 'QnaBoardModifyPage',
     components: {
-      default: JpaQnaBoardModifyPage
+      default: QnaBoardModifyPage
     },
     props: {
       default: true
