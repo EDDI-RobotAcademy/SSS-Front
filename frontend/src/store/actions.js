@@ -224,8 +224,7 @@ requestSideProductModifyToSpring({}, payload){
             })
     },
     requestCreateIngredientToSpring ({}, payload) {
-        return axios.post('http://localhost:7777/selfsalad/register',
-        payload )
+        return axios.post('http://localhost:7777/selfsalad/register',payload )
             .then(() => {
                 alert('재료 등록 성공')
             })
