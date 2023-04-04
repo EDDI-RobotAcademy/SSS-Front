@@ -22,4 +22,8 @@ export default {
     TopButtonForm
   },
 }
+<<<<<<< Updated upstream
 </script>
+=======
+</script>
+>>>>>>> Stashed changes
