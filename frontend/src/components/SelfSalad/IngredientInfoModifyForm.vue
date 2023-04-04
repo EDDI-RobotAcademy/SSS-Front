@@ -76,10 +76,12 @@
         }
       },
       methods: {
-          onSubmit () {
+        onSubmit () {
             let formData = new FormData()
-            for (let idx = 0; idx < this.files.length; idx++) {
-                formData.append('imageFile', this.files[idx])
+            if(this.files.length ===1){
+              formData.append('imageFile', this.files[0])
+            }else if(this.files.length === 0){
+              formData.append('imageFile', new File([], 'empty'));
             }
             console.log('imageFile: '+ JSON.stringify(formData))
 
@@ -87,6 +89,7 @@
             const name = this.ingredientInfo.name
             console.log("재료명 : "+name)
             console.log("카테고리 : "+categoryType)
+            
             let ingredientInfo = { name, categoryType }
             formData.append(
                 "ingredientInfo",
@@ -97,7 +100,7 @@
             this.$emit('submit', formData)
           },
 
-          handleFileUpload () {
+          handleFileUpload (event) {
             this.files = this.$refs.files.files;
             if (this.files && this.files.length == 1) {
             const reader = new FileReader();
@@ -105,6 +108,11 @@
               this.thumbnail = event.target.result;
             };
             reader.readAsDataURL(this.files[0]);
+          }else if(this.files.length >1){
+            alert('이미지를 1개만 선택해주세요.')
+            event.target.value=''
+            return
+
           }
         },
       },
