@@ -3,14 +3,14 @@
     <v-row>
       <v-col cols="5">
         <v-img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)" 
-                aspect-ratio="1" class="grey lighten-2" width="500" height="500">
+                aspect-ratio="1" width="500" height="500">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" justify="center">
               <v-progress-circular indeterminate color="grey lightesn-5"/>
             </v-row>
           </template>
         </v-img>
-        <!-- <v-row>
+        <!-- <v-row> 메인 사진 하단에 선택해서 넘길 수 있는 작은 이미지
           <template>
             <v-tabs width="400" height="100"
                         show-arrows background-color="transparent"
@@ -242,14 +242,11 @@ export default {
   width: 100%;
 }
 .detail {
-  border: 1px solid
+  /* border: 1px solid */
 }
 .v-tab {
   padding: 0;
   position: relative;
-}
-.v-img {
-  background-color: white;
 }
 .ingredient th {
   font-size: 1.4em;
