@@ -40,14 +40,15 @@
     }
     .title {
       font-size: 25px;
-      padding: 10px 0;
       text-align: center;
       margin-top: 30px;
+      color: black;
+      font-weight: bold;
+
     }
     .price {
       font-size: 20px;
-      padding: 10px 0;
       text-align: center;
-      margin-top: 10px;
+      color: green;
     }
 </style>
