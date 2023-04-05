@@ -157,15 +157,15 @@ export default {
         })
 },
 //읽기
-    requestSideProductToSpring({commit},productId){
-        return axios.get(`http://localhost:7777/sideproduct/read/${productId}`)
+    requestSideProductToSpring({commit},sideProductId){
+        return axios.get(`http://localhost:7777/sideproduct/read/${sideProductId}`)
         .then((res) => {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
     },
 //삭제
-requestDeleteSideProductToSpring({}, productId) {
-    return axios.delete(`http://localhost:7777/sideproduct/${productId}`)
+requestDeleteSideProductToSpring({}, sideProductId) {
+    return axios.delete(`http://localhost:7777/sideproduct/${sideProductId}`)
         .then(() => {
             alert("삭제 성공")
         })
