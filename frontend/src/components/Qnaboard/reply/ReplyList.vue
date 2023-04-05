@@ -2,7 +2,7 @@
   <v-container>
     <table class="reply"
            style="background-color: #eeeeee; border-radius: 10px"
-           v-if="!replyContent || (Array.isArray(replyContent) && replyContent.length === 0)">
+           v-if="!replys || (Array.isArray(replys) && replys.length === 0)">
       <div style="padding: 10px">
         <p>현재 등록된 댓글이 없습니다!</p>
       </div>
@@ -10,7 +10,7 @@
     <table class="reply"
            style="background-color: #eeeeee; border-radius: 10px"
            v-else
-           v-for="replyContent in replyContent" :key="replyContent.replyId"
+           v-for="reply in replys" :key="reply.replyContent"
     >
       <tbody>
       <!--      댓글 리스트-->
@@ -41,8 +41,11 @@ export default {
       replyContent: this.replyContent
     }
   },
+  props: {
+  },
   computed: {
-    ...mapState(['reply'])
+    ...mapState(['reply']),
+    ...mapState(['replys'])
   },
 }
 </script>

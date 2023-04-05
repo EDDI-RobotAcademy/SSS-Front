@@ -1,37 +1,39 @@
 <template>
     <form @submit.prevent="onSubmit" enctype="multipart/form-data">
-      <table>
-          <tr>
-              <td>제품명</td>
-              <td>
-                  <input type="text" v-model="title"/>
-              </td>
-          </tr>
-          <tr>
-              <td>가격</td>
-              <td>
-                  <input type="int" v-model="price"/>
-              </td>
-          </tr>
-          <tr>
-              <td>상세정보</td>
-              <td>
-                  <textarea cols="30" rows="10" v-model="content"/>
-              </td>
-          </tr>
-          <tr>
-            <td>상품 사진</td>
-            <td>
-                  <input type="file" id="files" ref="files" multiple @change="handleFileUpload"/>
-            </td>
-        </tr>
-      </table>
-  
+      <div class="div">
+          <table>
+              <tr>
+                  <td>제품명</td>
+                  <td>
+                      <input type="text" v-model="title"/>
+                  </td>
+              </tr>
+              <tr>
+                  <td>가격</td>
+                  <td>
+                      <input type="int" v-model="price"/>
+                  </td>
+              </tr>
+              <tr>
+                  <td>상세정보</td>
+                  <td>
+                      <textarea cols="30" rows="10" v-model="content"/>
+                  </td>
+              </tr>
+              <tr>
+                <td>상품 사진</td>
+                <td>
+                    <input type="file" id="files" ref="files" multiple @change="handleFileUpload"/>
+                </td>
+            </tr>
+          </table>
+      </div>  
+      <v-divider></v-divider>
       <div>
-          <button type="submit">등록</button>
-          <router-link :to="{ name: 'ProductListPage' }">
+          <v-btn type="submit">등록</v-btn>
+          <v-btn><span><router-link :to="{ name: 'ProductListPage' }">
               취소
-          </router-link>
+          </router-link></span></v-btn>
       </div>
     </form>
   </template>
@@ -74,6 +76,12 @@
   }
   </script>
   
-  <style>
-  
+  <style scoped>
+  .div {
+    display: flex;
+    justify-content: center;
+  }
+  a {
+    text-decoration: none;
+  }
   </style>
