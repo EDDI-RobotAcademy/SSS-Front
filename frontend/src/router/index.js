@@ -91,7 +91,7 @@ const routes = [
   },
   //사이드메뉴
   {
-  path: '/side-Product-read/:productId',
+  path: '/side-Product-read/:sideProductId',
   name: 'SideProductReadPage',
   components: {
     default: SideProductReadPage
@@ -111,7 +111,7 @@ const routes = [
   component: SideProductListPage
   },
   {
-  path: '/side-Product-modify',
+  path: '/side-Product-modify/:sideProductId',
   name: 'SideProductModifyPage',
   components: {
     default: SideProductModifyPage
