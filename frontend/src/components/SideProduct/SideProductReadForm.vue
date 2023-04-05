@@ -1,12 +1,12 @@
 <template>
   <v-container>
-  <div>
-    <div class="div">
+  <v-row>
+    <v-col cols="6">
     <table>
       <tr>
         <td>게시물 번호</td>
         <td>
-          <input type="text" :value="sideproduct.productId" readonly/>
+          <input type="text" :value="sideproduct.SideProductId" readonly/>
         </td>
       </tr>
       <tr>
@@ -28,8 +28,11 @@
         </td>
       </tr>
     </table>
-  </div>
-  </div>
+  </v-col>
+    <v-col cols="6">
+      <v-img :src="require(`@/assets/selfSalad/${sideproduct.sideProductImg.editedImg}`)"/>
+    </v-col>
+  </v-row>
 </v-container>
 </template>
   
