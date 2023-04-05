@@ -39,15 +39,15 @@
   <style scoped>
     .cardSession{
     width: 100%;
-    background-color: rgb(216, 238, 224);
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
   }
   .cardSession .card{
-    width: 21%;
-    height: 400px;
+    width: 260px;
+    height: auto;
+    border: none;
   }
   .cardSession .card:nth-child(4n){
     margin-bottom: 60px;

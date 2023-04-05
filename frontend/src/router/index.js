@@ -28,6 +28,7 @@ import IngredientAmountModifyPage from "@/views/SelfSalad/IngredientAmountModify
 import ProductListPage from '@/views/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
+import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -136,6 +137,16 @@ const routes = [
   name: 'ProductReadPage',
   components: {
     default: ProductReadPage
+  },
+  props: {
+    default: true
+  }
+},
+{
+  path: '/product-modify',
+  name: 'ProductModifyPage',
+  components: {
+    default: ProductModifyPage
   },
   props: {
     default: true

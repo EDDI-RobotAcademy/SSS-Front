@@ -4,13 +4,13 @@
         <!-- <h2>상품 상세정보</h2> -->
         <product-read-form v-if="product" :product="product" :productImgs="productImgs"/>
         <p v-else>로딩중 .......... </p>
-        <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
+        <v-btn><router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
-        </router-link>
-        <button @click="onDelete">삭제</button>
-        <router-link :to="{ name: 'ProductListPage' }">
-          돌아가기
-        </router-link>
+        </router-link></v-btn>
+        <v-btn @click="onDelete">삭제</v-btn>
+        <v-btn><router-link :to="{ name: 'ProductListPage' }">
+          목록
+        </router-link></v-btn>
       </div>
     </v-container>
   </template>
@@ -52,6 +52,8 @@
   
   </script>
   
-  <style>
-  
+  <style scoped>
+  a {
+    text-decoration: none;
+  }
   </style>
