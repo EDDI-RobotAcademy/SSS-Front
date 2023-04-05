@@ -22,7 +22,8 @@ import MemberModify from "@/views/Member/MemberModify.vue"
 
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
-import IngredientImgModifyPage from "@/views/SelfSalad/IngredientImgModifyPage.vue"
+import IngredientInfoModifyPage from "@/views/SelfSalad/IngredientInfoModifyPage.vue"
+import IngredientAmountModifyPage from "@/views/SelfSalad/IngredientAmountModifyPage.vue"
 
 import ProductListPage from '@/views/Product/ProductListPage.vue'
 import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
@@ -181,10 +182,20 @@ const routes = [
   }
 },
 {
-  path: '/ingredinet-img-modify-page/:id',
-  name: 'IngredientImgModifyPage',
+  path: '/ingredinet-info-modify-page/:id',
+  name: 'IngredientInfoModifyPage',
   components: {
-    default: IngredientImgModifyPage
+    default: IngredientInfoModifyPage
+  },
+  props: {
+    default: true,
+  }
+},
+{
+  path: '/ingredinet-amount-modify-page/:id',
+  name: 'IngredientAmountModifyPage',
+  components: {
+    default: IngredientAmountModifyPage
   },
   props: {
     default: true,

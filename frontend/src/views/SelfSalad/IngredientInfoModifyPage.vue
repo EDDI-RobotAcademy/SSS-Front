@@ -1,9 +1,9 @@
 <template>
     <v-container>
       <div align="center">
-        <h2>" {{ ingredientImg.name }} " 이미지 수정</h2>
+        <h2>재료정보 수정</h2>
         <div>
-            <ingredient-img-modify-form :id="id" v-if="ingredientImg" :ingredientImg="ingredientImg" @submit="onSubmit"/>         
+            <ingredient-info-modify-form :id="id" v-if="ingredientInfo" :ingredientInfo="ingredientInfo" @submit="onSubmit"/>         
         <p v-else>로딩중 .......</p>
       </div>
       </div>
@@ -13,11 +13,11 @@
   <script>
   
 import { mapActions, mapState } from 'vuex'
-import IngredientImgModifyForm from '@/components/SelfSalad/IngredientImgModifyForm.vue'
+import IngredientInfoModifyForm from '@/components/SelfSalad/IngredientInfoModifyForm.vue'
   
   export default {
-      components: { IngredientImgModifyForm },
-      name: "IngredientImgModifyPage",
+      components: { IngredientInfoModifyForm },
+      name: "IngredientInfoModifyPage",
       props: {
         id: {
           type: String,
@@ -25,18 +25,18 @@ import IngredientImgModifyForm from '@/components/SelfSalad/IngredientImgModifyF
         },
       },
       computed: {
-        ...mapState(['ingredientImg'])
+        ...mapState(['ingredientInfo'])
       },
       methods: {
           ...mapActions([
-              'requestIngredientImgToSpring',
-              'requestIngredientImgModifyToSpring',
+              'requestIngredientInfoToSpring',
+              'requestIngredientInfoModifyToSpring',
           ]),
           async onSubmit (payload) {
-              const imageFile = payload
+              const formData = payload
               const ingredientId = this.id
   
-              await this.requestIngredientImgModifyToSpring({ ingredientId, imageFile })
+              await this.requestIngredientInfoModifyToSpring({ ingredientId, formData })
               await this.$router.push({
                   name: 'IngredientListPage',
               })
@@ -44,7 +44,7 @@ import IngredientImgModifyForm from '@/components/SelfSalad/IngredientImgModifyF
       },
       created(){
         console.log("id 확인"+ this.id);
-        this.requestIngredientImgToSpring(this.id)
+        this.requestIngredientInfoToSpring(this.id)
       }
   }
   
