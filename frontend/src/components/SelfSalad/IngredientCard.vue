@@ -7,7 +7,7 @@
             재료정보 수정
           </router-link>
         </button>
-        <button type="button"">
+        <button type="button">
           <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
             수량/가격 정보 수정
           </router-link>
@@ -19,14 +19,14 @@
       </div>
       <div class="ingredientName">{{ ingredient.name }}</div>
       <div class="amountInfo">
-        <span>{{ min }}({{convertedAmountType}}) 당 {{ ingredient.price }}원/{{ ingredient.calorie }} KCAL</span>
+        <span>{{ unit }}({{convertedAmountType}}) 당 {{ ingredient.price }}원/{{ ingredient.calorie }} KCAL</span>
       </div>
       <div class="backgroundImg">
         <div class="white-box">
-          <select id="selection" class="form-select" v-model="selectedAmount" @change="onChange" >
+          <select id="selection" class="form-select" v-model="selectedAmount" @change="onChange">
             <option disabled :value="option.value">수량</option>
             <option>0</option>
-            <option v-for="number in numbers" :key="number" :value="number">{{ number }} </option>       
+            <option v-for="(number, index) in numbers" :key="index" :value="number">{{ number }} </option>       
           </select>
           <span>({{convertedAmountType}})</span>
         </div>
@@ -49,6 +49,7 @@ export default{
       amountType : this.ingredient.amountType,
 
       numbers: [],
+      number: '',
       prevSelectedAmount: 0,
 
       selectedAmount: -1,
@@ -56,6 +57,8 @@ export default{
         value: -1,
       }, 
       indentifier : 'option'+this.ingredient.id,
+      selectedName : 'default',
+      prevIndex : 0,
     }
   },
   props: {
@@ -76,7 +79,7 @@ export default{
     window.removeEventListener('beforeunload', this.refreshPage);
   },
   mounted() {
-    for (let i = this.min; i <= this.max; i += this.unit) {
+    for (let i = this.unit; i <= this.max; i += this.unit) {
       this.numbers.push(i)
     }
     // localStorage에서 선택한 값을 가져와 selectedAmount 변수에 할당
@@ -84,6 +87,11 @@ export default{
     if (selectedValue) {
       this.selectedAmount = selectedValue;
       this.prevSelectedAmount = selectedValue;
+
+      // 카테고리 변경전 option의 index
+      const selectedIndex = this.numbers.findIndex(number => number === parseInt(this.selectedAmount))+1
+      console.log("이미 선택된 인덱스?: "+selectedIndex )
+      this.prevIndex = selectedIndex
     }
   },
   watch: {
@@ -91,6 +99,7 @@ export default{
       if ( newVal === -1) {
         this.selectedAmount = -1
         this.prevSelectedAmount = 0
+        this.prevIndex = this.numbers.findIndex(number => number === parseInt(this.selectedAmount))+1
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
           if (key.startsWith('option')) {
@@ -117,15 +126,29 @@ export default{
        if(this.selectedAmount !== 0){
        localStorage.setItem(this.indentifier, this.selectedAmount);
        }
-      this.selectedAmount = Number(event.target.value);
+       const index = (event.target.selectedIndex -1) // option 순서
+       console.log("시작합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+       console.log("선택한 인덱스 :"+ index);
 
-      const priceDiff = this.price * (this.selectedAmount - this.prevSelectedAmount);
-      const calorieDiff = this.calorie * (this.selectedAmount - this.prevSelectedAmount);
+       const calorie = index * this.calorie
+       const price = index * this.price
+       console.log("선택 칼로리 : " + calorie +" // 선택 가격 : " + price)
+    
+       let prevPrice = this.prevIndex * this.price
+       let prevCalorie = this.prevIndex * this.calorie
+       console.log("이전 인덱스 :"+ this.prevIndex)
+       console.log("이전선택 칼로리 : " + prevCalorie +" // 이전선택 가격 : " + prevPrice)
+
+       const priceChange = price - prevPrice
+       const calorieChange = calorie - prevCalorie
+
       const optionValue = this.selectedAmount
 
-      this.prevSelectedAmount = this.selectedAmount;
-
-      this.$emit('change', priceDiff, calorieDiff, optionValue)
+      this.selectedName = this.ingredient.name;
+      this.$emit('change', priceChange, calorieChange, optionValue, this.selectedName)
+      
+      this.prevIndex = index
+      
     },
     refreshPage(){
       for (let i = 0; i < localStorage.length; i++) {
