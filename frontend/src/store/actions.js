@@ -198,19 +198,36 @@ requestDeleteSideProductToSpring({}, sideProductId) {
             alert("아 뭔가 문제 발생..")
         })
 },
-//수정
 
-requestSideProductModifyToSpring({}, payload){
-    const {productId, title, content, price} = payload
-    return axios.put(`http://localhost:7777/sideproduct/modify/${productId}`,
-    { title, content, price})
-    .then(() => {
-        alert("수정 성공")
-    })
-    .catch(() => {
-        alert("아 뭔가 문제 발생..")
-    })
-},
+    //수정
+    requestSideProductModifyToSpring({}, payload){
+        const{sideProductId, formData} = payload
+        return axios.put(`http://localhost:7777/sideproduct/modify/${sideProductId}`, formData
+        , {headers: {
+            'Content-Type': 'multipart/form-data'}})
+        .then(() => {
+            alert("수정 성공")
+        })
+        .catch(() => {
+            alert("아 수정 뭔가 문제 발생..")
+        })
+    },
+
+    requestProductListToSpring({ commit }) {
+        return axios.get('http://localhost:7777/products/list')
+        .then((res) => {
+            commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+        })
+    },
+    requestCreateProductToSpring ({}, payload) {
+        return axios.post('http://localhost:7777/products/register', payload)
+            .then(() => {
+                alert('상품 등록 성공!')
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    },
 
 
     requestIngredientListToSpring ({ commit }) {

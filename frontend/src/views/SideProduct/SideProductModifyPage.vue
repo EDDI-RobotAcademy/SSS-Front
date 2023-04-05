@@ -1,51 +1,48 @@
 <template>
   <v-container>
     <div align="center">
-    <P><mark>등록한 상품을 수정하는 페이지 입니다.</mark></P>
-    <side-product-modify-form :sideproduct="sideproduct" @submit="onSubmit"/>
+      <P><mark>등록한 상품을 수정하는 페이지 입니다.</mark></P>
+      <side-product-modify-form :sideproduct="sideproduct" @submit="onSubmit" />
     </div>
   </v-container>
-  
 </template>
 
 <script>
 import SideProductModifyForm from '@/components/SideProduct/SideProductModifyForm.vue'
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
-  components:{SideProductModifyForm},
+  components: { SideProductModifyForm },
   name: "SideProductModifyPage",
-  props:{
-    productId:{
+  props: {
+    sideProductId: {
       type: String,
       requires: true,
     }
   },
-computed: {
-  ...mapState(['sideproduct'])
-},
-methods:{
-  ...mapActions([
-    'requestSideProductToSpring',
-    'requestSideProductModifyToSpring'
-  ]),
-  async onSubmit(payload){
-    console.log("submit")
-    const { title, content, price } = payload
-    const productId = this.productId
-    await this.requestSideProductModifyToSpring({productId, title, content, price})
-    await this.$router.push({
-      name: 'SideProductReadPage',
-      params: { productId: this.productId.toString() }
-    })
+  computed: {
+    ...mapState(['sideproduct'])
+  },
+  methods: {
+    ...mapActions([
+      'requestSideProductToSpring',
+      'requestSideProductModifyToSpring',
+    ]),
+    async onSubmit(payload) {
+      const sideProductId = this.sideProductId
+      const formData  = payload
+      console.log("넘어오네"+sideProductId, payload)
+      await this.requestSideProductModifyToSpring({ sideProductId, formData })
+      await this.$router.push({
+        name: 'SideProductReadPage',
+        params: { sideProductId: this.sideProductId.toString() }
+      })
+    }
+  },
+  created() {
+    this.requestSideProductToSpring(this.sideProductId)
   }
-},
-created(){
-  this.requestSideProductToSpring(this.productId)
-}
-  
+
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
