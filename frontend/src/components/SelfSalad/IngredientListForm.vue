@@ -11,6 +11,7 @@
         </select>    
       </tr>
       <div>
+        <p>{{ names }}</p>
         <p class="totalCalorie"><span> : {{ totalCalorie }} </span> ( 총 KCAL )</p>
       </div>
       <button type="button" @click="resetAll">
@@ -52,6 +53,7 @@ export default {
       totalCalorie: 0,
       selectedAmount: 0,
       changeValue : 0,
+      names: []
     }   
   },
   props: {
@@ -72,15 +74,25 @@ export default {
     },
   },
   methods: {
-    onChange( selectPrice, selectCalorie, optionValue ){
+    onChange( selectPrice, selectCalorie, optionValue, selectedName ){
       this.totalPrice += selectPrice
       this.totalCalorie += selectCalorie
       console.log(optionValue)
       this.changeValue = optionValue
 
+      if(selectedName && optionValue !==0 ){
+        this.names.push(selectedName);
+      }
+      let removeName = this.names.indexOf(selectedName);
+      if(optionValue ===0 && removeName !==-1){
+        this.names.splice(removeName, 1)
+        console.log("재료명들"+this.names.toString())
+      }
+
       console.log(selectPrice+": 전달받은 가격")
       console.log(selectCalorie+": 전달받은 수량")
       console.log(optionValue+": 전달받은 옵션값" )
+      console.log(selectedName+": 재료명" )
       //const amount = Number(selectedAmount)
 
     },

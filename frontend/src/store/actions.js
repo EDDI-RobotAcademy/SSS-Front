@@ -15,7 +15,8 @@ import {
 
     REQUEST_INGREDIENT_LIST_TO_SPRING,
     REQUEST_INGREDIENT_CATEGORY_TO_SPRING,
-    REQUEST_INGREDIENT_IMG_TO_SPRING,
+    REQUEST_INGREDIENT_INFO_TO_SPRING,
+    REQUEST_INGREDIENT_AMOUNT_TO_SPRING,
 
 
 } from './mutation-types'
@@ -289,21 +290,39 @@ requestDeleteSideProductToSpring({}, sideProductId) {
                 commit(REQUEST_INGREDIENT_CATEGORY_TO_SPRING, res.data)
             })
     },
-    requestIngredientImgToSpring({commit}, id){
+    requestIngredientInfoToSpring({commit}, id){
         const ingredientId = id
-        return axios.get(`http://localhost:7777/selfsalad/read/img/${ingredientId}`)
+        return axios.get(`http://localhost:7777/selfsalad/read/info/${ingredientId}`)
         .then((res) => {
-            commit(REQUEST_INGREDIENT_IMG_TO_SPRING,res.data)
+            commit(REQUEST_INGREDIENT_INFO_TO_SPRING,res.data)
         })
     },
-    requestIngredientImgModifyToSpring({}, payload){
-        const { ingredientId, imageFile } = payload
-        return axios.put(`http://localhost:7777/selfsalad/modify/img/${ingredientId}`, imageFile)
+    requestIngredientInfoModifyToSpring({}, payload){
+        const { ingredientId, formData } = payload
+        return axios.put(`http://localhost:7777/selfsalad/modify/info/${ingredientId}`, formData)
         .then(() => {
             alert("수정 성공")
         })
         .catch(() => {
             alert("수정 실패")
         })
-    }
+    },
+    requestIngredientAmountToSpring({commit}, id){
+        const ingredientId = id
+        return axios.get(`http://localhost:7777/selfsalad/read/amount/${ingredientId}`)
+        .then((res) => {
+            commit(REQUEST_INGREDIENT_AMOUNT_TO_SPRING,res.data)
+        })
+    },
+    requestIngredientAmountModifyToSpring({}, payload){
+        const { ingredientId, amountType, max, min, unit, price, calorie } = payload
+        return axios.put(`http://localhost:7777/selfsalad/modify/amount/${ingredientId}`,
+        { amountType, max, min, unit, price, calorie })
+        .then(() => {
+            alert("수정 성공")
+        })
+        .catch(() => {
+            alert("수정 실패")
+        })
+    },
 }
