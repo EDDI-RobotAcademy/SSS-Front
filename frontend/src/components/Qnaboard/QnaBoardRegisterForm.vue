@@ -4,23 +4,22 @@
       <tr>
         <td>제목</td>
         <td>
-          <input type="text" v-model="title"/>
+          <input placeholder="제목을 입력하세요." type="text" v-model="title"/>
         </td>
       </tr>
       <tr>
         <td>작성자</td>
         <td>
-          <input type="text" v-model="writer"/>
+          <input placeholder="작성자 이름을 입력하세요." type="text" v-model="writer"/>
         </td>
       </tr>
       <tr>
         <td>본문</td>
         <td>
-          <textarea cols="50" rows="20" v-model="content"/>
+          <textarea placeholder="내용을 입력하세요." cols="50" rows="20" v-model="content"/>
         </td>
       </tr>
     </table>
-
     <div>
       <button type="submit">등록</button>
       <router-link to="{ name: 'QnaBoardListPage' }">
@@ -36,9 +35,9 @@ export default {
     name: "QnaBoardRegisterForm",
     data () {
         return {
-            title: '제목을 입력하세요.',
-            writer: '작성자 이름을 입력하세요',
-            content: '내용을 입력하세요.'
+          title: this.$store.state.reply.title,
+          writer: this.$store.state.reply.writer,
+          content: this.$store.state.reply.content,
         }
     },
     methods: {
