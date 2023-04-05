@@ -38,10 +38,10 @@ export default {
                 alert('문제 발생!')
             })
     },
-    requestCreateReplyToSpring ({}, payload) {
-        const replyContent = payload
-        return axios.post('http://localhost:7777/reply/register', replyContent)
-
+    requestCreateReplyToSpring ({}, payload ) {
+        const { replyWriter, replyContent } = payload
+        return axios.post('http://localhost:7777/reply/register', 
+            { replyWriter, replyContent })
             .then((res) => {
                 alert('댓글 등록 성공: ' + JSON.stringify(res.data))
                 return res
@@ -188,7 +188,7 @@ export default {
             commit(REQUEST_SIDEPRODUCT_TO_SPRING,res.data)
         })
     },
-//삭제
+//삭제  
 requestDeleteSideProductToSpring({}, sideProductId) {
     return axios.delete(`http://localhost:7777/sideproduct/${sideProductId}`)
         .then(() => {

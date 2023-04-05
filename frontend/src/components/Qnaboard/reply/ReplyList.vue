@@ -17,6 +17,10 @@
       <tr>
         <div class="reply">
           <v-row>
+            <pre style="font-family: naver2; height: fit-content">{{ replyWriter }}
+            </pre>
+          </v-row>
+          <v-row>
             <pre style="font-family: naver2; height: fit-content">{{ replyContent }}
             </pre>
           </v-row>
