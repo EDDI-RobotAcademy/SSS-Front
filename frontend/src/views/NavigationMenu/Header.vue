@@ -26,21 +26,20 @@
 
       <v-spacer></v-spacer>
       <template v-if="!this.$store.state.signInValue">
-        <v-btn onclick="location.href='http://localhost:8080/member/sign-up'">
-          <span>signUp</span>
+        <v-btn>
+          <router-link :to="{ name: 'SignUp' }">signUp</router-link>
           <v-icon right>mdi-account-plus</v-icon>
-        </v-btn>
-        <v-btn onclick="location.href='http://localhost:8080/member/sign-in'">
-          <span>login</span>
+        </v-btn>  
+        <v-btn>
+          <router-link :to="{ name: 'SignIn' }">signIn</router-link>
           <v-icon right>mdi-test-tube</v-icon>
-        </v-btn>
+        </v-btn>  
       </template>
-
       <template v-else>
-        <v-btn onclick="location.href='http://localhost:8080/my-page'">
-          <span>MYPAGE</span>
-          <v-icon right>mdi-test-tube</v-icon>
-        </v-btn>
+          <v-btn>
+            <router-link :to="{ name: 'MyPageView' }">MYPAGE</router-link>
+            <v-icon right>mdi-test-tube</v-icon>
+          </v-btn> 
           <v-btn @click="logoutBtn">
             <span>logout</span>
             <v-icon right>mdi-history</v-icon>
@@ -81,10 +80,12 @@ export default {
     color: #3d7e27 !important;
   }
   .menu a {
-    text-decoration: none;
     color: black;
     font-weight: 600;
     margin-right: 80px;
     transition: all 0.3s ease 0s;
+  }
+a {
+    text-decoration: none;
   }
 </style>
