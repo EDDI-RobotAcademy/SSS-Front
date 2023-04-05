@@ -1,10 +1,18 @@
 <template>
   <div class="ingredientCard">
     <div class="ingredientInfo">
-      <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
-        재료 정보 수정
-      </router-link>
-      </router-link>
+      <div class="modifyBtn">
+        <button type="button">
+          <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
+            재료정보 수정
+          </router-link>
+        </button>
+        <button type="button"">
+          <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
+            수량/가격 정보 수정
+          </router-link>
+        </button>
+      </div>
       <div class="ingredientImage">
         <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
          />
@@ -155,23 +163,6 @@ export default{
     height: auto;
     border-radius: 100%;
   }
-  /**  .ingredientImage:hover::after{
-    border-radius: 100%;
-    z-index: 999;
-    display: inline-block;
-    position: absolute;
-    content: '이미지 수정';
-    top: 0; left:7%;
-    width:84%; height: 98%;
-    background-color: rgba(1, 1, 1, 0.204);
-    text-align: center;
-    align-items: center;
-  }
-
-      display: inline-block;
-    position: absolute;
-    content: '이미지 수정';
-  */
   .ingredientName::before{
     display: inline-block;
     content: '';
@@ -234,5 +225,20 @@ export default{
     outline: none;
     box-shadow: none;
     border-color: transparent;
+  }
+  .modifyBtn{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+  .modifyBtn a{
+    width: 40%;
+    background-color: rgb(133, 173, 83);
+    text-decoration: none;
+    color: #fff;
+    padding: 1rem 0.1rem;
+
   }
 </style>
