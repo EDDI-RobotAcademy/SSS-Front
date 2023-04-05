@@ -28,9 +28,10 @@ export default {
       'requestSideProductModifyToSpring',
     ]),
     async onSubmit(payload) {
-      const { title, content, price } = payload
       const sideProductId = this.sideProductId
-      await this.requestSideProductModifyToSpring({ sideProductId, title, content, price })
+      const formData  = payload
+      console.log("넘어오네"+sideProductId, payload)
+      await this.requestSideProductModifyToSpring({ sideProductId, formData })
       await this.$router.push({
         name: 'SideProductReadPage',
         params: { sideProductId: this.sideProductId.toString() }

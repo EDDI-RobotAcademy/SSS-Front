@@ -78,24 +78,21 @@ export default {
     onSubmit() {
       let formData = new FormData()
       formData.append("fileList", this.files[0]);
-      const { sideProductId, title, content, price } = this
-      let productInfo = {
-        title: title,
-        content: content,
-        price: price,
-      }
+      console.log('fileList: '+ JSON.stringify(formData))
+      const title =  this.sideproduct.title
+      const content = this.sideproduct.content
+      const price = this.sideproduct.price
+      
+      let productInfo = { title, content, price }
+      console.log("데이터 확인 : "+title, content, price)
       formData.append(
                   "productInfo",
                   new Blob([JSON.stringify(productInfo)], { type: "application/json" })
               )
-              for(let value of formData.values()){
-                console.log(value)
-              }
-              console.log(this.formData)
-              console.log(productInfo)
+      console.log('formData: ' + JSON.stringify(formData))
 
-              this.$emit('submit', { sideProductId, formData })
-          },
+              this.$emit('submit', formData )
+    },
     handleFileUpload(event) {
       this.files = event.target.files;
       this.imgUrl = URL.createObjectURL(this.files[0]);
