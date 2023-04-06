@@ -27,7 +27,7 @@
           v-else v-for="ingredient in ingredients" :key="ingredient.id">
           <ingredient-card :ingredient="ingredient"
                             @change="onChange"
-                            :change-value="changeValue" />
+                            :change-value="Number(changeValue)" />
         </td>
       </tr>
       <div>
@@ -77,30 +77,29 @@ export default {
     onChange( selectPrice, selectCalorie, optionValue, selectedName ){
       this.totalPrice += selectPrice
       this.totalCalorie += selectCalorie
-      console.log(optionValue)
       this.changeValue = optionValue
 
-      if(selectedName && optionValue !==0 ){
+      if(selectedName && optionValue !==0 && !this.names.includes(selectedName) ){
         this.names.push(selectedName);
-      }
-      let removeName = this.names.indexOf(selectedName);
-      if(optionValue ===0 && removeName !==-1){
-        this.names.splice(removeName, 1)
-        console.log("재료명들"+this.names.toString())
-      }
+        console.log("재료명 추가: " + this.names.toString());
 
+      }else if (optionValue == 0) {
+        const index = this.names.indexOf(selectedName);
+        this.names.splice(index, 1);
+        console.log("재료명 삭제: " + this.names.toString());
+      }
+      
       console.log(selectPrice+": 전달받은 가격")
-      console.log(selectCalorie+": 전달받은 수량")
+      console.log(selectCalorie+": 전달받은 칼로리")
       console.log(optionValue+": 전달받은 옵션값" )
       console.log(selectedName+": 재료명" )
-      //const amount = Number(selectedAmount)
-
     },
     resetAll() {
         this.selectedAmount = 0;
         this.totalCalorie = 0;
         this.totalPrice = 0;
         this.changeValue = -1;
+        this.names.splice(0)
       },
     changeCategory(){
       const categoryName = this.category
