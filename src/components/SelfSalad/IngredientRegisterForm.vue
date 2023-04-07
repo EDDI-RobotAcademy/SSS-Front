@@ -73,9 +73,9 @@
       </table>
   
       <div>
-        <button type="submit">등록</button>
+        <v-btn type="submit" color="blue">등록</v-btn>
         <router-link :to="{ name: 'IngredientListPage' }">
-          취소
+          <v-btn color="red">취소</v-btn>
         </router-link>
       </div>
     </form>
