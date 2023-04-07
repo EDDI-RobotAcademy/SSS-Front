@@ -1,6 +1,8 @@
 <template>
+    <v-container>
     <form @submit.prevent="onSubmit" enctype="multipart/form-data">
-      <div class="div">
+        <v-row>
+            <v-col cols="6">
           <table>
               <tr>
                   <td>제품명</td>
@@ -27,8 +29,15 @@
                 </td>
             </tr>
           </table>
-      </div>  
-      <v-divider></v-divider>
+          </v-col>
+          <v-col cols="12" sm="4" md="6">
+            <v-row>
+                <v-col v-for="(url, index) in imageUrls" :key="index" cols="6" sm="4">
+                    <v-img :src="url" :alt="'Image ' + index" aspect-ratio="1"></v-img>
+                </v-col>
+            </v-row>
+        </v-col>
+    </v-row>
       <div>
           <v-btn type="submit">등록</v-btn>
           <v-btn><span><router-link :to="{ name: 'ProductListPage' }">
@@ -36,6 +45,7 @@
           </router-link></span></v-btn>
       </div>
     </form>
+    </v-container>
   </template>
   
   <script>
@@ -48,6 +58,7 @@
               price: 0,
               content: '샐샐샐',
               files: '',
+              imageUrls: [],
           }
       },
       methods: {
@@ -69,19 +80,23 @@
                 console.log('formdata: ' + JSON.stringify(formData) )
                 this.$emit('submit', formData)  
             },
-            handleFileUpload () {
-              this.files = this.$refs.files.files
+            handleFileUpload (event) {
+                this.files = event.target.files
+        this.imageUrls = Array.from(this.files).map((file) => URL.createObjectURL(file))
             },
         }
   }
   </script>
   
   <style scoped>
-  .div {
-    display: flex;
-    justify-content: center;
-  }
-  a {
-    text-decoration: none;
-  }
+  table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    margin-bottom: 5px;
+}
+
+td {
+    padding: 5px;
+    border: 2px solid black;
+}
   </style>
