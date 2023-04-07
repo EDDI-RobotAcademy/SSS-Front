@@ -47,14 +47,12 @@
           </v-col>
         </v-row>
   
-        <div>
-          <button type="submit">수정 완료</button>
-          <router-link :to="{ name: 'ProductReadPage',
-                              params: { productId: productId }}">
-            취소
-          </router-link>
-        </div>
-      </form>
+    <div>
+        <v-btn type="submit" color="blue">수정 완료</v-btn>
+        <router-link :to="{name: 'ProductReadPage',
+                        params: { productId: productId }}">
+            <v-btn color="red">취소</v-btn>
+        </router-link>
     </div>
   </template>
   
