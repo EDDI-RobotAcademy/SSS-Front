@@ -1,31 +1,31 @@
 <template>
   <v-container>
-    <form @submit.prevent="onSubmit" enctype="multipart/form-data" method="post">
-        <v-row>
+    <form @submit.prevent="onSubmit">
+      <v-row>
         <v-col cols="6">
           <table>
             <tr>
               <td>게시물 번호</td>
               <td>
-                <input type="text" :value="sideproduct.sideproductId" disabled/>
+                <input type="text" :value="sideProductId" disabled />
               </td>
             </tr>
             <tr>
               <td>메뉴무엇?</td>
               <td>
-                <input type="text" v-model="title" />
+                <input type="text" v-model="sideproduct.title" />
               </td>
             </tr>
             <tr>
               <td>얼마야</td>
               <td>
-                <input type="text" v-model.number="price" />
+                <input type="text" v-model="sideproduct.price" />
               </td>
             </tr>
             <tr>
               <td>본문</td>
               <td>
-                <textarea cols="50" rows="20" v-model="content" />
+                <textarea cols="50" rows="20" v-model="sideproduct.content" />
               </td>
             </tr>
             <tr>
@@ -52,7 +52,7 @@
           </router-link>
         </div>
       </v-row>
-      </form>
+    </form>
   </v-container>
 </template>
 
@@ -71,9 +71,13 @@ export default {
   props: {
     sideproduct: {
       type: Object,
-      required: true,
-    }
-  },
+      required: true
+    },
+      sideProductId: {
+        type: String,
+        required: true,
+      }
+    },
   methods: {
     onSubmit() {
       let formData = new FormData()

@@ -6,7 +6,7 @@
       <tr>
         <td>게시물 번호</td>
         <td>
-          <input type="text" :value="sideproduct.SideProductId" readonly/>
+          <input type="text" :value="sideProductId" readonly/>
         </td>
       </tr>
       <tr>
@@ -42,7 +42,11 @@
       props: {
         sideproduct: {
           type: Object,
-          require: true,
+          required: true,
+        },
+        sideProductId: {
+          type: String,
+          required: true,
         }
       }
 

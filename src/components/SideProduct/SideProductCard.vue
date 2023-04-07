@@ -11,9 +11,9 @@
       <p class="product-price">{{ sideproduct.price  }} 원</p>
         <div>
           <v-btn color="green" @click="showPreview = false">취소</v-btn>
-          <router-link :to="{ name: 'SideProductReadPage',
+          <router-link :to="{ name: 'SideProductModifyPage',
                     params: { sideProductId: sideproduct.sideProductId.toString() } }">
-                    <v-btn color="blue">상세보기</v-btn>
+                    <v-btn color="blue">수정하기</v-btn>
           </router-link>
           <v-btn color="red" @click="onDelete">삭제</v-btn>
       </div>
