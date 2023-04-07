@@ -312,4 +312,13 @@ requestDeleteSideProductToSpring({}, sideProductId) {
             alert("수정 실패")
         })
     },
+    requestDeleteIngredientToSpring({}, ingredientId) {
+        return axios.delete(`http://localhost:7777/selfsalad/delete/${ingredientId}`)
+        .then(() => {
+            alert("삭제 성공")
+        })
+        .catch(() => {
+            alert("문제 발생")
+        })
+    },
 }

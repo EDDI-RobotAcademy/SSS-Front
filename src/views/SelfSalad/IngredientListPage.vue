@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <ingredient-list-form :ingredients="ingredients" @change="changeCategory" />
+    <ingredient-list-form :ingredients="ingredients"
+                           @change="changeCategory"
+                           @click="onDelete" />
   </v-container>
 </template>
 
@@ -24,10 +26,17 @@ import { mapActions, mapState } from 'vuex'
       methods: {
         ...mapActions([
           'requestIngredientListToSpring',
-          'requestIngredientCategoryToSpring'
+          'requestIngredientCategoryToSpring',
+          'requestDeleteIngredientToSpring'
         ]),
         async changeCategory(payload){
           await this.requestIngredientCategoryToSpring(payload) //카테고리 이름
+        },
+        async onDelete (payload) {
+          const ingredientId = payload
+          await this.requestDeleteIngredientToSpring(ingredientId)
+          console.log("삭제완료")
+          await this.requestIngredientListToSpring()
         },
       },
       beforeRouteLeave(to, from, next) {

@@ -27,7 +27,8 @@
           v-else v-for="ingredient in ingredients" :key="ingredient.id">
           <ingredient-card :ingredient="ingredient"
                             @change="onChange"
-                            :change-value="Number(changeValue)" />
+                            :change-value="Number(changeValue)"
+                            @click="onDelete" />
         </td>
       </tr>
       <div>
@@ -104,8 +105,11 @@ export default {
     changeCategory(){
       const categoryName = this.category
       this.$emit('change', categoryName)
-    }
     },
+    onDelete(payload){
+      this.$emit("click", payload)
+    }
+  },
 
 
 }
