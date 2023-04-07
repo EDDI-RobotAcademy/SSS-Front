@@ -39,10 +39,10 @@
         </v-col>
     </v-row>
       <div>
-          <v-btn type="submit">등록</v-btn>
-          <v-btn><span><router-link :to="{ name: 'ProductListPage' }">
-              취소
-          </router-link></span></v-btn>
+          <v-btn type="submit" color="blue">등록</v-btn>
+          <router-link :to="{ name: 'ProductListPage' }">
+              <v-btn color="red">취소</v-btn>
+          </router-link>
       </div>
     </form>
     </v-container>
