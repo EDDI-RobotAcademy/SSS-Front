@@ -28,7 +28,7 @@
         </v-row> -->
       </v-col>
       
-      <v-col cols="7">           
+      <v-col cols="5">           
         <table>
           <!-- <tr>
             <td>상품 번호</td>
@@ -76,13 +76,13 @@
               </div>
             </div>
           </tr>
+        </table>
 
           <div align="center" style="margin-top: 20px" >
             <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
                 <v-btn icon color="#568869" @click="btnFavorite" x-large><v-icon>mdi-heart-outline</v-icon></v-btn>
                 <v-btn icon color="red" @click="btnFavorite" x-large><v-icon>mdi-heart</v-icon></v-btn>
           </div>
-        </table>
         <v-row>
           <v-col>
             <v-btn
@@ -240,9 +240,6 @@ export default {
 .table {
   margin-top: 10px;
   width: 100%;
-}
-.detail {
-  /* border: 1px solid */
 }
 .v-tab {
   padding: 0;
