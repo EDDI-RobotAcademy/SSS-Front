@@ -8,7 +8,7 @@
         </template>
       </v-img>
       <p class="product-title">{{ sideproduct.title }}</p>
-      <p class="product-price">{{ sideproduct.price  }} 원</p>
+      <p class="product-price">{{ sideproduct.price | comma }}원</p>
         <div>
           <v-btn color="green" @click="showPreview = false">취소</v-btn>
           <router-link :to="{ name: 'SideProductModifyPage',

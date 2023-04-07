@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="(sideproduct, idx) in sideproducts" :key="idx" cols="3">
+      <v-col v-if="!sideproducts || (Array.isArray(sideproducts) && sideproducts.length === 0)">
+        <p>현재 등록된 상품이 없습니다!</p>
+      </v-col>
+      <v-col v-else v-for="(sideproduct, idx) in sideproducts" :key="idx" cols="3">
         <side-product-card :sideproduct="sideproduct"/>
       </v-col>
     </v-row>
