@@ -19,7 +19,7 @@
 									<p class="text-white mb-4 fs-5">
 										당신의 샐러드로 건강한 하루를 시작하세요.
 									</p>
-                  <router-link :to="{name:'home'}" class="btn btn-success text-white">Choose my salad</router-link>
+                  <router-link :to="{name:'IngredientRegisterPage'}" class="btn btn-success text-white">Choose my salad</router-link>
 								</div>
 							</div>
 						</div>
@@ -42,7 +42,7 @@
 									<p class="text-white mb-4 fs-5">
 										당신의 샐러드로 건강한 하루를 시작하세요.
 									</p>
-                  <router-link :to="{name:'home'}" class="btn btn-success text-white">Choose my salad</router-link>
+                  <router-link :to="{name:'IngredientRegisterPage'}" class="btn btn-success text-white">Choose my salad</router-link>
 								</div>
 							</div>
 						</div>
