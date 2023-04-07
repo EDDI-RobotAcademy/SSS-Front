@@ -1,25 +1,15 @@
-<template>
+<template>  
   <v-container>
-    <div class="div">
-      <table>
-        <tr class="cardSession">
-          <td v-if="!products || (Array.isArray(products) && products.length === 0)">
-            <p colspan="4">
-                현재 등록된 상품이 없습니다!
-            </p>
-          </td>  
-          <td class="card" v-else v-for="product in products" :key="product.productId">
-            <router-link :to="{ name: 'ProductReadPage',
-                              params: { productId: product.productId.toString() }}">
-            <product-card :product="product"></product-card>
-            </router-link>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <v-row>
+      <v-col v-if="!products || (Array.isArray(products) && products.length === 0)">
+        <p>현재 등록된 상품이 없습니다!</p>
+      </v-col>
+      <v-col v-else v-for="product in products" :key="product.productId" cols="3">
+        <product-card :product="product"></product-card>
+      </v-col>
+    </v-row>
   </v-container>
   </template>
-  
   <script>
   import ProductCard from "@/components/Product/ProductCard.vue";
 
@@ -37,20 +27,4 @@
   </script>
   
   <style scoped>
-    .cardSession{
-    width: 100%;
-    /* margin-bottom: 50px; */
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-  .cardSession .card{
-    width: 260px;
-    height: auto;
-    border: none;
-  }
-  .cardSession .card:nth-child(4n){
-    margin-bottom: 60px;
-  }
-  a { text-decoration: none;}
   </style>
