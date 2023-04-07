@@ -1,18 +1,17 @@
 <template>
   <div class="ingredientCard">
+    <v-btn>
+      <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
+        재료정보 수정
+      </router-link>
+    </v-btn>
+    <v-btn>
+      <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
+        수량/가격 정보 수정
+      </router-link>
+    </v-btn>  
+    <v-btn @click="onDelete">삭제</v-btn>
     <div class="ingredientInfo">
-      <div class="modifyBtn">
-        <button type="button">
-          <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
-            재료정보 수정
-          </router-link>
-        </button>
-        <button type="button">
-          <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
-            수량/가격 정보 수정
-          </router-link>
-        </button>
-      </div>
       <div class="ingredientImage">
         <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
          />
@@ -127,7 +126,6 @@ export default{
        localStorage.setItem(this.indentifier, this.selectedAmount);
        }
        const index = (event.target.selectedIndex -1) // option 순서
-       console.log("시작합니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
        console.log("선택한 인덱스 :"+ index);
 
        const calorie = index * this.calorie
@@ -157,6 +155,10 @@ export default{
             localStorage.removeItem(key);
           }
         }
+    },
+    onDelete () {
+        const ingredientId = this.ingredient.id
+        this.$emit("click", ingredientId)
     }
   },
 }
@@ -249,19 +251,7 @@ export default{
     box-shadow: none;
     border-color: transparent;
   }
-  .modifyBtn{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    margin-top: -10px;
-    margin-bottom: 20px;
-  }
-  .modifyBtn a{
-    width: 40%;
-    background-color: rgb(133, 173, 83);
+  a{
     text-decoration: none;
-    color: #fff;
-    padding: 1rem 0.1rem;
-
   }
 </style>
