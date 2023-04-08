@@ -2,7 +2,7 @@
   <v-container>
     <div align="center">
       <P><mark>등록한 상품을 수정하는 페이지 입니다.</mark></P>
-      <side-product-modify-form :sideproduct="sideproduct" :sideProductId="sideProductId" @submit="onSubmit" />
+      <side-product-modify-form :sideProduct="sideProduct" :sideProductId="sideProductId" @submit="onSubmit" />
     </div>
   </v-container>
 </template>
@@ -16,7 +16,7 @@ export default {
   props: {
     sideProductId: {
       type: String,
-      requires: true,
+      required: true,
     }
   },
   computed: {

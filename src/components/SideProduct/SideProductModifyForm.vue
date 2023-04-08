@@ -13,19 +13,19 @@
             <tr>
               <td>메뉴무엇?</td>
               <td>
-                <input type="text" v-model="sideproduct.title" />
+                <input type="text" v-model="sideProduct.title" />
               </td>
             </tr>
             <tr>
               <td>얼마야</td>
               <td>
-                <input type="text" v-model="sideproduct.price" />
+                <input type="text" v-model="sideProduct.price" />
               </td>
             </tr>
             <tr>
               <td>본문</td>
               <td>
-                <textarea cols="50" rows="20" v-model="sideproduct.content" />
+                <textarea cols="50" rows="20" v-model="sideProduct.content" />
               </td>
             </tr>
             <tr>
@@ -37,16 +37,16 @@
           </table>
         </v-col>
         <v-col cols="6">
-          <v-img :src="require(`@/assets/selfSalad/${sideproduct.sideProductImg.editedImg}`)" />
+          <v-img :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)" />
 
-          <v-img v-if="fileSelected" :src="require(`@/assets/selfSalad/${sideproduct.sideProductImg.editedImg}`)" />
+          <v-img v-if="fileSelected" :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)" />
           <v-img v-else :src="imgUrl" :alt="'Image'"></v-img>
         </v-col>
         <div>
           <v-btn type="submit" color="blue">수정 완료</v-btn>
           <router-link :to="{
             name: 'SideProductReadPage',
-            params: { sideProductId: sideproduct.sideProductId }
+            params: { sideProductId: sideProduct.sideProductId }
           }">
             <v-btn color="red">취소</v-btn>
           </router-link>
@@ -61,15 +61,15 @@ export default {
   name: "SideProductModifyForm",
   data() {
     return {
-      title: this.sideproduct.title,
-      content: this.sideproduct.content,
-      price: this.sideproduct.price,
+      title: this.sideProduct.title,
+      content: this.sideProduct.content,
+      price: this.sideProduct.price,
       imgUrl: "",
       fileSelected: false,
     }
   },
   props: {
-    sideproduct: {
+    sideProduct: {
       type: Object,
       required: true
     },
@@ -83,9 +83,9 @@ export default {
       let formData = new FormData()
       formData.append("fileList", this.files[0]);
       console.log('fileList: '+ JSON.stringify(formData))
-      const title =  this.sideproduct.title
-      const content = this.sideproduct.content
-      const price = this.sideproduct.price
+      const title =  this.sideProduct.title
+      const content = this.sideProduct.content
+      const price = this.sideProduct.price
       
       let productInfo = { title, content, price }
       console.log("데이터 확인 : "+title, content, price)

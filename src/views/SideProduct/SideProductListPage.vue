@@ -6,7 +6,7 @@
               게시글 작성 하러 가기
           </router-link>
       </div>
-      <side-product-list-form :sideproducts="sideproducts"/>
+      <side-product-list-form :sideProducts="sideProducts"/>
   </v-container>
 </template>
 
