@@ -58,12 +58,6 @@
 <script>
 export default {
 	name: 'CarouselForm',
-	data() {
-    return {
-      showSearch: true,
-      keyword: '',
-    }
-  }
 }
 </script>
 
