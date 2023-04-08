@@ -69,6 +69,8 @@
 import ProductCard from '@/components/Product/ProductCard.vue'
 import { mapActions, mapState } from 'vuex'
 
+const productModule = 'productModule'
+
 export default {
   components: {ProductCard},
   name: 'BannerForm',
@@ -83,7 +85,7 @@ export default {
     }
   },
   computed:{
-    ...mapState([
+    ...mapState(productModule, [
       'products'
     ])
   },
@@ -91,7 +93,7 @@ export default {
     await this.requestProductListToSpring()
   },
   methods:{
-    ...mapActions([
+    ...mapActions(productModule, [
       'requestProductListToSpring'
     ])
   }
