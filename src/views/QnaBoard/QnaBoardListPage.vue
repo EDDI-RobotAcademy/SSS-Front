@@ -13,11 +13,13 @@
 import QnaBoardList from '@/components/Qnaboard/QnaBoardList.vue'
 import { mapActions, mapState } from 'vuex'
 
+const qnaModule = 'qnaModule'
+
 export default {
   components: { QnaBoardList },
   name: "QnaBoardListPage",
   computed: {
-    ...mapState([
+    ...mapState(qnaModule, [
       'boards'
     ]),
   },
@@ -25,7 +27,7 @@ export default {
     this.requestBoardListToSpring()
   },
   methods: {
-    ...mapActions([
+    ...mapActions(qnaModule, [
       'requestBoardListToSpring'
     ])
   }

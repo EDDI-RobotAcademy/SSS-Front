@@ -6,6 +6,7 @@ import state from "@/store/states"
 import sideProductModule from "@/store/SideProduct/SideProductModule.js"
 import productModule from "@/store/Product/ProductModule.js"
 import selfSaladModule from "@/store/SelfSalad/SelfSaladModule.js"
+import qnaModule from "@/store/Qnaboard/QnaModule.js"
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
     sideProductModule: sideProductModule,
     productModule: productModule,
     selfSaladModule: selfSaladModule,
+    qnaModule: qnaModule,
   },
   state,
 })
