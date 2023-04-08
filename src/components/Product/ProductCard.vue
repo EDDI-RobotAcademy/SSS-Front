@@ -1,11 +1,17 @@
 <template>
+  <v-container>
     <div class="productCard">
       <div class="thumbnail">
-          <img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)">
+        <router-link :to="{ name: 'ProductReadPage',
+              params: { productId: product.productId.toString() }}">
+        <img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)">
+      </router-link>
+
       </div>
-      <p class="title">{{ product.title }}</p>
-      <p class="price">{{ product.price | comma }}원</p>
+      <p class="product-title">{{ product.title }}</p>
+      <p class="product-price">{{ product.price | comma }}원</p>
     </div>
+  </v-container>
 </template>
   
 <script>
@@ -38,17 +44,12 @@
       width: 100%;
       height: 250px;
     }
-    .title {
-      font-size: 25px;
-      text-align: center;
-      margin-top: 30px;
-      color: black;
-      font-weight: bold;
+.product-title {
+  margin-top: 5px;
+  font-weight: bold;
+}
 
-    }
-    .price {
-      font-size: 20px;
-      text-align: center;
-      color: green;
-    }
+.product-price {
+  color: green;
+}
 </style>

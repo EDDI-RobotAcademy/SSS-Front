@@ -6,7 +6,7 @@
               게시글 작성 하러 가기
           </router-link>
       </div>
-      <side-product-list-form :sideproducts="sideproducts"/>
+      <side-product-list-form :sideProducts="sideProducts"/>
   </v-container>
 </template>
 
@@ -14,23 +14,19 @@
 import SideProductListForm from '@/components/SideProduct/SideProductListForm.vue'
 import { mapActions, mapState } from 'vuex'
 
+const sideProductModule = 'sideProductModule'
 
 export default {
   components: { SideProductListForm },
   name: "SideProductListPage",
   computed:{
-    ...mapState([
-      'sideproducts'
-    ])
+    ...mapState(sideProductModule,['sideProducts'])
   },
   mounted (){
     this.requestSideProductListToSpring()
-    console.log("ddddd")
   },
   methods:{
-    ...mapActions([
-      'requestSideProductListToSpring'
-    ])
+    ...mapActions(sideProductModule, ['requestSideProductListToSpring'])
   }
 
 }

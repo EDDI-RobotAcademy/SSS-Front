@@ -1,8 +1,11 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="(sideproduct, idx) in sideproducts" :key="idx" cols="3">
-        <side-product-card :sideproduct="sideproduct"/>
+      <v-col v-if="!sideProducts || (Array.isArray(sideProducts) && sideProducts.length === 0)">
+        <p>현재 등록된 상품이 없습니다!</p>
+      </v-col>
+      <v-col v-else v-for="(sideProduct, idx) in sideProducts" :key="idx" cols="3">
+        <side-product-card :sideProduct="sideProduct"/>
       </v-col>
     </v-row>
   </v-container>
@@ -15,7 +18,7 @@ export default {
   name: "SideProductListForm",
   components: { SideProductCard },
   props: {
-    sideproducts: {
+    sideProducts: {
       type: Array
     }
   },

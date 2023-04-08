@@ -24,6 +24,8 @@ import { mapActions, mapState } from 'vuex'
 import ReplyRegisterForm from '@/components/Qnaboard/reply/ReplyRegisterForm.vue'
 import ReplyList from '@/components/Qnaboard/reply/ReplyList.vue'
 
+const qnaModule = 'qnaModule'
+
 export default {
   components: { QnaBoardRead, ReplyRegisterForm, ReplyList },
     name: "QnaBoardReadPage",
@@ -34,11 +36,12 @@ export default {
         },
     },
     computed: {
-        ...mapState(['board']),
-        ...mapState(['reply'])
+        ...mapState(qnaModule, [
+          'board', 'replys'
+        ]),
     },
     methods: {
-        ...mapActions([
+        ...mapActions(qnaModule,[
             'requestBoardToSpring',
             'requestDeleteBoardToSpring',
             'requestCreateReplyToSpring',

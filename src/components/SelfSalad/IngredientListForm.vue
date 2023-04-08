@@ -33,9 +33,9 @@
       </tr>
       <div>
         <p>최종 가격: {{ totalPrice }}</p>
-        <button type="submit">바로 주문하기</button>
+        <v-btn type="submit" color="blue">바로 주문하기</v-btn>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
-          등록하기
+          <v-btn color="green">등록하기</v-btn>
         </router-link>
       </div>
     </table>

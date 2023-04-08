@@ -7,23 +7,23 @@
           <v-progress-circular indeterminate color="lighten-5-grey"/>
         </template>
       </v-img>
-      <p class="product-title">{{ sideproduct.title }}</p>
-      <p class="product-price">{{ sideproduct.price  }} 원</p>
+      <p class="product-title">{{ sideProduct.title }}</p>
+      <p class="product-price">{{ sideProduct.price | comma }}원</p>
         <div>
           <v-btn color="green" @click="showPreview = false">취소</v-btn>
-          <router-link :to="{ name: 'SideProductReadPage',
-                    params: { sideProductId: sideproduct.sideProductId.toString() } }">
-                    <v-btn color="blue">상세보기</v-btn>
+          <router-link :to="{ name: 'SideProductModifyPage',
+                    params: { sideProductId: sideProduct.sideProductId.toString() } }">
+                    <v-btn color="blue">수정하기</v-btn>
           </router-link>
           <v-btn color="red" @click="onDelete">삭제</v-btn>
       </div>
     </v-card-text>
   </v-card>
-  <v-img :src="require(`@/assets/selfSalad/${sideproduct.sideProductImg.editedImg}`)"
-  @click="showPreview = true; previewImage = require(`@/assets/selfSalad/${sideproduct.sideProductImg.editedImg}`);"
+  <v-img :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)"
+  @click="showPreview = true; previewImage = require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`);"
 />
-      <p class="product-title">{{ sideproduct.title }}</p>
-      <p class="product-price">{{ sideproduct.price  }} 원</p>
+      <p class="product-title">{{ sideProduct.title }}</p>
+      <p class="product-price">{{ sideProduct.price  }} 원</p>
 </v-container>
 </template>
 
@@ -38,7 +38,7 @@ export default {
     }
   },
   props: {
-    sideproduct: {
+    sideProduct: {
       type: Object,
       required: true,
     },          

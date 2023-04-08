@@ -2,7 +2,7 @@
   <v-container>
     <div align="center">
       <P><mark>등록한 상품을 수정하는 페이지 입니다.</mark></P>
-      <side-product-modify-form :sideproduct="sideproduct" @submit="onSubmit" />
+      <side-product-modify-form :sideProduct="sideProduct" :sideProductId="sideProductId" @submit="onSubmit" />
     </div>
   </v-container>
 </template>
@@ -10,20 +10,23 @@
 <script>
 import SideProductModifyForm from '@/components/SideProduct/SideProductModifyForm.vue'
 import { mapActions, mapState } from 'vuex'
+
+const sideProductModule = 'sideProductModule'
+
 export default {
   components: { SideProductModifyForm },
   name: "SideProductModifyPage",
   props: {
     sideProductId: {
       type: String,
-      requires: true,
+      required: true,
     }
   },
   computed: {
-    ...mapState(['sideproduct'])
+    ...mapState(sideProductModule, ['sideProduct'])
   },
   methods: {
-    ...mapActions([
+    ...mapActions(sideProductModule, [
       'requestSideProductToSpring',
       'requestSideProductModifyToSpring',
     ]),

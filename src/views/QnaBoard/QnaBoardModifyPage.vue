@@ -12,6 +12,8 @@
   
   import QnaBoardModifyForm from '@/components/Qnaboard/QnaBoardModifyForm.vue'
   import { mapActions, mapState } from 'vuex'
+
+  const qnaModule = 'qnaModule'
   
   export default {
       components: { QnaBoardModifyForm },
@@ -23,10 +25,12 @@
           }
       },
       computed: {
-          ...mapState(['board'])
+          ...mapState(qnaModule, [
+            'board'
+        ])
       },
       methods: {
-          ...mapActions([
+          ...mapActions(qnaModule, [
               'requestBoardToSpring',
               'requestBoardModifyToSpring',
           ]),

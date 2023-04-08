@@ -15,9 +15,8 @@
                 </template>
               </v-img>
             </router-link>
-            <p class="product-brand">{{ boardItem.title }}</p>
-            <p class="product-name">{{ boardItem.name }}</p>
-            <p class="product-price">{{ boardItem.price }} won</p>
+            <p class="product-title">{{ boardItem.name }}</p>
+            <p class="product-price">{{ boardItem.price  }} 원</p>
           </v-col>
         </div>
         </v-row>
@@ -42,34 +41,16 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="main-top-promotion row">
-                <v-col v-for="(boardItem, idx) in boardList" :key="idx">
-                  <router-link :to="{ name: 'home' }">
-                    <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
-                      <template v-slot:placeholder>
-                        <v-progress-circular indeterminate color="lighten-5-grey" />
-                      </template>
-                    </v-img>
-                  </router-link>
-                  <p class="product-brand">{{ boardItem.title }}</p>
-                  <p class="product-name">{{ boardItem.name }}</p>
-                  <p class="product-price">{{ boardItem.price }} won</p>
-                </v-col>
+              <v-col v-for="product in products.slice(0, 4)" :key="product.productId">
+                <product-card :product="product"/>
+              </v-col>
             </div>
           </div>
           <div class="carousel-item">
             <div class="main-top-promotion row">
-                <v-col v-for="(boardItem, idx) in boardList" :key="idx">
-                  <router-link :to="{ name: 'home' }">
-                    <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
-                      <template v-slot:placeholder>
-                        <v-progress-circular indeterminate color="lighten-5-grey" />
-                      </template>
-                    </v-img>
-                  </router-link>
-                  <p class="product-brand">{{ boardItem.title }}</p>
-                  <p class="product-name">{{ boardItem.name }}</p>
-                  <p class="product-price">{{ boardItem.price }} won</p>
-                </v-col>
+              <v-col v-for="product in products.slice(4,8)" :key="product.productId">
+                <product-card :product="product"/>
+              </v-col>
             </div>
           </div>
         </div>
@@ -79,11 +60,19 @@
           <span class="visually-hidden">Next</span>
       </div>
     </div>
+    
   </v-container>
 </template>
 
 <script>
+
+import ProductCard from '@/components/Product/ProductCard.vue'
+import { mapActions, mapState } from 'vuex'
+
+const productModule = 'productModule'
+
 export default {
+  components: {ProductCard},
   name: 'BannerForm',
   data() {
     return {
@@ -94,8 +83,20 @@ export default {
         { title: 'title3', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
       ]
     }
+  },
+  computed:{
+    ...mapState(productModule, [
+      'products'
+    ])
+  },
+  async mounted (){
+    await this.requestProductListToSpring()
+  },
+  methods:{
+    ...mapActions(productModule, [
+      'requestProductListToSpring'
+    ])
   }
-
 }
 </script>
 
@@ -114,5 +115,12 @@ export default {
   margin-right: -70px;
   margin-top: 190px;
 }
+.product-title {
+  margin-top: 5px;
+  font-weight: bold;
+}
 
+.product-price {
+  color: green;
+} 
 </style>

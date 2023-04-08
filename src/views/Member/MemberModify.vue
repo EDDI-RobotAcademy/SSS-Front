@@ -5,8 +5,9 @@
 </template>
 
 <script>
-import axios from "axios";
+import axiosInst from '@/utility/axiosObject'
 import MemberModifyForm from '../../components/Member/MemberModifyForm.vue'
+
 export default {
 
   name: "MemberModify",
@@ -18,7 +19,7 @@ export default {
       onSubmit (payload) {
         const { nickname, password, phoneNumber,  } = payload;
   
-        axios.post("http://localhost:7777/member/member-modify", {
+        axiosInst.post('/member/member-modify', {
           password, nickname, phoneNumber, address
         })
             .then((res) => {

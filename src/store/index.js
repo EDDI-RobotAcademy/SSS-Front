@@ -2,21 +2,24 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import state from "@/store/states"
-import actions from "@/store/actions"
-import mutations from "@/store/mutations"
 
-import createPersistedState from "vuex-persistedstate"
+import sideProductModule from "@/store/SideProduct/SideProductModule.js"
+import productModule from "@/store/Product/ProductModule.js"
+import selfSaladModule from "@/store/SelfSalad/SelfSaladModule.js"
+import qnaModule from "@/store/Qnaboard/QnaModule.js"
+import memberModule from "@/store/Member/MemberModule.js"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+  modules: {
+    sideProductModule: sideProductModule,
+    productModule: productModule,
+    selfSaladModule: selfSaladModule,
+    qnaModule: qnaModule,
+    memberModule: memberModule,
+  },
   state,
-  actions,
-  mutations,
-
-  plugins: [
-    createPersistedState({
-      paths: ['signInValue', 'memberInfoAboutSignIn', 'userToken']
-    })
-  ]
 })
+
+export default store

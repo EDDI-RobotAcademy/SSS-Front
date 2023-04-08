@@ -36,6 +36,9 @@
     </v-row>
       <div>
         <v-btn type="submit" color="blue">등록</v-btn>
+        <router-link :to="{ name: 'SideProductListPage' }">
+          <v-btn color="red">취소</v-btn>
+      </router-link>
       </div>
     </form>
   </v-container>

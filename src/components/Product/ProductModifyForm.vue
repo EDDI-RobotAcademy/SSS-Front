@@ -1,6 +1,8 @@
 <template>
-    <div>
+    <v-container>
       <form @submit.prevent="onSubmit" enctype="multipart/form-data" method="post">
+        <v-row>
+            <v-col cols="6">
         <table>
           <tr>
             <td>상품 번호</td>
@@ -23,7 +25,7 @@
           <tr>
               <td>가격</td>
               <td>
-                  <input type="number" v-model="price"/>
+                <input type="number" v-model="price"/>
               </td>
           </tr>
           <tr>
@@ -35,27 +37,31 @@
           </tr>
         </table>
   
-        <v-row>
-          <v-col v-for="(imagePath, idx) in product.productImgs" :key="idx" cols="4">
-              <v-img :src="require(`@/assets/product/${imagePath.editedImg}`)" aspect-ratio="1" class="grey lighten-2">
-              <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular indeterminate color="grey lighten-5"/>
-                  </v-row>
-              </template>
-              </v-img>
-          </v-col>
-        </v-row>
+    </v-col>
+    <v-col>
+        <p>수정 전</p>
+        <v-col v-for="(imagePath, idx) in product.productImgs" :key="idx" md="3">
+            <v-img :src="require(`@/assets/product/${imagePath.editedImg}`)" aspect-ratio="1">
+            </v-img>
+        </v-col>
+    </v-col>
+    <v-col>
+        <p>수정 후</p>
+        <v-col v-for="(url, index) in imageUrls" :key="index" md="3">
+            <v-img :src="url" :alt="'Image ' + index" aspect-ratio="1"></v-img>
+        </v-col>
+    </v-col>
+</v-row>
   
-        <div>
-          <button type="submit">수정 완료</button>
-          <router-link :to="{ name: 'ProductReadPage',
-                              params: { productId: productId }}">
-            취소
-          </router-link>
-        </div>
-      </form>
+    <div>
+        <v-btn type="submit" color="blue">수정 완료</v-btn>
+        <router-link :to="{name: 'ProductReadPage',
+                        params: { productId: productId }}">
+            <v-btn color="red">취소</v-btn>
+        </router-link>
     </div>
+      </form>
+    </v-container>
   </template>
   
   <script>
@@ -82,6 +88,7 @@ import axios from 'axios'
               content: '',
               price: 0,
               files: '',
+            imageUrls: [],
           }
       },
       created () {
@@ -134,9 +141,10 @@ import axios from 'axios'
                   this.$emit('submit', { productId, formData })
               }
           },
-          handleFileUpload () {
-            this.files = this.$refs.files.files
-          },
+          handleFileUpload(event) {
+            this.files = event.target.files
+            this.imageUrls = Array.from(this.files).map((file) => URL.createObjectURL(file))
+        },
       },
       mounted () {
           console.log('modify form - files: ' + this.productImgs)
@@ -145,6 +153,15 @@ import axios from 'axios'
   
   </script>
   
-  <style>
-  
+  <style scoped>
+  table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    margin-bottom: 5px;
+}
+
+td {
+    padding: 5px;
+    border: 2px solid black;
+}
   </style>

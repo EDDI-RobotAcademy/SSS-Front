@@ -8,12 +8,14 @@
   <script>
   import IngredientRegisterForm from '@/components/SelfSalad/IngredientRegisterForm.vue'
   import { mapActions } from 'vuex'
+
+  const selfSaladModule = 'selfSaladModule'
   
   export default {
       components: { IngredientRegisterForm },
       name: "IngredientRegisterPage",
       methods: {
-          ...mapActions ([
+          ...mapActions(selfSaladModule, [
               'requestCreateIngredientToSpring'
           ]),
           async onSubmit (payload) {
