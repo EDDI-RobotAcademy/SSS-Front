@@ -10,12 +10,14 @@
 import IngredientListForm from '@/components/SelfSalad/IngredientListForm.vue';
 import { mapActions, mapState } from 'vuex'
 
+const selfSaladModule = 'selfSaladModule'
+
   export default {
       components: { IngredientListForm },
       name: "IngredientListPage",
 
       computed: {
-        ...mapState([
+        ...mapState(selfSaladModule, [
           'ingredients'
         ]),
       },
@@ -24,7 +26,7 @@ import { mapActions, mapState } from 'vuex'
           this.requestIngredientListToSpring()
       },         
       methods: {
-        ...mapActions([
+        ...mapActions(selfSaladModule, [
           'requestIngredientListToSpring',
           'requestIngredientCategoryToSpring',
           'requestDeleteIngredientToSpring'

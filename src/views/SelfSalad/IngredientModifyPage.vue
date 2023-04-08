@@ -15,6 +15,8 @@
 import { mapActions, mapState } from 'vuex'
 import IngredientImgModifyForm from '@/components/SelfSalad/IngredientImgModifyForm.vue'
 
+const selfSaladModule = 'selfSaladModule'
+
 export default {
     components: { IngredientImgModifyForm },
     name: "IngredientImgModifyPage",
@@ -25,10 +27,12 @@ export default {
       },
     },
     computed: {
-      ...mapState(['ingredientImg'])
+      ...mapState(selfSaladModule, [
+        'ingredientImg'
+      ])
     },
     methods: {
-        ...mapActions([
+        ...mapActions(selfSaladModule, [
             'requestIngredientImgToSpring',
             'requestIngredientImgModifyToSpring',
         ]),

@@ -14,6 +14,8 @@
   
 import { mapActions, mapState } from 'vuex'
 import IngredientInfoModifyForm from '@/components/SelfSalad/IngredientInfoModifyForm.vue'
+
+const selfSaladModule = 'selfSaladModule'
   
   export default {
       components: { IngredientInfoModifyForm },
@@ -25,10 +27,12 @@ import IngredientInfoModifyForm from '@/components/SelfSalad/IngredientInfoModif
         },
       },
       computed: {
-        ...mapState(['ingredientInfo'])
+        ...mapState(selfSaladModule, [
+          'ingredientInfo'
+        ])
       },
       methods: {
-          ...mapActions([
+          ...mapActions(selfSaladModule, [
               'requestIngredientInfoToSpring',
               'requestIngredientInfoModifyToSpring',
           ]),
