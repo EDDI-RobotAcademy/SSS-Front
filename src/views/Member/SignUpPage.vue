@@ -5,10 +5,9 @@
   </template>
   
   <script>
-  
-  import axios from "axios";
+  import axiosInst from '@/utility/axiosObject'
   import SignUpForm from "@/components/Member/SignUpForm.vue";
-  
+
   export default {
     name: "SignUpPage",
     components: {
@@ -18,7 +17,7 @@
       onSubmit (payload) {
         const { email, password, nickname, authorityName, adminCheck, adminCode } = payload;
   
-        axios.post("http://localhost:7777/member/sign-up", {
+        axiosInst.post('/member/sign-up', {
           email, password, nickname, authorityName, adminCheck, adminCode
         })
             .then((res) => {

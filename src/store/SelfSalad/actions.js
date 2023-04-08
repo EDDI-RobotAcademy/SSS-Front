@@ -15,7 +15,7 @@ export default {
 async requestCreateIngredientToSpring ({}, payload) {
     try {
         await axiosInst.post('/selfsalad/register', payload)
-        alert('상품 등록 성공!')
+        alert('재료 등록 성공!')
     } catch {
         alert('문제 발생!')
     }
