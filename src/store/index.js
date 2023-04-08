@@ -2,21 +2,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import state from "@/store/states"
-import actions from "@/store/actions"
-import mutations from "@/store/mutations"
 
-import createPersistedState from "vuex-persistedstate"
+import sideProductModule from "@/store/SideProduct/SideProductModule.js"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+  modules: {
+    sideProductModule: sideProductModule,
+  },
   state,
-  actions,
-  mutations,
-
-  plugins: [
-    createPersistedState({
-      paths: ['signInValue', 'memberInfoAboutSignIn', 'userToken']
-    })
-  ]
 })
+
+export default store

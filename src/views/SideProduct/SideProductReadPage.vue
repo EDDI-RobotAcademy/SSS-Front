@@ -19,6 +19,8 @@
 import SideProductReadForm from '@/components/SideProduct/SideProductReadForm'
 import {mapActions, mapState} from 'vuex'
 
+const sideProductModule = 'sideProductModule'
+
 export default {  
   components: { SideProductReadForm },
     name: "SideProductReadPage",
@@ -29,10 +31,10 @@ export default {
         }
     },
     computed: {
-      ...mapState(['sideproduct'])
+      ...mapState(sideProductModule, ['sideProduct'])
     },
     methods:{
-      ...mapActions([
+      ...mapActions(sideProductModule, [
         'requestSideProductToSpring',
         'requestDeleteSideProductToSpring'
       ]),

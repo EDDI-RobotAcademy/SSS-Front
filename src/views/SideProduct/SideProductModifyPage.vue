@@ -10,6 +10,9 @@
 <script>
 import SideProductModifyForm from '@/components/SideProduct/SideProductModifyForm.vue'
 import { mapActions, mapState } from 'vuex'
+
+const sideProductModule = 'sideProductModule'
+
 export default {
   components: { SideProductModifyForm },
   name: "SideProductModifyPage",
@@ -20,10 +23,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['sideproduct'])
+    ...mapState(sideProductModule, ['sideProduct'])
   },
   methods: {
-    ...mapActions([
+    ...mapActions(sideProductModule, [
       'requestSideProductToSpring',
       'requestSideProductModifyToSpring',
     ]),

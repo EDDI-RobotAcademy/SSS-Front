@@ -11,11 +11,13 @@
 import SideProductRegisterForm from '@/components/SideProduct/SideProductRegisterForm.vue'
 import {mapActions} from 'vuex'
 
+const sideProductModule = 'sideProductModule'
+
 export default {
   components: { SideProductRegisterForm },
   name: "SideProductRegisterPage",
   methods:{
-    ...mapActions([
+    ...mapActions(sideProductModule, [
       'requestCreateSideProductToSpring'
     ]),
     async onSubmit (payload) {
