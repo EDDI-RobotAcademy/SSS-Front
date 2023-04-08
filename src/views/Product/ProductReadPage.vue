@@ -19,6 +19,8 @@
   
   import ProductReadForm from '@/components/Product/ProductReadForm.vue'
   import { mapActions, mapState } from 'vuex'
+
+  const productModule = 'productModule'
   
   export default {
     components: { ProductReadForm },
@@ -30,10 +32,12 @@
           }
       },
       computed: {
-          ...mapState(['product', 'productImgs'])
+          ...mapState(productModule, [
+            'product', 'productImgs'
+          ])
       },
       methods: {
-          ...mapActions([
+          ...mapActions(productModule, [
               'requestProductToSpring',
               'requestDeleteProductToSpring',
               'requestProductImageToSpring',

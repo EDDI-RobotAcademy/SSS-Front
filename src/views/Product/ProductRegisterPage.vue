@@ -10,12 +10,15 @@
   <script>
   import ProductRegisterForm from '@/components/Product/ProductRegisterForm.vue';
   import { mapActions } from 'vuex';
+
+  const productModule = 'productModule'
+
   
   export default {
       components: { ProductRegisterForm },
       name: "ProductRegisterPage",
       methods: {
-          ...mapActions ([
+          ...mapActions (productModule, [
               'requestCreateProductToSpring'
           ]), 
           async onSubmit (payload) {  

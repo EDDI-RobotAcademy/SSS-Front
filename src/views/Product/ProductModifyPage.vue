@@ -13,6 +13,8 @@
   
   import ProductModifyForm from '@/components/Product/ProductModifyForm.vue'
   import { mapActions, mapState } from 'vuex'
+
+  const productModule = 'productModule'
   
   export default {
       components: { ProductModifyForm },
@@ -24,10 +26,12 @@
           }
       },
       computed: {
-          ...mapState(['product', 'productImgs'])
+          ...mapState(productModule, [
+            'product', 'productImgs'
+        ])
       },
       methods: {
-          ...mapActions([
+          ...mapActions(productModule, [
               'requestProductToSpring',
               'requestProductModifyToSpring',
               'requestProductImageToSpring',

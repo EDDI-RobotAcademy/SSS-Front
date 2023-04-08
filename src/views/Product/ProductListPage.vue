@@ -15,12 +15,14 @@
   import ProductListForm from '@/components/Product/ProductListForm.vue'
   import ProductCard from '@/components/Product/ProductCard.vue'
   import { mapActions, mapState } from 'vuex'
+
+  const productModule = 'productModule'
   
   export default {
     components: { ProductListForm, ProductCard },
     name: "ProductListPage",
     computed:{
-      ...mapState([
+      ...mapState(productModule, [
         'products'
       ])
     },
@@ -28,7 +30,7 @@
       await this.requestProductListToSpring()
     },
     methods:{
-      ...mapActions([
+      ...mapActions(productModule, [
         'requestProductListToSpring'
       ])
     }
