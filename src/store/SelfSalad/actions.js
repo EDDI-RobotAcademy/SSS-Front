@@ -1,6 +1,5 @@
 import {
     REQUEST_INGREDIENT_LIST_TO_SPRING,
-    REQUEST_INGREDIENT_TO_SPRING,
     REQUEST_INGREDIENT_CATEGORY_TO_SPRING,
     REQUEST_INGREDIENT_INFO_TO_SPRING,
     REQUEST_INGREDIENT_AMOUNT_TO_SPRING
@@ -70,10 +69,10 @@ async requestIngredientInfoModifyToSpring ({}, payload) {
 
 //수량_가격 수정 완
 async requestIngredientAmountModifyToSpring ({}, payload) {
-    const { ingredientId, amountType, max, min, unit, price, calorie } = payload
+    const { ingredientId, amountType, max, unit, price, calorie } = payload
 
     return await axiosInst.put(`/selfsalad/modify/amount/${ingredientId}`,
-    { amountType, max, min, unit, price, calorie })
+    { amountType, max, unit, price, calorie })
         .then(() => {
             alert("수정 성공")
         })
