@@ -158,9 +158,9 @@
 
         <v-tab-item>
           <v-card flat>
-            <v-card-title>
-              구매후기
-            </v-card-title>
+            <v-card-text align="center">
+              <review-form :product="product"/>
+            </v-card-text>
           </v-card>
         </v-tab-item>
 
@@ -177,8 +177,11 @@
 </template>
 
 <script>
+import ReviewForm from "@/components/Product/review/ReviewForm.vue"
+
 export default {
   name: "ProductReadForm",
+  components: {ReviewForm},
   data() {
     return {
       tab2: null,
@@ -188,7 +191,7 @@ export default {
       totalPrice: 0,
       items: [
         {tab: '상품설명'},
-        {tab: '구매후기'},
+        {tab: '상품후기'},
         {tab: 'Q&A'},
       ],
       deliveryFee: 3000,  //productInfo를 따로 만들것인지...(배송비, 찜 정보 등)
@@ -206,10 +209,10 @@ export default {
     },
   },
   methods: {
-    selectedImg(e) {
-      // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
-      this.idx = e;
-    },
+    // selectedImg(e) {
+    //   // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
+    //   this.idx = e;
+    // },
     qtyDesc() {
       if(this.quantity > 1) {
         this.quantity--

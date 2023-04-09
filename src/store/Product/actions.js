@@ -1,7 +1,9 @@
 import {
     REQUEST_PRODUCT_TO_SPRING,
     REQUEST_PRODUCT_LIST_TO_SPRING,
-    REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING
+    REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
+    REQUEST_READ_REVIEW_TO_SPRING,
+    REQUEST_REVIEW_IMAGE_TO_SPRING
 
 } from './mutation-types'
 
@@ -66,5 +68,32 @@ async requestProductModifyToSpring ({}, payload) {
         .catch(() => {
             alert("문제 발생!")
         })
-    }
+    },
+
+    // requestRegisterReviewToSpring(_, payload) {
+    //     return axiosInst.post('/review/register', payload)
+    //         .then(() => {
+    //         })
+    // },
+    // requestRegisterReviewWithImgToSpring(_, payload) {
+    //     return axiosInst.post('/review/registerWithImg', payload)
+    //         .then((res) => {
+    //             console.log(res.data)
+    //         })
+    //         .catch((res) => {
+    //             console.log(res.message)
+    //         })
+    // },
+async requestReadReviewToSpring({commit}, productId) {
+    return await axiosInst.get(`/review/list/${productId}`)
+            .then((res) => {
+                commit(REQUEST_READ_REVIEW_TO_SPRING, res.data)
+            })
+    },
+async requestReviewImageToSpring({commit}, reviewId) {
+    return await axiosInst.get(`/review/image/${reviewId}`)
+            .then((res) => {
+                commit(REQUEST_REVIEW_IMAGE_TO_SPRING, res.data)
+            })
+    },    
 }
