@@ -27,10 +27,6 @@
                 <input type="text" v-model="ingredientAmount.max"/>
               </div>
               <div>
-                <label>최소수량</label>             
-                <input type="text" v-model="ingredientAmount.min"/>
-              </div>
-              <div>
                 <label>수량 단위</label>             
                 <input type="text" v-model="ingredientAmount.unit"/>
               </div>
@@ -75,11 +71,10 @@
           onSubmit () {
             const amountType = this.ingredientAmount.amountType;
             const max = this.ingredientAmount.max;
-            const min = this.ingredientAmount.min;
             const unit = this.ingredientAmount.unit;
             const price = this.ingredientAmount.price;
             const calorie = this.ingredientAmount.calorie;
-            this.$emit('submit', { amountType, max, min, unit, price, calorie } )
+            this.$emit('submit', { amountType, max, unit, price, calorie } )
           },
       }
   }
