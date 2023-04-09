@@ -29,7 +29,7 @@
           productId: {
               type: String,
               required: true,
-          }
+          },
       },
       computed: {
           ...mapState(productModule, [
