@@ -53,10 +53,6 @@
                 <input type="text" v-model="max" value="put max"/>
               </div>
               <div>
-                <label>최소수량</label>             
-                <input type="text" v-model="min" value="put min"/>
-              </div>
-              <div>
                 <label>수량 단위</label>             
                 <input type="text" v-model="unit" value="put unit"/>
               </div>
@@ -91,7 +87,6 @@
               category: 'VEGETABLE',
               measure: 'GRAM',
               max: '10',
-              min: '1',
               unit: '2',
               price:'2000',
               calorie:'10', 
@@ -106,13 +101,12 @@
             }
             console.log('imageFile: '+ this.files)
 
-            const { name, category, measure, max, min, unit, price, calorie } = this
+            const { name, category, measure, max, unit, price, calorie } = this
             let ingredientInfo = {
                 name: name,
                 category: category,
                 measure: measure,
                 max: max,
-                min: min,
                 unit: unit,
                 price: price,
                 calorie: calorie
