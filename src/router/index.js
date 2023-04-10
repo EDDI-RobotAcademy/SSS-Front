@@ -17,7 +17,6 @@ import SideProductModifyPage from "@/views/SideProduct/SideProductModifyPage.vue
 
 import SignUpPage from "@/views/Member/SignUpPage.vue";
 import SignInPage from '@/views/Member/SignInPage.vue';
-import MyPageView from "@/views/MyPage/MyPageView.vue"
 import MemberModify from "@/views/Member/MemberModify.vue"
 
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
@@ -30,6 +29,7 @@ import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
+import MyInfoPage from "@/views/MyPage/MyInfoPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,11 +47,6 @@ const routes = [
     path: '/member/sign-up',
     name: 'SignUp',
     component: SignUpPage
-  },
-  {
-    path: '/my-page',
-    name: 'MyPageView',
-    component: MyPageView
   },
 
   {
@@ -201,7 +196,11 @@ const routes = [
     default: true,
   }
 },
-
+//마이 페이지
+{
+  path: '/my-info',
+  name: 'MyInfoPage',
+  component: MyInfoPage 
 ]
 
 const router = new VueRouter({
