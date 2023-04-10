@@ -29,10 +29,11 @@
         </li>
         <li v-for="review in reviews" :key="review.reviewId" v-else>
           <review-content
-              :review="review"/>
+              :review="review" :reviewImgs="reviewImgs"/>
         </li>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -76,7 +77,7 @@ export default {
     },
     computed: {
         ...mapState(productModule, [
-            'reviews'
+            'reviews', 'reviewImgs'
         ])
     }
 }
