@@ -25,6 +25,9 @@
         </ul>
         
         <v-spacer></v-spacer>
+          <v-btn large elevation="0" text @click="goCartPage">
+            <v-icon> mdi-cart-outline</v-icon>
+          </v-btn>
         <template v-if="!this.$store.state.signInValue">
           <v-btn>
             <router-link :to="{ name: 'SignUp' }">signUp</router-link>
@@ -99,6 +102,10 @@ export default {
       this.$router.push({ name: "home" })
       // 현재 경로에서 새로고침 시 필요
       history.go(0)
+    },
+    goCartPage() {
+      this.$router.push({name: "ShoppingCartPage"});
+    },
     }
   }
 }

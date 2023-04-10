@@ -30,6 +30,7 @@ import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
 import MyInfoPage from "@/views/MyPage/MyInfoPage"
+import ShoppingCartPage from "@/views/ShoppingCart/ShoppingCartPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -201,6 +202,13 @@ const routes = [
   path: '/my-info',
   name: 'MyInfoPage',
   component: MyInfoPage 
+},
+// 장바구니
+{
+  path: '/shoppingCart',
+  name: 'ShoppingCartPage',
+  component: ShoppingCartPage
+},
 ]
 
 const router = new VueRouter({
