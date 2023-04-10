@@ -38,6 +38,11 @@
         <template v-if="!this.$store.state.signInValue">
           <v-btn>
             <router-link :to="{ name: 'SignUp' }">signUp</router-link>
+
+      <v-spacer></v-spacer>
+      <template v-if="!signInValue">
+        <v-btn>
+          <router-link :to="{ name: 'SignUp' }">signUp</router-link>
           <v-icon right>mdi-account-plus</v-icon>
         </v-btn>  
         <v-btn>
@@ -89,6 +94,8 @@
 import { mapState } from 'vuex';
 import SideNav from '@/views/NavigationMenu/SideNav.vue'
 
+const memberModule = 'memberModule'
+
 export default {
   name: "Header",
   components: { SideNav },
@@ -99,9 +106,6 @@ export default {
     }
   },
   methods: {
-    ...mapState([
-      'signInValue'
-    ]),
     logoutBtn() {
       this.$store.commit("SIGN_IN_VALUE", false)
       localStorage.removeItem("vuex")
@@ -118,6 +122,11 @@ export default {
         const keyword = this.$refs.keyword.value
         await this.reqProductsFromSpring(keyword)
     }
+  },
+  computed: {
+    ...mapState(memberModule, [
+      'signInValue'
+    ]),
   }
 }
 </script>

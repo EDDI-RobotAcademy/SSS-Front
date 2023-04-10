@@ -18,11 +18,11 @@
                 <!-- <p>{{ review.member.nickname | comma }}</p> -->
                 <p>{{ review.content }}</p>
             </div>
-            <div v-if="review.reviewImgs && review.reviewImgs.length > 0">
-                <div v-for="(image, index) in review.reviewImgs" :key="index">
+            <div class="image-container" v-if="reviewImgs && reviewImgs.length > 0">
+                <div v-for="(image, index) in reviewImgs" :key="index">
                     <v-img
                         :src="require(`@/assets/review/${image.editedImg}`)"
-                        height="300" width="400" contain @click="openReview"
+                        height="100" width="200" contain @click="openReview"
                     ></v-img>
                 </div>
             </div>
@@ -32,18 +32,30 @@
       <v-card>
         <v-card-title>사진 후기</v-card-title>
         <v-divider></v-divider>
-        <v-card-text cols="6">
-          <div v-for="(image, index) in review.reviewImgs" :key="index">
-            <v-img
-              :src="require(`@/assets/review/${image.editedImg}`)"
-              height="300" width="400" contain
-            ></v-img>
-          </div>
-        </v-card-text>
-        <v-card-text cols="6">
-            <!-- <p>{{ review.member.nickname | comma }}</p> -->
-            <p>{{ review.content }}</p>
-            <p>{{ review.regDate }}</p>
+        <v-container>
+            <v-row>
+                <v-col cols="6">
+                  <div v-for="(image, index) in reviewImgs" :key="index"> 
+                    <v-img
+                      :src="require(`@/assets/review/${image.editedImg}`)"
+                      height="300" width="400" contain
+                    ></v-img>
+                  </div>
+                </v-col>
+                <v-col cols="6">
+                    <!-- <p>{{ review.member.nickname | comma }}</p> -->
+                    <p>{{ review.content }}</p>
+                    <p>{{ review.regDate }}</p>
+                </v-col>
+            </v-row>
+        </v-container>
+        <v-card-text>
+            <div v-for="(image, index) in reviewImgs.slice(1)" :key="index">
+                <v-img
+                    :src="require(`@/assets/review/${image.editedImg}`)"
+                    height="50" width="100" contain
+                ></v-img>
+            </div>
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="closeReview">Close</v-btn>
@@ -64,10 +76,14 @@ export default {
             type: Object,
             required: true
         },
+        reviewImgs: {
+            type: Array,
+            required: true
+        }
     },
     data() {
         return {
-            dialog: false
+            dialog: false,
         }
     },
     methods: {
@@ -98,5 +114,9 @@ export default {
     position: relative;
     list-style: none;
     padding: 10px;
+}
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>
