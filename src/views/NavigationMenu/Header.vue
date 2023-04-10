@@ -25,7 +25,7 @@
         </ul>
 
       <v-spacer></v-spacer>
-      <template v-if="!this.$store.state.signInValue">
+      <template v-if="!signInValue">
         <v-btn>
           <router-link :to="{ name: 'SignUp' }">signUp</router-link>
           <v-icon right>mdi-account-plus</v-icon>
@@ -55,12 +55,11 @@
 <script>
 import { mapState } from 'vuex';
 
+const memberModule = 'memberModule'
+
 export default {
   name: "Header",
   methods: {
-    ...mapState([
-      'signInValue'
-    ]),
     logoutBtn() {
       this.$store.commit("SIGN_IN_VALUE", false)
       localStorage.removeItem("vuex")
@@ -70,6 +69,11 @@ export default {
       // 현재 경로에서 새로고침 시 필요
       history.go(0)
     }
+  },
+  computed: {
+    ...mapState(memberModule, [
+      'signInValue'
+    ]),
   }
 }
 </script>

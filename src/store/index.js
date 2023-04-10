@@ -9,6 +9,8 @@ import selfSaladModule from "@/store/SelfSalad/SelfSaladModule.js"
 import qnaModule from "@/store/Qnaboard/QnaModule.js"
 import memberModule from "@/store/Member/MemberModule.js"
 
+import createPersistedState from "vuex-persistedstate"
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -20,6 +22,12 @@ const store = new Vuex.Store({
     memberModule: memberModule,
   },
   state,
+  plugins: [
+    createPersistedState({
+      paths: ['signInValue', 'memberInfoAboutSignIn', 'userToken']
+      //paths: ['memberModule']
+    })
+  ]
 })
 
 export default store
