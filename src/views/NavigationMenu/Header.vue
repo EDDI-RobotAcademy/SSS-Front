@@ -35,9 +35,7 @@
           <v-btn large elevation="0" text @click="goCartPage">
             <v-icon> mdi-cart-outline</v-icon>
           </v-btn>
-        <template v-if="!this.$store.state.signInValue">
-          <v-btn>
-            <router-link :to="{ name: 'SignUp' }">signUp</router-link>
+
 
       <v-spacer></v-spacer>
       <template v-if="!signInValue">
@@ -101,7 +99,7 @@ export default {
   components: { SideNav },
   data() {
     return {
-      navigation_drawer: true
+      navigation_drawer: true,
       keyword: ''
     }
   },
