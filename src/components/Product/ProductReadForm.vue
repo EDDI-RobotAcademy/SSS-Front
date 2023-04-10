@@ -75,15 +75,19 @@
                 <p>{{ totalPrice | comma }}원</p>
               </div>
             </div>
-          </tr>
-        </table>
-
-          <div align="center" style="margin-top: 20px" >
-            <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
-                <v-btn icon color="#568869" @click="btnFavorite" x-large><v-icon>mdi-heart-outline</v-icon></v-btn>
-                <v-btn icon color="red" @click="btnFavorite" x-large><v-icon>mdi-heart</v-icon></v-btn>
           </div>
+        </div>
+        
         <v-row>
+          <v-col align="center">
+            <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
+                <v-btn v-if="isTrue == false" x-large icon @click="clickToggle">
+                  <v-icon>mdi-heart-outline</v-icon>
+                </v-btn>
+                <v-btn v-else x-large icon color="red" @click="clickToggle">
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+              </v-col>
           <v-col>
             <v-btn
                 @click="btnCart"
@@ -184,6 +188,8 @@ export default {
   components: {ReviewForm},
   data() {
     return {
+      // 좋아요 토글 기능
+      isTrue: false,
       tab2: null,
       tab: null,
       idx: 0,
@@ -213,6 +219,10 @@ export default {
     //   // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
     //   this.idx = e;
     // },
+    // 좋아요 토글 기능
+    clickToggle() {
+      this.isTrue = !this.isTrue
+    },
     qtyDesc() {
       if(this.quantity > 1) {
         this.quantity--
