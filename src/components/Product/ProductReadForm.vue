@@ -1,4 +1,6 @@
 <template>
+  <v-container>
+
   <div>
     <v-row>
       <v-col cols="5">
@@ -28,52 +30,36 @@
         </v-row> -->
       </v-col>
       
-      <v-col cols="5">           
-        <table>
-          <!-- <tr>
-            <td>상품 번호</td>
-            <td>
-              <input type="text" :value="product.productId" readonly/>
-            </td>
-          </tr> -->
-          <tr>
-            <h3>{{ product.title }}</h3>
-            <!-- <td>
-              <input type="text" :value="product.title" readonly/>
-            </td> -->
-          </tr>
-          <tr>
-            <h4>Price: {{ product.price | comma }}원</h4>
-            <!-- <td>
-              <input type="number" :value="product.price" readonly/>
-            </td> -->
-          </tr>
-          <tr>
-            <v-row>
-              <p style="font-size: 0.7em">배송비(얼마이상무료배송)</p>
-              <p>{{ deliveryFee | comma }}원</p>
-            </v-row>
-          </tr>
-          <tr>
-            <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
-              <div>{{ product.title }}</div>
-                <div class="d-flex align-items-center">
-                  <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
-                    <v-icon size="15">mdi-minus</v-icon>
-                  </v-btn>
-                  <div>{{ quantity }}</div>
-                  <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
-                    <v-icon size="15">mdi-plus</v-icon>
-                  </v-btn>
-              </div>
+      <v-col cols="6">           
+        <div>
+          <div class="d-flex justify-content-between align-items-center title">
+          <h3>{{ product.title }}</h3>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <h4>판매가</h4>
+          <h4>{{ product.price | comma }}원</h4>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>배송비</p>
+          <p>{{ deliveryFee | comma }}원
+          (5만원 이상 무료배송)</p>
+        </div>
+          <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
+            <p>구매수량</p>
+            <div class="d-flex align-items-center">
+              <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+                <v-icon size="15">mdi-minus</v-icon>
+              </v-btn>
+              <div>{{ quantity }}</div>
+              <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
+                <v-icon size="15">mdi-plus</v-icon>
+              </v-btn>
             </div>
-          </tr>
-          <tr>  
-            <div class="row">
-              <p class="col-sm-4" style="text-align: left">총 합계</p>
-              <div class="col-sm-8" align="right">
-                <p>{{ totalPrice | comma }}원</p>
-              </div>
+          </div>
+          <div class="row">
+            <p class="col-sm-4" style="text-align: left">총 합계</p>
+            <div class="col-sm-8" align="right">
+              <p>{{ totalPrice | comma }}원</p>
             </div>
           </div>
         </div>
@@ -178,6 +164,7 @@
       </v-tabs-items>
     </div>
   </div>
+</v-container>
 </template>
 
 <script>
