@@ -30,6 +30,7 @@ import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
 import MyInfoPage from "@/views/MyPage/MyInfoPage"
+import ProductFavoritePage from "@/views/MyPage/ProductFavoritePage"
 import ShoppingCartPage from "@/views/ShoppingCart/ShoppingCartPage"
 Vue.use(VueRouter)
 
@@ -208,6 +209,12 @@ const routes = [
   path: '/shoppingCart',
   name: 'ShoppingCartPage',
   component: ShoppingCartPage
+},
+// 찜 목록
+{
+  path: '/product-favorite',
+  name: 'ProductFavoritePage',
+  component: ProductFavoritePage
 },
 ]
 
