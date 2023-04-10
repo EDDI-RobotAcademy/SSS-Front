@@ -25,6 +25,13 @@
         </ul>
         
         <v-spacer></v-spacer>
+          <div>
+            <v-text-field v-model= "keyword"
+            ref="keyword"
+            label="검색어를 입력 해주세요."
+            type="text"
+            append-icon="mdi-magnify"/>
+          </div>
           <v-btn large elevation="0" text @click="goCartPage">
             <v-icon> mdi-cart-outline</v-icon>
           </v-btn>
@@ -88,6 +95,7 @@ export default {
   data() {
     return {
       navigation_drawer: true
+      keyword: ''
     }
   },
   methods: {
@@ -106,6 +114,9 @@ export default {
     goCartPage() {
       this.$router.push({name: "ShoppingCartPage"});
     },
+    async search(){
+        const keyword = this.$refs.keyword.value
+        await this.reqProductsFromSpring(keyword)
     }
   }
 }
