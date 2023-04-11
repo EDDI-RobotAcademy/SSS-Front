@@ -21,6 +21,12 @@
           <v-tab-item>
             <my-shopping-cart-form/>
           </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
+            나의 리뷰
+          </v-tab>
+          <v-tab-item>
+            <my-review-form/>
+          </v-tab-item>
     </v-container>
   </div>
 </template>
@@ -29,13 +35,15 @@
 
 import MyInfoForm from "@/components/MyPage/MyInfoForm";
 import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
+import MyReviewForm from "@/components/MyPage/MyReviewForm";
+
 
 export default {
-  name: "MyInfoPage",
   components: {MyInfoForm}
   name: "MyPage",
   components: { MyInfoForm, 
                 MyShoppingCartForm,
+                MyReviewForm
               }
 }
 </script>
