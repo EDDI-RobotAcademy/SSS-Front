@@ -10,23 +10,24 @@
     <table class="reply"
            style="background-color: #eeeeee; border-radius: 10px"
            v-else
-           v-for="reply in replys" :key="reply.replyContent"
-    >
+           v-for="(reply, index) in replys" :key="reply.replyId">
       <tbody>
       <!--      댓글 리스트-->
       <tr>
         <div class="reply">
           <v-row>
-            <pre style="font-family: naver2; height: fit-content">{{ replyWriter }}
+            <pre style="font-family: naver2; height: fit-content">{{ reply.replyWriter }}
             </pre>
           </v-row>
           <v-row>
-            <pre style="font-family: naver2; height: fit-content">{{ replyContent }}
+            <pre v-show="replyModify !== index" style="font-family: naver2; height: fit-content">
+              {{ reply.replyContent }}
             </pre>
           </v-row>
-          <v-row>
-            <p class="mt-2">{{ replyContent.regDate }}</p>
-          </v-row>
+          <v-text-field v-model="reply.replyContent" label="댓글 수정" v-show="replyModify === index"></v-text-field>
+          <button v-if="reply.replyWriter && replyModify !== index" @click="startModify(index)">수정 | </button>
+          <button v-if="reply.replyWriter && replyModify === index" @click="saveReply(reply)">수정 완료 | </button>
+          <button v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
         </div>
       </tr>
       </tbody>
@@ -36,20 +37,51 @@
 
 <script>
 
+import axios from "axios";
 import {mapActions, mapState} from "vuex";
+
+const qnaModule = 'qnaModule'
 
 export default {
   name: "ReplyList",
   data() {
     return {
-      replyContent: this.replyContent
+      replyModify: null,
     }
   },
   props: {
+    replys: {
+        type: Array
+    },
+    reply: {
+        type: Object
+    },
   },
-  computed: {
-    ...mapState(['reply']),
-    ...mapState(['replys'])
+  methods: {
+    ...mapActions(qnaModule, [
+      'requestReplyDeleteToSpring',
+    ]),
+    startModify(index) {
+      this.replyModify = index;
+    },
+    saveReply(payload) {
+      this.replyModify = null;
+      const { replyId, replyContent } = payload;
+      
+      return axios.put(`http://localhost:7777/reply/${replyId}`,
+          {replyContent})
+          .then((res) => {
+              alert("질문 게시글의 댓글 " + replyId + "번 -> " + replyContent  +"로 수정 성공", res.data)
+          })
+          .catch(() => {
+              alert("질문 게시글의 댓글 " + replyId + "번 수정 실패")
+          })
+        },
+    async deleteReply(payload) {
+        const { replyId } = payload
+        await this.requestReplyDeleteToSpring({replyId})
+        await this.$router.go(this.$router.currentRoute)
+    },
   },
 }
 </script>

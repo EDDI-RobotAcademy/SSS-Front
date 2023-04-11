@@ -58,14 +58,16 @@ async requestBoardModifyToSpring ({}, payload) {
 //댓글
 //등록
 async requestCreateReplyToSpring ({}, payload) {
+    const { replyWriter, replyContent, boardId, replyId } = payload
     try {
-        await axiosInst.post('/reply/register', payload)
+        await axiosInst.post('/reply/register', 
+        { replyWriter, replyContent, boardId, replyId })
         alert('댓글 등록 성공!')
     } catch {
         alert('문제 발생!')
     }
 },
-//
+// 리스트
 async requestReplyListFromSpring ({ commit }, boardId) {
     return await axiosInst.get(`/reply/${boardId}`)
         .then((res) => {
@@ -73,17 +75,22 @@ async requestReplyListFromSpring ({ commit }, boardId) {
             console.log("1")
         })
     },
-    async requestReplyListFromSpring ({ commit }, qnaBoardId) {
-        return await axiosInst.get(`/reply/${qnaBoardId}`)
-        .then((res) => {
-            commit(REQUEST_REPLY_LIST_FROM_SPRING, res.data)
-            console.log("2")
-    })
-},
+    // //수정
+    // async requestBoardModifyToSpring ({}, payload) {
+    //     const { title, content, boardId, writer } = payload
+    //     return await axiosInst.put(`/board/${boardId}`,
+    //     { title, content, writer })
+    //         .then(() => {
+    //             alert("수정 성공")
+    //         })
+    //         .catch(() => {
+    //             alert("문제 발생!")
+    //         })
+    //     },    
 //삭제
 async requestReplyDeleteToSpring ({}, payload) {
-    const { replyId } = payload
-    return await axiosInst.delete(`/replyId/${replyId}`)
+    const replyId = payload
+    return await axiosInst.delete(`/reply/${replyId}`)
         .then(() => {
             alert("삭제 성공")
         })
