@@ -35,9 +35,6 @@
           <v-btn large elevation="0" text @click="goCartPage">
             <v-icon> mdi-cart-outline</v-icon>
           </v-btn>
-        <template v-if="!this.$store.state.signInValue">
-          <v-btn>
-            <router-link :to="{ name: 'SignUp' }">signUp</router-link>
 
       <v-spacer></v-spacer>
       <template v-if="!signInValue">
@@ -101,7 +98,7 @@ export default {
   components: { SideNav },
   data() {
     return {
-      navigation_drawer: true
+      navigation_drawer: true,
       keyword: ''
     }
   },
@@ -112,6 +109,11 @@ export default {
       localStorage.removeItem("userToken")
       alert("로그아웃 되었습니다.")
       this.$router.push({ name: "home" })
+        .catch(err => {  // 같은 경로로 다시 보내질 때 발생하는 에러 처리
+          if(err.name !== 'NavigationDuplicated') {
+            throw err
+          }
+        })
       // 현재 경로에서 새로고침 시 필요
       history.go(0)
     },
