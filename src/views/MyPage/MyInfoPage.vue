@@ -27,6 +27,12 @@
           <v-tab-item>
             <my-review-form/>
           </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
+            회원 탈퇴
+          </v-tab>
+          <v-tab-item>
+            <my-account-drop-form />
+          </v-tab-item>
     </v-container>
   </div>
 </template>
@@ -34,6 +40,7 @@
 <script>
 
 import MyInfoForm from "@/components/MyPage/MyInfoForm";
+import MyAccountDropForm from "@/components/MyPage/MyAccountDropForm";
 import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
 import MyReviewForm from "@/components/MyPage/MyReviewForm";
 
@@ -42,6 +49,7 @@ export default {
   components: {MyInfoForm}
   name: "MyPage",
   components: { MyInfoForm, 
+                MyAccountDropForm, 
                 MyShoppingCartForm,
                 MyReviewForm
               }
