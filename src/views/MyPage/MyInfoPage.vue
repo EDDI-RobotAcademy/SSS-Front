@@ -1,7 +1,4 @@
 <template>
-  <v-container>
-  <my-info-form @submit="onSubmit"/>
-</v-container>
   <div>
     <v-container style="width: 1400px">
       <h2>마이 페이지</h2>
@@ -28,6 +25,12 @@
             <my-review-form/>
           </v-tab-item>
           <v-tab style="margin-bottom: 30px; font-weight: bold">
+            찜 상품
+          </v-tab>
+          <v-tab-item>
+            <my-favorite-form />
+          </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
             회원 탈퇴
           </v-tab>
           <v-tab-item>
@@ -41,15 +44,16 @@
 
 import MyInfoForm from "@/components/MyPage/MyInfoForm";
 import MyAccountDropForm from "@/components/MyPage/MyAccountDropForm";
+import MyFavoriteForm from "@/components/MyPage/MyFavoriteForm";
 import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
 import MyReviewForm from "@/components/MyPage/MyReviewForm";
 
 
 export default {
-  components: {MyInfoForm}
   name: "MyPage",
   components: { MyInfoForm, 
                 MyAccountDropForm, 
+                MyFavoriteForm, 
                 MyShoppingCartForm,
                 MyReviewForm
               }
