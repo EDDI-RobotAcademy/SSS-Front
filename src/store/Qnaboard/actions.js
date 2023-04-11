@@ -89,7 +89,7 @@ async requestReplyListFromSpring ({ commit }, boardId) {
     //     },    
 //삭제
 async requestReplyDeleteToSpring ({}, payload) {
-    const replyId = payload
+    const { replyId } = payload
     return await axiosInst.delete(`/reply/${replyId}`)
         .then(() => {
             alert("삭제 성공")

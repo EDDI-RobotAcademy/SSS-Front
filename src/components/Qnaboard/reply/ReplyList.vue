@@ -79,6 +79,7 @@ export default {
         },
     async deleteReply(payload) {
         const { replyId } = payload
+        console.log(replyId + "33333")
         await this.requestReplyDeleteToSpring({replyId})
         await this.$router.go(this.$router.currentRoute)
     },
