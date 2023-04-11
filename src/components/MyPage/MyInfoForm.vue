@@ -1,18 +1,6 @@
 <template>
   <!-- 회원 정보 관리 -->
-  <div>
-    <v-container style="width: 1400px">
-      <h2>내 정보</h2>
-      <v-divider style="margin-top: 40px"></v-divider>
 
-      <div style="margin-top: 80px">
-        <v-tabs vertical>
-          <v-tab style="margin-bottom: 30px; font-weight: bold">
-            회원 정보 관리
-
-          </v-tab>
-
-          <v-tab-item>
             <v-card flat style="width: 100%">
               <v-card-text>
                 <h2 style="margin-left: 50px">회원 정보 관리</h2>
@@ -55,17 +43,7 @@
 
               </v-card-text>
             </v-card>
-          </v-tab-item>
 
-          <v-tab style="margin-bottom: 30px; font-weight: bold">
-            회원 탈퇴
-          </v-tab>
-          <v-tab-item>
-          </v-tab-item>
-        </v-tabs>
-      </div>
-    </v-container>
-  </div>
 </template>
 
 <script>
