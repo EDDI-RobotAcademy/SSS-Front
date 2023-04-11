@@ -1,5 +1,6 @@
 <template>
-    <form @submt.prevent="onSubmit">
+  <v-container>
+    <form @submit="onSubmit()">
       <v-card>
         <v-card-title></v-card-title>
         <div class="reply-title">
@@ -8,6 +9,19 @@
         <v-divider style="border-color: black; border-width: 1px"></v-divider>
         <div class="reply-container">
           <div class="reply-items">
+            <v-row>
+              <v-col cols="2">
+                <p>작성자</p>
+              </v-col>
+              <v-col cols="2">
+                <v-textarea
+                    color="black"
+                    height="50px"
+                    v-model="replyWriter"
+                    outlined>
+                </v-textarea>
+              </v-col>
+          </v-row>
             <v-row>
                 <v-col cols="2">
                   <p>댓글작성</p>
@@ -24,12 +38,12 @@
             <v-row align="center">
               <v-col>
                 <div align="center" class="mb-10">
-                  <button
+                  <v-btn
                       btn-name="등록하기"
-                      @click="onSubmit"
+                      type="submit"
                       style="width: 200px; height: 50px; font-size: 15px">
                     등록하기
-                  </button>
+                  </v-btn>
                 </div>
               </v-col>
             </v-row>
@@ -37,6 +51,7 @@
         </div>
       </v-card>
     </form>
+  </v-container>
   </template>
   
   <script> 
@@ -44,27 +59,24 @@
   
   export default {
     name: "ReplyRegisterForm",
+    props: {
+      board: {
+        type: Array
+      },
+    },
     data () {
       return {
-        reply: '',
-        replyId: this.replyId,
-        replyWriter: this.replyWriter,
-        replyContent: this.replyContent,
+        replyContent: '',
+        replyWriter: '',
       }
     },
     methods: {
-      ...mapActions([
-          'requestCreateReplyToSpring'
-      ]),
-      async onSubmit() {
-        const reply = await this.requestCreateReplyToSpring(payload)
-        console.log('reply: ' + JSON.stringify(reply.data))
-        await this.$router.push({
-          name: 'JpaQnaBoardReadPage',
-          params: { replyId: reply.data.replyId.toString() }
-        })
+      onSubmit() {
+        const {replyContent, replyWriter} = this
+        this.$emit('submit', {replyContent, replyWriter})
       }
     },
+    
   }
   </script>
   

@@ -35,9 +35,9 @@ export default {
     name: "QnaBoardRegisterForm",
     data () {
         return {
-          title: this.$store.state.reply.title,
-          writer: this.$store.state.reply.writer,
-          content: this.$store.state.reply.content,
+          title: '',
+          writer: '',
+          content: '',
         }
     },
     methods: {
