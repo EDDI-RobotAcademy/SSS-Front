@@ -19,6 +19,16 @@
             <my-shopping-cart-form/>
           </v-tab-item>
           <v-tab style="margin-bottom: 30px; font-weight: bold">
+            배송 조회
+          </v-tab>
+          <v-tab-item>
+          </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
+            문의 사항
+          </v-tab>
+          <v-tab-item>
+          </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
             나의 리뷰
           </v-tab>
           <v-tab-item>
@@ -31,11 +41,18 @@
             <my-favorite-form />
           </v-tab-item>
           <v-tab style="margin-bottom: 30px; font-weight: bold">
+            나만의 샐러드
+          </v-tab>
+          <v-tab-item>
+          </v-tab-item>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
             회원 탈퇴
           </v-tab>
           <v-tab-item>
             <my-account-drop-form />
           </v-tab-item>
+        </v-tabs>
+      </div>
     </v-container>
   </div>
 </template>
@@ -60,6 +77,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
