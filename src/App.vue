@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <Header/>
+    <HeaderOne/>
+    <HeaderTwo style="position: sticky; top: 0; z-index: 1;"/>
     <v-main>
       <router-view/>
     </v-main>
@@ -9,7 +10,8 @@
 </template>
 
 <script>
-import Header from '@/views/NavigationMenu/Header.vue';
+import HeaderOne from '@/views/NavigationMenu/HeaderOne.vue';
+import HeaderTwo from '@/views/NavigationMenu/HeaderTwo.vue';
 import Footer from '@/views/NavigationMenu/Footer.vue';
   
 export default {
@@ -19,7 +21,8 @@ export default {
     //
   }),
   components: {
-    Header,
+    HeaderOne,
+    HeaderTwo,
     Footer
   }
 };

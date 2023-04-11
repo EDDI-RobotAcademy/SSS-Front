@@ -1,11 +1,11 @@
 <template>
   <v-container style="width: 1400px">
-    <v-navigation-drawer height="100%" width="260px" app color="#367a2c" v-model="navigation_drawer" right>
+    <v-navigation-drawer height="80%" width="350px" app temporary color="#80a84f" right style="margin-top: 80px;" v-model="navigation_drawer">
       <v-list-item style="height: 25%">
         <v-list-item-content>
           <v-list-item-title class="mb-5" style="margin-top: 250px">
             <div align="center">
-              <router-link to="/order-manage">
+              <router-link to="/my-info">
                 <v-avatar :size="120" color="grey lighten-4">
                   <!-- <img src="@/assets/default_profile_image.png" alt="avatar"> -->
                 </v-avatar>
@@ -45,37 +45,41 @@ export default {
   name: "BuyerNav",
   data() {
     return {
-      navigation_drawer: true,
       nickname: 'sss',
       items: [
         {
-          title: "내 정보",
+          title: "회사 소개",
           icon: "mdi-account",
-          route: "/"
+          route: "/introduction-page"
         },
         {
-          title: "주문 배송",
+          title: "샐러드",
           icon: "mdi-currency-usd",
-          route: "/"
+          route: "/Product-list"
         },
         {
-          title: "나의 문의",
+          title: "사이드 메뉴",
           icon: "mdi-comment-question",
-          route: "/"
+          route: "/side-Product-list"
         },
         {
-          title: "나의 후기",
+          title: "Self Salad Sell",
           icon: "mdi-star",
-          route: "/"
+          route: "/selfsalad/ingredient-list-page"
         },
         {
-          title: "찜 했다",
-          icon: "mdi-lightbulb-on",
-          route: "/"
+          title: "이벤트 참여",
+          icon: "mdi-heart",
+          route: "/event"
         },
       ],
     }
   },
+  props: {
+    navigation_drawer: {
+      type: Boolean
+    }
+  }
 }
 </script>
 

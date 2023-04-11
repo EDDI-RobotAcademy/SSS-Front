@@ -2,15 +2,32 @@
   <v-container>
   <my-info-form @submit="onSubmit"/>
 </v-container>
+  <div>
+    <v-container style="width: 1400px">
+      <h2>마이 페이지</h2>
+      <v-divider style="margin-top: 40px"></v-divider>
+          <v-tab style="margin-bottom: 30px; font-weight: bold">
+            장바구니
+          </v-tab>
+          <v-tab-item>
+            <my-shopping-cart-form/>
+          </v-tab-item>
+    </v-container>
+  </div>
 </template>
 
 <script>
 
 import MyInfoForm from "@/components/MyPage/MyInfoForm";
+import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
 
 export default {
   name: "MyInfoPage",
   components: {MyInfoForm}
+  name: "MyPage",
+  components: { MyInfoForm, 
+                MyShoppingCartForm,
+              }
 }
 </script>
 
