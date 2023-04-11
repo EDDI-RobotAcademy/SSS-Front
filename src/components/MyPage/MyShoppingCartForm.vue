@@ -1,20 +1,16 @@
 <template>
-  <div>
-    <v-container style="width: 1000px">
-      <div style="margin-top: 30px;">
-        <h2>장바구니</h2>
-      </div>
-      <v-divider style="margin-top: 30px; margin-bottom: 30px;"></v-divider>
-
-      <!-- 장바구니 상품 표시 카드 -->
-      <v-container style="width: 900px"
+  <!-- 장바구니 상품 표시 카드 -->
+  <v-card>
+      <h2 style="margin-left: 50px">장바구니</h2>
+      <v-divider style="margin-top: 30px"></v-divider>
+      <v-container style="width: 1000px"
         v-if="!shoppingBucketProductItemList || (Array.isArray(shoppingBucketProductItemList) && shoppingBucketProductItemList.length === 0)">
-        <div align="center">
+        <div style="margin-top: 50px" align="center">
           <h2>장바구니에 상품이 없습니다.</h2>
         </div>
       </v-container>
 
-      <v-container style="width: 900px" v-else>
+      <!-- <v-container style="width: 1000px" v-else>
         <v-card style="border: 1px solid black; margin-top: 10px;" v-for="(item, index) in shoppingBucketProductItemList"
           :key="index">
           <v-layout style="background-color: #2F4F4F">
@@ -98,12 +94,12 @@
             </v-layout>
           </v-card>
         </v-card>
-      </v-container>
+      </v-container> -->
 
-      <!-- 장바구니 상품 총 가격 표시 바 -->
-      <v-container style="width: 900px">
+      <!-- 장바구니 상품 총 가격-->
+      <v-container style="width: 1000px">
         <v-checkbox type="checkbox" v-model="allSelected" label="전체선택">
-
+          
         </v-checkbox>
         <v-card style="height: 100px; border: 3px solid black" flat>
           <v-container style="width: 600px">
@@ -135,13 +131,12 @@
                 <span style="font-size: 30px; font-weight: bold">
                   {{ this.totalPaymentAmount | comma }}
                 </span>
-                <span>
-                  원
-                </span>
+                <span>원</span>
               </div>
             </v-layout>
           </v-container>
         </v-card>
+        
         <!--구매하기 버튼-->
         <v-container style="width: 800px">
           <v-btn width="100%" height="40px" elevation="0" style="background-color: #80a84f; color: white">
@@ -149,16 +144,14 @@
           </v-btn>
         </v-container>
       </v-container>
-    </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
 
-import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "ShoppingCartForm",
+  name: "MyShoppingCartForm",
   data() {
     return {
       showMinusButtonValue: false,
