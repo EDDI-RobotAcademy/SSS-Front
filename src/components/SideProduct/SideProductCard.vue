@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <v-card v-if="showPreview" class="v-card">
+  <v-card v-if="showPreview && !deletionSuccess" class="v-card">
     <v-card-text>
       <v-img :src="previewImage" aspect-ratio="1">
         <template v-slot:placeholder>
@@ -28,12 +28,16 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
+
+const sideProductModule = 'sideProductModule'
+
 export default {
   name: "SideProductCard",
   data() {
     return {
       showPreview: false,
+      deletionSuccess: false,
       previewImage: "",
     }
   },
@@ -50,14 +54,18 @@ export default {
   },
 },
 methods:{
-      ...mapActions([
-        'requestDeleteSideProductToSpring'
+      ...mapActions(sideProductModule, [
+        'requestDeleteSideProductToSpring',
       ]),
       async onDelete() {
-        await this.requestDeleteSideProductToSpring(this.sideProductId)
+        await this.requestDeleteSideProductToSpring(this.sideProduct.sideProductId)
         await this.$router.push({name : 'SideProductListPage'}).catch(()=>{});
+        //삭제 성공시 모달창 닫음
+        this.deletionSuccess = true
+        //리스트로 돌아 갔을 때 화면 새로고침
+        window.location.reload(true);
       }
-    },
+    }
 }
 </script>
 
