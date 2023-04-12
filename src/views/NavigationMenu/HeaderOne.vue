@@ -33,14 +33,14 @@
 
 <script>
 import { mapState } from 'vuex';
-
+import { SIGN_IN_VALUE } from '@/store/Member/mutation-types';
 const memberModule = 'memberModule'
 
 export default {
   name: "HeaderOne",
   methods: {
     logoutBtn() {
-      this.$store.commit("SIGN_IN_VALUE", false)
+      this.$store.commit(`memberModule/${SIGN_IN_VALUE}`, false)
       localStorage.removeItem("vuex")
       localStorage.removeItem("userToken")
       alert("로그아웃 되었습니다.")
