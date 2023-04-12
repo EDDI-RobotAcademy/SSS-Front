@@ -19,14 +19,12 @@
               'requestCreateBoardToSpring'
           ]),
           async onSubmit (payload) {
-              const board = await this.requestCreateBoardToSpring(payload)
-              console.log('board: ' + JSON.stringify(board.data))
+              await this.requestCreateBoardToSpring(payload)
               await this.$router.push({
-                  name: 'QnaBoardReadPage',
-                  params: { boardId: board.data.boardId.toString() }
+                  name: 'QnaBoardListPage',
               })
           }
-      }
+      },
   }
   
   </script>
