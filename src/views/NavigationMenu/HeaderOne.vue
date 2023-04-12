@@ -33,18 +33,23 @@
 
 <script>
 import { mapState } from 'vuex';
-
+import { SIGN_IN_VALUE } from '@/store/Member/mutation-types';
 const memberModule = 'memberModule'
 
 export default {
   name: "HeaderOne",
   methods: {
     logoutBtn() {
-      this.$store.commit("SIGN_IN_VALUE", false)
+      this.$store.commit(`memberModule/${SIGN_IN_VALUE}`, false)
       localStorage.removeItem("vuex")
       localStorage.removeItem("userToken")
       alert("로그아웃 되었습니다.")
       this.$router.push({ name: "home" })
+        .catch(err => {  // 같은 경로로 다시 보내질 때 발생하는 에러 처리
+          if(err.name !== 'NavigationDuplicated') {
+            throw err
+          }
+        })
       // 현재 경로에서 새로고침 시 필요
       history.go(0)
     }
