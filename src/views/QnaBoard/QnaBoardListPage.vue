@@ -4,15 +4,15 @@
     <router-link :to="{ name: 'QnaBoardRegisterPage' }">
        게시물 작성
     </router-link>
-    <qna-board-list :boards="boards"/>
-    <!-- <div>
-      <select>
+    <div>
+      <select v-model="searchBy">
         <option value="title">제목</option>
         <option value="writer">작성자</option>
       </select>
-      <input type="text" v-model="serachQuery" placeholder="검색" @keyup.enter="searchBoard">
-      <button @click="searchBoard">검색</button>
-    </div> -->
+      <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchBoards">
+      <button @click="searchBoards">검색</button>
+    </div>
+    <qna-board-list :boards="boardList" :current-page="currentPage" />
   </v-container>
 </template>
 
@@ -26,38 +26,53 @@ const qnaModule = 'qnaModule'
 export default {
   components: { QnaBoardList },
   name: "QnaBoardListPage",
+  data () { 
+    return {
+      searchQuery: '',
+      boardList: [],
+      searchBy: 'title',
+      currentPage: 1,
+    }
+  },
   computed: {
-    ...mapState(qnaModule, [
-      'boards'
-    ]),
+    ...mapState(qnaModule, ['boards']),
   },
   mounted () {
     this.requestBoardListToSpring()
   },
+  created() {
+    //브라우저 새로고침 해도 게시물 목록 계속 보이게 수정
+    if (this.boards && this.boards.length > 0) {
+      this.searchBoards();
+    }
+  },
+  watch: {
+    boards() {
+      //브라우저 새로고침 해도 게시물 목록 계속 보이게 수정
+      // 게시물 목록이 변경될 때마다 searchBoards() 호출
+      if (this.boards && this.boards.length > 0) {
+        this.searchBoards();
+      }
+    }
+  },
   methods: {
+    searchBoards() {
+      const query = this.searchQuery.toLowerCase();
+      if (query === ''){
+        this.boardList = this.boards;
+      } else {
+        if (this.searchBy === 'title') {
+          this.boardList = this.boards.filter(board => board.title.toLowerCase().includes(query));
+        } else if (this.searchBy === 'writer') {
+          this.boardList = this.boards.filter(board=> board.writer.toLowerCase().includes(query));
+        }
+      }
+      this.currentPage = 1;
+    },
     ...mapActions(qnaModule, [
       'requestBoardListToSpring'
     ]),
-    // searchBoard() {
-    //   const query = this.serachQuery.toLowerCase();
-    //   if (query === ''){
-    //     this.boardList = this.boardList;
-    //   } else {
-    //     if (this.searchBy === 'title') {
-    //       this.boardList = this.boards.filter(board => board.title.toLowerCase().includes(query));
-    //     } else if (this.searchBy === 'writer') {
-    //       this.boardList = this.boards.filter(board=> board.writer.toLowerCase().includes(query));
-    //     }
-    //   }
-    // }
   },
-  // data () { 
-  //   return {
-  //     searchQuery: '',
-  //     boardList: [],
-  //     searchBy: 'title',
-  //   }
-  // }
 }
 
 </script>
