@@ -1,11 +1,11 @@
 <template>
   <nav>
-    <v-app-bar class="flex-grow-0" color="white" style="display: flex; justify-content: center;">
-        <div>
-            <router-link :to="{ name: 'home' }">
-              <img src="@/assets/logo/3sss-ko.jpg" width="200">
-            </router-link>
-          </div>
+    <v-app-bar color="white">
+      <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <router-link :to="{ name: 'home' }">
+          <img src="@/assets/logo/3sss-ko.jpg" width="200">
+        </router-link>
+      </div>
       <v-spacer></v-spacer>
       <div>
       <template v-if="!signInValue">
