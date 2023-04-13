@@ -7,22 +7,22 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <div>
+      <div class="menu">
       <template v-if="!signInValue">
-        <v-btn>
-          <router-link :to="{ name: 'SignUp' }">signUp</router-link>
-        </v-btn>  
-        <v-btn>
-          <router-link :to="{ name: 'SignIn' }">signIn</router-link>
-        </v-btn>  
+        <button style="margin-right: 15px;">
+          <router-link :to="{ name: 'SignIn' }">Login</router-link>
+        </button>  
+        <button>
+          <router-link :to="{ name: 'SignUp' }">Join</router-link>
+        </button>  
       </template>
       <template v-else>
-          <v-btn>
-            <router-link :to="{ name: 'MyPageView' }">MYPAGE</router-link>
-          </v-btn> 
-          <v-btn @click="logoutBtn">
+          <button style="margin-right: 15px;">
+            <router-link :to="{ name: 'MyInfoPage' }">Mypage</router-link>
+          </button> 
+          <button @click="logoutBtn" style="font-weight: 600">
             <span>logout</span>
-          </v-btn>
+          </button>
         </template>
       </div>
     </v-app-bar>
@@ -63,6 +63,17 @@ export default {
 </script>
 
 <style scoped>
+.menu a {
+  color: black;
+  font-weight: 600;
+}
+a {
+  text-decoration: none;
+}
+</style>
+
+
+
   
 
 </style>
