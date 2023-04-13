@@ -14,20 +14,13 @@
       <tbody>
       <!--      댓글 리스트-->
       <tr>
-        <div class="reply">
-          <v-row>
-            <pre style="font-family: naver2; height: fit-content">{{ reply.replyWriter }}
-            </pre>
-          </v-row>
-          <v-row>
-            <pre v-show="replyModify !== index" style="font-family: naver2; height: fit-content">
-              {{ reply.replyContent }}
-            </pre>
-          </v-row>
+        <div class="comment">
+          <p>작성자 : {{ reply.replyWriter }}</p>      
+          <p> 내용 : {{ reply.replyContent }}</p>
           <v-text-field v-model="reply.replyContent" label="댓글 수정" v-show="replyModify === index"></v-text-field>
+          <button v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
           <button v-if="reply.replyWriter && replyModify !== index" @click="startModify(index)">수정 | </button>
           <button v-if="reply.replyWriter && replyModify === index" @click="saveReply(reply)">수정 완료 | </button>
-          <button v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
         </div>
       </tr>
       </tbody>
@@ -89,29 +82,25 @@ export default {
 
 <style scoped>
 
-table.boards {
+table.reply {
   text-align: left;
   line-height: 1.5;
-  /*border: 1px solid;*/
-  width: 600px;
+  border: 1px solid rgba(189, 189, 189, 0.5);
+  border-left-color: white;
+  border-right-color: white;
+  width: 80%;
   table-layout: fixed;
 }
 
-table.boards thead {
-  background: darkseagreen;
-  font-weight: bold;
-}
-
-.boards .comment {
+.reply .comment {
   padding-left: 20px;
   padding-top: 15px;
   margin: 10px;
-
 }
 
-.boards .comment .comment-btn {
-  padding-left: 15px;
-  color: white;
-  margin-left: 370px;
+.reply .comment button {
+  float: right;
+  margin-left: 1px;
+  padding-right: 10px;
 }
 </style>
