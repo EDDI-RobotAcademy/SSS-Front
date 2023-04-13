@@ -29,7 +29,6 @@ import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
-import MyInfoPage from "@/views/MyPage/MyInfoPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -199,8 +198,9 @@ const routes = [
 //마이 페이지
 {
   path: '/my-info',
-  name: 'MyInfoPage',
-  component: MyInfoPage 
+  name: 'MyPage',
+  component: MyPage 
+},
 },
 ]
 
