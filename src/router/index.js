@@ -33,6 +33,7 @@ import MyPage from "@/views/MyPage/MyPage"
 import MyFavoritePage from "@/views/MyPage/MyFavoritePage"
 import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 import MyReviewPage from "@/views/MyPage/MyReviewPage"
+import MyAccountPage from "@/views/MyPage/MyAccountPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -222,6 +223,12 @@ const routes = [
   path: '/my-info-review',
   name: 'MyReviewPage',
   component: MyReviewPage 
+},
+//내정보 수정
+{
+  path: '/my-info-account',
+  name: 'MyInfoAccountPage',
+  component: MyAccountPage 
 },
 },
 ]
