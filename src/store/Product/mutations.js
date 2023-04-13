@@ -4,7 +4,8 @@ import {
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
     REQUEST_READ_REVIEW_TO_SPRING,
     REQUEST_REVIEW_IMAGE_TO_SPRING,
-    
+    REQUEST_FAVORITE_LIST_TO_SPRING,
+    REQUEST_FAVORITE_PRODUCTS_TO_SPRING
 } from './mutation-types'
 
 export default {
@@ -25,4 +26,11 @@ export default {
     [REQUEST_REVIEW_IMAGE_TO_SPRING] (state, passingData) {
         state.reviewImgs = passingData
     },
+
+    [REQUEST_FAVORITE_LIST_TO_SPRING] (state, passingData) {
+        state.favoriteList = passingData
+    },
+    [REQUEST_FAVORITE_PRODUCTS_TO_SPRING] (state, passingData) {
+        state.favoriteProducts = passingData
+    }
 }

@@ -17,7 +17,9 @@ async requestMemberSignInToSpring({ commit }, payload) {
                     localStorage.setItem("userToken", res.data.userToken)
                     commit(REQUEST_SIGN_IN_TOKEN_FROM_SPRING, res.data)
                     states.userToken = res.data.userToken
+                    states.memberInfoAboutSignIn = res.data
                     console.log("토큰: " + states.userToken)
+                    console.log("정보: " + JSON.stringify(states.memberInfoAboutSignIn))
                     if(localStorage.getItem("userToken") != states.userToken) {
                     commit(USER_TOKEN, res.data.userToken)
                     }

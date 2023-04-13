@@ -3,7 +3,8 @@ import {
     REQUEST_PRODUCT_LIST_TO_SPRING,
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
     REQUEST_READ_REVIEW_TO_SPRING,
-    REQUEST_REVIEW_IMAGE_TO_SPRING
+    REQUEST_REVIEW_IMAGE_TO_SPRING,
+    REQUEST_FAVORITE_LIST_TO_SPRING
 
 } from './mutation-types'
 
@@ -95,5 +96,13 @@ async requestReviewImageToSpring({commit}, reviewId) {
             .then((res) => {
                 commit(REQUEST_REVIEW_IMAGE_TO_SPRING, res.data)
             })
-    },    
+    },
+
+async requestFavoriteListToSpring({commit}, memberId)  {
+    return await axiosInst.get(`/products/favorite/myFavorite/${memberId}`)
+            .then((res) => {
+                console.log("목록" + res.data)
+                commit(REQUEST_FAVORITE_LIST_TO_SPRING, res.data)
+            })
+}   
 }
