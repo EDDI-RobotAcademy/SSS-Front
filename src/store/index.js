@@ -24,8 +24,7 @@ const store = new Vuex.Store({
   state,
   plugins: [
     createPersistedState({
-      paths: ['signInValue', 'memberInfoAboutSignIn', 'userToken']
-      //paths: ['memberModule']
+      paths: ['memberModule']
     })
   ]
 })
