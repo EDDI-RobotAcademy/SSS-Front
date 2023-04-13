@@ -6,7 +6,14 @@
               게시글 작성 하러 가기
           </router-link>
       </div>
-      <side-product-list-form :sideProducts="sideProducts"/>
+      <div>
+        <select v-model="searchBy">
+          <option value="title">제품명</option>
+        </select>
+        <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchMenus">
+        <button @click="searchMenus">검색</button>
+      </div>
+      <side-product-list-form :sideProducts="sideList" :current-page="currentPage"/>
   </v-container>
 </template>
 
@@ -19,16 +26,46 @@ const sideProductModule = 'sideProductModule'
 export default {
   components: { SideProductListForm },
   name: "SideProductListPage",
+  data () {
+    return {
+      searchQuery: '',  
+      sideList: [],
+      searchBy: 'title',
+      currentPage: 1,
+    }
+  },
   computed:{
-    ...mapState(sideProductModule,['sideProducts'])
+    ...mapState(sideProductModule,['sideProducts']),
   },
   mounted (){
     this.requestSideProductListToSpring()
   },
   methods:{
-    ...mapActions(sideProductModule, ['requestSideProductListToSpring'])
-  }
-
+    ...mapActions(sideProductModule, ['requestSideProductListToSpring']),
+    searchMenus() {
+      const query = this.searchQuery.toLowerCase();
+      if (query === ''){
+        this.sideList = this.sideProducts;
+      } else {
+        if (this.searchBy === 'title') {
+          this.sideList = this.sideProducts.filter(sideProduct => sideProduct.title.toLowerCase().includes(query));
+        } 
+      }
+      this.currentPage = 1;
+    }
+  },
+  created() {
+    if (this.sideProducts && this.sideProducts.length > 0) {
+      this.searchMenus();
+    }
+  },
+  watch: {
+    sideProducts() {
+      if (this.sideProducts && this.sideProducts.length > 0) {
+        this.searchMenus();
+      }
+    }
+  },
 }
 </script>
 
