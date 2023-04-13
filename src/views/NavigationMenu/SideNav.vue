@@ -1,14 +1,11 @@
 <template>
   <v-container style="width: 1400px">
-    <v-navigation-drawer height="80%" width="350px" app temporary color="#80a84f" right style="margin-top: 80px;" v-model="navigation_drawer">
-      <v-list-item style="height: 25%">
+    <v-navigation-drawer v-if="showNav" width="250px" app  color="#80a84f">
+      <v-list-item style="height: 10%">
         <v-list-item-content>
           <v-list-item-title class="mb-5" style="margin-top: 250px">
             <div align="center">
               <router-link to="/my-info">
-                <v-avatar :size="120" color="grey lighten-4">
-                  <!-- <img src="@/assets/default_profile_image.png" alt="avatar"> -->
-                </v-avatar>
               </router-link>
             </div>
           </v-list-item-title>
@@ -48,36 +45,53 @@ export default {
       nickname: 'sss',
       items: [
         {
-          title: "회사 소개",
-          icon: "mdi-account",
-          route: "/introduction-page"
+          title: "장바구니",
+          icon: "mdi-cart-variant",
+          route: "/my-info-cart"
         },
         {
-          title: "샐러드",
-          icon: "mdi-currency-usd",
-          route: "/Product-list"
+          title: "찜",
+          icon: "mdi-star-circle",
+          route: "/my-info-favorite"
         },
         {
-          title: "사이드 메뉴",
-          icon: "mdi-comment-question",
-          route: "/side-Product-list"
+          title: "리뷰",
+          icon: "mdi-fountain-pen-tip",
+          route: "/my-info-review"
         },
         {
-          title: "Self Salad Sell",
-          icon: "mdi-star",
-          route: "/selfsalad/ingredient-list-page"
+          title: "문의 사항",
+          icon: "mdi-human-greeting",
+          route: "/my-info-Qna"
         },
         {
-          title: "이벤트 참여",
-          icon: "mdi-heart",
-          route: "/event"
+          title: "내 정보 관리",
+          icon: "mdi-card-account-details-star-outline",
+          route: "/my-info-account"
         },
       ],
+      //특정 페이지에서만 nav사용 하기위해 기본값으로 false설정
+      showNav: false,
+      specificPages: ['/my-info', '/my-info-cart', '/my-info-favorite','/my-info-review', '/my-info-account', '/my-info-Qna']
     }
   },
   props: {
     navigation_drawer: {
       type: Boolean
+    }
+  },
+  mounted() {
+    if (this.specificPages.includes(this.$route.path)) {
+      this.showNav = true;
+    }
+  },
+  watch: {
+    '$route'(to, from) {
+      if (this.specificPages.includes(to.path)) {
+        this.showNav = true;
+      } else {
+        this.showNav = false;
+      }
     }
   }
 }
