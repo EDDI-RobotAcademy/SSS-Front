@@ -29,7 +29,12 @@ import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
-import MyInfoPage from "@/views/MyPage/MyInfoPage"
+import MyPage from "@/views/MyPage/MyPage"
+import MyFavoritePage from "@/views/MyPage/MyFavoritePage"
+import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
+import MyReviewPage from "@/views/MyPage/MyReviewPage"
+import MyAccountPage from "@/views/MyPage/MyAccountPage"
+import MyQnaPage from "@/views/MyPage/MyQnaPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -199,8 +204,38 @@ const routes = [
 //마이 페이지
 {
   path: '/my-info',
-  name: 'MyInfoPage',
-  component: MyInfoPage 
+  name: 'MyPage',
+  component: MyPage 
+},
+//찜(좋아요) 페이지
+{
+  path: '/my-info-favorite',
+  name: 'MyFavoritePage',
+  component: MyFavoritePage 
+},
+//장바구니
+{
+  path: '/my-info-cart',
+  name: 'MyShoppingCartPage',
+  component: MyShoppingCartPage 
+},
+//등록 한 리뷰
+{
+  path: '/my-info-review',
+  name: 'MyReviewPage',
+  component: MyReviewPage 
+},
+//내정보 수정
+{
+  path: '/my-info-account',
+  name: 'MyInfoAccountPage',
+  component: MyAccountPage 
+},
+//작성한 문의 내용
+{
+  path: '/my-info-Qna',
+  name: 'MyInfoQnaPage',
+  component: MyQnaPage 
 },
 ]
 
