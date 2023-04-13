@@ -29,6 +29,8 @@ import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
+import MyPage from "@/views/MyPage/MyPage"
+import MyFavoritePage from "@/views/MyPage/MyFavoritePage"
 import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 import MyReviewPage from "@/views/MyPage/MyReviewPage"
 Vue.use(VueRouter)
@@ -202,6 +204,12 @@ const routes = [
   path: '/my-info',
   name: 'MyPage',
   component: MyPage 
+},
+//찜(좋아요) 페이지
+{
+  path: '/my-info-favorite',
+  name: 'MyFavoritePage',
+  component: MyFavoritePage 
 },
 //장바구니
 {
