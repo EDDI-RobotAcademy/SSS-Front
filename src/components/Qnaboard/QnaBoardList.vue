@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="box">
       <h3>게시물 목록</h3>
       <table>
         <tr>
           <th align="center" width="100">No</th>
           <th align="center" width="640">제목</th>
-          <th align="center" width="150">작성자</th>
+          <th align="center" width="100">작성자</th>
           <th align="center" width="300">등록일자</th>
         </tr>
         <tr v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
@@ -20,10 +20,10 @@
           <td align="left">
             <router-link :to="{ name: 'QnaBoardReadPage',
                               params: { boardId: board.boardId.toString() }}">
-              {{ board.title }}
+              <p class="title">{{ board.title }}</p>
             </router-link>
           </td>
-          <td align="right">
+          <td align="center">
             {{ board.writer }}
           </td>
           <td align="center">
@@ -48,6 +48,31 @@
   
   </script>
   
-  <style>
+  <style scoped>
+  table {
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border: 2px solid black;
+    margin-bottom: 5px;
+  }
   
+  td {
+    padding: 5px;
+    border: 2px solid black;
+  }
+
+  th {
+    border: 2px solid black;
+    text-align: center;
+  }
+  .box {
+    text-align: center;
+  }
+  .title {
+    color: black;
+    text-decoration: none;
+  }
   </style>

@@ -20,7 +20,7 @@
         </td>
       </tr>
     </table>
-    <div>
+    <div class="bottom">
       <button type="submit">등록</button>
       <router-link to="{ name: 'QnaBoardListPage' }">
         취소
@@ -50,6 +50,23 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+
+td {
+  padding: 5px;
+  border: 2px solid black;
+}
+.bottom {
+  text-align: center;
+}
+
+
 
 </style>

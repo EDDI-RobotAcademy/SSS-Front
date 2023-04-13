@@ -1,18 +1,26 @@
 <template>
   <v-container>
-    <h2>가장 자주하는 질문 FAQ</h2>
-    <router-link :to="{ name: 'QnaBoardRegisterPage' }">
-       게시물 작성
-    </router-link>
-    <div>
-      <select v-model="searchBy">
-        <option value="title">제목</option>
-        <option value="writer">작성자</option>
-      </select>
-      <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchBoards">
-      <button @click="searchBoards">검색</button>
+    <div class="box">
+      <h2>가장 자주하는 질문 FAQ</h2>
     </div>
-    <qna-board-list :boards="boardList" :current-page="currentPage" />
+    <div class="center">
+    <router-link :to="{ name: 'QnaBoardRegisterPage' }">
+      <p>게시물 작성</p>
+    </router-link>
+    </div>
+    <div class="outer">
+      <div class="inner">
+        <select v-model="searchBy">
+          <option value="title">제목</option>
+          <option value="writer">작성자</option>
+        </select>
+        <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchBoards">
+        <button @click="searchBoards">검색</button>
+      </div>
+      <div class="list">
+        <qna-board-list :boards="boardList" :current-page="currentPage" />
+      </div>
+    </div>
   </v-container>
 </template>
 
@@ -77,6 +85,33 @@ export default {
 
 </script>
 
-<style>
-
+<style scoped>
+.box {
+  text-align: center;
+  padding-bottom: 50px;
+}
+.inner{
+  text-align: center;
+  padding-right: 100px;
+  width: 30%;
+  display: inline-block;
+  float: right;
+}
+.outer {
+  width:100%;
+}
+.center {
+  width: 30%;
+  text-align: center;
+  float: left;
+  padding-right: 300px;
+}
+.center p{
+  text-decoration: none;
+  font-weight: normal;
+  color:black;
+}
+.list { 
+  width: 100%;
+}
 </style>

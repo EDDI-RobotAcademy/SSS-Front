@@ -16,7 +16,7 @@
               <v-col cols="2">
                 <v-textarea
                     color="black"
-                    height="50px"
+                    height="5px"
                     v-model="replyWriter"
                     outlined>
                 </v-textarea>
@@ -29,7 +29,7 @@
                 <v-col cols="10">
                   <v-textarea
                       color="black"
-                      height="200px"
+                      height="50px"
                       v-model="replyContent"
                       outlined>
                   </v-textarea>
@@ -92,7 +92,7 @@
   }
   
   .reply-items {
-    margin-top: 40px;
+    margin-top: 10px;
     text-align: right;
     padding-right: 50px;
     width: 1000px;
