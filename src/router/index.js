@@ -30,6 +30,7 @@ import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
 import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
+import MyReviewPage from "@/views/MyPage/MyReviewPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -207,6 +208,12 @@ const routes = [
   path: '/my-info-cart',
   name: 'MyShoppingCartPage',
   component: MyShoppingCartPage 
+},
+//등록 한 리뷰
+{
+  path: '/my-info-review',
+  name: 'MyReviewPage',
+  component: MyReviewPage 
 },
 },
 ]
