@@ -14,6 +14,7 @@
           <div class="button">
             <v-col>
               <v-btn class="ml-0 ma-2">장바구니</v-btn>
+              <v-btn @click="cancelFavorite(item.product.productId)">찜 삭제</v-btn>
             </v-col>
           </div>
         </div>
@@ -48,16 +49,17 @@ export default {
   },
   methods: {
     ...mapActions(productModule, [
-      'requestFavoriteListToSpring'
+      'requestFavoriteListToSpring',
+      'requestSaveFavoriteToSpring'
     ]), 
-    // }
+    async cancelFavorite(payload) {
+      const productId = payload
+      const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
+      await this.requestSaveFavoriteToSpring({memberId, productId})
+      alert("해당 상품 찜을 취소하였습니다.")
+      this.$router.go(this.$router.currentRoute)
+    }
   },
-  props: {
-        favoriteList: {
-            type: Array,
-            required: true
-        },
-    },
   filters: {
       comma(val) {
         return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
