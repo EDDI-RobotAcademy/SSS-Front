@@ -1,6 +1,8 @@
 <template>
+  <v-container>
   <!-- 장바구니 상품 표시 카드 -->
-  <v-card>
+  <v-card flat style="width: 100%">
+    <v-card-text>
       <h2 style="margin-left: 50px">장바구니</h2>
       <v-divider style="margin-top: 30px"></v-divider>
       <v-container style="width: 1000px"
@@ -16,24 +18,18 @@
           <v-layout style="background-color: #2F4F4F">
             <v-checkbox style="margin-left: 30px;" color="#FAEBD7" dark v-model="selectList"
               @click="selectProduct(item.product.price, item.itemCount, this)" :value="item" type="checkbox" />
-
             <h4 style="margin-top: 20px; color: white">{{ item.product.nickname }}</h4>
-
           </v-layout>
-
           <v-layout>
             <v-card max-width="100" style="padding: 15px 15px 15px 15px" flat>
               <v-img height="75px" :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)">
               </v-img>
             </v-card>
-
             <v-card style="width: 100%;" flat>
               <v-layout style="margin-bottom: 30px;">
                 <h4 style="margin-top: 40px; padding: 0px 0px 0px 20px">{{ item.product.title }}</h4>
-
                 <v-spacer></v-spacer>
                 <v-layout style="margin-top: 40px" justify-end>
-
                   <div>
                     <v-btn small plain elevation="0" @click="minusProductAmount(index)" :disabled="showMinusButtonValue">
                       <h1>-</h1>
@@ -47,11 +43,9 @@
                       <h1>+</h1>
                     </v-btn>
                   </div>
-
                   <div style="margin-top: 5px; margin-left: 30px;">
                     <h5>{{ item.product.price | comma }}원</h5>
                   </div>
-
                   <div style=" padding: 0px 10px 0px 30px">
                     <v-btn rounded small elevation="0" style="background-color: #2F4F4F;
                           color: white; margin-left: 10px;" @click="deleteSelectProduct(item.itemId)">
@@ -62,7 +56,6 @@
               </v-layout>
             </v-card>
           </v-layout>
-
           <v-card flat style="border-top: 1px solid black; height: 50px">
             <v-layout>
               <div style="padding: 13px 10px 10px 20px">
@@ -74,7 +67,6 @@
               </div>
             </v-layout>
           </v-card>
-
           <v-card flat style="border-top: 1px solid black; height: 80px">
             <v-layout>
               <div style="padding: 30px 0px 0px 20px">
@@ -87,7 +79,6 @@
                   <h5 style="font-weight: normal">50,000이상 무료배송</h5>
                 </div>
               </div>
-
               <div align="end" style="padding: 33px 20px 0px 0px" v-else>
                 <h5>무료배송</h5>
               </div>
@@ -144,30 +135,17 @@
           </v-btn>
         </v-container>
       </v-container>
+    </v-card-text>
   </v-card>
+</v-container>
 </template>
+
 
 <script>
 
-
 export default {
-  name: "MyShoppingCartForm",
-  data() {
-    return {
-      showMinusButtonValue: false,
-      showPlusButtonValue: false,
-      selectList: [],
-      totalProductPrice: 0,
-      totalDeliveryFee: 0,
-      totalPaymentAmount: 0,
-      deleteCheckValue: true
-    }
-  },
-  filters: {
-    comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-  },
+  name: "MyShoppingCartPage"
+
 }
 </script>
 

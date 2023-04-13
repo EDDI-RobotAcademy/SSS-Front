@@ -29,6 +29,7 @@ import ProductRegisterPage from '@/views/Product/ProductRegisterPage.vue'
 import ProductReadPage from '@/views/Product/ProductReadPage.vue'
 import ProductModifyPage from '@/views/Product/ProductModifyPage.vue'
 
+import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -200,6 +201,12 @@ const routes = [
   path: '/my-info',
   name: 'MyPage',
   component: MyPage 
+},
+//장바구니
+{
+  path: '/my-info-cart',
+  name: 'MyShoppingCartPage',
+  component: MyShoppingCartPage 
 },
 },
 ]
