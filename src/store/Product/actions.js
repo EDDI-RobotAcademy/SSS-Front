@@ -4,8 +4,8 @@ import {
     REQUEST_PRODUCT_IMAGE_LIST_TO_SPRING,
     REQUEST_READ_REVIEW_TO_SPRING,
     REQUEST_REVIEW_IMAGE_TO_SPRING,
-    REQUEST_FAVORITE_LIST_TO_SPRING
-
+    REQUEST_FAVORITE_LIST_TO_SPRING,
+    REQUEST_FAVORITE_INFO_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -104,5 +104,12 @@ async requestFavoriteListToSpring({commit}, memberId)  {
                 console.log("목록" + res.data)
                 commit(REQUEST_FAVORITE_LIST_TO_SPRING, res.data)
             })
-}   
+},   
+async requestSaveFavoriteToSpring({commit}, payload) {
+    const {memberId, productId} = payload
+    return await axiosInst.post(`/products/favorite/changeLike`, {memberId, productId})
+            .then((res) => {
+                commit(REQUEST_FAVORITE_INFO_TO_SPRING, res.data)
+            })
+}
 }
