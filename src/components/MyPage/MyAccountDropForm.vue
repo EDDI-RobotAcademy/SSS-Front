@@ -1,11 +1,9 @@
 <template>
   <v-card flat style="width: 100%">
     <v-card-text>
-      <h2 style="margin-left: 50px">회원탈퇴</h2>
-      <v-divider style="margin-top: 30px"></v-divider>
       <v-container style="width: 1000px">
         <div style="margin-top: 50px" align="center">
-          <v-card style="width: 700px; height: auto; text-align: left">
+          <v-card style="width: 700px; height: auto; text-align: left" flat>
             <h4 style="padding: 12px 20px">회원 탈퇴 시 주의사항🚨</h4>
             <v-divider></v-divider>
             <div style="padding: 12px 25px">
