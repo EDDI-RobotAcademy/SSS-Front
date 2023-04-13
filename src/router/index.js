@@ -34,6 +34,7 @@ import MyFavoritePage from "@/views/MyPage/MyFavoritePage"
 import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 import MyReviewPage from "@/views/MyPage/MyReviewPage"
 import MyAccountPage from "@/views/MyPage/MyAccountPage"
+import MyQnaPage from "@/views/MyPage/MyQnaPage"
 Vue.use(VueRouter)
 
 const routes = [
@@ -230,6 +231,11 @@ const routes = [
   name: 'MyInfoAccountPage',
   component: MyAccountPage 
 },
+//작성한 문의 내용
+{
+  path: '/my-info-Qna',
+  name: 'MyInfoQnaPage',
+  component: MyQnaPage 
 },
 ]
 
