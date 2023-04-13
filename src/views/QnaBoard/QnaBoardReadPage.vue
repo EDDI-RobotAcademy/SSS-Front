@@ -14,7 +14,7 @@
     <table>
       <tr>
         <div>
-          <h1>댓글</h1>
+          <h5>댓글</h5>
         </div>
         <div>
           <reply-list :replys="replys"/>
