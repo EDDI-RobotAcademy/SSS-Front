@@ -1,9 +1,9 @@
 <template>
     <v-container>
-      <h2>게시물 작성</h2>
+        <h2 align="center">게시물 작성</h2>
       <qna-board-register-form @submit="onSubmit"/>
     </v-container>
-  </template>
+</template>
   
   <script>
   import QnaBoardRegisterForm from '@/components/Qnaboard/QnaBoardRegisterForm.vue'
@@ -29,5 +29,6 @@
   
   </script>
   
-  <style>
+  <style scoped>
+
   </style>
