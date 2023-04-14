@@ -1,7 +1,8 @@
 import {
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     USER_TOKEN,
-    SIGN_IN_VALUE
+    SIGN_IN_VALUE,
+    IS_AUTHENTICATED
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -14,6 +15,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
                 .then((res) => {
                 if (localStorage.getItem("userToken") == null) {
                     alert("로그인 성공!");
+                    commit(IS_AUTHENTICATED, true)
                     localStorage.setItem("userToken", res.data.userToken)
                     commit(REQUEST_SIGN_IN_TOKEN_FROM_SPRING, res.data)
                     states.userToken = res.data.userToken

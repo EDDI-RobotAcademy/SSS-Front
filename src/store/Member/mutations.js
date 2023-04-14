@@ -1,7 +1,8 @@
 import {
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     SIGN_IN_VALUE,
-    USER_TOKEN
+    USER_TOKEN,
+    IS_AUTHENTICATED
 } from './mutation-types'
 
 export default {
@@ -13,5 +14,8 @@ export default {
     },
     [USER_TOKEN] (state, passingData) {
         state.userToken = passingData
+    },
+    [IS_AUTHENTICATED] (state, passingData) {
+        state.isAuthenticated = passingData
     }
 }
