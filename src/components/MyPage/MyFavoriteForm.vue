@@ -9,8 +9,8 @@
         <div class="item-info" v-for="(item, index) in favoriteList" :key="index">
           <img :src="require(`@/assets/product/${item.product.productImgs[0].editedImg}`)"
             max-width="100%" max-height="250" contain/>
-          <p class="content">{{ item.product.title }}</p>
-          <p class="price">{{ item.product.price | comma }} 원</p>
+          <p class="content" @click="productView(item)">{{ item.product.title }}</p>
+          <p class="price" @click="productView(item)">{{ item.product.price | comma }} 원</p>
           <div class="button">
             <v-col>
               <v-btn class="ml-0 ma-2">장바구니</v-btn>
@@ -58,6 +58,9 @@ export default {
       await this.requestSaveFavoriteToSpring({memberId, productId})
       alert("해당 상품 찜을 취소하였습니다.")
       this.$router.go(this.$router.currentRoute)
+    },
+    productView(item) {
+      this.$router.push({name: 'ProductReadPage', params: {productId: String(item.product.productId)}})
     }
   },
   filters: {
