@@ -6,4 +6,7 @@ export default {
     reviews: [],
     review: {},
     reviewImgs: [],
+
+    favoriteInfo: false,
+    favoriteList: [],
 }

@@ -2,7 +2,7 @@
     <v-container>
       <div align="center">
         <!-- <h2>상품 상세정보</h2> -->
-        <product-read-form v-if="product" :product="product" :productImgs="productImgs"/>
+        <product-read-form @saveFavorite="saveFavorite" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
         <p v-else>로딩중 .......... </p>
         <v-btn><router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
@@ -21,7 +21,7 @@
   import { mapActions, mapState } from 'vuex'
 
   const productModule = 'productModule'
-  
+
   export default {
     components: { ProductReadForm },
       name: "ProductReadPage",
@@ -33,7 +33,7 @@
       },
       computed: {
           ...mapState(productModule, [
-            'product', 'productImgs'
+            'product', 'productImgs', 'favoriteInfo'
           ])
       },
       methods: {
@@ -41,10 +41,16 @@
               'requestProductToSpring',
               'requestDeleteProductToSpring',
               'requestProductImageToSpring',
+              'requestSaveFavoriteToSpring'
           ]),
           async onDelete () {
               await this.requestDeleteProductToSpring(this.productId)
               await this.$router.push({ name: 'ProductListPage' })
+          },
+          async saveFavorite(payload) {
+            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
+            const productId = payload.productId
+            await this.requestSaveFavoriteToSpring({memberId, productId})
           }
       },
       async created () {

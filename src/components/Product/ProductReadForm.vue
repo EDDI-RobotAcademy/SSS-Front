@@ -12,22 +12,6 @@
             </v-row>
           </template>
         </v-img>
-        <!-- <v-row> 메인 사진 하단에 선택해서 넘길 수 있는 작은 이미지
-          <template>
-            <v-tabs width="400" height="100"
-                        show-arrows background-color="transparent"
-                        v-model="tab2">
-              <v-tab @click="selectedImg(index)"
-                      v-for="(item, index) in product.productImgs" :key="index">
-              
-                      <v-card width="80px" height="80px">
-                        <v-img :src="require(`@/assets/product/${item.editedImg}`)" aspect-ratio="1" class="grey lighten-2">
-                        </v-img>
-                      </v-card>
-              </v-tab>
-            </v-tabs>
-          </template>
-        </v-row> -->
       </v-col>
       
       <v-col cols="6">           
@@ -67,10 +51,10 @@
         <v-row>
           <v-col align="center">
             <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
-                <v-btn v-if="isTrue == false" x-large icon @click="clickToggle">
+                <v-btn v-if="!this.favoriteInfo" x-large icon @click="clickFavorite">
                   <v-icon>mdi-heart-outline</v-icon>
                 </v-btn>
-                <v-btn v-else x-large icon color="red" @click="clickToggle">
+                <v-btn v-else x-large icon color="red" @click="clickFavorite">
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
               </v-col>
@@ -175,8 +159,6 @@ export default {
   components: {ReviewForm},
   data() {
     return {
-      // 좋아요 토글 기능
-      isTrue: false,
       tab2: null,
       tab: null,
       idx: 0,
@@ -200,16 +182,16 @@ export default {
       type: Object,
       required: true,
     },
+    favoriteInfo: {
+      type: Boolean,
+      required: true,
+    }
   },
   methods: {
     // selectedImg(e) {
     //   // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
     //   this.idx = e;
     // },
-    // 좋아요 토글 기능
-    clickToggle() {
-      this.isTrue = !this.isTrue
-    },
     qtyDesc() {
       if(this.quantity > 1) {
         this.quantity--
@@ -226,8 +208,14 @@ export default {
     btnDirectPurchase() {
       // 바로구매 클릭 이벤트
     },
-    btnFavorite() {
+    clickFavorite() {
       // 찜(좋아요) 클릭 이벤트
+      if(this.$store.state.memberModule.isAuthenticated) {
+        const productId = this.product.productId
+        this.$emit('saveFavorite', {productId})
+      } else {
+        alert("로그인한 사용자만 가능합니다.")
+      }
     },
   },
   beforeUpdate() {
