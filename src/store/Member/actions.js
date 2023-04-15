@@ -39,7 +39,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
                 } 
                 })
     },
-    async reqUpdateMemberInfoFromSpring({ commit }, payload) {
+    async requestUpdateMemberInfoFromSpring({ commit }, payload) {
       console.log(payload);
         const userId = parseInt(localStorage.getItem("userId"), 10);
 
@@ -65,4 +65,22 @@ async requestMemberSignInToSpring({ commit }, payload) {
             });
             
         },
+
+
+        async requestCheckPasswordToSpring({}, payload) {
+          const {memberId, password} = payload
+          console.log(payload);
+          return await axiosInst.post(`/member/check-password`, {memberId, password} )
+              .then((res) => {
+                  if(res.data == false) {
+                      alert("비밀번호가 틀림");
+                  }
+                  return res.data;
+              })
+              .catch((res) => {
+                  alert("문제 발생!");
+                  return res.data;
+              })
+      },
+
   };

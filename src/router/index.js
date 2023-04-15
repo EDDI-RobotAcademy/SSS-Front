@@ -17,7 +17,6 @@ import SideProductModifyPage from "@/views/SideProduct/SideProductModifyPage.vue
 
 import SignUpPage from "@/views/Member/SignUpPage.vue";
 import SignInPage from '@/views/Member/SignInPage.vue';
-import MemberInfoModify from "@/views/Member/MemberInfoModify.vue"
 
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
@@ -35,6 +34,10 @@ import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 import MyReviewPage from "@/views/MyPage/MyReviewPage"
 import MyAccountPage from "@/views/MyPage/MyAccountPage"
 import MyQnaPage from "@/views/MyPage/MyQnaPage"
+import MyMemberInfoModifyPage from "@/views/MyPage/MyMemberInfoModifyPage.vue"
+import MyInfoPasswordCheckPage from "@/views/MyPage/MyInfoPasswordCheckPage.vue"
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -54,13 +57,8 @@ const routes = [
     component: SignUpPage
   },
 
-  {
-    path: '/member/member-Info-modify',
-    name: 'MemberInfoModify',
-    component: MemberInfoModify
-  },
-
-
+  
+  
   {
     path: '/qna-board-list-page',
     name: 'QnaBoardListPage',
@@ -93,26 +91,26 @@ const routes = [
   },
   //사이드메뉴
   {
-  path: '/side-Product-read/:sideProductId',
-  name: 'SideProductReadPage',
-  components: {
-    default: SideProductReadPage
-  },
-  props: {
-    default: true
+    path: '/side-Product-read/:sideProductId',
+    name: 'SideProductReadPage',
+    components: {
+      default: SideProductReadPage
+    },
+    props: {
+      default: true
   }
-  },
-  {
+},
+{
   path: '/side-Product-register',
   name: 'SideProductRegisterPage',
   component: SideProductRegisterPage
-  },
-  {
+},
+{
   path: '/side-Product-list',
   name: 'SideProductListPage',
   component: SideProductListPage
-  },
-  {
+},
+{
   path: '/side-Product-modify/:sideProductId',
   name: 'SideProductModifyPage',
   components: {
@@ -237,6 +235,17 @@ const routes = [
   name: 'MyInfoQnaPage',
   component: MyQnaPage 
 },
+{
+  path: '/my-member-Info-modify-page',
+  name: 'MyMemberInfoModifyPage',
+  component: MyMemberInfoModifyPage
+},
+{
+  path: '/my-info-password-check-page',
+  name: 'MyInfoPasswordCheckPage',
+  component: MyInfoPasswordCheckPage
+},
+
 ]
 
 const router = new VueRouter({
