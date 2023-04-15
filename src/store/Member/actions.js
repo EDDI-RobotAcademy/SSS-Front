@@ -14,7 +14,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
         await axiosInst.post('/member/sign-in', { email, password })
                 .then((res) => {
                 if (localStorage.getItem("userToken") == null) {
-                    alert("로그인 성공!");
+                    alert("로그인 되었습니다.");
                     commit(IS_AUTHENTICATED, true)
                     localStorage.setItem("userToken", res.data.userToken)
                     commit(REQUEST_SIGN_IN_TOKEN_FROM_SPRING, res.data)
@@ -29,6 +29,9 @@ async requestMemberSignInToSpring({ commit }, payload) {
                 } else {
                     alert("이미 로그인된 상태입니다.");
                 } 
+                })
+                .catch(() => {
+                    alert("아이디 또는 비밀번호를 다시 확인해주세요.")
                 })
     },
 }
