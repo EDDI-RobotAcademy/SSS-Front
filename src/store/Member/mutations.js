@@ -1,6 +1,7 @@
 import {
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     SIGN_IN_VALUE,
+    MEMBER_INFO_MODIFY
     USER_TOKEN,
     IS_AUTHENTICATED
 } from './mutation-types'
@@ -18,4 +19,8 @@ export default {
     [IS_AUTHENTICATED] (state, passingData) {
         state.isAuthenticated = passingData
     }
+    },
+    [MEMBER_INFO_MODIFY] (state, memberInfoModify) {
+        state.memberInfoModify = memberInfoModify
+    },
 }

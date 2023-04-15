@@ -3,4 +3,5 @@ export default {
     signInValue: false,
     userToken: "",
     isAuthenticated: false,
+    memberInfoModify: {},
 }

@@ -17,7 +17,7 @@ import SideProductModifyPage from "@/views/SideProduct/SideProductModifyPage.vue
 
 import SignUpPage from "@/views/Member/SignUpPage.vue";
 import SignInPage from '@/views/Member/SignInPage.vue';
-import MemberModify from "@/views/Member/MemberModify.vue"
+import MemberInfoModify from "@/views/Member/MemberInfoModify.vue"
 
 import IngredientListPage from "@/views/SelfSalad/IngredientListPage.vue"
 import IngredientRegisterPage from "@/views/SelfSalad/IngredientRegisterPage.vue"
@@ -55,9 +55,9 @@ const routes = [
   },
 
   {
-    path: '/member/member-modify',
-    name: 'MemberModify',
-    component: MemberModify
+    path: '/member/member-Info-modify',
+    name: 'MemberInfoModify',
+    component: MemberInfoModify
   },
 
 
