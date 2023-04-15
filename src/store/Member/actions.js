@@ -2,8 +2,8 @@ import {
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     USER_TOKEN,
     SIGN_IN_VALUE,
-    IS_AUTHENTICATED
-    MEMBER_INFO_MODIFY
+    IS_AUTHENTICATED,
+    MEMBER_INFO_MODIFY,
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
