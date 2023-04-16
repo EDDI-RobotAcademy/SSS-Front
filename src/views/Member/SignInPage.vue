@@ -27,9 +27,9 @@ export default {
       onSubmit (payload) {
         const { email, password } = payload
         this.requestMemberSignInToSpring({ email, password })
-        this.$router.push("/");
+        this.$router.go(-1)
     }
-  }
+  },
 }
 </script>
 

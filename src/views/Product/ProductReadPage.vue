@@ -41,7 +41,8 @@
               'requestProductToSpring',
               'requestDeleteProductToSpring',
               'requestProductImageToSpring',
-              'requestSaveFavoriteToSpring'
+              'requestSaveFavoriteToSpring',
+              'viewCntUp'
           ]),
           async onDelete () {
               await this.requestDeleteProductToSpring(this.productId)
@@ -57,9 +58,10 @@
           console.log(this.productId)
           await this.requestProductToSpring(this.productId)
           await this.requestProductImageToSpring(this.productId)
-      }
-  }
-  
+          await this.viewCntUp(this.productId);
+      },
+    }
+   
   </script>
   
   <style scoped>
