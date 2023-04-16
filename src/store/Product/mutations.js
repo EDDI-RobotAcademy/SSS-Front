@@ -5,8 +5,8 @@ import {
     REQUEST_READ_REVIEW_TO_SPRING,
     REQUEST_REVIEW_IMAGE_TO_SPRING,
     REQUEST_FAVORITE_LIST_TO_SPRING,
-    REQUEST_FAVORITE_PRODUCTS_TO_SPRING,
-    REQUEST_FAVORITE_INFO_TO_SPRING
+    REQUEST_FAVORITE_INFO_TO_SPRING,
+    INCREMENT_VIEW_CNT
 } from './mutation-types'
 
 export default {
@@ -31,10 +31,14 @@ export default {
     [REQUEST_FAVORITE_LIST_TO_SPRING] (state, passingData) {
         state.favoriteList = passingData
     },
-    [REQUEST_FAVORITE_PRODUCTS_TO_SPRING] (state, passingData) {
-        state.favoriteProducts = passingData
-    },
     [REQUEST_FAVORITE_INFO_TO_SPRING] (state, passingData) {
         state.favoriteInfo = passingData
+    },
+
+    [INCREMENT_VIEW_CNT] (state, passingData) {
+        const product = state.product
+        if(product.productId === passingData) {
+            product.viewCnt++
+        }
     }
 }
