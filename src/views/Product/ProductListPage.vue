@@ -1,19 +1,31 @@
 <template>
     <v-container>
-      <v-row>
         <h1>Salad</h1>
         <router-link :to="{ name: 'ProductRegisterPage' }">
             상품 등록
         </router-link>
-        <div>
-          <select v-model="searchBy">
-            <option value="title">제품명</option>
-          </select>
-          <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchProducts">
-          <button @click="searchProducts">검색</button>
-        </div>
-        <product-list-form :products="dpitems" :current-page="currentPage" />
-      </v-row>  
+
+          <v-col cols="12">
+            <div class="search-bar">
+              <select v-model="searchBy">
+                <option value="title">제품명</option>
+              </select>
+              <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchProducts">
+              <button @click="searchProducts">검색</button>
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <div class="sort-bar">
+              <div class="total">
+                총 {{ dpitems.length }}개
+              </div>
+              <sort-product class="sort"/>
+            </div>
+          </v-col>
+
+
+          <product-list-form :products="dpitems" :current-page="currentPage" /> 
+
     </v-container>
   </template>
   
@@ -21,13 +33,14 @@
 
   import ProductListForm from '@/components/Product/ProductListForm.vue'
   import ProductCard from '@/components/Product/ProductCard.vue'
+  import SortProduct from '@/components/Product/SortProduct.vue'
   import { mapActions, mapState } from 'vuex'
 
   const productModule = 'productModule'
   
   export default {
-    components: { ProductListForm, ProductCard },
     name: "ProductListPage",
+    components: { ProductListForm, ProductCard, SortProduct },
     data () { 
       return {
         searchQuery: '',
@@ -75,4 +88,30 @@
   }
   </script>
   
-  <style></style>
+  <style scoped>
+.search-bar, .sort-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.search-bar select,
+.search-bar input[type="text"],
+.search-bar button,
+.sort-bar .sort {
+  width: auto;
+  margin-right: 10px;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.sort-bar .total {
+  margin-right: auto;
+  margin-left: 20px;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+}
+  </style>
