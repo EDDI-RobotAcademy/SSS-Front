@@ -2,7 +2,7 @@
     <v-container>
       <div align="center">
         <!-- <h2>상품 상세정보</h2> -->
-        <product-read-form @saveFavorite="saveFavorite" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
+        <product-read-form @saveFavorite="saveFavorite" @addCart="addCart" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
         <p v-else>로딩중 .......... </p>
         <v-btn><router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
@@ -21,6 +21,7 @@
   import { mapActions, mapState } from 'vuex'
 
   const productModule = 'productModule'
+  const ordercartModule = 'ordercartModule'
 
   export default {
     components: { ProductReadForm },
@@ -37,28 +38,43 @@
           ])
       },
       methods: {
-          ...mapActions(productModule, [
-              'requestProductToSpring',
-              'requestDeleteProductToSpring',
-              'requestProductImageToSpring',
-              'requestSaveFavoriteToSpring'
-          ]),
+        ...mapActions(productModule, [        
+          'requestProductToSpring',        
+          'requestDeleteProductToSpring',        
+          'requestProductImageToSpring',        
+          'requestSaveFavoriteToSpring'    
+      ]),
+        ...mapActions(ordercartModule, [        
+          'requestAddCartToSpring'    
+    ]),
           async onDelete () {
-              await this.requestDeleteProductToSpring(this.productId)
-              await this.$router.push({ name: 'ProductListPage' })
+            await this.requestDeleteProductToSpring(this.productId)
+            await this.$router.push({ name: 'ProductListPage' })
           },
           async saveFavorite(payload) {
             const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
             const productId = payload.productId
             await this.requestSaveFavoriteToSpring({memberId, productId})
-          }
-      },
-      async created () {
+          },
+          // 장바구니에 상품 추가
+          async addCart(payload) {
+            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
+            const itemId = payload.productId
+            const quantity = payload.quantity
+            const category = 'PRODUCT'
+            console.log('memberId: '+ memberId )
+            console.log('productId: '+ itemId )
+            console.log('quantity: '+ quantity )
+            console.log('category: '+ category )
+            await this.requestAddCartToSpring({memberId, itemId, category, quantity})
+          },
+        },
+        async created () {
           console.log(this.productId)
           await this.requestProductToSpring(this.productId)
           await this.requestProductImageToSpring(this.productId)
+        }
       }
-  }
   
   </script>
   

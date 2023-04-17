@@ -60,7 +60,7 @@
               </v-col>
           <v-col>
             <v-btn
-                @click="btnCart"
+              @click="clickAddCart"
                 width="240px"
                 x-large><v-icon>mdi-cart-variant</v-icon><span>장바구니</span></v-btn>
           </v-col>
@@ -202,21 +202,23 @@ export default {
     qtyInc() {
       this.quantity++
     },
-    btnCart() {
+    clickAddCart() {
       // 장바구니 클릭 이벤트
+        const productId = this.product.productId
+        const quantity = this.quantity
+
+        this.$emit('addCart', {productId, quantity})
     },
     btnDirectPurchase() {
       // 바로구매 클릭 이벤트
     },
     clickFavorite() {
       // 찜(좋아요) 클릭 이벤트
-      if(this.$store.state.memberModule.isAuthenticated) {
+
         const productId = this.product.productId
         this.$emit('saveFavorite', {productId})
-      } else {
-        alert("로그인한 사용자만 가능합니다.")
-      }
-    },
+      } 
+
   },
   beforeUpdate() {
     this.totalPrice = this.product.price * this.quantity
