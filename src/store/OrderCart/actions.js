@@ -29,6 +29,25 @@ async requestAddCartListToSpring({ commit }, memberId) {
         commit(REQUEST_ADD_CART_LIST_TO_SPRING, res.data);
         console.log('리스트 연결');
     })
+},
+//삭제
+async requestDeleteCartToSpring ({}, payload) {
+    const { itemId, category } = payload
+
+    const confirmDelete = window.confirm("상품을 삭제하시겠습니까?");
+
+    if (confirmDelete) {
+        return await axiosInst.delete("/cart/delete", {
+            data: { itemId, itemCategoryType: category }
+        })
+            .then(() => {
+                alert("장바구니에서 삭제되었습니다.")
+            })
+            .catch(() => {
+                alert("문제 발생!")
+            })
+    }
+},
 //수정
 async requestModifyCartToSpring ({}, payload) {
     const { itemId, quantity, category } = payload

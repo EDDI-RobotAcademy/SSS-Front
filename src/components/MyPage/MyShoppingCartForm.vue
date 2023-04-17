@@ -167,12 +167,27 @@ export default {
       this.allSelected = !this.allSelected;
       this.cartItems.forEach(item => (item.selected = this.allSelected));
     },
+    removeItem(idx) {
+      const itemId = this.cartItems[0].cartItemId
+      const category = this.cartItems[0].category
+      this.$emit('onDelete', { itemId, category })
+    },
     toggleAll(value) {
       this.checkedValues = value ? this.cartItems.map(cartItem => cartItem.cartItemId) : [];
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+  },
+  computed: {
+    totalPrice() {
+      let sum = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        if (this.checkedValues.includes(this.cartItems[i].cartItemId)) {
+        sum += this.cartItems[i].totalPrice;
+        }
+      }
+      return sum;
   },
     allChecked: {
       get() {
