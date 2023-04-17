@@ -4,6 +4,7 @@ import {
     MEMBER_INFO_MODIFY,
     USER_TOKEN,
     IS_AUTHENTICATED,
+    LOG_OUT,
 } from './mutation-types'
 
 export default {
@@ -22,4 +23,13 @@ export default {
     [MEMBER_INFO_MODIFY] (state, memberInfoModify) {
         state.memberInfoModify = memberInfoModify
     },
+    [LOG_OUT] (state) {
+        state.signInValue = false;
+        state.userToken = null;
+        state.isAuthenticated = false;
+        state.memberInfoAboutSignIn = {};
+        state.memberInfoModify = {};
+    },
+
+
 }
