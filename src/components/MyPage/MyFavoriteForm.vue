@@ -34,6 +34,10 @@ const memberModule = 'memberMoudle'
 export default {
   name: "MyFavoriteForm",
   mounted() {
+    // const memberId = this.userInfoAboutSignIn.userId
+    // this.requestFavoriteListToSpring(memberId)
+    // const token = window.localStorage.getItem("userToken");
+    // this.requestFavoriteListToSpring(token);
     if (this.$store.state.memberModule.memberInfoAboutSignIn && this.$store.state.memberModule.memberInfoAboutSignIn.userId) {
     const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
     this.requestFavoriteListToSpring(memberId);
@@ -56,6 +60,7 @@ export default {
       const productId = payload
       const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
       await this.requestSaveFavoriteToSpring({memberId, productId})
+      localStorage.removeItem(`${memberId}_${productId}_like`)
       alert("해당 상품 찜을 취소하였습니다.")
       this.$router.go(this.$router.currentRoute)
     },
