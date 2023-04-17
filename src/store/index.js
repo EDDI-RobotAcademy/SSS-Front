@@ -8,6 +8,7 @@ import productModule from "@/store/Product/ProductModule.js"
 import selfSaladModule from "@/store/SelfSalad/SelfSaladModule.js"
 import qnaModule from "@/store/Qnaboard/QnaModule.js"
 import memberModule from "@/store/Member/MemberModule.js"
+import ordercartModule from "@/store/OrderCart/OrderCartModule.js"
 
 import createPersistedState from "vuex-persistedstate"
 
@@ -20,6 +21,7 @@ const store = new Vuex.Store({
     selfSaladModule: selfSaladModule,
     qnaModule: qnaModule,
     memberModule: memberModule,
+    ordercartModule: ordercartModule
   },
   state,
   plugins: [

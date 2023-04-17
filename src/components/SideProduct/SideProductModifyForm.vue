@@ -37,9 +37,9 @@
           </table>
         </v-col>
         <v-col cols="6">
-          <v-img :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)" />
+          <v-img :src="require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`)" />
 
-          <v-img v-if="fileSelected" :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)" />
+          <v-img v-if="fileSelected" :src="require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`)" />
           <v-img v-else :src="imgUrl" :alt="'Image'"></v-img>
         </v-col>
         <div>
