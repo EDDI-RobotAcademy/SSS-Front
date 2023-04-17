@@ -2,7 +2,7 @@
   <v-container>
       <div align="center">
           <p><mark>게시글 목록이 보여지는 페이지 입니다.</mark></p>
-          <router-link :to="{ name: 'SideProductRegisterPage' }">
+          <router-link :to="{ name: 'SideProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
               게시글 작성 하러 가기
           </router-link>
       </div>
@@ -22,6 +22,7 @@ import SideProductListForm from '@/components/SideProduct/SideProductListForm.vu
 import { mapActions, mapState } from 'vuex'
 
 const sideProductModule = 'sideProductModule'
+const memberModule = 'memberModule'
 
 export default {
   components: { SideProductListForm },
@@ -35,6 +36,10 @@ export default {
     }
   },
   computed:{
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
+
     ...mapState(sideProductModule,['sideProducts']),
   },
   mounted (){
