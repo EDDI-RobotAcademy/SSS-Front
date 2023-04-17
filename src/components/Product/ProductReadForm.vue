@@ -51,7 +51,7 @@
         <v-row>
           <v-col align="center">
             <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
-                <v-btn v-if="!this.favoriteInfo" x-large icon @click="clickFavorite">
+                <v-btn v-if="!this.favoriteInfo.isLike" x-large icon @click="clickFavorite">
                   <v-icon>mdi-heart-outline</v-icon>
                 </v-btn>
                 <v-btn v-else x-large icon color="red" @click="clickFavorite">
@@ -153,6 +153,8 @@
 
 <script>
 import ReviewForm from "@/components/Product/review/ReviewForm.vue"
+import { mapActions } from 'vuex'
+const productModule = 'productModule'
 
 export default {
   name: "ProductReadForm",
@@ -183,15 +185,11 @@ export default {
       required: true,
     },
     favoriteInfo: {
-      type: Boolean,
+      type: Object,
       required: true,
     }
   },
   methods: {
-    // selectedImg(e) {
-    //   // 메인 이미지 하단 이미지 클릭하면 메인 사진으로 뜨게하기
-    //   this.idx = e;
-    // },
     qtyDesc() {
       if(this.quantity > 1) {
         this.quantity--
@@ -214,27 +212,27 @@ export default {
     },
     clickFavorite() {
       // 찜(좋아요) 클릭 이벤트
-
+      if(this.$store.state.memberModule.isAuthenticated) {
         const productId = this.product.productId
-        this.$emit('saveFavorite', {productId})
-      } 
-
-  },
+        const isLike = !this.favoriteInfo.isLike
+        this.favoriteInfo.isLike = isLike
+        
+        const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
+        localStorage.setItem(`${memberId}_${productId}_like`, JSON.stringify({ memberId, productId, isLike }));
+    
+        this.$emit('saveFavorite', {productId, isLike})
+      } else {
+        alert("로그인한 사용자만 가능합니다.")
+      }
+    },
   beforeUpdate() {
     this.totalPrice = this.product.price * this.quantity
   },
-};
+},
+}
 </script>
 
 <style scoped>
-.table {
-  margin-top: 10px;
-  width: 100%;
-}
-.v-tab {
-  padding: 0;
-  position: relative;
-}
 .ingredient th {
   font-size: 1.4em;
 }

@@ -6,7 +6,8 @@ import {
     REQUEST_REVIEW_IMAGE_TO_SPRING,
     REQUEST_FAVORITE_LIST_TO_SPRING,
     REQUEST_FAVORITE_INFO_TO_SPRING,
-    INCREMENT_VIEW_CNT
+    SET_FAVORITE_INFO,
+    INCREMENT_VIEW_CNT,
 } from './mutation-types'
 
 export default {
@@ -33,6 +34,9 @@ export default {
     },
     [REQUEST_FAVORITE_INFO_TO_SPRING] (state, passingData) {
         state.favoriteInfo = passingData
+    },
+    [SET_FAVORITE_INFO] (state, payload) {
+        state.favoriteInfo.isLike = payload;
     },
 
     [INCREMENT_VIEW_CNT] (state, passingData) {
