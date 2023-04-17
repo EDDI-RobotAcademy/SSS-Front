@@ -145,6 +145,23 @@ export default {
     return {
       checkedValues: [],
     }
+  },
+  methods: {
+    incQuantity(idx) {
+      this.cartItems[idx].quantity++
+      const itemId = this.cartItems[idx].cartItemId
+      const quantity = 1
+      const category = this.cartItems[idx].category
+      this.$emit('onModify', { itemId, category, quantity })
+    },
+    descQuantity(idx) {
+      if (this.cartItems[idx].quantity > 1) {
+        this.cartItems[idx].quantity--
+        const itemId = this.cartItems[idx].cartItemId
+        const quantity = -1
+        const category = this.cartItems[idx].category
+        this.$emit('onModify', { itemId, category, quantity })
+      }
     },
     selectAll() {
       this.allSelected = !this.allSelected;

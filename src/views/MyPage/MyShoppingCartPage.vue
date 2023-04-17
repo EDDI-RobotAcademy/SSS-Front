@@ -25,7 +25,17 @@ export default {
   methods:{
     ...mapActions(ordercartModule, [
       'requestAddCartListToSpring',
+      'requestModifyCartToSpring'
     ]),
+    async onModify(payload) {
+      const itemId = payload.itemId
+      const quantity = payload.quantity
+      const category = payload.category
+      console.log('itemId: '+ itemId )
+      console.log('quantity: '+ quantity )
+      console.log('category: '+ category )
+      await this.requestModifyCartToSpring({ itemId, quantity, category })
+      window.location.reload(true);
 
 
     }

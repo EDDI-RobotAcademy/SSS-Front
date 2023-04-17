@@ -29,4 +29,21 @@ async requestAddCartListToSpring({ commit }, memberId) {
         commit(REQUEST_ADD_CART_LIST_TO_SPRING, res.data);
         console.log('리스트 연결');
     })
+//수정
+async requestModifyCartToSpring ({}, payload) {
+    const { itemId, quantity, category } = payload
+
+    return await axiosInst.put("/cart/modify", {
+        itemId: itemId,
+        quantity: quantity,
+        itemCategoryType: category
+    })
+        .then(() => {
+            alert("수량이 변경되었습니다.")
+        })
+        .catch(() => {
+            alert("문제 발생!")
+        })
+},
+
 }
