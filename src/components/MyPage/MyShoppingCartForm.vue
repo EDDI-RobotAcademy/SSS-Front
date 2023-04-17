@@ -1,152 +1,199 @@
 <template>
   <v-container>
-  <!-- 장바구니 상품 표시 카드 -->
-  <v-card flat style="width: 100%">
-    <v-card-text>
-      <h2 style="margin-left: 50px">장바구니</h2>
-      <v-divider style="margin-top: 30px"></v-divider>
-      <v-container style="width: 1000px"
-        v-if="!shoppingBucketProductItemList || (Array.isArray(shoppingBucketProductItemList) && shoppingBucketProductItemList.length === 0)">
-        <div style="margin-top: 50px" align="center">
-          <h2>장바구니에 상품이 없습니다.</h2>
-        </div>
-      </v-container>
+    <!-- 장바구니 상품 표시 카드 -->
+    <v-card flat style="width: 100%">
+      <v-card-text>
+        <v-container style="width: 1000px" v-if="!cartItems || (Array.isArray(cartItems) && cartItems.length === 0)">
+          <div style="margin-top: 50px" align="center">
+            <h2>장바구니에 상품이 없습니다.</h2>
+          </div>
+        </v-container>
 
-      <!-- <v-container style="width: 1000px" v-else>
-        <v-card style="border: 1px solid black; margin-top: 10px;" v-for="(item, index) in shoppingBucketProductItemList"
-          :key="index">
-          <v-layout style="background-color: #2F4F4F">
-            <v-checkbox style="margin-left: 30px;" color="#FAEBD7" dark v-model="selectList"
-              @click="selectProduct(item.product.price, item.itemCount, this)" :value="item" type="checkbox" />
-            <h4 style="margin-top: 20px; color: white">{{ item.product.nickname }}</h4>
-          </v-layout>
-          <v-layout>
-            <v-card max-width="100" style="padding: 15px 15px 15px 15px" flat>
-              <v-img height="75px" :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)">
-              </v-img>
-            </v-card>
-            <v-card style="width: 100%;" flat>
-              <v-layout style="margin-bottom: 30px;">
-                <h4 style="margin-top: 40px; padding: 0px 0px 0px 20px">{{ item.product.title }}</h4>
-                <v-spacer></v-spacer>
-                <v-layout style="margin-top: 40px" justify-end>
-                  <div>
-                    <v-btn small plain elevation="0" @click="minusProductAmount(index)" :disabled="showMinusButtonValue">
-                      <h1>-</h1>
-                    </v-btn>
-                  </div>
-                  <div>
-                    <h3>{{ item.itemCount }}</h3>
-                  </div>
-                  <div>
-                    <v-btn small plain elevation="0" @click="plusProductAmount(index)" :disabled="showPlusButtonValue">
-                      <h1>+</h1>
-                    </v-btn>
-                  </div>
-                  <div style="margin-top: 5px; margin-left: 30px;">
-                    <h5>{{ item.product.price | comma }}원</h5>
-                  </div>
-                  <div style=" padding: 0px 10px 0px 30px">
-                    <v-btn rounded small elevation="0" style="background-color: #2F4F4F;
-                          color: white; margin-left: 10px;" @click="deleteSelectProduct(item.itemId)">
-                      삭제
-                    </v-btn>
-                  </div>
-                </v-layout>
-              </v-layout>
-            </v-card>
-          </v-layout>
-          <v-card flat style="border-top: 1px solid black; height: 50px">
-            <v-layout>
-              <div style="padding: 13px 10px 10px 20px">
-                <h4>상품 가격</h4>
-              </div>
+        <v-container>
+          <v-card>
+            <v-card-title style="background-color: #80a84f">
+              <span style="font-size: 30px; font-weight: bold; color: white;">Order / Payment</span>
               <v-spacer></v-spacer>
-              <div style="padding: 13px 20px 10px 0px">
-                {{ item.product.price * item.itemCount | comma }}원
-              </div>
-            </v-layout>
+              <v-btn style="color: white;" text @click="selectRemoveItem">
+                <v-icon>mdi-delete-outline</v-icon>
+                선택 삭제
+              </v-btn>
+            </v-card-title>
+            <v-card-text>
+              <table>
+                <thead>
+                  <tr style="margin-top: 20px;">
+                    <th>전체 {{ cartItems.length }}개</th>
+                    <th class="itemCheck ms-8 mt-14">
+                      <v-checkbox class="allCheckbox" v-model="allChecked" />
+                    </th>
+                    <th></th>
+                    <th>상품명</th>
+                    <th>판매가</th>
+                    <th>수량</th>
+                    <th>주문관리</th>
+                    <th>배송비/배송 형태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(cartItem, idx) in cartItems" :key="idx">
+                    <td>{{ idx + 1 }}</td>
+                    <td class="itemCheck" align="left">
+                      <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
+                    </td>
+                    <td>
+                      <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
+                      </router-link>
+                        <v-img :src="cartItem.category.includes('PRODUCT') ?
+                        require(`@/assets/product/${cartItem.editedImg}`) :
+                        require(`@/assets/selfSalad/${cartItem.editedImg}`)"
+                        style="max-width: 100px; max-height: 100px;" />
+                    </td>
+                    <td>{{ cartItem.title }}</td>
+                    <td>
+                      <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
+                    </td>
+                    <td>
+                      <v-btn class="mr-2" icon small @click="descQuantity(idx)">
+                        <v-icon>mdi-minus</v-icon>
+                      </v-btn>
+                      {{ cartItem.quantity }}
+                      <v-btn class="ml-2" icon small @click="incQuantity(idx)">
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                      <p>{{ cartItem.totalPrice | comma }}원</p>
+                    </td>
+                    <td>
+                      <v-btn @click="removeItem(idx)">
+                        삭제하기
+                      </v-btn>
+                    </td>
+                    <td style="text-align: center;">
+                      <p>택배배송<br>
+                      <span style="font-weight: bold;">배송비무료</span><br>
+                        0원 이상 무료</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </v-card-text>
           </v-card>
-          <v-card flat style="border-top: 1px solid black; height: 80px">
-            <v-layout>
-              <div style="padding: 30px 0px 0px 20px">
-                <h4>배송비</h4>
-              </div>
+        </v-container>
+        <v-container>
+          <v-card>
+            <v-card-title style="background-color: #80a84f">
+              <span style="font-size: 30px; font-weight: bold; color: white;">Order / Payment</span>
               <v-spacer></v-spacer>
-              <div align="end" style="padding: 20px 20px 0px 0px" v-if="item.product.price * item.itemCount < 50000">
-                <h4>{{ item.product.productInfo.deliveryFee | comma }}원</h4>
-                <div>
-                  <h5 style="font-weight: normal">50,000이상 무료배송</h5>
-                </div>
-              </div>
-              <div align="end" style="padding: 33px 20px 0px 0px" v-else>
-                <h5>무료배송</h5>
-              </div>
-            </v-layout>
+              <v-btn style="color: white;" text @click="selectRemoveItem">
+                <v-icon>mdi-delete-outline</v-icon>
+                선택 삭제
+              </v-btn>
+            </v-card-title>
+            <v-card-text>
+              <table>
+                <thead>
+                  <tr style="margin-top: 20px;">
+                    <th>전체  개</th>
+                    <th class="itemCheck ms-8 mt-14">
+                      <v-checkbox class="allCheckbox" v-model="allChecked" />
+                    </th>
+                    <th></th>
+                    <th>상품명</th>
+                    <th>판매가</th>
+                    <th>수량</th>
+                    <th>주문관리</th>
+                    <th>배송비/배송 형태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+            </v-card-text>
           </v-card>
-        </v-card>
-      </v-container> -->
+        </v-container>
 
-      <!-- 장바구니 상품 총 가격-->
-      <v-container style="width: 1000px">
-        <v-checkbox type="checkbox" v-model="allSelected" label="전체선택">
-          
-        </v-checkbox>
-        <v-card style="height: 100px; border: 3px solid black" flat>
-          <v-container style="width: 600px">
-            <v-layout style="height: 100%; width: 100%; margin-top: 8px" justify-center>
-              <div>
-                <h5 style="font-weight: normal">상품금액</h5>
-                <span style="font-size: 30px; font-weight: bold">
-                  {{ this.totalProductPrice | comma }}
-                </span>
-                <span>원</span>
-              </div>
-              <v-spacer></v-spacer>
-              <h2 style="margin-top: 10px;">+</h2>
-              <v-spacer></v-spacer>
-              <div>
-                <h5 style="font-weight: normal">배송비</h5>
-                <div>
-                  <span style="font-size: 30px; font-weight: bold">
-                    {{ this.totalDeliveryFee | comma }}
-                  </span>
-                  <span>원</span>
-                </div>
-              </div>
-              <v-spacer></v-spacer>
-              <h2 style="margin-top: 10px;">=</h2>
-              <v-spacer></v-spacer>
-              <div>
-                <h5 style="font-weight: normal">총 금액</h5>
-                <span style="font-size: 30px; font-weight: bold">
-                  {{ this.totalPaymentAmount | comma }}
-                </span>
-                <span>원</span>
-              </div>
-            </v-layout>
-          </v-container>
-        </v-card>
         
-        <!--구매하기 버튼-->
-        <v-container style="width: 800px">
-          <v-btn width="100%" height="40px" elevation="0" style="background-color: #80a84f; color: white">
-            <h4>구매하기</h4>
+
+              
+        <v-container style="width: 400px ">
+              <div>
+                <h5 style="font-weight: normal">최종 결제 금액</h5>
+                <span style="font-size: 30px; font-weight: bold">{{totalPrice | comma }}</span>
+                <span> 원 </span>
+              </div>
+              <v-btn width="100%" height="80px" style="background-color: #80a84f; color: white">
+            <h4>주문하기</h4>
           </v-btn>
         </v-container>
-      </v-container>
-    </v-card-text>
-  </v-card>
-</v-container>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 
 <script>
 
 export default {
-  name: "MyShoppingCartPage"
-
+  name: "MyShoppingCartForm",
+  props: {
+    cartItems: {
+      type: Array,
+    }
+  },
+  data() {
+    return {
+      checkedValues: [],
+    }
+    },
+    selectAll() {
+      this.allSelected = !this.allSelected;
+      this.cartItems.forEach(item => (item.selected = this.allSelected));
+    },
+    toggleAll(value) {
+      this.checkedValues = value ? this.cartItems.map(cartItem => cartItem.cartItemId) : [];
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
+    allChecked: {
+      get() {
+        return this.checkedValues.length === this.cartItems.length;
+      },
+      set(value) {
+        this.toggleAll(value);
+      }
+    }
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+table tr:hover {
+  background-color: #f5f5f5;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+th {
+  border-bottom: 2px solid #848e98;
+}
+
+table th {
+  font-weight: bold;
+  text-align: center;
+}
+</style>
