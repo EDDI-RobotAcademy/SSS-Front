@@ -1,4 +1,5 @@
 import {
+    REQUEST_ADD_CART_LIST_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -21,4 +22,11 @@ async requestAddCartToSpring({}, payload) {
         alert("문제가 발생하여 장바구니에 추가되지 않았습니다.");
     }
 },
+//리스트
+async requestAddCartListToSpring({ commit }, memberId) {
+    return await axiosInst.get(`/cart/list/${memberId}`)
+    .then((res) => {
+        commit(REQUEST_ADD_CART_LIST_TO_SPRING, res.data);
+        console.log('리스트 연결');
+    })
 }
