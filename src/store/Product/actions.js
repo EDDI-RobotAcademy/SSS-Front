@@ -142,5 +142,10 @@ async viewCntUp({commit}, productId) {
                 commit(INCREMENT_VIEW_CNT, res.data)
             })
 },
-
+async requestSortFavoriteToSpring({ commit }) {
+    return await axiosInst.post(`/products/list/favorite`)
+            .then((res) => {
+                commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+            })
+}
 }
