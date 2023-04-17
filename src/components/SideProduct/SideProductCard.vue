@@ -41,8 +41,8 @@
       </div>
     </v-card-text>
   </v-card>
-  <v-img :src="require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`)"
-  @click="showPreview = true; previewImage = require(`@/assets/selfSalad/${sideProduct.sideProductImg.editedImg}`);"
+  <v-img :src="require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`)"
+  @click="showPreview = true; previewImage = require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`);"
 />
       <p class="product-title">{{ sideProduct.title }}</p>
       <p class="product-price">{{ sideProduct.price | comma  }} 원</p>

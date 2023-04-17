@@ -43,12 +43,10 @@
                     </td>
                     <td>
                       <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                      </router-link>
-                        <v-img :src="cartItem.category.includes('PRODUCT') ?
-                        require(`@/assets/product/${cartItem.editedImg}`) :
-                        require(`@/assets/selfSalad/${cartItem.editedImg}`)"
+                        <v-img :src="require(`@/assets/product/${cartItem.editedImg}`)"
                         style="max-width: 100px; max-height: 100px;" />
-                    </td>
+                      </router-link>
+                      </td>
                     <td>{{ cartItem.title }}</td>
                     <td>
                       <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
