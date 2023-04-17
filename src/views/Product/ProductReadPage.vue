@@ -38,12 +38,13 @@
           ])
       },
       methods: {
-        ...mapActions(productModule, [        
-          'requestProductToSpring',        
-          'requestDeleteProductToSpring',        
-          'requestProductImageToSpring',        
-          'requestSaveFavoriteToSpring'    
-      ]),
+        ...mapActions(productModule, [
+            'requestProductToSpring',
+            'requestDeleteProductToSpring',
+            'requestProductImageToSpring',
+            'requestSaveFavoriteToSpring',
+            'viewCntUp'
+        ]),
         ...mapActions(ordercartModule, [        
           'requestAddCartToSpring'    
     ]),
@@ -75,8 +76,9 @@
           await this.requestProductImageToSpring(this.productId)
         }
       }
-  
-  </script>
+    
+
+</script>
   
   <style scoped>
   a {

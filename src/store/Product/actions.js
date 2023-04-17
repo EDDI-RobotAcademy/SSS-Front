@@ -5,7 +5,8 @@ import {
     REQUEST_READ_REVIEW_TO_SPRING,
     REQUEST_REVIEW_IMAGE_TO_SPRING,
     REQUEST_FAVORITE_LIST_TO_SPRING,
-    REQUEST_FAVORITE_INFO_TO_SPRING
+    REQUEST_FAVORITE_INFO_TO_SPRING,
+    INCREMENT_VIEW_CNT
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -33,6 +34,7 @@ async requestProductListToSpring ({ commit }) {
 async requestProductToSpring ({ commit }, productId) {
     return await axiosInst.get(`/products/${productId}`)
         .then((res) => {
+            console.log(res.data)
             commit(REQUEST_PRODUCT_TO_SPRING, res.data)
     })
 },
@@ -111,5 +113,18 @@ async requestSaveFavoriteToSpring({commit}, payload) {
             .then((res) => {
                 commit(REQUEST_FAVORITE_INFO_TO_SPRING, res.data)
             })
-}
+},
+
+async requestSortProductsToSpring({ commit }) {
+    return await axiosInst.post(`/products/list/view`)
+            .then((res) => {
+                commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+            })
+},
+async viewCntUp({commit}, productId) {
+    return await axiosInst.post(`/products/viewUp/${productId}`)
+            .then((res) => {
+                commit(INCREMENT_VIEW_CNT, res.data)
+            })
+},
 }
