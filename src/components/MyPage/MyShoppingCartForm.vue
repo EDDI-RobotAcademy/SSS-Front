@@ -174,6 +174,24 @@ export default {
     },
     toggleAll(value) {
       this.checkedValues = value ? this.cartItems.map(cartItem => cartItem.cartItemId) : [];
+    },
+    async selectRemoveItem() {
+      let deleteCartMessage = confirm("선택한 상품을 삭제하시겠습니까?")
+      if (deleteCartMessage) {
+        let selectCartItemId = []
+        let category = 'PRODUCT'
+        for (let i = 0; i < this.cartItems.length; i++) {
+          if (this.checkedValues.includes(this.cartItems[i].cartItemId)) {
+            selectCartItemId.push(this.cartItems[i].cartItemId)
+            selectCartItemId.push(category)
+          }
+        }
+        console.log('itemId: ' + selectCartItemId)
+        await this.requestDeleteCartToSpring({ selectCartItemId })
+        window.location.reload(true);
+      }
+    },
+  },
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
