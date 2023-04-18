@@ -64,5 +64,23 @@ async requestModifyCartToSpring ({}, payload) {
             alert("문제 발생!")
         })
 },
+//셀프 샐러드 장바구니 추가
+async requestSelfSaladAddCartToSpring({}, payload) {
+    // const { title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList } = payload;
+    // let json = JSON.stringify(payload);
+    console.log("payload  "+JSON.stringify(payload))
+    try {
+        await axiosInst.post("/cart/selfSalad/register", payload , {
+        headers: {
+            'Content-Type': 'application/json'
+        }})
+    if (confirm("장바구니가 추가되었습니다. 장바구니로 이동하시겠습니까?")) {
+    window.location.href = "http://localhost:8080/my-info-cart";
+    } else {
+    }
+    } catch (error) {
+        alert("문제가 발생하여 장바구니에 추가되지 않았습니다.");
+    }
+}
 
 }

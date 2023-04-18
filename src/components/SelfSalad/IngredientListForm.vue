@@ -25,7 +25,7 @@
         </td>
         <td class="card"
         v-else v-for="ingredient in ingredients" :key="ingredient.id">
-        {{ ingredients }}
+
           <ingredient-card :ingredient="ingredient"
                             @change="onChange"
                             :change-value="Number(changeValue)"
@@ -69,6 +69,9 @@ export default {
       changeValue : 0,
       names: [],
       quantity: 1,
+      // 장바구니에 보내 줄 재료 정보 배열
+      selfSaladList: []
+
     }   
   },
   props: {
@@ -89,7 +92,7 @@ export default {
     },
   },
   methods: {
-    onChange( selectPrice, selectCalorie, optionValue, selectedName ){
+    onChange( selectPrice, selectCalorie, optionValue, selectedName, ingredientId, amountType ){
       this.totalPrice += selectPrice
       this.totalCalorie += selectCalorie
       this.changeValue = optionValue
@@ -108,6 +111,11 @@ export default {
       console.log(selectCalorie+": 전달받은 칼로리")
       console.log(optionValue+": 전달받은 옵션값" )
       console.log(selectedName+": 재료명" )
+      let selectedAmount = optionValue
+
+// 재료 배열로 생성
+this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmount, amountType: amountType});
+      console.log(this.selfSaladList)
     },
     resetAll() {
         this.selectedAmount = 0;
@@ -139,9 +147,11 @@ export default {
       const quantity = this.quantity
       const totalCalorie = this.totalCalorie
       const totalPrice = this.totalPrice *this.quantity 
+      let selfSaladRequestList = this.selfSaladList // 배열을 복사하여 사용
+      console.log(selfSaladRequestList)
 
 
-      this.$emit('addCart', {title, quantity, totalCalorie, totalPrice})
+      this.$emit('addCart', { title, quantity, totalPrice, totalCalorie, selfSaladRequestList })
     },
   },
 
