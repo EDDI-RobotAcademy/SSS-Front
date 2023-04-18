@@ -145,13 +145,15 @@ export default{
        console.log("이전 인덱스 :"+ this.prevIndex)
        console.log("이전선택 칼로리 : " + prevCalorie +" // 이전선택 가격 : " + prevPrice)
 
-       const priceChange = price - prevPrice
-       const calorieChange = calorie - prevCalorie
-
+      const priceChange = price - prevPrice
+      const calorieChange = calorie - prevCalorie
       const optionValue = this.selectedAmount
+      const ingredientId = this.ingredient.id
+      const amountType = this.ingredient.amountType
+
 
       this.selectedName = this.ingredient.name;
-      this.$emit('change', priceChange, calorieChange, optionValue, this.selectedName)
+      this.$emit('change', priceChange, calorieChange, optionValue, this.selectedName, ingredientId, amountType)
       
       this.prevIndex = index
       

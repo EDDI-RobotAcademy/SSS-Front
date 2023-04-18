@@ -27,8 +27,7 @@
                     <th class="itemCheck ms-8 mt-14">
                       <v-checkbox class="allCheckbox" v-model="allChecked" />
                     </th>
-                    <th></th>
-                    <th>상품명</th>
+                    <th colspan="2">상품명</th>
                     <th>판매가</th>
                     <th>수량</th>
                     <th>주문관리</th>

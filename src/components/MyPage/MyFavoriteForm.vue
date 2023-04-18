@@ -1,4 +1,5 @@
 <template>
+  <v-container>
   <!-- (좋아요) 찜 목록 -->
   <v-card flat style="width: 100%">
     <v-card-text>
@@ -24,6 +25,7 @@
       </div>
     </v-card-text>
   </v-card>
+  </v-container>
 </template>
 
 
