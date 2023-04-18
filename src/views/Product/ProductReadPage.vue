@@ -4,10 +4,11 @@
         <!-- <h2>상품 상세정보</h2> -->
         <product-read-form @saveFavorite="saveFavorite" @addCart="addCart" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
         <p v-else>로딩중 .......... </p>
-        <v-btn><router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
+        <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+          <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
         </router-link></v-btn>
-        <v-btn @click="onDelete">삭제</v-btn>
+        <v-btn @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
         <v-btn><router-link :to="{ name: 'ProductListPage' }">
           목록
         </router-link></v-btn>
@@ -22,6 +23,7 @@
 
   const productModule = 'productModule'
   const ordercartModule = 'ordercartModule'
+  const memberModule = 'memberModule'
 
   export default {
     components: { ProductReadForm },
@@ -36,6 +38,9 @@
           ...mapState(productModule, [
             'product', 'productImgs', 'favoriteInfo'
           ]),
+          ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
           favoriteInfo: {
             get() {
               return this.$store.state.productModule.favoriteInfo;

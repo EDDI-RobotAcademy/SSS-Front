@@ -4,6 +4,7 @@ import {
     SIGN_IN_VALUE,
     IS_AUTHENTICATED,
     MEMBER_INFO_MODIFY,
+    LOG_OUT,
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -42,7 +43,9 @@ async requestMemberSignInToSpring({ commit }, payload) {
                     alert("아이디 또는 비밀번호를 다시 확인해주세요.")
                 })
     },
-    async requestUpdateMemberInfoFromSpring({ commit }, payload) {
+    
+    
+async requestUpdateMemberInfoFromSpring({ commit }, payload) {
       console.log(payload);
         const userId = parseInt(localStorage.getItem("userId"), 10);
 
@@ -70,7 +73,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
         },
 
 
-        async requestCheckPasswordToSpring({}, payload) {
+async requestCheckPasswordToSpring({}, payload) {
           const {memberId, password} = payload
           console.log(payload);
           return await axiosInst.post(`/member/check-password`, {memberId, password} )
@@ -85,5 +88,25 @@ async requestMemberSignInToSpring({ commit }, payload) {
                   return res.data;
               })
       },
+async requestDeleteMember({ commit }) {
+        try {
+        const memberId = parseInt(localStorage.getItem("userId"), 10);
+        await axiosInst.delete(`/member/delete-member/${memberId}`);
+        alert('회원 탈퇴가 완료되었습니다.');
+        commit(LOG_OUT);
+        localStorage.removeItem("vuex")
+        localStorage.removeItem("userToken")
+        alert('회원 탈퇴로 인해 자동 로그아웃 되었습니다.');
+        } catch (error) {
+          if (error.response) {
+            console.error(error.response.data);
+            alert('회원 탈퇴에 실패하였습니다.');
+          } else if (error.request) {
+            console.error(error.request);
+            alert('서버로부터 응답이 없습니다.');
+          }
+        }
+      },
+
 
   };

@@ -1,16 +1,16 @@
 <template>
   <div class="ingredientCard">
-    <v-btn>
+    <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
       <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
         재료정보 수정
       </router-link>
     </v-btn>
-    <v-btn>
+    <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
       <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
         수량/가격 정보 수정
       </router-link>
     </v-btn>  
-    <v-btn @click="onDelete">삭제</v-btn>
+    <v-btn @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
     <div class="ingredientInfo">
       <div class="ingredientImage">
         <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
@@ -35,10 +35,14 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+const memberModule = 'memberModule'
+
 
 export default{
   name: "IngredientCard",
   data(){
+    
     return {
       max : Number(this.ingredient.max),
       min : Number(this.ingredient.min),
@@ -60,6 +64,7 @@ export default{
       prevIndex : 0,
     }
   },
+  
   props: {
     ingredient: {
       type: Object,
@@ -109,6 +114,9 @@ export default{
     },
   },
   computed: {
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
   convertedAmountType() {
     if (this.ingredient.amountType === 'GRAM') {
       return this.measure ='g';

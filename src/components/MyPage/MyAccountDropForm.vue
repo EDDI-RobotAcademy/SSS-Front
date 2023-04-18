@@ -18,8 +18,7 @@
             <h4>주의사항을 확인하였고, 탈퇴를 진행합니다.</h4>
           </div>
           <div>
-            <v-checkbox>
-            </v-checkbox>
+            <v-checkbox v-model="consentCheckStatus"/>
           </div>
 
         </v-layout>
@@ -41,10 +40,34 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 
 export default {
-  name: "BuyerAccountDropForm"
+  name: "MyAccountDropForm",
+  data: () => ({
+    consentCheckStatus: false,
+    accountDorp: false,
+    dropcheckalert: false,
+  }),
+  methods: {
+    ...mapActions('memberModule', ['requestDeleteMember']),
+    async accountDrop() {
+    const result = window.confirm("정말 탈퇴 하시겠습니까?");
+    if (result) {
+      try {
+        await this.requestDeleteMember();
+        this.$router.push("/");  
+      } catch (err) {
+        console.error(err);
+        alert("회원 탈퇴에 실패하였습니다.");
+      }
+      history.go(0)
+    }
+    
+  },
 }
+};
+
 </script>
 
 <style scoped>

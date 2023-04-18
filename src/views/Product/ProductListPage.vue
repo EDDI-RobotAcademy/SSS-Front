@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <h1>Salad</h1>
-        <router-link :to="{ name: 'ProductRegisterPage' }">
+        <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
             상품 등록
         </router-link>
 
@@ -36,6 +36,7 @@
   import SortProduct from '@/components/Product/SortProduct.vue'
   import { mapActions, mapState } from 'vuex'
 
+  const memberModule = 'memberModule'
   const productModule = 'productModule'
   
   export default {
@@ -52,6 +53,9 @@
     computed:{
       ...mapState(productModule, [
         'products'
+      ]),
+      ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
       ]),
     },
     async mounted () {
