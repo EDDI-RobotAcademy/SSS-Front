@@ -205,9 +205,11 @@ export default {
       this.allSelected = !this.allSelected;
       this.cartItems.forEach(item => (item.selected = this.allSelected));
     },
+    //개별 삭제
     removeItem(idx) {
-      const itemId = this.cartItems[0].cartItemId
-      const category = this.cartItems[0].category
+      const itemId = this.cartItems[idx].cartItemId
+      const category = this.cartItems[idx].category
+      console.log(category)
       this.$emit('onDelete', { itemId, category })
     },
     toggleAll(value) {
