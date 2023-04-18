@@ -11,7 +11,7 @@
 
         <v-container>
           <v-card>
-            <v-card-title style="background-color: #80a84f">
+            <v-card-title style="background-color: #80a84f" @click="SSSOpen = !SSSOpen">
               <span style="font-size: 30px; font-weight: bold; color: white;">Order / Payment</span>
               <v-spacer></v-spacer>
               <v-btn style="color: white;" text @click="selectRemoveItem">
@@ -19,11 +19,11 @@
                 선택 삭제
               </v-btn>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="SSSOpen">
               <table>
                 <thead>
                   <tr style="margin-top: 20px;">
-                    <th>전체 {{ cartItems.length }}개</th>
+                    <th>전체 {{ selfSaladCount }}개</th>
                     <th class="itemCheck ms-8 mt-14">
                       <v-checkbox class="allCheckbox" v-model="allChecked" />
                     </th>
@@ -35,8 +35,77 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(cartItem, idx) in cartItems" :key="idx">
-                    <td>{{ idx + 1 }}</td>
+                  <template v-for="(cartItem, idx) in cartItems">
+                    <tr :key="idx" v-if="cartItem.category === 'SELF_SALAD'">
+                      <td>{{ idx + 1 }}</td>
+                    <td class="itemCheck" align="left">
+                      <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
+                    </td>
+                    <td>
+                      <v-img :src="require(`@/assets/selfSalad/onion.png`)"
+                        style="max-width: 100px; max-height: 100px;" />
+                      </td>
+                    <td>{{ cartItem.title }}</td>
+                    <td>
+                      <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
+                    </td>
+                    <td>
+                      <v-btn class="mr-2" icon small @click="descQuantity(idx)">
+                        <v-icon>mdi-minus</v-icon>
+                      </v-btn>
+                      {{ cartItem.quantity }}
+                      <v-btn class="ml-2" icon small @click="incQuantity(idx)">
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                      <p>{{ cartItem.totalPrice | comma }}원</p>
+                    </td>
+                    <td>
+                      <v-btn @click="removeItem(idx)">
+                        삭제하기
+                      </v-btn>
+                    </td>
+                    <td style="text-align: center;">
+                      <p>택배배송<br>
+                      <span style="font-weight: bold;">배송비무료</span><br>
+                        0원 이상 무료</p>
+                    </td>
+                  </tr>
+                  </template>
+                </tbody>
+              </table>
+            </v-card-text>
+          </v-card>
+        </v-container>
+        
+        <v-container>
+          <v-card>
+            <v-card-title style="background-color: #80a84f" @click="ProductOpen = !ProductOpen">
+              <span style="font-size: 30px; font-weight: bold; color: white;">Order / Payment</span>
+              <v-spacer></v-spacer>
+              <v-btn style="color: white;" text @click="selectRemoveItem">
+                <v-icon>mdi-delete-outline</v-icon>
+                선택 삭제
+              </v-btn>
+            </v-card-title>
+            <v-card-text v-if="ProductOpen">
+              <table>
+                <thead>
+                  <tr style="margin-top: 20px;">
+                    <th>전체 {{ProductCount}} 개</th>
+                    <th class="itemCheck ms-8 mt-14">
+                      <v-checkbox class="allCheckbox" v-model="allChecked" />
+                    </th>
+                    <th colspan="2">상품명</th>
+                    <th>판매가</th>
+                    <th>수량</th>
+                    <th>주문관리</th>
+                    <th>배송비/배송 형태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template v-for="(cartItem, idx) in cartItems">
+                    <tr :key="idx" v-if="cartItem.category === 'PRODUCT' || cartItem.category === 'SIDE'">
+                      <td>{{ idx + 1 }}</td>
                     <td class="itemCheck" align="left">
                       <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
                     </td>
@@ -71,39 +140,9 @@
                         0원 이상 무료</p>
                     </td>
                   </tr>
-                </tbody>
-              </table>
-            </v-card-text>
-          </v-card>
-        </v-container>
-        <v-container>
-          <v-card>
-            <v-card-title style="background-color: #80a84f">
-              <span style="font-size: 30px; font-weight: bold; color: white;">Order / Payment</span>
-              <v-spacer></v-spacer>
-              <v-btn style="color: white;" text @click="selectRemoveItem">
-                <v-icon>mdi-delete-outline</v-icon>
-                선택 삭제
-              </v-btn>
-            </v-card-title>
-            <v-card-text>
-              <table>
-                <thead>
-                  <tr style="margin-top: 20px;">
-                    <th>전체  개</th>
-                    <th class="itemCheck ms-8 mt-14">
-                      <v-checkbox class="allCheckbox" v-model="allChecked" />
-                    </th>
-                    <th></th>
-                    <th>상품명</th>
-                    <th>판매가</th>
-                    <th>수량</th>
-                    <th>주문관리</th>
-                    <th>배송비/배송 형태</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
+                  </template>
+
+
                 </tbody>
               </table>
             </v-card-text>
@@ -141,6 +180,8 @@ export default {
   data() {
     return {
       checkedValues: [],
+      SSSOpen: true,
+      ProductOpen: true
     }
   },
   methods: {
@@ -192,7 +233,7 @@ export default {
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    },
   },
   computed: {
     totalPrice() {
@@ -203,7 +244,15 @@ export default {
         }
       }
       return sum;
-  },
+    },
+    //셀프 샐러드 개수
+    selfSaladCount() {
+      return this.cartItems.filter(item => item.category === 'SELF_SALAD').length;
+    },
+    //완제품 개수
+    ProductCount() {
+      return this.cartItems.filter(item => item.category === 'PRODUCT' || item.category === 'SIDE').length;
+    },
     allChecked: {
       get() {
         return this.checkedValues.length === this.cartItems.length;
