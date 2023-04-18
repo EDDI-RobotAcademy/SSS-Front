@@ -1,5 +1,6 @@
 import {
     REQUEST_ADD_CART_LIST_TO_SPRING
+    REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -70,7 +71,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     // let json = JSON.stringify(payload);
     console.log("payload  "+JSON.stringify(payload))
     try {
-        await axiosInst.post("/cart/selfSalad/register", payload , {
+        await axiosInst.post("/cart/selfsalad/register", payload , {
         headers: {
             'Content-Type': 'application/json'
         }})
