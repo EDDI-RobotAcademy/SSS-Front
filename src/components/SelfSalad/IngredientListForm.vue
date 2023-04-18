@@ -47,7 +47,7 @@
         <p>최종 가격: {{ totalPrice }}</p>
         <v-btn type="submit" color="blue">바로 주문하기</v-btn>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
-          <v-btn color="green">등록하기</v-btn>
+          <v-btn color="green" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">등록하기</v-btn>
         </router-link>
         <v-btn @click="clickAddCart"><v-icon>mdi-cart-variant</v-icon><span>장바구니</span></v-btn>
       </div>
@@ -57,6 +57,10 @@
 
 <script>
 import IngredientCard from '@/components/SelfSalad/IngredientCard.vue';
+import { mapActions, mapState } from 'vuex'
+const memberModule = 'memberModule'
+
+
 export default {
   name: "IngredientListForm",
   components: { IngredientCard },
@@ -78,6 +82,10 @@ export default {
     },
   },
   computed: {
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
+
   convertedCategoryType() {
     if (this.category === 'VEGETABLE') {
       return '채소';
