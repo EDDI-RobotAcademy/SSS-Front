@@ -1,34 +1,31 @@
 <template>
-  <v-container>
-            <v-card-text>
-              <v-container style="width: 1000px">
-                <v-form @submit.prevent="onSubmit">
-                  <div>
-                    <table style="table-layout: fixed; width: 100%; box-sizing: border-box">
-                      <tbody style="margin: 0; border: 0; vertical-align:">
-                          <th class="th-style">
-                            비밀번호 확인이 필요합니다.
-                          </th>
-                          <td style="border-bottom: 1px solid black; padding: 12px 10px">
-                            <v-layout style="width: 400px">
-                              <v-text-field outlined dense style="width: 280px; height: 45px" type="text" v-model="password" label="비밀번호" />
-                              <div style="margin-left: 10px">
-                              </div>
-                            </v-layout>
-                          </td>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div align="center" style="margin-top: 10px">
-                    <v-btn rounded elevation="0" style="background-color: #80a84f" class="white--text" type="submit">
-                      수정
-                    </v-btn>
-                  </div>
-                </v-form>
-              </v-container>
-            </v-card-text>
-  </v-container>
+  <div class="center-container">
+    <v-container class="center-form" style="width: 500px">
+      <v-card-text>
+        <v-form @submit.prevent="onSubmit">
+          <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+  <tr>
+    <td style="text-align: center; height: 100%; vertical-align: middle;">
+      <div style="font-size: larger; font-weight: bold; color: #40513B; margin-bottom: 20px;">
+        비밀번호를 입력하세요
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <v-layout align-center style="width: 400px;">
+          <v-text-field style="width: 100%; margin-right: 20px; font-family: Arial;" type="text" v-model="password" label="비밀번호"/>
+          <v-btn style="background-color: #609966; color: white;" type="submit">
+            확인
+          </v-btn>
+        </v-layout>
+      </div>
+    </td>
+  </tr>
+</table>
+        </v-form>
+      </v-card-text>
+    </v-container>
+  </div>
 </template>
+
 
 <script>
 import MyMemberInfoModifyPage from "@/views/MyPage/MyMemberInfoModifyPage.vue";
@@ -60,7 +57,6 @@ export default {
       this.requestCheckPasswordToSpring({memberId, password})
           .then((res) => {
             if (res === false) {
-              alert("비밀번호가 틀림");
               router.push("/my-info-account");
             } else {
               router.push("/my-member-Info-modify-page");
@@ -75,12 +71,26 @@ export default {
 
 <style scoped>
 .th-style {
-  background-color: #f5f5f5;
-  width: 120px;
+  width: 200px;
   border: 1px;
   text-align: left;
   padding: 12px 10px;
   height: 48px;
-  border-bottom: 1px solid black;
 }
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 600px); /* 64px는 Vuetify의 툴바 높이 */
+}
+
+.center-form {
+  background-color: #FFFFFF; /* 폼 배경색상 추가 */
+  padding: 20px; /* 폼 패딩 추가 */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
+}
+
+
 </style>
