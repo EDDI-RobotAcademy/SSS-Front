@@ -6,6 +6,7 @@ import {
     REQUEST_REVIEW_IMAGE_TO_SPRING,
     REQUEST_FAVORITE_LIST_TO_SPRING,
     REQUEST_FAVORITE_INFO_TO_SPRING,
+    SET_FAVORITE_INFO,
     INCREMENT_VIEW_CNT
 } from './mutation-types'
 
@@ -103,7 +104,7 @@ async requestReviewImageToSpring({commit}, reviewId) {
 async requestFavoriteListToSpring({commit}, memberId)  {
     return await axiosInst.get(`/products/favorite/myFavorite/${memberId}`)
             .then((res) => {
-                console.log("목록" + res.data)
+                console.log("목록" + JSON.stringify(res.data))
                 commit(REQUEST_FAVORITE_LIST_TO_SPRING, res.data)
             })
 },   
@@ -111,9 +112,23 @@ async requestSaveFavoriteToSpring({commit}, payload) {
     const {memberId, productId} = payload
     return await axiosInst.post(`/products/favorite/changeLike`, {memberId, productId})
             .then((res) => {
+                console.log("저장데이터" + JSON.stringify(res.data))
                 commit(REQUEST_FAVORITE_INFO_TO_SPRING, res.data)
             })
 },
+async requestGetFavoriteFromSpring({ commit }, payload) {
+    const {memberId, productId} = payload
+    try {
+        const res = await axiosInst.post(`/products/favorite/likeStatus`, { memberId, productId })
+        console.log(res.data)
+        commit(SET_FAVORITE_INFO, res.data)
+        return res.data
+      } catch (error) {
+        console.error(error)
+        return null // 에러가 발생하면 null 값
+      }
+  },
+
 
 async requestSortProductsToSpring({ commit }) {
     return await axiosInst.post(`/products/list/view`)
@@ -127,4 +142,10 @@ async viewCntUp({commit}, productId) {
                 commit(INCREMENT_VIEW_CNT, res.data)
             })
 },
+async requestSortFavoriteToSpring({ commit }) {
+    return await axiosInst.post(`/products/list/favorite`)
+            .then((res) => {
+                commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)
+            })
+}
 }

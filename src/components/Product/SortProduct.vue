@@ -24,32 +24,55 @@
       sorts: [
         '등록순',
         '조회순',
+        '좋아요순',
       ],
       sort: '등록순',
     }),
     computed: {
       ...mapState(productModule, ["products"]),
       sortedProducts() {
-        if (this.sort === "조회순") {
-          return this.products.sort((a, b) => {
-            if (b.viewCnt === a.viewCnt) {
-              return b.productId - a.productId;
-            } else {
-              return b.viewCnt - a.viewCnt;
-            }
-          });
-        } else {
-          return this.products.sort((a, b) => b.productId - a.productId);
+        // if (this.sort === "조회순") {
+        //   return this.products.sort((a, b) => {
+        //     if (b.viewCnt === a.viewCnt) {
+        //       return b.productId - a.productId;
+        //     } else {
+        //       return b.viewCnt - a.viewCnt;
+        //     }
+        //   });
+        // } else {
+        //   return this.products.sort((a, b) => b.productId - a.productId);
+        // }
+        switch(this.sort) {
+          case "조회순":
+            return this.products.sort((a, b) => {
+              if (b.viewCnt === a.viewCnt) {
+                return b.productId - a.productId;
+              } else {
+                return b.viewCnt - a.viewCnt;
+              }
+            });
+          case "좋아요순":
+            return this.products.sort((a, b) => {
+              if (b.favoriteCnt === a.favoriteCnt) {
+                return b.productId - a.productId;
+              } else {
+                return b.favoriteCnt - a.favoriteCnt;
+              }
+            })
+          default:
+            return this.products.sort((a, b) => b.productId - a.productId);
         }
       },
     },
     methods:{
       ...mapActions(productModule, [
-        'requestSortProductsToSpring'
+        'requestSortProductsToSpring',
+        'requestSortFavoriteToSpring'
       ]),
     },
     mounted() {
       this.requestSortProductsToSpring()
+      this.requestSortFavoriteToSpring()
     }
   }
 </script>
