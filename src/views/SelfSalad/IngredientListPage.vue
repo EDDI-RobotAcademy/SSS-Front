@@ -12,6 +12,7 @@ import IngredientListForm from '@/components/SelfSalad/IngredientListForm.vue';
 import { mapActions, mapState } from 'vuex'
 
 const selfSaladModule = 'selfSaladModule'
+const ordercartModule = 'ordercartModule'
 
   export default {
       components: { IngredientListForm },
@@ -32,6 +33,9 @@ const selfSaladModule = 'selfSaladModule'
           'requestIngredientCategoryToSpring',
           'requestDeleteIngredientToSpring'
         ]),
+        ...mapActions(ordercartModule, [        
+          'requestSelfSaladAddCartToSpring'    
+    ]),
         async changeCategory(payload){
           await this.requestIngredientCategoryToSpring(payload) //카테고리 이름
         },
@@ -48,25 +52,16 @@ const selfSaladModule = 'selfSaladModule'
             const totalPrice = payload.totalPrice
             const totalCalorie = payload.totalCalorie
             const title = payload.title
+            const selfSaladRequestList = payload.selfSaladRequestList
             console.log('title: '+ title )
             console.log('memberId: '+ memberId )
             console.log('quantity: '+ quantity )
             console.log('totalPrice: '+ totalPrice )
             console.log('totalCalorie: '+ totalCalorie )
             // await this.requestSelfSaladAddCartToSpring({title, quantity, totalPrice, totalCalorie, memberId})
+            await this.requestSelfSaladAddCartToSpring({ title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList})
           },
       },
-      clickAddCart() {
-      // 장바구니 클릭 이벤트
-      const quantity = this.quantity
-      const totalCalorie = this.totalCalorie
-      const totalPrice = this.totalPrice *this.quantity 
-      console.log(quantity)
-      console.log(totalCalorie)
-      console.log(totalPrice)
-
-      this.$emit('addCart', {quantity, totalCalorie, totalPrice})
-    },
       beforeRouteLeave(to, from, next) {
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
