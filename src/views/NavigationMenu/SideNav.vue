@@ -72,7 +72,7 @@ export default {
       ],
       //특정 페이지에서만 nav사용 하기위해 기본값으로 false설정
       showNav: false,
-      specificPages: ['/my-info', '/my-info-cart', '/my-info-favorite','/my-info-review', '/my-info-account', '/my-info-Qna']
+      // specificPages: ['/my-info', '/my-info-cart', '/my-info-favorite','/my-info-review', '/my-info-account', '/my-info-Qna']
     }
   },
   props: {
