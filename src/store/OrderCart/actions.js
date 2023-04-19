@@ -1,6 +1,7 @@
 import {
     REQUEST_ADD_CART_LIST_TO_SPRING,
-    REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING
+    REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING,
+    REQUEST_SELFSALAD_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -91,5 +92,14 @@ async requestSelfSaladAddCartListToSpring({ commit }, memberId) {
         console.log('리스트 연결');
     })
 },
+//셀프샐러드 수정 읽기
+async requestSelfSaladToSpring ({ commit }, itemId) {
+    console.log("액션에서 출력한 아이디는 "+itemId)
+    return await axiosInst.get(`/cart/selfsalad/read/${itemId}`)
+        .then((res) => {
+            commit(REQUEST_SELFSALAD_TO_SPRING, res.data)
+            console.log('읽기 연결');
+    })
+}
 
 }

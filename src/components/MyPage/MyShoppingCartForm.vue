@@ -63,6 +63,9 @@
                       <v-btn @click="removeItem(idx)">
                         삭제하기
                       </v-btn>
+                  <v-btn @click="openModal(idx)">
+                    수정하기
+                  </v-btn>
                     </td>
                     <td style="text-align: center;">
                       <p>택배배송<br>
@@ -77,6 +80,7 @@
           </v-card>
         </v-container>
         
+
         <v-container>
           <v-card>
             <v-card-title style="background-color: #80a84f" @click="ProductOpen = !ProductOpen">
@@ -149,6 +153,10 @@
           </v-card>
         </v-container>
 
+        <v-dialog v-model="showModal">
+          <self-salad-modify-cart-page @close="closeModal"  />
+        </v-dialog>
+
         
 
               
@@ -170,18 +178,24 @@
 
 <script>
 
+import SelfSaladModifyCartPage from "@/views/SelfSalad/SelfSaladModifyCartPage.vue";
+
+
 export default {
   name: "MyShoppingCartForm",
+  components: { SelfSaladModifyCartPage },
   props: {
     cartItems: {
       type: Array,
+      require: true,
     }
   },
   data() {
     return {
       checkedValues: [],
       SSSOpen: true,
-      ProductOpen: true
+      ProductOpen: true,
+      showModal: false,
     }
   },
   methods: {
@@ -212,6 +226,13 @@ export default {
       console.log(category)
       this.$emit('onDelete', { itemId, category })
     },
+    //모달창 열고 카트 아이디 보내주기
+    openModal(idx) {
+      const itemId = this.cartItems[idx].cartItemId
+      this.showModal = true;
+      this.$emit('onSSSModify', { itemId })
+
+    },
     toggleAll(value) {
       this.checkedValues = value ? this.cartItems.map(cartItem => cartItem.cartItemId) : [];
     },
@@ -230,6 +251,14 @@ export default {
         await this.requestDeleteCartToSpring({ selectCartItemId })
         window.location.reload(true);
       }
+    },
+    // 모달을 열기 위한 메서드
+    // openModal() {
+    //   this.showModal = true;
+    // },
+    // 모달을 닫기 위한 메서드
+    closeModal() {
+      this.showModal = false;
     },
   },
   filters: {

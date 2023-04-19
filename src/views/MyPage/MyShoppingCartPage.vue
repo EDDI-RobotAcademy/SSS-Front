@@ -1,14 +1,16 @@
 <template>
   <v-container>
     <my-page/>
-    <my-shopping-cart-form :cartItems="cartItems" @onDelete="onDelete" @onModify="onModify"/>
+    <my-shopping-cart-form :cartItems="cartItems" @onDelete="onDelete" @onModify="onModify" @onSSSModify="onSSSModify"/>
   </v-container>
 </template>
 
 
 <script>
 import MyShoppingCartForm from '@/components/MyPage/MyShoppingCartForm.vue'
-import MyPage from "@/views/MyPage/MyPage.vue";
+import MyPage from "@/views/MyPage/MyPage.vue"
+
+
 
 import { mapActions, mapState } from 'vuex'
 
@@ -17,9 +19,15 @@ const ordercartModule = 'ordercartModule'
 export default {
   name: "MyShoppingCartPage",
   components: { MyShoppingCartForm, MyPage },
+  data() {
+    return {
+      showModal: false
+    }
+  },
   computed:{
     ...mapState(ordercartModule, [
-      'cartItems'
+      'cartItems',
+      'cartItem'
     ])
   },
   methods:{
@@ -29,6 +37,7 @@ export default {
       'requestModifyCartToSpring',
 
     'requestSelfSaladAddCartListToSpring',  
+    'requestSelfSaladToSpring'
     ]),
     async onDelete(payload) {
       const itemId = payload.itemId
@@ -37,6 +46,11 @@ export default {
       console.log('category: '+ category )
       await this.requestDeleteCartToSpring({ itemId, category })
       window.location.reload(true);
+    },
+    async onSSSModify(payload) {
+      const itemId = payload.itemId
+      console.log('itemId: '+ itemId )
+      await this.requestSelfSaladToSpring( itemId )
     },
     async onModify(payload) {
       const itemId = payload.itemId
@@ -55,6 +69,7 @@ export default {
   const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
   await this.requestAddCartListToSpring( memberId )
   await this.requestSelfSaladAddCartListToSpring( memberId )
+
 }
 }
 </script>
