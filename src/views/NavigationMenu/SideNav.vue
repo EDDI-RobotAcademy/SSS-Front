@@ -80,20 +80,20 @@ export default {
       type: Boolean
     }
   },
-  mounted() {
-    if (this.specificPages.includes(this.$route.path)) {
-      this.showNav = true;
-    }
-  },
-  watch: {
-    '$route'(to, from) {
-      if (this.specificPages.includes(to.path)) {
-        this.showNav = true;
-      } else {
-        this.showNav = false;
-      }
-    }
-  }
+  // mounted() {
+  //   if (this.specificPages.includes(this.$route.path)) {
+  //     this.showNav = true;
+  //   }
+  // },
+  // watch: {
+  //   '$route'(to, from) {
+  //     if (this.specificPages.includes(to.path)) {
+  //       this.showNav = true;
+  //     } else {
+  //       this.showNav = false;
+  //     }
+  //   }
+  // }
 }
 </script>
 
