@@ -2,18 +2,14 @@
     <div class="grey lighten-5" style="font-family: Arial">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
-          <router-link to="/">
-            <v-img
-                :src="require('@/assets/logo/3sss-ko.jpg')" width="300" class="mx-auto mb-6"/>
-          </router-link>
           <v-card width="460">
             <v-card-text class="text-center px-12 py-16">
               <v-form @submit.prevent="onSubmit" ref="form">
                 <div class="text-h4 font-weight-black mb-10">회원정보 변경</div>
   
                 <div class="d-flex">
-                  <v-text-field v-model="nickname" label="닉네임" @change="nicknameValidation"
-                                :rules="nickname_rule" :disabled="false" required/>
+                  <v-text-field v-model="nickname" label="닉네임 변경" @change="nicknameValidation"
+                                :rules="nickname_rule" :disabled="false" required="false"/>
                   <v-btn text large outlined style="font-size: 13px"
                          class="mt-3 ml-5" color="teal lighten-1"
                          @click="checkDuplicateNickName">
@@ -22,25 +18,25 @@
                 </div>
   
                 <div class="d-flex">
-                  <v-text-field v-model="newPassword" label="비밀번호" type="password"
+                  <v-text-field v-model="newPassword" label="새 비밀번호" type="password"
                                 :rules="newPassword_rule" :disabled="false" required/>
                 </div>
   
                 <div class="d-flex">
-                  <v-text-field v-model="newPassword_confirm" label="비밀번호 확인" type="password"
+                  <v-text-field v-model="newPassword_confirm" label="새 비밀번호 확인" type="password"
                                 :rules="newPassword_confirm_rule" :disabled="false" required/>
                 </div>
   
                 <div class="d-flex">
                   <v-text-field 
                     v-model="phoneNumber" 
-                    label="전화번호 입력" 
+                    label="전화번호 추가하기" 
                     type="phoneNumber" 
                     maxlength="11" 
                     placeholder="-를 제외하고 입력해주세요."
                     @input="phoneNumber = phoneNumber.replace(/[^0-9]/g, '')"
                     :rules="phoneNumber_rule"
-                    :disabled="false" required/>
+                    :disabled="false" required="false"/>
                 </div>
   
   
@@ -66,7 +62,7 @@
                 
                 <v-btn type="submit" block x-large rounded
                        class="mt-6" color="purple lighten-1" 
-                       :disabled="(nicknamePass) == false">
+                       >
                   변경하기
                 </v-btn>
   
@@ -105,7 +101,6 @@
         addressPass: false,
         
         nickname_rule: [
-          v => !!v || '닉네임을 입력해주세요.',
           v => !(v && v.length >= 15) || '닉네임은 15자 이상 입력할 수 없습니다.',
         ],
         newPassword_rule: [
@@ -119,8 +114,7 @@
         ],
   
         phoneNumber_rule: [
-           v => !!v || "전화번호를 입력해주세요.",
-           v => /^(010|011|016|017|018|019)[0-9]{7,8}$/.test(v) || "유효하지 않은 전화번호입니다.",
+           v => !v || /^(010|011|016|017|018|019)[0-9]{7,8}$/.test(v) || "유효하지 않은 전화번호입니다.",
         ],
         address_rule: [
           v => !!v || "주소를 입력해주세요.",  
