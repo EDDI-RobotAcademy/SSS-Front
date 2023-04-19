@@ -22,7 +22,7 @@
         })
             .then((res) => {
               alert("회원 가입 완료!")
-              this.$router.push("/member/sign-in")
+              this.$router.push({ name: 'SignIn', params: { prevRoute: 'SignUp' } });
             })
             .catch((res) => {
               alert(res.response.data.message)

@@ -19,8 +19,28 @@
               <tr>
                   <td>상세정보</td>
                   <td>
-                      <textarea cols="30" rows="10" v-model="content"/>
+                      <textarea cols="30" rows="5" v-model="content"/>
                   </td>
+              </tr>
+              <tr>
+                <td>영양정보</td>
+                <td>
+                    <label for="calorie">열량</label>
+                    <input type="number" name="calorie" v-model="productDetail.calorie" step="0.01" class="short-input"/>
+                    <label for="carbohydrate">탄수화물</label>
+                    <input type="number" name="carbohydrate" v-model="productDetail.carbohydrate" step="0.01" class="short-input"/>
+                    <label for="sugars">당류</label>
+                    <input type="number" name="sugars" v-model="productDetail.sugars" step="0.01" class="short-input"/>
+                    <label for="protein">단백질</label>
+                    <input type="number" name="protein" v-model="productDetail.protein" step="0.01" class="short-input"/>
+                    <br>
+                    <label for="fat">지방</label>
+                    <input type="number" name="fat" v-model="productDetail.fat" step="0.01" class="short-input"/>
+                    <label for="aturatedFat">포화지방</label>
+                    <input type="number" name="aturatedFat" v-model="productDetail.aturatedFat" step="0.01" class="short-input"/>
+                    <label for="natrium">나트륨</label>
+                    <input type="number" name="natrium" v-model="productDetail.natrium" step="0.01" class="short-input"/>
+                </td>
               </tr>
               <tr>
                 <td>상품 사진</td>
@@ -57,6 +77,15 @@
               title: '샐러드명',
               price: 0,
               content: '샐샐샐',
+              productDetail: {
+                calorie: 0,
+                carbohydrate: 0,
+                sugars: 0,
+                protein: 0,
+                fat: 0,
+                aturatedFat: 0,
+                natrium: 0,
+              },
               files: '',
               imageUrls: [],
           }
@@ -69,11 +98,12 @@
               }
               console.log('productImgList: ' + this.productImgList)
 
-                const { title, price, content } = this
+                const { title, price, content, productDetail } = this
                 let productInfo = {
                     title: title,
                     price: price,
                     content: content,
+                    productDetail: productDetail
                 }
                 console.log('productInfo: ' + JSON.stringify(productInfo))
                 formData.append("productInfo", new Blob([JSON.stringify(productInfo)], { type: "application/json" }))
@@ -98,5 +128,9 @@
 td {
     padding: 5px;
     border: 2px solid black;
+}
+
+.short-input {
+    width: 5em;
 }
   </style>
