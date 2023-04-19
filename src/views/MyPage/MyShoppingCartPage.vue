@@ -26,7 +26,9 @@ export default {
     ...mapActions(ordercartModule, [
       'requestAddCartListToSpring',
       'requestDeleteCartToSpring',
-      'requestModifyCartToSpring'
+      'requestModifyCartToSpring',
+
+    'requestSelfSaladAddCartListToSpring',  
     ]),
     async onDelete(payload) {
       const itemId = payload.itemId
@@ -52,6 +54,7 @@ export default {
   async created() {
   const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
   await this.requestAddCartListToSpring( memberId )
+  await this.requestSelfSaladAddCartListToSpring( memberId )
 }
 }
 </script>

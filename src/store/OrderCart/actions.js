@@ -1,5 +1,6 @@
 import {
-    REQUEST_ADD_CART_LIST_TO_SPRING
+    REQUEST_ADD_CART_LIST_TO_SPRING,
+    REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -70,7 +71,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     // let json = JSON.stringify(payload);
     console.log("payload  "+JSON.stringify(payload))
     try {
-        await axiosInst.post("/cart/selfSalad/register", payload , {
+        await axiosInst.post("/cart/selfsalad/register", payload , {
         headers: {
             'Content-Type': 'application/json'
         }})
@@ -81,6 +82,14 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     } catch (error) {
         alert("문제가 발생하여 장바구니에 추가되지 않았습니다.");
     }
-}
+},
+//리스트
+async requestSelfSaladAddCartListToSpring({ commit }, memberId) {
+    return await axiosInst.get(`/cart/list/${memberId}`)
+    .then((res) => {
+        commit(REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING, res.data);
+        console.log('리스트 연결');
+    })
+},
 
 }
