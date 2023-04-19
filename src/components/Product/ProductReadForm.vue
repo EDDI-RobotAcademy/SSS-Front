@@ -116,13 +116,13 @@
                     </tr>
                     <tr>
                       <td>{{product.title}}</td>
-                      <td>264.4</td>
-                      <td>36.4</td>
-                      <td>11.1</td>
-                      <td>7.3</td>
-                      <td>11.8</td>
-                      <td>1.6</td>
-                      <td>368.7</td>
+                      <td>{{ product.productDetail.calorie }}</td>
+                      <td>{{ product.productDetail.carbohydrate }}</td>
+                      <td>{{ product.productDetail.sugars }}</td>
+                      <td>{{ product.productDetail.protein }}</td>
+                      <td>{{ product.productDetail.fat }}</td>
+                      <td>{{ product.productDetail.aturatedFat }}</td>
+                      <td>{{ product.productDetail.natrium }}</td>
                     </tr>
                 </table>
               </v-row>
