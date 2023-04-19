@@ -27,7 +27,13 @@ export default {
       onSubmit (payload) {
         const { email, password } = payload
         this.requestMemberSignInToSpring({ email, password })
-        this.$router.go(-1)
+        
+        const prevRoute = this.$route.params.prevRoute;
+        if (prevRoute === "SignUp") {
+          this.$router.push("/");
+        } else {
+          this.$router.go(-1);
+        }
     }
   },
 }
