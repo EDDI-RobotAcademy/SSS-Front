@@ -84,7 +84,7 @@
         </v-container>
 
         <v-dialog v-model="showModal">
-          <self-salad-modify-cart-page @close="closeModal"  />
+          <self-salad-modify-cart-page :cartItemId="cartItemId" @close="closeModal"/>
         </v-dialog>
 
       
@@ -202,9 +202,9 @@ export default {
     },
     //모달창 열고 카트 아이디 보내주기
     openModal(idx) {
-      const itemId = this.cartItems[idx].cartItemId
+      this.cartItemId = idx
       this.showModal = true;
-      this.$emit('onSSSModify', { itemId })
+      this.$emit('onSSSModify', idx)
 
     },
     toggleAll(value) {
@@ -228,10 +228,6 @@ export default {
         window.location.reload(true);
       }
     },
-    // 모달을 열기 위한 메서드
-    // openModal() {
-    //   this.showModal = true;
-    // },
     // 모달을 닫기 위한 메서드
     closeModal() {
       this.showModal = false;
@@ -252,7 +248,6 @@ export default {
       }
       return sum;
     },
-    //셀프 샐러드 개수
     allChecked: {
       get() {
         return this.checkedValues.length === this.cartItems.length;
@@ -282,6 +277,8 @@ td {
   padding: 0.5rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
 }
 
 th {
