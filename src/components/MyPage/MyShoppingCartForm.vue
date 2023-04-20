@@ -41,11 +41,12 @@
                     <td class="itemCheck" align="left">
                       <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
                     </td>
+                    <td></td>
                     <td>
-                      <v-img :src="require(`@/assets/selfSalad/onion.png`)"
-                        style="max-width: 100px; max-height: 100px;" />
+                      <v-img :src="require(`@/assets/logo/3sss.jpg`)"
+                        style="max-width: 80px; max-height: 100px;" />
+                        {{ cartItem.title }}
                       </td>
-                    <td>{{ cartItem.title }}</td>
                     <td>
                       <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
                     </td>
