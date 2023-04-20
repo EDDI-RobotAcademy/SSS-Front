@@ -1,9 +1,11 @@
 <template>
   <v-container>
-  <self-salad-modify-cart-form 
+    <self-salad-modify-cart-form 
     :ingredients="ingredients"
     :cartItem="cartItem"
-    @change="changeCategory"/>
+    :cartItemId="cartItemId"
+    @change="changeCategory"
+    @submit="onSubmit"/>
     <v-btn @click="$emit('close')">
       닫기
     </v-btn>
@@ -20,6 +22,12 @@ const ordercartModule = 'ordercartModule'
   export default {
       components: { SelfSaladModifyCartForm },
       name: "SelfSaladModifyCartPage",
+      props: {
+        cartItemId: {
+      type: Number,
+      require: true,
+    }
+  },
       computed: {
         ...mapState(selfSaladModule, [
           'ingredients'
@@ -37,27 +45,24 @@ const ordercartModule = 'ordercartModule'
           'requestIngredientListToSpring',
           'requestIngredientCategoryToSpring',
         ]),
-      //   ...mapActions(ordercartModule, [ 
-      //     'requestSelfSaladToSpring'
-      // ]),
+        ...mapActions(ordercartModule, [ 
+          'requestSelfSaladCartModifyToSpring'
+        ]),
         async changeCategory(payload){
           await this.requestIngredientCategoryToSpring(payload) //카테고리 이름
         },
         // 수정 완 벝
-        async addCart(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
-            const quantity = payload.quantity
+        async onSubmit(payload) {
+            const itemId = this.cartItemId
             const totalPrice = payload.totalPrice
             const totalCalorie = payload.totalCalorie
-            const title = payload.title
             const selfSaladRequestList = payload.selfSaladRequestList
-            console.log('title: '+ title )
-            console.log('memberId: '+ memberId )
-            console.log('quantity: '+ quantity )
+            console.log('itemId: '+ itemId )
             console.log('totalPrice: '+ totalPrice )
             console.log('totalCalorie: '+ totalCalorie )
-            // await this.requestSelfSaladAddCartToSpring({title, quantity, totalPrice, totalCalorie, memberId})
-            await this.requestSelfSaladAddCartToSpring({ title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList})
+            await this.requestSelfSaladCartModifyToSpring({...payload, itemId});
+            window.location.reload(true);
+            // this.$emit('close'); // 수정 완료 시 모달창을 닫기.
           },
       },
       beforeRouteLeave(to, from, next) {

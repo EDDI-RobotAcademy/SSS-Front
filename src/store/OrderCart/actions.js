@@ -100,6 +100,20 @@ async requestSelfSaladToSpring ({ commit }, itemId) {
             commit(REQUEST_SELFSALAD_TO_SPRING, res.data)
             console.log('읽기 연결');
     })
-}
+},
 
+async requestSelfSaladCartModifyToSpring({}, payload) {
+    const itemId = payload.itemId; // payload에서 itemId 추출
+    console.log("payload  "+JSON.stringify(payload))
+    console.log("itemId: ", itemId)
+    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, payload, {
+        headers: {
+            'Content-Type': 'application/json'}})
+        .then(() => {
+                alert("수정이 완료 되었습니다.")
+        })
+        .catch(() => {
+            alert("문제가 발생하여 장바구니 수정이 되지 않았습니다.");
+        })
+    }
 }
