@@ -15,7 +15,7 @@
       </v-col>
       
       <v-col cols="6">           
-        <div>
+        <div class="product-info">
           <div class="d-flex justify-content-between align-items-center title">
           <h3>{{ product.title }}</h3>
         </div>
@@ -138,13 +138,6 @@
           </v-card>
         </v-tab-item>
 
-        <v-tab-item>
-          <v-card flat>
-            <v-card-title>
-              Q&A
-            </v-card-title>
-          </v-card>
-        </v-tab-item>
       </v-tabs-items>
     </div>
   </div>
@@ -153,8 +146,6 @@
 
 <script>
 import ReviewForm from "@/components/Product/review/ReviewForm.vue"
-import { mapActions } from 'vuex'
-const productModule = 'productModule'
 
 export default {
   name: "ProductReadForm",
@@ -169,9 +160,8 @@ export default {
       items: [
         {tab: '상품설명'},
         {tab: '상품후기'},
-        {tab: 'Q&A'},
       ],
-      deliveryFee: 3000,  //productInfo를 따로 만들것인지...(배송비, 찜 정보 등)
+      deliveryFee: 3000,
     }
   },
   filters: {
@@ -233,6 +223,9 @@ export default {
 </script>
 
 <style scoped>
+.product-info {
+  margin-top: 60px;
+}
 .ingredient th {
   font-size: 1.4em;
 }
