@@ -158,22 +158,65 @@
           <self-salad-modify-cart-page @close="closeModal"  />
         </v-dialog>
 
+      
+          <div class="sticky-nav">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; width: 800px; margin: 0 auto;">
+              <div>
+                <h5 style="font-weight: normal; color: white;">선택 상품금액</h5>
+                <span style="font-size: 30px; font-weight: bold; color: white;">
+                  {{ totalPrice | comma }}
+                </span>
+                <span style="color: white;">원</span>
+              </div>
+              <h2 style="margin-top: 10px; color: white;">+</h2>
+              <div>
+                <h5 style="font-weight: normal; color: white;">배송비</h5>
+                <div v-if="checkedValues.length === 0">
+                  <span style="font-size: 30px; font-weight: bold; color: white;">
+                    0
+                  </span>
+                  <span style="color: white;">원</span>
+                </div>
+                <div v-else-if="totalPrice < 50000">
+                  <span style="font-size: 30px; font-weight: bold; color: white;">
+                    {{ deliveryFee | comma}}
+                  </span>
+                  <span style="color: white;">원</span>
+                </div>
+                <div v-else>
+                  <span style="font-size: 30px; font-weight: bold; color: white;">무료배송</span>
+                </div>
+              </div>
+              <div style="border-left: 2px solid white; margin-left: 50px; color: white;"></div>
+              <div style="display: flex; align-items: center;">
+                <div v-if="checkedValues.length === 0">
+                  <h5 style="font-weight: normal; color: white;">총 주문금액</h5>
+                  <span style="font-size: 30px; font-weight: bold; color: white;">
+                    0
+                  </span>
+                  <span style="color: white;">원</span>
+                </div>
+                <div v-else>
+                  <h5 style="font-weight: normal; color: white;">총 주문금액</h5>
+                  <span style="font-size: 30px; font-weight: bold; color: white;">
+                    {{ totalPrice+deliveryFee | comma }}
+                  </span>
+                  <span style="color: white;">원</span>
+                </div>
+                <div style="margin-left: 50px;">
+                  <v-btn>
+                    <h4>{{ checkedValues.length }}건 주문하기</h4>
+                  </v-btn>
+                </div>
+              </div>
+            </div>
+          </div>
         
 
-              
-        <v-container style="width: 400px ">
-              <div>
-                <h5 style="font-weight: normal">최종 결제 금액</h5>
-                <span style="font-size: 30px; font-weight: bold">{{totalPrice | comma }}</span>
-                <span> 원 </span>
-              </div>
-              <v-btn width="100%" height="80px" style="background-color: #80a84f; color: white">
-            <h4>주문하기</h4>
-          </v-btn>
-        </v-container>
-      </v-card-text>
+        
+
+    </v-card-text>
     </v-card>
-  </v-container>
 </template>
 
 
@@ -197,6 +240,7 @@ export default {
       SSSOpen: true,
       ProductOpen: true,
       showModal: false,
+      deliveryFee: 3000
     }
   },
   methods: {
@@ -323,5 +367,12 @@ th {
 table th {
   font-weight: bold;
   text-align: center;
+}
+.sticky-nav {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: hsl(204, 12%, 58%);
 }
 </style>
