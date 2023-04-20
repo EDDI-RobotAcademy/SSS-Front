@@ -1,7 +1,6 @@
 import {
     REQUEST_BOARD_LIST_TO_SPRING,
     REQUEST_BOARD_TO_SPRING,
-
     REQUEST_REPLY_LIST_FROM_SPRING,
 
 } from './mutation-types'
@@ -11,15 +10,18 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 //등록
 async requestCreateBoardToSpring ({}, payload) {
+    const { title, writer, content, privateCheck, memberId } = payload
+    console.log(memberId)
     try {
-        await axiosInst.post('/board/register', payload)
+        await axiosInst.post('/board/register', 
+        { title, writer, content, privateCheck, memberId })
         alert('등록 성공!')
     } catch {
         alert('문제 발생!')
     }
 },
 //리스트
-async requestBoardListToSpring ({ commit }) {
+async requestBoardListToSpring ({ commit } ) {
     return await axiosInst.get('/board/list')
         .then((res) => {
             commit(REQUEST_BOARD_LIST_TO_SPRING, res.data)
@@ -60,6 +62,10 @@ async requestBoardModifyToSpring ({}, payload) {
 async requestCreateReplyToSpring ({}, payload) {
     const { replyWriter, replyContent, boardId, replyId } = payload
     try {
+        console.log(replyWriter)
+        console.log(replyContent)
+        console.log(boardId)
+        console.log(replyId)
         await axiosInst.post('/reply/register', 
         { replyWriter, replyContent, boardId, replyId })
         alert('댓글 등록 성공!')
@@ -75,18 +81,6 @@ async requestReplyListFromSpring ({ commit }, boardId) {
             console.log("1")
         })
     },
-    // //수정
-    // async requestBoardModifyToSpring ({}, payload) {
-    //     const { title, content, boardId, writer } = payload
-    //     return await axiosInst.put(`/board/${boardId}`,
-    //     { title, content, writer })
-    //         .then(() => {
-    //             alert("수정 성공")
-    //         })
-    //         .catch(() => {
-    //             alert("문제 발생!")
-    //         })
-    //     },    
 //삭제
 async requestReplyDeleteToSpring ({}, payload) {
     const { replyId } = payload

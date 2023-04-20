@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="box">
-      <h2>가장 자주하는 질문 FAQ</h2>
+      <h2>자유게시판</h2>
     </div>
     <div class="center">
     <router-link :to="{ name: 'QnaBoardRegisterPage' }">
@@ -86,32 +86,74 @@ export default {
 </script>
 
 <style scoped>
+
 .box {
   text-align: center;
-  padding-bottom: 50px;
+  margin-bottom: 30px;
 }
-.inner{
-  text-align: center;
-  padding-right: 100px;
-  width: 30%;
-  display: inline-block;
-  float: right;
-}
-.outer {
-  width:100%;
-}
+
 .center {
-  width: 30%;
-  text-align: center;
-  float: left;
-  padding-right: 300px;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 30px;
 }
-.center p{
+
+.center p {
+  color: #fff;
+  background-color: #739e42;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
   text-decoration: none;
-  font-weight: normal;
-  color:black;
 }
-.list { 
-  width: 100%;
+
+.center p:hover {
+  background-color: #739e42;
+}
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.inner select {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #739e42;
+  margin-right: 10px;
+}
+
+.inner input[type='text'] {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #739e42;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+
+.inner button {
+  width: 70px;
+  height: 35px;
+  background-color: #739e42;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.inner button:hover {
+  background-color: #739e42;
 }
 </style>
