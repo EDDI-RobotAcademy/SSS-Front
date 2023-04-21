@@ -68,11 +68,18 @@ async requestModifyCartToSpring ({}, payload) {
 },
 //셀프 샐러드 장바구니 추가
 async requestSelfSaladAddCartToSpring({}, payload) {
-    // const { title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList } = payload;
-    // let json = JSON.stringify(payload);
+    const { title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList } = payload;
+    let newTemp = []; // 새로운 배열 생성
+    for (let i = 0; i < selfSaladRequestList.length; i++) {
+        const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
+        if (selectedAmount <= 0) {
+            alert("수량이 0인 재료가 있습니다. 다시 한번 확인해 주세요.");
+            newTemp.push({ ingredientId, selectedAmount, amountType });
+        } 
+    }
     console.log("payload  "+JSON.stringify(payload))
     try {
-        await axiosInst.post("/cart/selfsalad/register", payload , {
+        await axiosInst.post("/cart/selfsalad/register", {title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList: newTemp} , {
         headers: {
             'Content-Type': 'application/json'
         }})
@@ -100,6 +107,20 @@ async requestSelfSaladToSpring ({ commit }, itemId) {
             commit(REQUEST_SELFSALAD_TO_SPRING, res.data)
             console.log('읽기 연결');
     })
-}
+},
 
+async requestSelfSaladCartModifyToSpring({}, payload) {
+    const itemId = payload.itemId; // payload에서 itemId 추출
+    console.log("payload  "+JSON.stringify(payload))
+    console.log("itemId: ", itemId)
+    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, payload, {
+        headers: {
+            'Content-Type': 'application/json'}})
+        .then(() => {
+                alert("수정이 완료 되었습니다.")
+        })
+        .catch(() => {
+            alert("문제가 발생하여 장바구니 수정이 되지 않았습니다.");
+        })
+    }
 }
