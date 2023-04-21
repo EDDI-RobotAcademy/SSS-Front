@@ -12,7 +12,8 @@
       <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
         <v-layout align-center style="width: 400px;">
           <v-text-field style="width: 100%; margin-right: 20px; font-family: Arial;" type="text" v-model="password" label="비밀번호"/>
-          <v-btn style="background-color: #609966; color: white;" type="submit">
+          
+          <v-btn style="background-color: #609966; color: white;" type="submit" @click="openModal()">
             확인
           </v-btn>
         </v-layout>
@@ -20,6 +21,10 @@
     </td>
   </tr>
 </table>
+<v-dialog v-model="showModal">
+  <my-member-info-modify-page @close="closeModal">
+  </my-member-info-modify-page>
+</v-dialog>
         </v-form>
       </v-card-text>
     </v-container>
@@ -29,7 +34,6 @@
 
 <script>
 import MyMemberInfoModifyPage from "@/views/MyPage/MyMemberInfoModifyPage.vue";
-import router from "@/router";
 import { mapActions } from "vuex";
 
 const memberModule = "memberModule";
@@ -42,11 +46,18 @@ export default {
   data() {
     return {
       password: "",
+      showModal:false,
+      
     };
   },
   methods: {
     ...mapActions(memberModule, ["requestCheckPasswordToSpring"]),
-
+    openModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
     onSubmit() {
       const memberId = parseInt(localStorage.getItem("userId"), 10);
       const password = this.password;
@@ -57,15 +68,15 @@ export default {
       this.requestCheckPasswordToSpring({memberId, password})
           .then((res) => {
             if (res === false) {
-              router.push("/my-info-account");
+              this.showModal = false;
             } else {
-              router.push("/my-member-Info-modify-page");
+
             }
           });
         },
-    },
-  };
-
+        
+  },
+};
     
 </script>
 

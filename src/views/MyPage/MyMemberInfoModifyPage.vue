@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <my-member-info-modify-form @submit="onSubmit"/>
-  </div>
+    <v-btn @click="$emit('close')" >닫기</v-btn>
+  </v-container>
 </template>
 
 <script>
@@ -24,8 +25,9 @@ export default {
       onSubmit(payload) {
         console.log(payload);
       this.requestUpdateMemberInfoFromSpring(payload);
-      this.$router.push("/my-info-account");  
+      this.$emit('close');
       console.log(payload);
+      
 }
 }
 }

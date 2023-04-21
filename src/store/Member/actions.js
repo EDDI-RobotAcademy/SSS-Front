@@ -45,13 +45,13 @@ async requestMemberSignInToSpring({ commit }, payload) {
     },
     
     
-async requestUpdateMemberInfoFromSpring({ commit }, payload) {
+    async requestUpdateMemberInfoFromSpring({ commit }, payload) {
       console.log(payload);
         const userId = parseInt(localStorage.getItem("userId"), 10);
 
         console.log('userId:', userId);
           
-        axiosInst.put(`/member/member-profile/${userId}`, payload)
+        axiosInst.put(`/member/profile-info/update/${userId}`, payload)
             .then((res) => {
               // 성공적으로 회원 정보를 수정했을 경우
               console.log(res.data);           
@@ -59,11 +59,6 @@ async requestUpdateMemberInfoFromSpring({ commit }, payload) {
               commit(MEMBER_INFO_MODIFY, payload);
             })
             .catch((err) => {
-              if (!payload.addresses) {
-                console.error('11111Address object is undefined.');
-                alert('.어드레스객체안갓대');
-                return;
-              }
               // 회원 정보 수정에 실패했을 경우
               console.error('Address object is undefined.');
               console.log(err.response.data.message);
@@ -71,6 +66,30 @@ async requestUpdateMemberInfoFromSpring({ commit }, payload) {
             });
             
         },
+        async requestUpdateAddressFromSpring({ commit }, payload) {
+            const userId = parseInt(localStorage.getItem("userId"), 10);
+            const{zipcode, city, street, addressDetail}= payload
+            console.log('userId:', userId);
+            console.log('payload= ' + zipcode, city, street, addressDetail);   
+            axiosInst.put(`/member/profile-address/update/${userId}`, payload,{
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+                .then((res) => {
+                  // 성공적으로 회원 정보를 수정했을 경우
+                  console.log(res.data);           
+                  alert('주소가 성공적으로 수정되었습니다.');
+                  commit(MEMBER_INFO_MODIFY, payload);
+                })
+                .catch((err) => {
+                  // 회원 정보 수정에 실패했을 경우
+                  console.error('Address object is undefined.');
+                  console.log(err.response.data.message);
+                  alert('수정실패ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ');
+                });
+                
+            },
 
 
 async requestCheckPasswordToSpring({}, payload) {
