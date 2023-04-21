@@ -48,7 +48,8 @@ export default {
       window.location.reload(true);
     },
     async onSSSModify(payload) {
-      const itemId = payload.itemId
+      // const itemId = payload.itemId
+      const itemId = payload
       console.log('itemId: '+ itemId )
       await this.requestSelfSaladToSpring( itemId )
     },

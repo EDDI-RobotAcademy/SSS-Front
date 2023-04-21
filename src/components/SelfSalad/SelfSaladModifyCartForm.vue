@@ -1,4 +1,5 @@
 <template>
+  <form @submit.prevent="onSubmit">
   <table style="background-color: white;">
     <tr class="background-category">{{ category }}</tr>
     <tr class="categorySession">
@@ -40,6 +41,7 @@
       <v-btn type="submit" color="blue">수정 완료</v-btn>
     </div>
   </table>
+  </form>
 </template>
 
 <script>
@@ -89,11 +91,6 @@ export default {
     },
   },
   methods: {
-    //아이디 맞는 애들만 카드에서 보여지게 함
-    findIngredientNameById(id) {
-      const ingredient = this.ingredients.find((item) => item.id === id);
-      return ingredient ? ingredient.name : "";
-    },
     onChange( selectPrice, selectCalorie, optionValue, selectedName, ingredientId, amountType ){
       this.totalPrice += selectPrice
       this.totalCalorie += selectCalorie
@@ -130,9 +127,6 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
       const categoryName = this.category
       this.$emit('change', categoryName)
     },
-    onDelete(payload){
-      this.$emit("click", payload)
-    },
     qtyDesc() {
       if(this.quantity > 1) {
         this.quantity--
@@ -143,15 +137,13 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
     qtyInc() {
       this.quantity++
     },
+    // 수정 완료
     onSubmit() {
-      // 수정 완 
-      const quantity = this.quantity
       const totalCalorie = this.totalCalorie
       const totalPrice = this.totalPrice *this.quantity 
       let selfSaladRequestList = this.selfSaladList // 배열을 복사하여 사용
-      console.log(selfSaladRequestList)
 
-      this.$emit('addCart', { quantity, totalPrice, totalCalorie, selfSaladRequestList })
+      this.$emit('submit', { totalPrice, totalCalorie, selfSaladRequestList })
     },
   },
 
