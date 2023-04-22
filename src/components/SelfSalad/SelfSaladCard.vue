@@ -142,7 +142,7 @@ export default{
 
       const priceChange = price - prevPrice
       const calorieChange = calorie - prevCalorie
-      const optionValue = this.selectedAmount
+      const optionValue = this.item.selectedAmount
       const ingredientId = this.ingredient.id
       const amountType = this.ingredient.amountType
 
