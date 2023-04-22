@@ -10,7 +10,7 @@
 
         <v-container>
           <v-card>
-            <v-card-title style="background-color: white" @click="CartOpen = !CartOpen">
+            <v-card-title style="background-color: white">
               <span style="font-size: 30px; font-weight: bold; color: black;">Order / Payment</span>
               <v-spacer></v-spacer>
               <v-btn style="color: black;" text @click="selectRemoveItem">
@@ -18,7 +18,7 @@
                 선택 삭제
               </v-btn>
             </v-card-title>
-            <v-card-text v-if="CartOpen">
+            <v-card-text>
               <table>
                 <thead>
                   <tr style="margin-top: 20px;">
@@ -166,7 +166,6 @@ export default {
   data() {
     return {
       checkedValues: [],
-      CartOpen: true,
       showModal: false,
       cartItemId: 0,
       deliveryFee: 3000
