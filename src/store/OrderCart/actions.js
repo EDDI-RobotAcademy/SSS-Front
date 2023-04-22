@@ -122,7 +122,6 @@ async requestSelfSaladCartModifyToSpring({}, payload) {
             newTemp.push({ ingredientId, selectedAmount, amountType });
         } 
     }
-
     await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, 
     { totalPrice, totalCalorie, selfSaladRequestList: newTemp} , {
         headers: {
@@ -132,6 +131,19 @@ async requestSelfSaladCartModifyToSpring({}, payload) {
         })
         .catch(() => {
             alert("문제가 발생하여 장바구니 수정이 되지 않았습니다.");
+        })
+    },
+
+//선택 삭제
+async requestSelectDeleteCartToSpring ({}, payload) {      
+    console.log("액션에서 찍은 삭제 리스트 : "+ JSON.stringify(payload))
+
+    return await axiosInst.delete("/cart/delete/list", { data: payload })
+        .then(() => {
+        alert("장바구니에서 삭제되었습니다.")
+        })
+        .catch(() => {
+        alert("문제 발생!")
         })
     }
 }
