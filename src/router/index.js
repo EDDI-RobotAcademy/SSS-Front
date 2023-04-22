@@ -34,9 +34,9 @@ import MyShoppingCartPage from "@/views/MyPage/MyShoppingCartPage"
 import MyReviewPage from "@/views/MyPage/MyReviewPage"
 import MyAccountPage from "@/views/MyPage/MyAccountPage"
 import MyQnaPage from "@/views/MyPage/MyQnaPage"
-import MyMemberInfoModifyPage from "@/views/MyPage/MyMemberInfoModifyPage.vue"
-import MyInfoPasswordCheckPage from "@/views/MyPage/MyInfoPasswordCheckPage.vue"
 
+import MyAddressPasswordCheckPage from "@/views/MyPage/MyAddressPasswordCheckPage.vue"
+import MyInfoPasswordCheckPage from "@/views/MyPage/MyInfoPasswordCheckPage.vue"
 
 Vue.use(VueRouter)
 
@@ -236,14 +236,15 @@ const routes = [
   component: MyQnaPage 
 },
 {
-  path: '/my-member-Info-modify-page',
-  name: 'MyMemberInfoModifyPage',
-  component: MyMemberInfoModifyPage
-},
-{
   path: '/my-info-password-check-page',
   name: 'MyInfoPasswordCheckPage',
   component: MyInfoPasswordCheckPage
+},
+
+{
+  path: '/my-address-password-check-page',
+  name: 'MyAddressPasswordCheckPage',
+  component: MyAddressPasswordCheckPage
 },
 
 ]
