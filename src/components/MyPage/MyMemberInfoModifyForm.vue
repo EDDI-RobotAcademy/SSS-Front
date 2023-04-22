@@ -136,7 +136,7 @@ export default {
 };
 </script>
   
-<style>
+<style scoped>
 .text-h4 {
   font-size: 24px;
   color: #40513B;
