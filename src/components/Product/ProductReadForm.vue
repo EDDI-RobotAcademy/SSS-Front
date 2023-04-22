@@ -43,7 +43,7 @@
           <div class="row">
             <p class="col-sm-4" style="text-align: left">총 합계</p>
             <div class="col-sm-8" align="right">
-              <p>{{ totalPrice | comma }}원</p>
+              <p>{{ quantity * product.price | comma }}원</p>
             </div>
           </div>
         </div>
@@ -165,7 +165,6 @@ export default {
       tab: null,
       idx: 0,
       quantity: 1,
-      totalPrice: 0,
       items: [
         {tab: '상품설명'},
         {tab: '상품후기'},
@@ -224,10 +223,7 @@ export default {
       } else {
         alert("로그인한 사용자만 가능합니다.")
       }
-    },
-  beforeUpdate() {
-    this.totalPrice = this.product.price * this.quantity
-  },
+    }
 },
 }
 </script>
