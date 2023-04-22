@@ -72,8 +72,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     let newTemp = []; // 새로운 배열 생성
     for (let i = 0; i < selfSaladRequestList.length; i++) {
         const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
-        if (selectedAmount <= 0) {
-            alert("수량이 0인 재료가 있습니다. 다시 한번 확인해 주세요.");
+        if (selectedAmount > 0) {
             newTemp.push({ ingredientId, selectedAmount, amountType });
         } 
     }
@@ -108,12 +107,23 @@ async requestSelfSaladToSpring ({ commit }, itemId) {
             console.log('읽기 연결');
     })
 },
-
+//셀프샐러드 수정 완료
 async requestSelfSaladCartModifyToSpring({}, payload) {
     const itemId = payload.itemId; // payload에서 itemId 추출
+
     console.log("payload  "+JSON.stringify(payload))
-    console.log("itemId: ", itemId)
-    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, payload, {
+    console.log("itemId: "+ itemId)
+    
+    const {totalPrice, totalCalorie, selfSaladRequestList} = payload;
+    let newTemp = []; // 새로운 배열 생성
+    for (let i = 0; i < selfSaladRequestList.length; i++) {
+        const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
+        if (selectedAmount > 0) {
+            newTemp.push({ ingredientId, selectedAmount, amountType });
+        } 
+    }
+    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, 
+    { totalPrice, totalCalorie, selfSaladRequestList: newTemp} , {
         headers: {
             'Content-Type': 'application/json'}})
         .then(() => {
@@ -121,6 +131,19 @@ async requestSelfSaladCartModifyToSpring({}, payload) {
         })
         .catch(() => {
             alert("문제가 발생하여 장바구니 수정이 되지 않았습니다.");
+        })
+    },
+
+//선택 삭제
+async requestSelectDeleteCartToSpring ({}, payload) {      
+    console.log("액션에서 찍은 삭제 리스트 : "+ JSON.stringify(payload))
+
+    return await axiosInst.delete("/cart/delete/list", { data: payload })
+        .then(() => {
+        alert("장바구니에서 삭제되었습니다.")
+        })
+        .catch(() => {
+        alert("문제 발생!")
         })
     }
 }

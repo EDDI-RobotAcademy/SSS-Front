@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <my-page/>
-    <my-shopping-cart-form :cartItems="cartItems" @onDelete="onDelete" @onModify="onModify" @onSSSModify="onSSSModify"/>
+    <my-shopping-cart-form :cartItems="cartItems" @onDelete="onDelete" @onModify="onModify" @onSSSModify="onSSSModify" @selectDelete="selectDelete"/>
   </v-container>
 </template>
 
@@ -37,7 +37,8 @@ export default {
       'requestModifyCartToSpring',
 
     'requestSelfSaladAddCartListToSpring',  
-    'requestSelfSaladToSpring'
+    'requestSelfSaladToSpring',
+    'requestSelectDeleteCartToSpring'
     ]),
     async onDelete(payload) {
       const itemId = payload.itemId
@@ -62,8 +63,10 @@ export default {
       console.log('category: '+ category )
       await this.requestModifyCartToSpring({ itemId, quantity, category })
       window.location.reload(true);
-
-
+    },
+    async selectDelete(payload) {
+      await this.requestSelectDeleteCartToSpring(payload)
+      window.location.reload(true);
     }
   },
   async created() {

@@ -10,7 +10,7 @@
       </div>
       <div class="backgroundImg">
         <div class="white-box">
-          <select id="selection" class="form-select" v-model="selectedAmount" @change="onChange">
+          <select id="selection" class="form-select" v-model="item.selectedAmount" @change="onChange">
             <option disabled :value="option.value">수량</option>
             <option>0</option>
             <option v-for="(number, index) in numbers" :key="index" :value="number">{{ number }} </option>       
@@ -43,6 +43,8 @@ export default{
       number: '',
       prevSelectedAmount: 0,
 
+      selectedAmount: this.item.selectedAmount,
+  
       selectedAmount: -1,
       option: {
         value: -1,
@@ -140,7 +142,7 @@ export default{
 
       const priceChange = price - prevPrice
       const calorieChange = calorie - prevCalorie
-      const optionValue = this.selectedAmount
+      const optionValue = this.item.selectedAmount
       const ingredientId = this.ingredient.id
       const amountType = this.ingredient.amountType
 
