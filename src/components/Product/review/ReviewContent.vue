@@ -3,63 +3,66 @@
     <v-row>
         <v-col cols="4" align="right">
             <div class="mr-3">
-                <p>{{ review.regDate }}</p>
+                <p>{{ review.nickName | comma }}</p>
                 <v-rating
-                    :value="review.rating"
-                    background-color="grey"
-                    color="yello darken-1"                    
-                    readonly
-                    dense
+                :value="review.rating"
+                background-color="grey"
+                color="yello darken-1"                    
+                readonly
+                dense
                 ></v-rating>
+                <p>{{ review.regDate }}</p>
             </div>
         </v-col>
         <v-col cols="8" align="left">
             <div class="ml-3">
-                <!-- <p>{{ review.member.nickname | comma }}</p> -->
+                
                 <p>{{ review.content }}</p>
             </div>
-            <div class="image-container" v-if="reviewImgs && reviewImgs.length > 0">
-                <div v-for="(image, index) in reviewImgs" :key="index">
+            <v-row v-if="review.reviewImgs && review.reviewImgs.length > 0">
+                <v-col v-for="image in review.reviewImgs" :key="image.reviewImgId" cols="2">
                     <v-img
                         :src="require(`@/assets/review/${image.editedImg}`)"
                         height="100" width="200" contain @click="openReview"
                     ></v-img>
-                </div>
-            </div>
+                </v-col>
+            </v-row>
         </v-col>
     </v-row>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="700px">
       <v-card>
-        <v-card-title>사진 후기</v-card-title>
+          <v-card-actions>
+            <v-card-title style="font-size: 25px;">사진 후기</v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="closeReview"><v-icon>mdi-close</v-icon></v-btn>
+        </v-card-actions>
         <v-divider></v-divider>
         <v-container>
             <v-row>
-                <v-col cols="6">
-                  <div v-for="(image, index) in reviewImgs" :key="index"> 
+                <v-col cols="12" md="6">
                     <v-img
-                      :src="require(`@/assets/review/${image.editedImg}`)"
+                      :src="require(`@/assets/review/${selectedImg || review.reviewImgs[0].editedImg}`)"
                       height="300" width="400" contain
                     ></v-img>
-                  </div>
                 </v-col>
-                <v-col cols="6">
-                    <!-- <p>{{ review.member.nickname | comma }}</p> -->
+                <v-col cols="12" md="6">
+                    <p style="font-weight: bold;">{{ review.nickName | comma }} 님</p>
                     <p>{{ review.content }}</p>
                     <p>{{ review.regDate }}</p>
                 </v-col>
             </v-row>
         </v-container>
         <v-card-text>
-            <div v-for="(image, index) in reviewImgs.slice(1)" :key="index">
+            <v-row>
+                <v-col v-for="image in review.reviewImgs" :key="image.reviewImgId" cols="2">
                 <v-img
                     :src="require(`@/assets/review/${image.editedImg}`)"
-                    height="50" width="100" contain
+                    height="100" width="100" contain
+                    @click="selectedImg = image.editedImg"
                 ></v-img>
-            </div>
+                </v-col>
+            </v-row>
         </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="closeReview">Close</v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -74,7 +77,8 @@ export default {
     props: {
         review: {
             type: Object,
-            required: true
+            required: true,
+            default: () => {}
         },
         reviewImgs: {
             type: Array,
@@ -84,6 +88,7 @@ export default {
     data() {
         return {
             dialog: false,
+            selectedImg: null,
         }
     },
     methods: {
@@ -95,6 +100,10 @@ export default {
         },
         closeReview() {
             this.dialog = false
+            this.currentImg = ''
+        },
+        changeImg(image) {
+            this.selectedImg = image;
         }
     },
     created() {
@@ -104,6 +113,13 @@ export default {
     filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    },
+    watch: {
+        dialog(val) {
+            if (!val) {
+                this.currentImg = ''
+            }
+        }
     }
   },
 }
