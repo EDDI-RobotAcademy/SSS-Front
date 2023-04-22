@@ -87,13 +87,13 @@
           },
         },
       async created () {
-          await this.requestProductToSpring(this.productId)
-          await this.requestProductImageToSpring(this.productId)
-          await this.viewCntUp(this.productId);
-          
           const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
           const productId = this.productId
-          
+
+          await this.requestProductToSpring(productId)
+          await this.requestProductImageToSpring(productId)
+          await this.viewCntUp({productId, memberId});
+                    
           if(memberId) {
             const localLike = localStorage.getItem(`${memberId}_${productId}_like`);
             if (localLike) {

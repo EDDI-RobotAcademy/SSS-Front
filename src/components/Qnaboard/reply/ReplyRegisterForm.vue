@@ -14,12 +14,9 @@
                 <p>작성자</p>
               </v-col>
               <v-col cols="2">
-                <v-textarea
-                    color="black"
-                    height="5px"
-                    v-model="replyWriter"
-                    outlined>
-                </v-textarea>
+                <td>
+                  {{this.$store.state.memberModule.memberInfoAboutSignIn.userNickName}}
+                </td>
               </v-col>
           </v-row>
             <v-row>
@@ -67,13 +64,13 @@
     data () {
       return {
         replyContent: '',
-        replyWriter: '',
       }
     },
-    methods: {
+    methods: { 
       onSubmit() {
-        const {replyContent, replyWriter} = this
-        this.$emit('submit', {replyContent, replyWriter})
+        const { replyContent, boardId, replyId } = this
+        const replyWriter = this.$store.state.memberModule.memberInfoAboutSignIn.userNickName;
+        this.$emit('submit', {replyContent, replyWriter, replyId, boardId})
       }
     },
     
