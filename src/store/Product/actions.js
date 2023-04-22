@@ -107,6 +107,12 @@ async requestReviewImageToSpring({commit}, reviewId) {
                 commit(REQUEST_REVIEW_IMAGE_TO_SPRING, res.data)
             })
     },
+async requestDeleteReviewToSpring({}, reviewId) {
+    return axiosInst.delete(`/review/delete/${reviewId}`)
+            .then(() => {
+                alert("작성하신 후기가 삭제되었습니다.")
+            })
+}, 
 
 async requestFavoriteListToSpring({commit}, memberId)  {
     return await axiosInst.get(`/products/favorite/myFavorite/${memberId}`)
