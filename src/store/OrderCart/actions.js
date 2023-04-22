@@ -72,8 +72,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     let newTemp = []; // 새로운 배열 생성
     for (let i = 0; i < selfSaladRequestList.length; i++) {
         const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
-        if (selectedAmount <= 0) {
-            alert("수량이 0인 재료가 있습니다. 다시 한번 확인해 주세요.");
+        if (selectedAmount > 0) {
             newTemp.push({ ingredientId, selectedAmount, amountType });
         } 
     }
