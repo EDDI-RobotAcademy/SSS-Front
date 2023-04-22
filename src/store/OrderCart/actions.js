@@ -108,12 +108,24 @@ async requestSelfSaladToSpring ({ commit }, itemId) {
             console.log('읽기 연결');
     })
 },
-
+//셀프샐러드 수정 완료
 async requestSelfSaladCartModifyToSpring({}, payload) {
     const itemId = payload.itemId; // payload에서 itemId 추출
+
     console.log("payload  "+JSON.stringify(payload))
-    console.log("itemId: ", itemId)
-    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, payload, {
+    console.log("itemId: "+ itemId)
+    
+    const {totalPrice, totalCalorie, selfSaladRequestList} = payload;
+    let newTemp = []; // 새로운 배열 생성
+    for (let i = 0; i < selfSaladRequestList.length; i++) {
+        const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
+        if (selectedAmount > 0) {
+            newTemp.push({ ingredientId, selectedAmount, amountType });
+        } 
+    }
+
+    await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, 
+    { totalPrice, totalCalorie, selfSaladRequestList: newTemp} , {
         headers: {
             'Content-Type': 'application/json'}})
         .then(() => {

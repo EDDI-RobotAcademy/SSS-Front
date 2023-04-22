@@ -53,14 +53,8 @@ const ordercartModule = 'ordercartModule'
         },
         // 수정 완 벝
         async onSubmit(payload) {
-            const itemId = this.cartItemId
-            const totalPrice = payload.totalPrice
-            const totalCalorie = payload.totalCalorie
-            const selfSaladRequestList = payload.selfSaladRequestList
-            console.log('itemId: '+ itemId )
-            console.log('totalPrice: '+ totalPrice )
-            console.log('totalCalorie: '+ totalCalorie )
-            await this.requestSelfSaladCartModifyToSpring({...payload, itemId});
+            const itemId = payload.itemId
+            await this.requestSelfSaladCartModifyToSpring(payload, itemId);
             window.location.reload(true);
             // this.$emit('close'); // 수정 완료 시 모달창을 닫기.
           },
