@@ -94,6 +94,13 @@ async requestReadReviewToSpring({commit}, productId) {
                 commit(REQUEST_READ_REVIEW_TO_SPRING, res.data)
             })
     },
+async requestReadMyReviewToSpring({commit}, memberId) {
+    return await axiosInst.get(`/review/list-myReview/${memberId}`)
+            .then((res) => {
+                console.log(res.data)
+                commit(REQUEST_READ_REVIEW_TO_SPRING, res.data)
+            })
+},    
 async requestReviewImageToSpring({commit}, reviewId) {
     return await axiosInst.get(`/review/image/${reviewId}`)
             .then((res) => {
