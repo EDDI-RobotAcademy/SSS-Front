@@ -39,7 +39,14 @@ async requestProductToSpring ({ commit }, productId) {
             commit(REQUEST_PRODUCT_TO_SPRING, res.data)
     })
 },
-
+// 각 리뷰에 해당 상품 정보 할당
+async requestProductInfoToSpring ({}, productId) {
+    return await axiosInst.get(`/products/${productId}`)
+        .then((res) => {
+            console.log(res.data)
+            return res.data
+    })
+},
 //이미지 읽기
 async requestProductImageToSpring ({ commit }, productId) {
     return await axiosInst.get(`/products/imageList/${productId}`)
@@ -107,6 +114,26 @@ async requestReviewImageToSpring({commit}, reviewId) {
                 commit(REQUEST_REVIEW_IMAGE_TO_SPRING, res.data)
             })
     },
+async requestModifyReviewTextToSpring({}, payload) {
+    const {reviewId, rating, content} = payload
+    return await axiosInst.put(`/review/modifyText/${reviewId}`, {rating, content})
+            .then(() => {
+                alert("작성하신 후기가 수정되었습니다.")
+            })
+},
+async requestModifyReviewToSpring({}, payload) {
+    const {formData, reviewId} = payload
+    return await axiosInst.put(`/review/modify/${reviewId}`,
+            formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'}})
+            .then(() => {
+                alert("작성하신 후기가 수정되었습니다.")
+            })
+            .catch(() => {
+                alert("문제 발생!")
+            })
+},
 async requestDeleteReviewToSpring({}, reviewId) {
     return axiosInst.delete(`/review/delete/${reviewId}`)
             .then(() => {

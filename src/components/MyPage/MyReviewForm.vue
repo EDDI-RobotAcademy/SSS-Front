@@ -72,7 +72,7 @@
               </v-card>
               <review-modify-form
                   ref="ReviewModifyForm"
-                  :review="review" :product="product"/>
+                  :review="review" :product="review.product"/>
             </div>
           </div>
         </v-container>
@@ -98,7 +98,8 @@ export default {
       'requestReadMyReviewToSpring', 'requestProductInfoToSpring', 'requestProductToSpring', 'requestDeleteReviewToSpring'
     ]),
     clickModify(reviewId) {
-        this.$root.$emit('clickModify', reviewId)
+      console.log(reviewId)
+       this.$root.$emit('clickModify', reviewId)
     },
     async clickDelete(reviewId) {
       await this.requestDeleteReviewToSpring(reviewId)
@@ -110,7 +111,7 @@ export default {
     await this.requestReadMyReviewToSpring(memberId)
     const productRequests = this.reviews.map(review => {
         const productId = review.productId
-        this.requestProductToSpring(productId)
+         this.requestProductToSpring(productId)
         return this.requestProductInfoToSpring(productId)
     })
 
@@ -126,10 +127,6 @@ export default {
       'reviews'
     ])
   },
-  // created() {
-  //   const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
-  //   this.requestReadMyReviewToSpring(memberId)
-  // }
 }
 </script>
 
