@@ -1,7 +1,6 @@
 <template>
     <v-container>
       <my-address-modify-form @submit="onSubmit"/>
-      <v-btn @click="$emit('close')" >닫기</v-btn>
     </v-container>
   </template>
   

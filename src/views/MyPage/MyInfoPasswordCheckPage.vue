@@ -11,7 +11,7 @@
       </div>
       <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
         <v-layout align-center style="width: 400px;">
-          <v-text-field style="width: 100%; margin-right: 20px; font-family: Arial;" type="text" v-model="password" label="비밀번호"/>
+          <v-text-field style="width: 100%; margin-right: 20px; font-family: Arial;" type="password" v-model="password" label="비밀번호"/>
           
           <v-btn style="background-color: #609966; color: white;" type="submit" @click="openModal()">
             확인
@@ -21,7 +21,7 @@
     </td>
   </tr>
 </table>
-<v-dialog v-model="showModal">
+<v-dialog v-model="showModal" width ="1000px">
   <my-member-info-modify-page @close="closeModal">
   </my-member-info-modify-page>
 </v-dialog>
