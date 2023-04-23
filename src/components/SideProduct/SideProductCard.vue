@@ -3,36 +3,47 @@
     <v-dialog v-model="showPreview" width="500">
       <v-card>
         <v-card-text>
+          <v-row>
+            <v-col col="12">
           <v-img
             :src="require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`)"
             aspect-ratio="1"
             />
+          </v-col>
               <p class="product-title">{{ sideProduct.title }}</p>
               <p class="product-price">{{ sideProduct.price | comma }}원</p>
-              <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
-                <p>구매수량</p>
+              <v-col cols="12">
+              <div class="d-flex justify-content-between align-items-center" style="background-color: #9DC08B; padding: 10px">
                 <div class="d-flex align-items-center">
-                  <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+                <p style="font-size:15px; color:white; margin: 0;">구매수량</p>
+              </div>
+                <div class="d-flex align-items-center">
+                  <v-btn class="mr-2" elevation="0" color="#EDF1D6" small @click="qtyDesc">
                     <v-icon size="15">mdi-minus</v-icon>
                   </v-btn>
                   <div>{{ quantity }}</div>
-                  <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
+                  <v-btn class="ml-2" elevation="0" color="#EDF1D6" small @click="qtyInc">
                     <v-icon size="15">mdi-plus</v-icon>
                   </v-btn>
                 </div>
               </div>
-              <div class="row">
-                <p class="col-sm-4" style="text-align: left">총 합계</p>
-                <div class="col-sm-8" align="right">
-                  <p>{{ totalPrice | comma }}원</p>
-                </div>
-              </div>
-          <div class="d-flex justify-content-between">
-            <v-btn color="green" @click="showPreview = false">취소</v-btn>
-            <v-btn @click="clickAddCart" width="240px" x-large>
-              <v-icon>mdi-cart-variant</v-icon><span>장바구니</span>
-            </v-btn>
-          </div>
+            </v-col>
+              <v-col cols="12">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px">
+    <p style="text-align: left; margin: 0; font-size: 20px;">총 합계</p>
+    <p style="text-align: right; margin: 0; font-size: 20px;">{{ totalPrice | comma }}원</p>
+  </div>
+</v-col>
+<v-col>
+  <div class="d-flex justify-center align-center justify-space-between">
+    <v-btn @click="clickAddCart" width="150" height="40" color="#9DC08B">
+      <v-icon size="24" style="color: white;">mdi-cart-variant</v-icon>
+      <span style="color: white;">장바구니</span>
+    </v-btn>
+    <v-btn width="150" height="40" color="#9DC08B" @click="showPreview = false" class="ml-2"><span style="color: white;">닫기</span></v-btn>
+  </div>
+</v-col>
+        </v-row>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -41,8 +52,8 @@
       @click="showPreview = true"
       aspect-ratio="1"
     />
-    <p class="product-title">{{ sideProduct.title }}</p>
-    <p class="product-price">{{ sideProduct.price | comma }} 원</p>
+    <p style="text-align: center;" class="product-title">{{ sideProduct.title }}</p>
+    <p style="text-align: center;" class="product-price">{{ sideProduct.price | comma }} 원</p>
   </v-container>
 </template>
 
@@ -122,13 +133,16 @@ methods:{
 <style scoped>
 
 .product-title {
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.product-price {
-  color: green;
-}
+    font-size: 25px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .product-price {
+    font-size: 20px;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 10px;
+  }
 .v-card {
   position: fixed;
   top: 120px;
