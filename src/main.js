@@ -15,3 +15,6 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+// 전역으로 폰트 스타일 등록
+import './App.vue';
