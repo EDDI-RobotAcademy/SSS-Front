@@ -118,20 +118,19 @@ export default {
 </script>
 
 <style scoped>
-v-text-feild {
-  width: 600px;
-  border: none;
-  box-shadow: none;
-  padding: 12px 16px;
-  width: 100%;
-  line-height: 1.2;
 
-}
+@media (max-width: 600px) {
+    .d-flex {
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+
 
 .text-h4 {
   font-size: 24px;
   color: #40513B;
 }
+
 
 
 

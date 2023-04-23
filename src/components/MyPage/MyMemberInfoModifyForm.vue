@@ -146,16 +146,6 @@ export default {
 </script>
   
 <style scoped>
-v-text-feild {
-  min-width: 400px;
-  max-width: 550px;
-  border: none;
-  box-shadow: none;
-  padding: 12px 16px;
-  width: 100%;
-  line-height: 1.2;
-
-}
 
 .text-h4 {
   font-size: 24px;
