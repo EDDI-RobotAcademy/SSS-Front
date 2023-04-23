@@ -1,31 +1,36 @@
 <template>
     <v-container>
-        <h1>Salad</h1>
-        <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+      <v-col cols="12">
+        <div>
+          <div class="search-bar">
+        <p class="saladPageName">Salad</p> 
+        <div>
+          <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
             상품 등록
         </router-link>
-
-          <v-col cols="12">
-            <div class="search-bar">
-              <select v-model="searchBy">
+        </div>
+        <div class="search-bar">
+              <select v-model="searchBy" style="padding-right: 10px;">
                 <option value="title">제품명</option>
               </select>
-              <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchProducts">
-              <button @click="searchProducts">검색</button>
+              <v-text-field v-model="searchQuery" style="width: 300px; margin-right: 20px;" type="text" placeholder="찾고싶은 제품을 입력하세요"/>
+              <v-btn style="background-color: #609966; color: white;" type="submit" @click="searchProducts">
+              검색
+            </v-btn>
             </div>
+            </div>
+            <div class="longline"/>
+          </div>
           </v-col>
           <v-col cols="12">
             <div class="sort-bar">
               <div class="total">
-                총 {{ dpitems.length }}개
+               총 {{ dpitems.length }}개
               </div>
               <sort-product class="sort"/>
             </div>
           </v-col>
-
-
-          <product-list-form :products="dpitems" :current-page="currentPage" /> 
-
+          <product-list-form :products="dpitems" :current-page="currentPage" />
     </v-container>
   </template>
   
@@ -93,6 +98,15 @@
   </script>
   
   <style scoped>
+  .saladPageName{
+    font-size: 60px;
+    text-align: left;
+    color: #40513B;
+    
+  }
+  .search-bar {
+  font-size: 20px; /* 폰트 크기를 20px로 설정 */
+}
 .search-bar, .sort-bar {
   display: flex;
   justify-content: flex-end;
@@ -101,7 +115,9 @@
 
 .search-bar select,
 .search-bar input[type="text"],
-.search-bar button,
+.search-bar button,{
+font-size: 20px;
+}
 .sort-bar .sort {
   width: auto;
   margin-right: 10px;
@@ -112,10 +128,32 @@
 .sort-bar .total {
   margin-right: auto;
   margin-left: 20px;
+  
 }
 
 .total {
   font-size: 20px;
   font-weight: bold;
 }
+
+.longline{
+    width: 100%;
+    border-bottom: 3px solid #40513B;
+    margin: 10px 0;
+}
+.search-bar {
+  display: flex;
+  justify-content: space-between; /* 요소들을 양쪽 끝으로 정렬 */
+  align-items: center;
+}
+
+.sort-bar {
+  display: flex;
+  justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
+  align-items: center;
+}
+*{
+    color: #40513B;
+  }
+
   </style>
