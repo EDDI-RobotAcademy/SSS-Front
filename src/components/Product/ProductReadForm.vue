@@ -28,14 +28,14 @@
           <p>{{ deliveryFee | comma }}원
           (5만원 이상 무료배송)</p>
         </div>
-          <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
+          <div class="d-flex justify-content-between align-items-center" style="border-radius: 8px; background-color: #EDF1D6; padding: 10px">
             <p>구매수량</p>
             <div class="d-flex align-items-center">
-              <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
                 <v-icon size="15">mdi-minus</v-icon>
               </v-btn>
               <div>{{ quantity }}</div>
-              <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
+              <v-btn style="background-color: #9DC08B;" rounded class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
                 <v-icon size="15">mdi-plus</v-icon>
               </v-btn>
             </div>
@@ -62,14 +62,14 @@
             <v-btn
               @click="clickAddCart"
                 width="240px"
-                x-large style="background-color: #9DC08B;"><v-icon>mdi-cart-variant</v-icon><span>장바구니</span></v-btn>
+                x-large style="background-color: #9DC08B; color: white;"><v-icon>mdi-cart-variant</v-icon><span style="color:white">장바구니</span></v-btn>
           </v-col>
           <v-col>      
             <v-btn
                 @click="btnDirectPurchase"
                 btn-name="바로구매"
                 width="240px"
-                x-large style="background-color: #9DC08B;"><v-icon>mdi-shopping</v-icon><span>바로구매</span></v-btn>
+                x-large style="background-color: #9DC08B; color: white;"><v-icon>mdi-shopping</v-icon><span style="color:white">바로구매</span></v-btn>
           </v-col>  
         </v-row>    
       </v-col>
@@ -224,8 +224,12 @@ export default {
 }
 .ingredient th {
   font-size: 1.4em;
+  color:white;
 }
 .ingredient td {
   font-size: 1.4em;
 }
+*{
+    color: #40513B;
+  }
 </style>
