@@ -1,59 +1,68 @@
 <template>
-  <div class="grey lighten-5" style="font-family: 'Nanum Gothic', sans-serif;">
-    <v-row justify="center">
-      <v-col class="mx-auto" md="6" style="padding-bottom: 0px;">
-        <v-card width="auto">
-          <v-card-text class="text-center px-12 py-16">
-            <v-form @submit.prevent="onSubmit" ref="form" style="width: 500px; margin: 0 auto;">
-              <div class="text-h4 font-weight-black mb-10">회원정보 변경</div>
-              <v-row>
-                <v-col cols="12">
-                  <div stlye="margin-bottom: 30px">
-                    <p>닉네임 변경</p>
-                  </div>
-                  <div class="d-flex align-center align-items-center">
-                    <v-text-field v-model="nickname" @change="nicknameValidation" :rules="nickname_rule" :disabled="false"
-                      label="닉네임을 변경하는 경우 입력하세요." outlined dense class="align-self-center" style="margin-top: 30px;" />
-                    <v-btn type="button" color="#609966" dark @click="checkDuplicateNickName" style="margin-left: 15px;">
-                      <span style="color: #fff;">닉네임 중복 확인</span>
-                    </v-btn>
-                  </div>
-                </v-col>
+  <div class="grey lighten-5">
+    <v-container style="max-width: none;">
+      <v-row justify="center">
+        <v-col class="mx-auto" lg="6" md="8" sm="12">
+          <v-card class="mx-auto" max-width="100%">
+                <div class="d-flex justify-center align-center text-center">
+            <v-card-text class="text-center px-6 py-8">
+              <v-form @submit.prevent="onSubmit" ref="form">
+                <div class="text-h4 font-weight-black mb-6">회원정보 변경</div>
+                <v-row>
+                  <div>
+                  <v-col cols="12">
+                    <div style="margin-bottom: 20px" >
+                      <p>닉네임 변경</p>
+                    </div>
+                    <div class="d-flex align-center align-items-center">
+                      <v-text-field v-model="nickname" @change="nicknameValidation" :rules="nickname_rule" :disabled="false" 
+                        label="닉네임을 변경하는 경우 입력하세요." outlined dense class="align-self-center" style="margin-top: 30px;" />
+                      <v-btn type="button" color="#609966" dark @click="checkDuplicateNickName"
+                        style="margin-left: 15px; font-size: 17px; height: 45px;">
+                        <span style="color: #fff;">중복 확인</span>
+                      </v-btn>
+                    </div>
+                  </v-col>
 
-                <v-col cols="12">
-                  <p style="font-size: ;">비밀번호 변경</p>
-                </v-col>
-                <v-col cols="12">
-                  <div class="d-flex align-center">
-                    <v-text-field v-model="newPassword" label="비밀번호를 변경 하는 경우 입력하세요." type="password"
-                      :rules="newPassword_rule" :disabled="false" outlined dense />
-                  </div>
-                  <div class="d-flex align-center">
-                    <v-text-field v-model="newPassword_confirm" label="비밀번호 확인" type="password"
-                      :rules="newPassword_confirm_rule" :disabled="false" outlined dense />
-                  </div>
-                </v-col>
-                <v-col cols="12">
-                  <p>전화번호 변경</p>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field v-model="phoneNumber" label="전화번호를 변경 하는 경우 입력하세요." type="phoneNumber" maxlength="11"
-                    placeholder="-를 제외하고 입력해주세요." @input="phoneNumber = phoneNumber.replace(/[^0-9]/g, '')"
-                    :rules="phoneNumber_rule" :disabled="false" outlined dense />
-                </v-col>
+                  <v-col cols="12">
+                    <p style="margin-top: 20px;">비밀번호 변경</p>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex align-center">
+                      <v-text-field v-model="newPassword" label="비밀번호를 변경하는 경우 입력하세요." type="password"
+                        :rules="newPassword_rule" :disabled="false" outlined dense />
+                    </div>
+                    <div class="d-flex align-center">
+                      <v-text-field v-model="newPassword_confirm" label="비밀번호 확인" type="password"
+                        :rules="newPassword_confirm_rule" :disabled="false" outlined dense />
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <p>전화번호 변경</p>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex align-center align-items-center">
+                    <v-text-field v-model="phoneNumber" label="전화번호를 변경하는 경우 입력하세요." type="phoneNumber" maxlength="11" 
+                      placeholder="-를 제외하고 입력해주세요." @input="phoneNumber = phoneNumber.replace(/[^0-9]/g, '')"
+                      :rules="phoneNumber_rule" :disabled="false" outlined dense />
+                      </div>
+                  </v-col>
 
-                <v-col cols="12" style="margin-top: 50px;">
-                  <v-btn type="submit" block x-large color="#609966">
-                    <span style="color: #fff;">변경하기</span>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-form>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+                  <v-col cols="12" style="margin-top: 20px;">
+                <v-btn type="submit" color="#609966" style="width: 270px; height: 50px;">
+                  <span style="color: #fff; font-size: 17px;">변경하기</span>
+                </v-btn>
+              </v-col>
+            </div>
+            </v-row>
+          </v-form>
+        </v-card-text>
+      </div>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+</div>
 </template>
 
   
@@ -137,17 +146,16 @@ export default {
 </script>
   
 <style scoped>
+
 .text-h4 {
   font-size: 24px;
   color: #40513B;
 }
 
 p {
-  font-size: 25px;
+  font-size: 23px;
   color: #40513B;
 }
 
-* {
-  font-family: 'NanumSquareRoundBold', sans-serif;
-}
+
 </style>
