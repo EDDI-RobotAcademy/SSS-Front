@@ -1,5 +1,6 @@
 <template>
-    <v-container>
+  <v-container>
+      <div class="longline" style="margin-bottom: 45px;"/>
         <v-row justify="center">
       <div class="row">
         <header style="text-align: center;">
