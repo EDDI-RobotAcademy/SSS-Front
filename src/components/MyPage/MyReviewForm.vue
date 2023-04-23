@@ -17,7 +17,7 @@
                       <router-link
                           :to="{ name: 'ProductReadPage',
                                     params: { productId: review.productId.toString()}}">
-                        <v-img
+                        <v-img 
                             style="margin: auto"
                             :src="require(`@/assets/product/${review.product.productImgs[0].editedImg}`)"
                             max-height="50px"
@@ -26,8 +26,9 @@
                       </router-link>
                     </v-col>
                     <v-col>
-                      <!-- <p style="font-size: 14px">주문 번호 : {{ myReview.orderInfo }}</p> -->
-                      <p style="font-size: 15px">상품명 : {{ review.product.title }}</p>
+                      <!-- <p style="font-size: 14px">주문 번호 : {{ review.orderInfo }}</p> -->
+                      <p style="font-size: 15px" v-if="review.product && review.product.title">
+                        상품명 : {{ review.product.title }}</p>
                     </v-col>
                   </v-row>
                 </div>
@@ -99,28 +100,29 @@ export default {
     ]),
     clickModify(reviewId) {
       console.log(reviewId)
-       this.$root.$emit('clickModify', reviewId)
+      this.$root.$emit('clickModify', reviewId)
     },
     async clickDelete(reviewId) {
       await this.requestDeleteReviewToSpring(reviewId)
-      this.$router.go(this.$router.currentRoute)
+    //  this.$router.go(this.$router.currentRoute)
+      window.location.reload(true)
     }    
   },
   async mounted() {
     const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
     await this.requestReadMyReviewToSpring(memberId)
-    const productRequests = this.reviews.map(review => {
-        const productId = review.productId
-         this.requestProductToSpring(productId)
-        return this.requestProductInfoToSpring(productId)
-    })
+    const productInfos = await Promise.all(
+    this.reviews.map((review) =>
+      this.requestProductInfoToSpring(review.productId)
+      )
+    );
 
-    Promise.all(productRequests)
-        .then(products => {
-            for (let i = 0; i < this.reviews.length; i++) {
-                this.reviews[i].product = products[i]
-            }
-        })
+  // 각 리뷰에 해당 상품 정보 할당
+  this.reviews.forEach((review, index) => {
+    this.$set(review, "product", productInfos[index]);
+    console.log(review.product)
+  });
+
   },
   computed: {
     ...mapState(productModule, [
