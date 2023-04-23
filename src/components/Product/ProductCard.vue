@@ -37,19 +37,27 @@
 </script>
   
 <style scoped>
-    .productCard, .thumbnail, .thumbnail img {
-      width: 100%;
-    }
-    .thumbnail img{
-      width: 100%;
-      height: 250px;
-    }
-.product-title {
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-.product-price {
-  color: green;
-}
+  .productCard, .thumbnail, .thumbnail img {
+    width: 100%;
+    padding:5px;
+  }
+  .thumbnail img{
+    width: 265px;
+    height: 300px;
+    object-fit: cover;
+  }
+ .product-title {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .product-price {
+    font-size: 15px;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 10px;
+  }
+  *{
+    color: #40513B;
+  }
 </style>
