@@ -124,7 +124,7 @@ export default {
       flex-direction: column;
       margin-bottom: 16px;
     }
-
+  }
 
 .text-h4 {
   font-size: 24px;

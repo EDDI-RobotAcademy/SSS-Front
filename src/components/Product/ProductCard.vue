@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+  <v-container class="text-center">
+    <v-row>
     <div class="productCard">
       <div class="thumbnail">
         <router-link :to="{ name: 'ProductReadPage',
@@ -8,9 +9,10 @@
       </router-link>
 
       </div>
-      <p class="product-title">{{ product.title }}</p>
-      <p class="product-price">{{ product.price | comma }}원</p>
+      <p style="text-align: center;" class="product-title">{{ product.title }}</p>
+      <p style="text-align: center;" class="product-price">{{ product.price | comma }}원</p>
     </div>
+  </v-row>
   </v-container>
 </template>
   
@@ -37,19 +39,30 @@
 </script>
   
 <style scoped>
-    .productCard, .thumbnail, .thumbnail img {
-      width: 100%;
-    }
-    .thumbnail img{
-      width: 100%;
-      height: 250px;
-    }
-.product-title {
-  margin-top: 5px;
-  font-weight: bold;
-}
+ .productCard{
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+ }
 
-.product-price {
-  color: green;
-}
+  .thumbnail img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+ .product-title {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .product-price {
+    font-size: 20px;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  *{
+    color: #40513B;
+  }
 </style>

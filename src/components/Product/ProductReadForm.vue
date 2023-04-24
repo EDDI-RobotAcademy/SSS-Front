@@ -28,14 +28,14 @@
           <p>{{ deliveryFee | comma }}원
           (5만원 이상 무료배송)</p>
         </div>
-          <div class="d-flex justify-content-between align-items-center" style="background-color: lightgray; padding: 10px">
+          <div class="d-flex justify-content-between align-items-center" style="border-radius: 8px; background-color: #EDF1D6; padding: 10px">
             <p>구매수량</p>
             <div class="d-flex align-items-center">
-              <v-btn class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
                 <v-icon size="15">mdi-minus</v-icon>
               </v-btn>
               <div>{{ quantity }}</div>
-              <v-btn class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
+              <v-btn style="background-color: #9DC08B;" rounded class="ml-2" elevation="0" color="lightengray" small @click="qtyInc">
                 <v-icon size="15">mdi-plus</v-icon>
               </v-btn>
             </div>
@@ -52,24 +52,24 @@
           <v-col align="center">
             <!-- v-if/v-else 로 찜 버튼 클릭 여부 나누기-->
                 <v-btn v-if="!this.favoriteInfo.isLike" x-large icon @click="clickFavorite">
-                  <v-icon>mdi-heart-outline</v-icon>
+                  <v-icon >mdi-heart-outline</v-icon>
                 </v-btn>
-                <v-btn v-else x-large icon color="red" @click="clickFavorite">
-                  <v-icon>mdi-heart</v-icon>
+                <v-btn v-else x-large icon color="red" @click="clickFavorite" >
+                  <v-icon >mdi-heart</v-icon>
                 </v-btn>
               </v-col>
           <v-col>
             <v-btn
               @click="clickAddCart"
                 width="240px"
-                x-large><v-icon>mdi-cart-variant</v-icon><span>장바구니</span></v-btn>
+                x-large style="background-color: #9DC08B; color: white;"><v-icon>mdi-cart-variant</v-icon><span style="color:white">장바구니</span></v-btn>
           </v-col>
           <v-col>      
             <v-btn
                 @click="btnDirectPurchase"
                 btn-name="바로구매"
                 width="240px"
-                x-large><v-icon>mdi-shopping</v-icon><span>바로구매</span></v-btn>
+                x-large style="background-color: #9DC08B; color: white;"><v-icon>mdi-shopping</v-icon><span style="color:white">바로구매</span></v-btn>
           </v-col>  
         </v-row>    
       </v-col>
@@ -93,7 +93,7 @@
             <v-card-text class="mt-5">
               
               <v-row>
-                <v-col cols="2" style="background-color: green;">
+                <v-col cols="2" style="background-color: #9DC08B;">
                   <span><h2 style="color:white">채소 구성</h2></span>
                 </v-col>
                 <v-col align="center" v-for="(image, index) in product.productImgs.slice(1)" :key="index" cols="2">
@@ -104,7 +104,7 @@
               <v-row style="margin-top: 80px;">
                 <h2>영양성분표</h2>
                 <table class="ingredient" style="width: 100%; margin: 0 auto; height: 100px; text-align: center;">                
-                    <tr style="background-color: green;">
+                    <tr style="background-color: #9DC08B;">
                       <th>메뉴</th>
                       <th>열량(kcal)</th>
                       <th>탄수화물(g)</th>
@@ -224,8 +224,12 @@ export default {
 }
 .ingredient th {
   font-size: 1.4em;
+  color:white;
 }
 .ingredient td {
   font-size: 1.4em;
 }
+*{
+    color: #40513B;
+  }
 </style>

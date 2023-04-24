@@ -4,12 +4,12 @@
         <!-- <h2>상품 상세정보</h2> -->
         <product-read-form @saveFavorite="saveFavorite" @addCart="addCart" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
         <p v-else>로딩중 .......... </p>
-        <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+        <v-btn style="background-color: #9DC08B;" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
           <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
         </router-link></v-btn>
-        <v-btn @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
-        <v-btn><router-link :to="{ name: 'ProductListPage' }">
+        <v-btn style="background-color: #9DC08B;" @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
+        <v-btn style="background-color: #9DC08B;"><router-link :to="{ name: 'ProductListPage' }">
           목록
         </router-link></v-btn>
       </div>
@@ -133,5 +133,8 @@
   <style scoped>
   a {
     text-decoration: none;
+  }
+  v-btn {
+    background-color: #9DC08B;
   }
   </style>
