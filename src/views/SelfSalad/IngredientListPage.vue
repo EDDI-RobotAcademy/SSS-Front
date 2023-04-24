@@ -47,14 +47,12 @@ const ordercartModule = 'ordercartModule'
         },
         // 장바구니에 상품 추가
         async addCart(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
             const quantity = payload.quantity
             const totalPrice = payload.totalPrice
             const totalCalorie = payload.totalCalorie
             const title = payload.title
             const selfSaladRequestList = payload.selfSaladRequestList
             console.log('title: '+ title )
-            console.log('memberId: '+ memberId )
             console.log('quantity: '+ quantity )
             console.log('totalPrice: '+ totalPrice )
             console.log('totalCalorie: '+ totalCalorie )

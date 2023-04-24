@@ -10,11 +10,15 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 //등록
 async requestCreateBoardToSpring ({}, payload) {
-    const { title, writer, content, privateCheck, memberId } = payload
-    console.log(memberId)
+    const { title, writer, content, privateCheck } = payload
     try {
         await axiosInst.post('/board/register', 
-        { title, writer, content, privateCheck, memberId })
+        { title, writer, content, privateCheck },
+        {
+            headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            }
+        })
         alert('등록 성공!')
     } catch {
         alert('문제 발생!')

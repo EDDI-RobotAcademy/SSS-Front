@@ -108,15 +108,13 @@ methods:{
     },
     clickAddCart() {
       // 장바구니 클릭 이벤트
-        const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
         const itemId = this.sideProduct.sideProductId
         const quantity = this.quantity
         const category = 'SIDE'
-        console.log('SIDE memberId: '+ memberId )
         console.log('SIDE productId: '+ itemId )
         console.log('SIDE quantity: '+ quantity )
         console.log('SIDE category: '+ category )
-        this.requestAddCartToSpring({memberId, itemId, category, quantity})
+        this.requestAddCartToSpring({ itemId, category, quantity})
       }
     },
     beforeUpdate() {

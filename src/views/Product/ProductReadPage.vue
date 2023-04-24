@@ -67,23 +67,20 @@
             await this.$router.push({ name: 'ProductListPage' })
           },
           async saveFavorite(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
             const productId = payload.productId
             const isLike = payload.isLike
-            await this.requestSaveFavoriteToSpring({memberId, productId})
+            await this.requestSaveFavoriteToSpring( productId)
             this.favoriteInfo.isLike = isLike
           },
           // 장바구니에 상품 추가
           async addCart(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
             const itemId = payload.productId
             const quantity = payload.quantity
             const category = 'PRODUCT'
-            console.log('memberId: '+ memberId )
             console.log('productId: '+ itemId )
             console.log('quantity: '+ quantity )
             console.log('category: '+ category )
-            await this.requestAddCartToSpring({memberId, itemId, category, quantity})
+            await this.requestAddCartToSpring({ itemId, category, quantity})
           },
         },
       async created () {
@@ -101,8 +98,10 @@
               console.log("Like?: " + isLike);
               this.favoriteInfo.isLike = isLike;
             } else {
-              const like = await this.requestGetFavoriteFromSpring({ memberId, productId });
-              console.log("가져와: " + like)
+
+              const like = await this.requestGetFavoriteFromSpring( productId);
+              console.log("like: " + like)
+
               if (like) {
                   // 찜한 상태가 있다면 favoriteInfo를 업데이트하고 로컬 스토리지에 저장
                   this.favoriteInfo.isLike = like;
