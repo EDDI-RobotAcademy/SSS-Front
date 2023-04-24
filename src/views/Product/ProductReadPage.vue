@@ -67,10 +67,9 @@
             await this.$router.push({ name: 'ProductListPage' })
           },
           async saveFavorite(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
             const productId = payload.productId
             const isLike = payload.isLike
-            await this.requestSaveFavoriteToSpring({memberId, productId})
+            await this.requestSaveFavoriteToSpring( productId)
             this.favoriteInfo.isLike = isLike
           },
           // 장바구니에 상품 추가
@@ -99,7 +98,7 @@
               console.log("isLike: " + isLike);
               this.favoriteInfo.isLike = isLike;
             } else {
-              const like = await this.requestGetFavoriteFromSpring({ memberId, productId });
+              const like = await this.requestGetFavoriteFromSpring( productId);
               console.log("like: " + like)
               if (like) {
                   // 찜한 상태가 있다면 favoriteInfo를 업데이트하고 로컬 스토리지에 저장

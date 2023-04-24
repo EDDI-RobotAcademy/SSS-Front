@@ -141,25 +141,38 @@ async requestDeleteReviewToSpring({}, reviewId) {
             })
 }, 
 
-async requestFavoriteListToSpring({commit}, memberId)  {
-    return await axiosInst.get(`/products/favorite/myFavorite/${memberId}`)
+async requestFavoriteListToSpring({commit})  {
+    return await axiosInst.get(`/products/favorite/myFavorite`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),            
+        }
+    })
             .then((res) => {
                 console.log("목록" + JSON.stringify(res.data))
                 commit(REQUEST_FAVORITE_LIST_TO_SPRING, res.data)
             })
 },   
-async requestSaveFavoriteToSpring({commit}, payload) {
-    const {memberId, productId} = payload
-    return await axiosInst.post(`/products/favorite/changeLike`, {memberId, productId})
+async requestSaveFavoriteToSpring({commit}, productId) {
+    return await axiosInst.post(`/products/favorite/changeLike/${productId}`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+        }
+    })
             .then((res) => {
                 console.log("저장데이터" + JSON.stringify(res.data))
                 commit(REQUEST_FAVORITE_INFO_TO_SPRING, res.data)
             })
 },
-async requestGetFavoriteFromSpring({ commit }, payload) {
-    const {memberId, productId} = payload
+async requestGetFavoriteFromSpring({ commit }, productId) {
     try {
-        const res = await axiosInst.post(`/products/favorite/likeStatus`, { memberId, productId })
+        const res = await axiosInst.post(`/products/favorite/likeStatus/${productId}`,
+        {
+            headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            }
+        } )
         console.log(res.data)
         commit(SET_FAVORITE_INFO, res.data)
         return res.data

@@ -22,15 +22,14 @@ export default {
           'requestAddCartToSpring'    
         ]),
     async addCart(payload) {
-            const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
             const itemId = payload.productId
             const quantity = payload.quantity
             const category = 'PRODUCT'
-            console.log('memberId: '+ memberId )
+            
             console.log('productId: '+ itemId )
             console.log('quantity: '+ quantity )
             console.log('category: '+ category )
-            await this.requestAddCartToSpring({memberId, itemId, category, quantity})
+            await this.requestAddCartToSpring({ itemId, category, quantity})
           },
   }
 }
