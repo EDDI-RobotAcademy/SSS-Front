@@ -113,7 +113,7 @@
   </template>
   
   <script>
-  import axios from "axios";
+  import axiosInst from '@/utility/axiosObject';
   
   export default {
     name: "SignUpForm",
@@ -191,7 +191,7 @@
       },
       checkAdminCode () {
         const {adminCode} = this
-        axios.post(`http://localhost:7777/member/check-admin/${adminCode}`)
+        axiosInst.post(`/member/check-admin/${adminCode}`)
           .then((res) => {
             if(res.data) {
               alert("관리자 코드 확인 완료.")
@@ -224,7 +224,7 @@
 
         if (emailValid) {
           const {email} = this
-          axios.post(`http://localhost:7777/member/check-email/${email}`)
+          axiosInst.post(`/member/check-email/${email}`)
               .then((res) => {
                 if (res.data) {
                   alert("사용 가능한 이메일입니다.")
@@ -240,7 +240,7 @@
 
       checkDuplicateNickName () {
         const {nickname} = this
-        axios.post(`http://localhost:7777/member/check-nickname/${nickname}`)
+        axiosInst.post(`/member/check-nickname/${nickname}`)
             .then((res) => {
                 if(res.data) {
                     alert("사용 가능한 닉네임입니다.")
