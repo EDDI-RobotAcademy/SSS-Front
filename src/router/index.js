@@ -38,6 +38,9 @@ import MyQnaPage from "@/views/MyPage/MyQnaPage"
 import MyAddressPasswordCheckPage from "@/views/MyPage/MyAddressPasswordCheckPage.vue"
 import MyInfoPasswordCheckPage from "@/views/MyPage/MyInfoPasswordCheckPage.vue"
 
+import PaymentInfoPage from '@/views/Payment/PaymentInfoPage.vue'
+import PaymentAddress from '@/views/Payment/PaymentAddress.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -245,6 +248,17 @@ const routes = [
   path: '/my-address-password-check-page',
   name: 'MyAddressPasswordCheckPage',
   component: MyAddressPasswordCheckPage
+},
+// 결제페이지
+{
+  path: '/payment-info-page',
+  name: 'PaymentInfoPage',
+  component: PaymentInfoPage
+},
+{
+  path: '/payment-address',
+  name: 'PaymentAddress',
+  component: PaymentAddress
 },
 
 ]
