@@ -12,8 +12,8 @@
                 <v-btn icon @click="cancel"><v-icon>mdi-close</v-icon></v-btn>
             </v-card-actions>
           <div>
-            <p>{{ product.title }}</p>
-            <v-img
+            <p v-if="review.product && review.product.title">{{ product.title }}</p>
+            <v-img v-if="review.product && review.product.productImgs"
                 :src="require(`@/assets/product/${product.productImgs[0].editedImg}`)"
                 max-width="200"
                 max-height="150"

@@ -14,7 +14,7 @@
           <p class="price" @click="productView(item)">{{ item.product.price | comma }} 원</p>
           <div class="button">
             <v-col>
-              <v-btn class="ml-0 ma-2">장바구니</v-btn>
+              <v-btn class="ml-0 ma-2" @click="clickAddCart(item.product.productId)">장바구니</v-btn>
               <v-btn @click="cancelFavorite(item.product.productId)">찜 삭제</v-btn>
             </v-col>
           </div>
@@ -65,6 +65,11 @@ export default {
       localStorage.removeItem(`${memberId}_${productId}_like`)
       alert("해당 상품 찜을 취소하였습니다.")
       this.$router.go(this.$router.currentRoute)
+    },
+    clickAddCart(payload) {
+        const productId = payload
+        const quantity = 1
+        this.$emit('addCart', {productId, quantity})
     },
     productView(item) {
       this.$router.push({name: 'ProductReadPage', params: {productId: String(item.product.productId)}})
