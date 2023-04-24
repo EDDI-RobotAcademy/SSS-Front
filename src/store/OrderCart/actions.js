@@ -45,15 +45,10 @@ async requestAddCartListToSpring({ commit }) {
     })
 },
 //삭제
-async requestDeleteCartToSpring ({}, payload) {
-    const { itemId, category } = payload
-
+async requestDeleteCartToSpring ({}, itemId) {
     const confirmDelete = window.confirm("상품을 삭제하시겠습니까?");
-
     if (confirmDelete) {
-        return await axiosInst.delete("/cart/delete", {
-            data: { itemId, itemCategoryType: category }
-        })
+        return await axiosInst.delete(`/cart/delete/${itemId}`)
             .then(() => {
                 alert("장바구니에서 삭제되었습니다.")
             })
@@ -64,12 +59,11 @@ async requestDeleteCartToSpring ({}, payload) {
 },
 //수정
 async requestModifyCartToSpring ({}, payload) {
-    const { itemId, quantity, category } = payload
+    const { itemId, quantity } = payload
 
     return await axiosInst.put("/cart/modify", {
         itemId: itemId,
         quantity: quantity,
-        itemCategoryType: category
     })
         .then(() => {
             alert("수량이 변경되었습니다.")
@@ -133,16 +127,16 @@ async requestSelfSaladCartModifyToSpring({}, payload) {
     console.log("payload  "+JSON.stringify(payload))
     console.log("itemId: "+ itemId)
     
-    const {totalPrice, totalCalorie, selfSaladRequestList} = payload;
+    const {totalPrice, totalCalorie, selfSaladModifyRequestList} = payload;
     let newTemp = []; // 새로운 배열 생성
-    for (let i = 0; i < selfSaladRequestList.length; i++) {
-        const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
+    for (let i = 0; i < selfSaladModifyRequestList.length; i++) {
+        const { ingredientId, selectedAmount } = selfSaladModifyRequestList[i];
         if (selectedAmount > 0) {
-            newTemp.push({ ingredientId, selectedAmount, amountType });
+            newTemp.push({ ingredientId, selectedAmount });
         } 
     }
     await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, 
-    { totalPrice, totalCalorie, selfSaladRequestList: newTemp} , {
+    { totalPrice, totalCalorie, selfSaladModifyRequestList: newTemp} , {
         headers: {
             'Content-Type': 'application/json'}})
         .then(() => {

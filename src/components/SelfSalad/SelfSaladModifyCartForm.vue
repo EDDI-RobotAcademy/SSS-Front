@@ -95,7 +95,7 @@ export default {
     },
   },
   methods: {
-    onChange( selectPrice, selectCalorie, optionValue, selectedName, ingredientId, amountType ){
+    onChange( selectPrice, selectCalorie, optionValue, selectedName, ingredientId){
       this.totalPrice += selectPrice
       this.totalCalorie += selectCalorie
       this.changeValue = optionValue
@@ -146,9 +146,9 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
       const itemId = this.cartItemId
       const totalCalorie = this.totalCalorie
       const totalPrice = this.totalPrice *this.quantity 
-      let selfSaladRequestList = this.selfSaladList // 배열을 복사하여 사용
+      let selfSaladModifyRequestList = this.selfSaladList // 배열을 복사하여 사용
 
-      this.$emit('submit', { itemId, totalPrice, totalCalorie, selfSaladRequestList })
+      this.$emit('submit', { itemId, totalPrice, totalCalorie, selfSaladModifyRequestList })
     },
   },
 

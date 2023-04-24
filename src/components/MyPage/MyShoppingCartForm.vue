@@ -43,7 +43,7 @@
                     <td>
                       <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
                       </router-link>
-                      <v-img :src="cartItem.category.includes('SELF_SALAD') ?
+                      <v-img :src="cartItem.category.includes('SELF') ?
                       require(`@/assets/logo/3sss.jpg`) :
                       require(`@/assets/product/${cartItem.editedImg}`)"
                       style="max-width: 100px; max-height: 100px;" />
@@ -66,7 +66,7 @@
                       <v-btn @click="removeItem(idx)">
                         삭제하기
                       </v-btn>
-                      <v-btn v-if="cartItem.category === 'SELF_SALAD'" @click="openModal(cartItem.cartItemId)">
+                      <v-btn v-if="cartItem.category === 'SELF'" @click="openModal(cartItem.cartItemId)">
                         수정하기
                       </v-btn>
                     </td>
@@ -176,16 +176,14 @@ export default {
       this.cartItems[idx].quantity++
       const itemId = this.cartItems[idx].cartItemId
       const quantity = 1
-      const category = this.cartItems[idx].category
-      this.$emit('onModify', { itemId, category, quantity })
+      this.$emit('onModify', { itemId, quantity })
     },
     descQuantity(idx) {
       if (this.cartItems[idx].quantity > 1) {
         this.cartItems[idx].quantity--
         const itemId = this.cartItems[idx].cartItemId
         const quantity = -1
-        const category = this.cartItems[idx].category
-        this.$emit('onModify', { itemId, category, quantity })
+        this.$emit('onModify', { itemId, quantity })
       }
     },
     selectAll() {

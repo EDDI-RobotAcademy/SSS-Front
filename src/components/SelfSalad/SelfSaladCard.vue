@@ -144,11 +144,10 @@ export default{
       const calorieChange = calorie - prevCalorie
       const optionValue = this.item.selectedAmount
       const ingredientId = this.ingredient.id
-      const amountType = this.ingredient.amountType
 
 
       this.selectedName = this.ingredient.name;
-      this.$emit('change', priceChange, calorieChange, optionValue, this.selectedName, ingredientId, amountType)
+      this.$emit('change', priceChange, calorieChange, optionValue, this.selectedName, ingredientId)
       
       this.prevIndex = index
       
