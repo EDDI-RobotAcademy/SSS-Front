@@ -46,7 +46,6 @@ export default {
           title: '',
           content: '',
           writer: '',
-          memberId: '',
           privateCheck: false,
         }
     },
@@ -54,7 +53,6 @@ export default {
     },
     created() {
       this.writer = this.$store.state.memberModule.memberInfoAboutSignIn.userNickName;
-      this.memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
     },
     methods: {
       click(){
@@ -70,8 +68,7 @@ export default {
               } else {
                 const { title, content, privateCheck } = this
                 const writer = this.$store.state.memberModule.memberInfoAboutSignIn.userNickName;
-                const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
-                this.$emit('submit', { title, writer, content, privateCheck, memberId })
+                this.$emit('submit', { title, writer, content, privateCheck })
               }
             } else {
               alert("로그인이 필요한 기능입니다.")

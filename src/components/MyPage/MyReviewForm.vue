@@ -109,8 +109,7 @@ export default {
     }    
   },
   async mounted() {
-    const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId;
-    await this.requestReadMyReviewToSpring(memberId)
+    await this.requestReadMyReviewToSpring()
     const productInfos = await Promise.all(
     this.reviews.map((review) =>
       this.requestProductInfoToSpring(review.productId)
