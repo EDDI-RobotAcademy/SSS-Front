@@ -70,9 +70,8 @@ export default {
     }
   },
   async created() {
-  const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
-  await this.requestAddCartListToSpring( memberId )
-  await this.requestSelfSaladAddCartListToSpring( memberId )
+  await this.requestAddCartListToSpring(),
+  await this.requestSelfSaladAddCartListToSpring()
 
 }
 }

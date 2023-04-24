@@ -59,7 +59,7 @@ const ordercartModule = 'ordercartModule'
             console.log('totalPrice: '+ totalPrice )
             console.log('totalCalorie: '+ totalCalorie )
             // await this.requestSelfSaladAddCartToSpring({title, quantity, totalPrice, totalCalorie, memberId})
-            await this.requestSelfSaladAddCartToSpring({ title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList})
+            await this.requestSelfSaladAddCartToSpring({ title, quantity, totalPrice, totalCalorie, selfSaladRequestList})
           },
       },
       beforeRouteLeave(to, from, next) {

@@ -9,10 +9,16 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 // 장바구니에 추가
 async requestAddCartToSpring({}, payload) {
-    const { memberId, itemId, category, quantity } = payload;
+    const { itemId, category, quantity } = payload;
 
     try {
-        await axiosInst.post("/cart/register", { memberId, itemId, category, quantity });
+        await axiosInst.post("/cart/register", { itemId, category, quantity },
+        {
+            headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+                'Content-Type': 'application/json'
+            }
+        });
         if (confirm("장바구니가 추가되었습니다. 장바구니로 이동하시겠습니까?")) {
             // this.$router.push({ name: 'MyShoppingCartPage' }) 
             // this.$router.push('/my-info-cart');
@@ -25,8 +31,14 @@ async requestAddCartToSpring({}, payload) {
     }
 },
 //리스트
-async requestAddCartListToSpring({ commit }, memberId) {
-    return await axiosInst.get(`/cart/list/${memberId}`)
+async requestAddCartListToSpring({ commit }) {
+    return await axiosInst.get(`/cart/list`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            'Content-Type': 'application/json'
+        }
+    })
     .then((res) => {
         commit(REQUEST_ADD_CART_LIST_TO_SPRING, res.data);
         console.log('리스트 연결');
@@ -68,7 +80,7 @@ async requestModifyCartToSpring ({}, payload) {
 },
 //셀프 샐러드 장바구니 추가
 async requestSelfSaladAddCartToSpring({}, payload) {
-    const { title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList } = payload;
+    const { title, quantity, totalPrice, totalCalorie, selfSaladRequestList } = payload;
     let newTemp = []; // 새로운 배열 생성
     for (let i = 0; i < selfSaladRequestList.length; i++) {
         const { ingredientId, selectedAmount, amountType } = selfSaladRequestList[i];
@@ -78,8 +90,9 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     }
     console.log("payload  "+JSON.stringify(payload))
     try {
-        await axiosInst.post("/cart/selfsalad/register", {title, quantity, totalPrice, totalCalorie, memberId, selfSaladRequestList: newTemp} , {
+        await axiosInst.post("/cart/selfsalad/register", {title, quantity, totalPrice, totalCalorie, selfSaladRequestList: newTemp} , {
         headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
             'Content-Type': 'application/json'
         }})
     if (confirm("장바구니가 추가되었습니다. 장바구니로 이동하시겠습니까?")) {
@@ -91,8 +104,14 @@ async requestSelfSaladAddCartToSpring({}, payload) {
     }
 },
 //리스트
-async requestSelfSaladAddCartListToSpring({ commit }, memberId) {
-    return await axiosInst.get(`/cart/list/${memberId}`)
+async requestSelfSaladAddCartListToSpring({ commit }) {
+    return await axiosInst.get(`/cart/list`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            'Content-Type': 'application/json'
+        }
+    })
     .then((res) => {
         commit(REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING, res.data);
         console.log('리스트 연결');
