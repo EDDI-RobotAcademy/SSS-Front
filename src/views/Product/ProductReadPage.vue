@@ -87,19 +87,21 @@
           const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
           const productId = this.productId
 
-          await this.requestProductToSpring(productId)
-          await this.requestProductImageToSpring(productId)
-          await this.viewCntUp({productId, memberId});
+          this.requestProductToSpring(productId)
+          this.requestProductImageToSpring(productId)
+          this.viewCntUp({productId, memberId});
                     
           if(memberId) {
             const localLike = localStorage.getItem(`${memberId}_${productId}_like`);
             if (localLike) {
-              const {isLike} = JSON.parse(localLike);
-              console.log("isLike: " + isLike);
+              const isLike = JSON.parse(localLike).isLike;
+              console.log("Like?: " + isLike);
               this.favoriteInfo.isLike = isLike;
             } else {
+
               const like = await this.requestGetFavoriteFromSpring( productId);
               console.log("like: " + like)
+
               if (like) {
                   // 찜한 상태가 있다면 favoriteInfo를 업데이트하고 로컬 스토리지에 저장
                   this.favoriteInfo.isLike = like;
@@ -117,8 +119,8 @@
         const productId = this.productId
         const localLike = localStorage.getItem(`${memberId}_${productId}_like`);
         if(localLike) {
-          const {isLike} = JSON.parse(localLike)
-          console.log("isLike: " + isLike)
+          const isLike = JSON.parse(localLike).isLike
+          console.log("마운트Like: " + isLike)
           if (isLike !== null) {
             this.favoriteInfo.isLike = isLike;
           }
