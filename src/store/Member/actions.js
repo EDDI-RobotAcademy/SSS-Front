@@ -47,11 +47,12 @@ async requestMemberSignInToSpring({ commit }, payload) {
     
     async requestUpdateMemberInfoFromSpring({ commit }, payload) {
       console.log(payload);
-        const userId = parseInt(localStorage.getItem("userId"), 10);
-
-        console.log('userId:', userId);
           
-        axiosInst.put(`/member/profile-info/update/${userId}`, payload)
+        axiosInst.put(`/member/profile-info/update`, payload,{
+          headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+          }
+        })
             .then((res) => {
               // 성공적으로 회원 정보를 수정했을 경우
               console.log(res.data);           
@@ -67,12 +68,11 @@ async requestMemberSignInToSpring({ commit }, payload) {
             
         },
         async requestUpdateAddressFromSpring({ commit }, payload) {
-            const userId = parseInt(localStorage.getItem("userId"), 10);
             const{zipcode, city, street, addressDetail}= payload
-            console.log('userId:', userId);
             console.log('payload= ' + zipcode, city, street, addressDetail);   
-            axiosInst.put(`/member/profile-address/update/${userId}`, payload,{
+            axiosInst.put(`/member/profile-address/update`, payload,{
               headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
                 'Content-Type': 'application/json'
               }
             })
@@ -93,9 +93,15 @@ async requestMemberSignInToSpring({ commit }, payload) {
 
 
 async requestCheckPasswordToSpring({}, payload) {
-          const {memberId, password} = payload
+          const password = payload
           console.log(payload);
-          return await axiosInst.post(`/member/check-password`, {memberId, password} )
+          return await axiosInst.post(`/member/check-password`, {password},
+          {
+              headers: {
+                  'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+                  'Content-Type': 'application/json'
+              }
+          } )
               .then((res) => {
                   if(res.data == false) {
                       alert("비밀번호가 틀림");
@@ -109,8 +115,12 @@ async requestCheckPasswordToSpring({}, payload) {
       },
 async requestDeleteMember({ commit }) {
         try {
-        const memberId = parseInt(localStorage.getItem("userId"), 10);
-        await axiosInst.delete(`/member/delete-member/${memberId}`);
+        await axiosInst.delete(`/member/delete-member`,
+        {
+            headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            }
+        });
         alert('회원 탈퇴가 완료되었습니다.');
         commit(LOG_OUT);
         localStorage.removeItem("vuex")
