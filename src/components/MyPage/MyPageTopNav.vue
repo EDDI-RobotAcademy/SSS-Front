@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       selected: null,
-      nickname: 'sss',
+      nickname : this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
       myPageCategoryItems: [
         {
           title: "장바구니",
