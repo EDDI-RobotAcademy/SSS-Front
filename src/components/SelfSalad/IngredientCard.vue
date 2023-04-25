@@ -1,20 +1,10 @@
 <template>
-  <div class="ingredientCard">
-    <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-      <router-link :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
-        재료정보 수정
-      </router-link>
-    </v-btn>
-    <v-btn v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-      <router-link :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
-        수량/가격 정보 수정
-      </router-link>
-    </v-btn>  
-    <v-btn @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
-    <div class="ingredientInfo">
+  <v-container class="text-center">
+    <div class="ingredientCard">
+      <div class="ingredientInfo">
       <div class="ingredientImage">
         <img :src="require(`../../assets/selfSalad/${ingredient.editedImg}`)"
-         />
+        />
       </div>
       <div class="ingredientName">{{ ingredient.name }}</div>
       <div class="amountInfo">
@@ -30,8 +20,28 @@
           <span>({{convertedAmountType}})</span>
         </div>
       </div>
+      <v-col cols="12" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+      <div class="modifybtnbox">         
+    <v-btn class="modifybtn" color="#40513B" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+      <router-link style="color: white;" :to="{ name: 'IngredientInfoModifyPage', params: { id: this.ingredient.id.toString() } }">
+        재료정보 수정
+      </router-link>
+    </v-btn>   
+  </div>
+  <div class="modifybtnbox">
+    <v-btn class="modifybtn" color="#40513B" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+      <router-link style="color: white;" :to="{ name: 'IngredientAmountModifyPage', params: { id: this.ingredient.id.toString() } }">
+        수량/가격 정보 수정
+      </router-link>
+    </v-btn>
+    </div>  
+    <div class="modifybtnbox">
+    <v-btn class="modifybtn" color="#40513B" style="color: white;" @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
+  </div>
+  </v-col>
     </div>
   </div>
+  </v-container>
 </template>
 
 <script>
@@ -180,11 +190,14 @@ export default{
   }
   .ingredientCard{
     border: none;
+    width: 280px;
   }
   .ingredientInfo{
     padding-top: 1.8rem;
     background-color: rgba(246, 242, 232, 0.854);
     /*rgb(133, 173, 83);  rgb(246, 242, 232);*/
+    border-top-right-radius: 29px;
+    border-top-left-radius: 29px;
     border-bottom-right-radius: 29px;
     border-bottom-left-radius: 29px;
   }
@@ -203,19 +216,19 @@ export default{
     content: '';
     
     width: 8px; height: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     border-radius: 50%;
     margin-right: 10px;
-    margin-left: 0.5rem;
-    background-color: rgb(133, 173, 83);
+    margin-left: -20px;
+    background-color: #40513B;
   }
 
   .ingredientName{
     font-size: 2rem;
-    padding: 10px 0;
-    text-align: left;
+   
+    text-align: center;
     margin-top: 20px;
-    padding:0 1rem;
+    margin-bottom: 15px;
     letter-spacing: 1px;
   }
   .amountInfo{
@@ -227,7 +240,6 @@ export default{
 
   }
   .backgroundImg{
-    background-image: url("../../assets/selfSalad/vegetableBackground.png");
     background-repeat: none;
     background-position: center;
     background-size:110% 100%;
@@ -263,5 +275,13 @@ export default{
   }
   a{
     text-decoration: none;
+  }
+
+  .modifybtnbox {
+    margin-top: 5px;
+  }
+  .modifybtn {
+    width: 180px;
+    color: #40513B;
   }
 </style>
