@@ -59,13 +59,13 @@
         this.showModal = false;
       },
       onSubmit() {
-        const memberId = parseInt(localStorage.getItem("userId"), 10);
+        
         const password = this.password;
         if (!password) {
           alert("비밀번호를 입력하세요.");
           return;
         }
-        this.requestCheckPasswordToSpring({memberId, password})
+        this.requestCheckPasswordToSpring(password)
             .then((res) => {
               if (res === false) {
                 this.showModal = false;
