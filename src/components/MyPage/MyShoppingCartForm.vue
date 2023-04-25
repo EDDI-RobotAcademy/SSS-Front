@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                   <template>
-                    <tr v-for="(cartItem, idx) in cartItems" :key="idx">
+                    <tr v-for="(cartItem, idx) in cartItems" :key="idx" v-if="cartItem.totalPrice / cartItem.quantity > 0">
                       <td>{{ idx + 1 }}</td>
                     <td class="itemCheck" align="left">
                       <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
