@@ -154,7 +154,7 @@ async requestFavoriteListToSpring({commit})  {
             })
 },   
 async requestSaveFavoriteToSpring({commit}, productId) {
-    return await axiosInst.post(`/products/favorite/changeLike/${productId}`,
+    return await axiosInst.post(`/products/favorite/changeLike/${productId}`, null,
     {
         headers: {
             'Authorization': 'Bearer '+localStorage.getItem("userToken"),
@@ -167,7 +167,7 @@ async requestSaveFavoriteToSpring({commit}, productId) {
 },
 async requestGetFavoriteFromSpring({ commit }, productId) {
     try {
-        const res = await axiosInst.post(`/products/favorite/likeStatus/${productId}`,
+        const res = await axiosInst.post(`/products/favorite/likeStatus/${productId}`, null,
         {
             headers: {
                 'Authorization': 'Bearer '+localStorage.getItem("userToken"),
