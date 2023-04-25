@@ -95,7 +95,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
 async requestCheckPasswordToSpring({}, payload) {
           const password = payload
           console.log(payload);
-          return await axiosInst.post(`/member/check-password`, {password},
+          return await axiosInst.post(`/member/check-password`, password,
           {
               headers: {
                   'Authorization': 'Bearer '+localStorage.getItem("userToken"),
