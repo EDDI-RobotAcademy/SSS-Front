@@ -193,13 +193,8 @@ async viewCntUp({commit}, payload) {
     const productId = payload.productId
     const memberId = payload.memberId
 
-    const ip = await axiosInst.get('https://api.ipify.org?format=json')
-    .then(res => res.data.ip);
-
-    // 로그인 하지 않은 사용자의 경우 ip주소를 받아와 같은 ip 로는 조회수가 증가하지 않도록 설정
-    const cookieName = memberId ? `productView_${productId}_${memberId}` : `productView_${productId}_${ip}`;
+    const cookieName = memberId ? `productView_${productId}_${memberId}` : `productView_${productId}_guest`
     const existingCookie = document.cookie.match(`(^|;)\\s*${cookieName}\\s*=\\s*([^;]+)`);
-
     if (existingCookie) {
       // 마지막 조회가 24시간 이전인지 확인
       const lastViewed = parseInt(existingCookie[2]);
