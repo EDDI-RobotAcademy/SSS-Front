@@ -125,6 +125,17 @@ const ordercartModule = 'ordercartModule'
       ...mapActions(ordercartModule, [ 
         'requestSelfSaladCartModifyToSpring'
       ]),
+        // 수정 완 벝
+      async onSubmit() {
+        const itemId = this.cartItemId
+        const totalCalorie = this.totalCalorie
+        const totalPrice = this.totalPrice
+        const selfSaladModifyRequestList = this.selfSaladList // 배열을 복사하여 사용
+        const payload =  { itemId, totalPrice, totalCalorie, selfSaladModifyRequestList }
+        
+        await this.requestSelfSaladCartModifyToSpring(payload, itemId);
+        window.location.reload(true);   
+      },
       onChange(event, item) {
         const ingredientId = item.ingredientId;
         const name = item.name;
