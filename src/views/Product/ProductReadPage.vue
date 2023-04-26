@@ -1,15 +1,15 @@
 <template>
     <v-container>
-      <div align="center">
+      <div align="center" style="padding: 10px;">
         <!-- <h2>상품 상세정보</h2> -->
         <product-read-form @saveFavorite="saveFavorite" @addCart="addCart" v-if="product" :product="product" :productImgs="productImgs" :favoriteInfo="favoriteInfo"/>
         <p v-else>로딩중 .......... </p>
-        <v-btn style="background-color: #9DC08B;" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-          <router-link :to="{ name: 'ProductModifyPage', params: { productId } }">
+        <v-btn style="background-color: #40513B;" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+          <router-link style="color: white;" :to="{ name: 'ProductModifyPage', params: { productId } }">
           게시물 수정
         </router-link></v-btn>
-        <v-btn style="background-color: #9DC08B;" @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
-        <v-btn style="background-color: #9DC08B;"><router-link :to="{ name: 'ProductListPage' }">
+        <v-btn style="background-color: #40513B; color: white; margin: 5px; " @click="onDelete" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">삭제</v-btn>
+        <v-btn style="background-color: #40513B;"><router-link style="color: white;" :to="{ name: 'ProductListPage' }">
           목록
         </router-link></v-btn>
       </div>
@@ -134,6 +134,6 @@
     text-decoration: none;
   }
   v-btn {
-    background-color: #9DC08B;
+    background-color: #629648;
   }
   </style>

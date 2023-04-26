@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-col cols="12">
+      
         <div>
           <div class="search-bar">
         <p class="saladPageName">Side</p> 
@@ -85,7 +86,7 @@ export default {
 
 <style scoped>
 .saladPageName{
-    font-size: 60px;
+    font-size: 70px;
     text-align: left;
     color: #40513B;
     
@@ -96,15 +97,16 @@ export default {
 
 .search-bar select,
 .search-bar input[type="text"],
-.search-bar button,{
+.search-bar button{
 font-size: 20px;
 }
 
 
 .longline{
     width: 100%;
-    border-bottom: 3px solid #40513B;
+    border-bottom: 4px solid #40513B;
     margin: 10px 0;
+    margin-top: -10px;
 }
 .search-bar {
   display: flex;

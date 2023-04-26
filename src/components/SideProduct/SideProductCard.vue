@@ -13,15 +13,15 @@
               <p class="product-title">{{ sideProduct.title }}</p>
               <p class="product-price">{{ sideProduct.price | comma }}원</p>
               <v-col cols="12">
-              <div class="d-flex justify-content-between align-items-center" style="background-color: #9DC08B; padding: 10px">
+              <div class="d-flex justify-content-between align-items-center" style="background-color: #3f792d; padding: 10px">
                 <div class="d-flex align-items-center">
-                <p style="font-size:15px; color:white; margin: 0;">구매수량</p>
+                <p style="font-size:15px; color: white; margin: 0;">구매수량</p>
               </div>
                 <div class="d-flex align-items-center">
                   <v-btn class="mr-2" elevation="0" color="#EDF1D6" small @click="qtyDesc">
                     <v-icon size="15">mdi-minus</v-icon>
                   </v-btn>
-                  <div>{{ quantity }}</div>
+                  <div style="color: white;">{{ quantity }}</div>
                   <v-btn class="ml-2" elevation="0" color="#EDF1D6" small @click="qtyInc">
                     <v-icon size="15">mdi-plus</v-icon>
                   </v-btn>
@@ -36,11 +36,14 @@
 </v-col>
 <v-col>
   <div class="d-flex justify-center align-center justify-space-between">
-    <v-btn @click="clickAddCart" width="150" height="40" color="#9DC08B">
+    <v-btn @click="clickAddCart" width="150" height="40" color="#3f792d">
       <v-icon size="24" style="color: white;">mdi-cart-variant</v-icon>
       <span style="color: white;">장바구니</span>
     </v-btn>
-    <v-btn width="150" height="40" color="#9DC08B" @click="showPreview = false" class="ml-2"><span style="color: white;">닫기</span></v-btn>
+    <v-btn width="150" height="40" color="#3f792d" @click="showPreview = false" class="ml-2">
+      <v-icon size="24" style="color: white;">mdi mdi-close</v-icon>
+      <span style="color: white;">닫기</span>
+    </v-btn>
   </div>
   <div class="d-flex justify-center align-center justify-space-between mt-5">
     <router-link :to="{ name: 'SideProductModifyPage',
@@ -162,4 +165,5 @@ methods:{
   max-width: 400px;
   margin: auto;
 }
+
 </style>
