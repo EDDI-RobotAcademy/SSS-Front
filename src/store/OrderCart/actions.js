@@ -45,10 +45,13 @@ async requestAddCartListToSpring({ commit }) {
     })
 },
 //삭제
-async requestDeleteCartToSpring ({}, itemId) {
+async requestDeleteCartToSpring ({}, payload) {
+    const { itemId, category } = payload
     const confirmDelete = window.confirm("상품을 삭제하시겠습니까?");
     if (confirmDelete) {
-        return await axiosInst.delete(`/cart/delete/${itemId}`)
+        return await axiosInst.delete("/cart/delete", {
+            data: { itemId, itemCategoryType: category }
+        })
             .then(() => {
                 alert("장바구니에서 삭제되었습니다.")
             })
@@ -97,20 +100,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
         alert("문제가 발생하여 장바구니에 추가되지 않았습니다.");
     }
 },
-//리스트
-async requestSelfSaladAddCartListToSpring({ commit }) {
-    return await axiosInst.get(`/cart/list`,
-    {
-        headers: {
-            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((res) => {
-        commit(REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING, res.data);
-        console.log('리스트 연결');
-    })
-},
+
 //셀프샐러드 수정 읽기
 async requestSelfSaladToSpring ({ commit }, itemId) {
     console.log("액션에서 출력한 아이디는 "+itemId)
@@ -128,15 +118,9 @@ async requestSelfSaladCartModifyToSpring({}, payload) {
     console.log("itemId: "+ itemId)
     
     const {totalPrice, totalCalorie, selfSaladModifyRequestList} = payload;
-    let newTemp = []; // 새로운 배열 생성
-    for (let i = 0; i < selfSaladModifyRequestList.length; i++) {
-        const { ingredientId, selectedAmount } = selfSaladModifyRequestList[i];
-        if (selectedAmount > 0) {
-            newTemp.push({ ingredientId, selectedAmount });
-        } 
-    }
+
     await axiosInst.put(`/cart/selfsalad/modify/${itemId}`, 
-    { totalPrice, totalCalorie, selfSaladModifyRequestList: newTemp} , {
+    { totalPrice, totalCalorie, selfSaladModifyRequestList} , {
         headers: {
             'Content-Type': 'application/json'}})
         .then(() => {
