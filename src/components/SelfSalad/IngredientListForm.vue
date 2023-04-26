@@ -9,7 +9,7 @@
         </div>
         <div>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
-          <v-btn color="#40513B" style="color:white" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">등록하기</v-btn>
+          <v-btn color="#40513B" style="width:150px; height:40px; font-size:20px; color:white;" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">재료 등록</v-btn>
         </router-link>
         </div>
         <div class="categorySession">
@@ -74,15 +74,15 @@
   <v-col cols="12">
       <div class="d-flex justify-end" style="margin-top: 20px;">
         <div class="btn-group">
-      <v-btn color="#40513B" style="color:white; padding: 10px;" @click="resetAll">
+      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white; padding: 10px;" @click="resetAll">
         재료 다시 담기
       </v-btn>
     </div>
     <div class="btn-group">
-      <v-btn color="#40513B" style="color:white;" type="submit">바로 주문하기</v-btn>
+      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white;" type="submit">바로 주문하기</v-btn>
     </div>
     <div class="btn-group">
-      <v-btn color="#40513B" style="color:white;" @click="clickAddCart"><v-icon>mdi-cart-variant</v-icon><span style="color:white;">장바구니</span></v-btn>
+      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white;" @click="clickAddCart"><v-icon>mdi-cart-variant</v-icon><span style="color:white;">장바구니</span></v-btn>
     </div>
   </div>
 </v-col>
@@ -270,7 +270,7 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
   .longline{
     width: 100%;
     border-bottom: 4px solid #40513B;
-    margin-top: -40px;
+    margin-top: -50x;
 }
 .line{
     width: 100%;
@@ -280,6 +280,7 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 *{
     color: #40513B;
   }
+
   .saladPageName{
     font-size: 70px;
     text-align: left;
