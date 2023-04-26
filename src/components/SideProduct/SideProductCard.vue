@@ -29,7 +29,7 @@
               </div>
             </v-col>
               <v-col cols="12">
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px">
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <p style="text-align: left; margin: 0; font-size: 20px;">총 합계</p>
     <p style="text-align: right; margin: 0; font-size: 20px;">{{ totalPrice | comma }}원</p>
   </div>
@@ -44,6 +44,13 @@
       <v-icon size="24" style="color: white;">mdi mdi-close</v-icon>
       <span style="color: white;">닫기</span>
     </v-btn>
+  </div>
+  <div class="d-flex justify-center align-center justify-space-between mt-5">
+    <router-link :to="{ name: 'SideProductModifyPage',
+          params: { sideProductId: sideProduct.sideProductId.toString() } }">
+      <v-btn width="150" height="40" color="blue" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">수정하기</v-btn>
+    </router-link>
+          <v-btn width="150" height="40" color="red" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'" @click="onDelete">삭제</v-btn>
   </div>
 </v-col>
         </v-row>
@@ -61,10 +68,11 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 const sideProductModule = 'sideProductModule'
 const ordercartModule = 'ordercartModule'
+const memberModule = 'memberModule'
 
 
 export default {
@@ -91,6 +99,9 @@ methods:{
       ...mapActions(ordercartModule, [        
           'requestAddCartToSpring'    
     ]),
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
       async onDelete() {
         await this.requestDeleteSideProductToSpring(this.sideProduct.sideProductId)
         await this.$router.push({name : 'SideProductListPage'}).catch(()=>{});
@@ -146,7 +157,7 @@ methods:{
   }
 .v-card {
   position: fixed;
-  top: 120px;
+  top: 40px;
   left: 0;
   right: 0;
   display: flex;
