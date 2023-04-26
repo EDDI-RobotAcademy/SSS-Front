@@ -27,7 +27,6 @@ export default {
   computed:{
     ...mapState(ordercartModule, [
       'cartItems',
-      'cartItem'
     ])
   },
   methods:{
@@ -36,14 +35,16 @@ export default {
       'requestDeleteCartToSpring',
       'requestModifyCartToSpring',
 
-    'requestSelfSaladAddCartListToSpring',  
+    //'requestSelfSaladAddCartListToSpring',
+    // 장바구니 담긴 셀프 샐러드 불러오기  
     'requestSelfSaladToSpring',
     'requestSelectDeleteCartToSpring'
     ]),
     async onDelete(payload) {
       const itemId = payload.itemId
+      const category = payload.category
       console.log('itemId: '+ itemId )
-      await this.requestDeleteCartToSpring(itemId)
+      await this.requestDeleteCartToSpring({ itemId, category })
       window.location.reload(true);
     },
     async onSSSModify(payload) {
@@ -61,13 +62,16 @@ export default {
       window.location.reload(true);
     },
     async selectDelete(payload) {
+      console.log("deleteId"+payload.itemId)
+      console.log("deleteCategory"+payload.itemCategoryType)
       await this.requestSelectDeleteCartToSpring(payload)
       window.location.reload(true);
     }
   },
   async created() {
-  await this.requestAddCartListToSpring(),
-  await this.requestSelfSaladAddCartListToSpring()
+    // 담긴 상품 불러오기, 
+  await this.requestAddCartListToSpring()
+  // await this.requestSelfSaladAddCartListToSpring()
 
 }
 }

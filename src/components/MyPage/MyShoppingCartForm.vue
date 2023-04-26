@@ -38,7 +38,7 @@
                     <tr v-for="(cartItem, idx) in cartItems" :key="idx" v-if="cartItem.totalPrice / cartItem.quantity > 0">
                       <td>{{ idx + 1 }}</td>
                     <td class="itemCheck" align="left">
-                      <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" />
+                      <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" :title="cartItem.title" />
                     </td>
                     <td>
                       <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
@@ -66,7 +66,7 @@
                       <v-btn @click="removeItem(idx)">
                         삭제하기
                       </v-btn>
-                      <v-btn v-if="cartItem.category === 'SELF'" @click="openModal(cartItem.cartItemId)">
+                      <v-btn v-if="cartItem.category === 'SELF'" @click="openModal(cartItem.cartItemId, cartItem.title)" >
                         수정하기
                       </v-btn>
                     </td>
@@ -83,8 +83,8 @@
           </v-card>
         </v-container>
 
-        <v-dialog v-model="showModal">
-          <self-salad-modify-cart-page :cartItemId="cartItemId" @close="closeModal"/>
+        <v-dialog v-model="showModal"  :max-width="1300" >
+          <self-salad-modify-cart-page :cartItemId="cartItemId" :saladTitle="saladTitle" @close="closeModal"/>
         </v-dialog>
 
       
@@ -151,7 +151,7 @@
 
 <script>
 
-import SelfSaladModifyCartPage from "@/views/SelfSalad/SelfSaladModifyCartPage.vue";
+import SelfSaladModifyCartPage from "@/views/MyPage/SelfSaladModifyCartPage.vue";
 
 
 export default {
@@ -168,7 +168,8 @@ export default {
       checkedValues: [],
       showModal: false,
       cartItemId: 0,
-      deliveryFee: 3000
+      deliveryFee: 3000,
+      saladTitle: '',
     }
   },
   methods: {
@@ -198,8 +199,9 @@ export default {
       this.$emit('onDelete', { itemId, category })
     },
     //모달창 열고 카트 아이디 보내주기
-    openModal(idx) {
+    openModal(idx, title) {
       this.cartItemId = idx
+      this.saladTitle = title
       this.showModal = true;
       this.$emit('onSSSModify', idx)
 
@@ -211,12 +213,13 @@ export default {
     },
     async selectRemoveItem() {
       let itemCategoryType = []
-      if(itemCategoryType === 0 ){
+      if(itemCategoryType !== 0 ){
       let deleteCartMessage = confirm("선택한 상품을 삭제하시겠습니까?")
       if (deleteCartMessage) {
         for (let i = 0; i < this.cartItems.length; i++) {
           if (this.checkedValues.includes(this.cartItems[i].cartItemId)) {
             itemCategoryType.push({itemId: this.cartItems[i].cartItemId, itemCategoryType: this.cartItems[i].category});
+            console.log("deleteItemID"+this.cartItems[i].cartItemId)
           }
         }
         this.$emit('selectDelete', itemCategoryType)
