@@ -62,9 +62,13 @@ export default {
         },
         {
           title: "문의 사항",
-          icon: "mdi-human-greeting",
           route: "/my-info-Qna",
           count: 1
+        },
+        {
+          title: "주문",
+          route: "/my-info-delivery",
+          count: 4
         }
       ]
     }
