@@ -27,7 +27,6 @@ export default {
   computed:{
     ...mapState(ordercartModule, [
       'cartItems',
-      'cartItem'
     ])
   },
   methods:{
@@ -36,7 +35,8 @@ export default {
       'requestDeleteCartToSpring',
       'requestModifyCartToSpring',
 
-    'requestSelfSaladAddCartListToSpring',  
+    //'requestSelfSaladAddCartListToSpring',
+    // 장바구니 담긴 셀프 샐러드 불러오기  
     'requestSelfSaladToSpring',
     'requestSelectDeleteCartToSpring'
     ]),
@@ -69,8 +69,9 @@ export default {
     }
   },
   async created() {
-  await this.requestAddCartListToSpring(),
-  await this.requestSelfSaladAddCartListToSpring()
+    // 담긴 상품 불러오기, 
+  await this.requestAddCartListToSpring()
+  // await this.requestSelfSaladAddCartListToSpring()
 
 }
 }

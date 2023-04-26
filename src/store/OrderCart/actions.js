@@ -100,20 +100,7 @@ async requestSelfSaladAddCartToSpring({}, payload) {
         alert("문제가 발생하여 장바구니에 추가되지 않았습니다.");
     }
 },
-//리스트
-async requestSelfSaladAddCartListToSpring({ commit }) {
-    return await axiosInst.get(`/cart/list`,
-    {
-        headers: {
-            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((res) => {
-        commit(REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING, res.data);
-        console.log('리스트 연결');
-    })
-},
+
 //셀프샐러드 수정 읽기
 async requestSelfSaladToSpring ({ commit }, itemId) {
     console.log("액션에서 출력한 아이디는 "+itemId)
