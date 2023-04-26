@@ -18,22 +18,17 @@
             <router-link :to="{ name: 'QnaBoardListPage' }">FAQ</router-link>
           </li>
         </ul>
-        <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer"/>
       </v-app-bar>
-          <side-nav :navigation_drawer="navigation_drawer"/>
   </nav>
   
 </template>
 
 <script>
-import SideNav from '@/views/NavigationMenu/SideNav.vue'
 
 export default {
   name: "HeaderTwo",
-  components: { SideNav },
   data() {
     return {
-      navigation_drawer: false
     }
   }
 }
