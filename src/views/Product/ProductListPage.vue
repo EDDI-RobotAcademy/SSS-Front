@@ -115,7 +115,7 @@
 
 .search-bar select,
 .search-bar input[type="text"],
-.search-bar button,{
+.search-bar button{
 font-size: 20px;
 }
 .sort-bar .sort {

@@ -5,7 +5,7 @@
       <div class="thumbnail">
         <router-link :to="{ name: 'ProductReadPage',
               params: { productId: product.productId.toString() }}">
-        <img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)">
+        <img :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
       </router-link>
 
       </div>

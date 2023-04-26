@@ -13,15 +13,15 @@
               <p class="product-title">{{ sideProduct.title }}</p>
               <p class="product-price">{{ sideProduct.price | comma }}원</p>
               <v-col cols="12">
-              <div class="d-flex justify-content-between align-items-center" style="background-color: #9DC08B; padding: 10px">
+              <div class="d-flex justify-content-between align-items-center" style="background-color: #3f792d; padding: 10px">
                 <div class="d-flex align-items-center">
-                <p style="font-size:15px; color:white; margin: 0;">구매수량</p>
+                <p style="font-size:15px; color: white; margin: 0;">구매수량</p>
               </div>
                 <div class="d-flex align-items-center">
                   <v-btn class="mr-2" elevation="0" color="#EDF1D6" small @click="qtyDesc">
                     <v-icon size="15">mdi-minus</v-icon>
                   </v-btn>
-                  <div>{{ quantity }}</div>
+                  <div style="color: white;">{{ quantity }}</div>
                   <v-btn class="ml-2" elevation="0" color="#EDF1D6" small @click="qtyInc">
                     <v-icon size="15">mdi-plus</v-icon>
                   </v-btn>
@@ -29,18 +29,28 @@
               </div>
             </v-col>
               <v-col cols="12">
-                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px">
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <p style="text-align: left; margin: 0; font-size: 20px;">총 합계</p>
     <p style="text-align: right; margin: 0; font-size: 20px;">{{ totalPrice | comma }}원</p>
   </div>
 </v-col>
 <v-col>
   <div class="d-flex justify-center align-center justify-space-between">
-    <v-btn @click="clickAddCart" width="150" height="40" color="#9DC08B">
+    <v-btn @click="clickAddCart" width="150" height="40" color="#3f792d">
       <v-icon size="24" style="color: white;">mdi-cart-variant</v-icon>
       <span style="color: white;">장바구니</span>
     </v-btn>
-    <v-btn width="150" height="40" color="#9DC08B" @click="showPreview = false" class="ml-2"><span style="color: white;">닫기</span></v-btn>
+    <v-btn width="150" height="40" color="#3f792d" @click="showPreview = false" class="ml-2">
+      <v-icon size="24" style="color: white;">mdi mdi-close</v-icon>
+      <span style="color: white;">닫기</span>
+    </v-btn>
+  </div>
+  <div class="d-flex justify-center align-center justify-space-between mt-5">
+    <router-link :to="{ name: 'SideProductModifyPage',
+          params: { sideProductId: sideProduct.sideProductId.toString() } }">
+      <v-btn width="150" height="40" color="blue" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">수정하기</v-btn>
+    </router-link>
+          <v-btn width="150" height="40" color="red" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'" @click="onDelete">삭제</v-btn>
   </div>
 </v-col>
         </v-row>
@@ -58,10 +68,11 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 const sideProductModule = 'sideProductModule'
 const ordercartModule = 'ordercartModule'
+const memberModule = 'memberModule'
 
 
 export default {
@@ -88,6 +99,9 @@ methods:{
       ...mapActions(ordercartModule, [        
           'requestAddCartToSpring'    
     ]),
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
       async onDelete() {
         await this.requestDeleteSideProductToSpring(this.sideProduct.sideProductId)
         await this.$router.push({name : 'SideProductListPage'}).catch(()=>{});
@@ -143,7 +157,7 @@ methods:{
   }
 .v-card {
   position: fixed;
-  top: 120px;
+  top: 40px;
   left: 0;
   right: 0;
   display: flex;
@@ -151,4 +165,5 @@ methods:{
   max-width: 400px;
   margin: auto;
 }
+
 </style>

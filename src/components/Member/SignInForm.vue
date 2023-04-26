@@ -4,11 +4,6 @@
     <v-row justify="center">
       <!--로그인쪽 위아래 스크롤될 정도로 길거나 짧게 만들 수 있음-->
       <v-col cols="auto" style="padding-bottom: 100px">
-        <router-link to="/">
-          <!-- 로고 이미지칸 클릭하면 홈페이지로 가지는데...음..louter-link 때문인듯! 링크걸려있으니 이미지 수정해서 넣으면 끗-->
-          <v-img
-              :src="require('@/assets/logo/3sss-ko.jpg')" width="300" class="mx-auto mb-6"/>
-        </router-link>
               <!--로그인창크기-->
         <v-card width="500">
           <v-card-text class="text-center px-15 py-16">

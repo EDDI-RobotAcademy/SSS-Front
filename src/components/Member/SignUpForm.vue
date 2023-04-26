@@ -2,10 +2,6 @@
     <div style="font-family: Arial">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
-          <router-link to="/">
-            <v-img
-                :src="require('@/assets/logo/3sss-ko.jpg')" width="300" class="mx-auto mb-6"/>
-          </router-link>
           <v-card width="460" style="margin-top: 40px;">
             <v-tabs v-model="tab">
                 <!-- <v-tab v-for="item in items" :key="item.tab" class="half-width">
