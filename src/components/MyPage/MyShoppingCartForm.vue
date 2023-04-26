@@ -211,12 +211,13 @@ export default {
     },
     async selectRemoveItem() {
       let itemCategoryType = []
-      if(itemCategoryType === 0 ){
+      if(itemCategoryType !== 0 ){
       let deleteCartMessage = confirm("선택한 상품을 삭제하시겠습니까?")
       if (deleteCartMessage) {
         for (let i = 0; i < this.cartItems.length; i++) {
           if (this.checkedValues.includes(this.cartItems[i].cartItemId)) {
             itemCategoryType.push({itemId: this.cartItems[i].cartItemId, itemCategoryType: this.cartItems[i].category});
+            console.log("deleteItemID"+this.cartItems[i].cartItemId)
           }
         }
         this.$emit('selectDelete', itemCategoryType)

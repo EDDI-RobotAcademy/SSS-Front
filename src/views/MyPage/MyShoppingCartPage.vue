@@ -42,8 +42,9 @@ export default {
     ]),
     async onDelete(payload) {
       const itemId = payload.itemId
+      const category = payload.category
       console.log('itemId: '+ itemId )
-      await this.requestDeleteCartToSpring(itemId)
+      await this.requestDeleteCartToSpring({ itemId, category })
       window.location.reload(true);
     },
     async onSSSModify(payload) {
@@ -61,6 +62,8 @@ export default {
       window.location.reload(true);
     },
     async selectDelete(payload) {
+      console.log("deleteId"+payload.itemId)
+      console.log("deleteCategory"+payload.itemCategoryType)
       await this.requestSelectDeleteCartToSpring(payload)
       window.location.reload(true);
     }
