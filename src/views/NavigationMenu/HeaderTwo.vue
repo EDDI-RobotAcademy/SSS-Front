@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-app-bar class="flex-grow-0" color="white" elevation="0" style="display: flex; justify-content: center;">
-      <ul class="menu mt-3">
+      <ul class="menu mt-5">
           <li>
             <router-link :to="{ name: 'IngredientListPage' }">Self Salad</router-link>
           </li>

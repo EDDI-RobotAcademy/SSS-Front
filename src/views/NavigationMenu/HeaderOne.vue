@@ -1,9 +1,9 @@
 <template>
   <nav>
     <v-app-bar color="white">
-      <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+      <div style="position: absolute; left: 50%; transform: translateX(-50%); margin-top: 15px;">
         <router-link :to="{ name: 'home' }">
-          <img src="@/assets/logo/3sss-ko.jpg" width="200">
+          <img src="@/assets/logo/long_sss.jpg" width="220">
         </router-link>
       </div>
       <v-spacer></v-spacer>
