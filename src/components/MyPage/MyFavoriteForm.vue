@@ -8,14 +8,14 @@
       <v-divider style="margin-top: 30px"></v-divider>
       <div class="item-container">
         <div class="item-info" v-for="(item, index) in favoriteList" :key="index">
-          <img :src="require(`@/assets/product/${item.product.productImgs[0].editedImg}`)"
+          <img :src="require(`@/assets/product/${item.productImgList[0].editedImg}`)"
             max-width="100%" max-height="250" contain/>
-          <p class="content" @click="productView(item)">{{ item.product.title }}</p>
-          <p class="price" @click="productView(item)">{{ item.product.price | comma }} 원</p>
+          <p class="content" @click="productView(item)">{{ item.title }}</p>
+          <p class="price" @click="productView(item)">{{ item.price | comma }} 원</p>
           <div class="button">
             <v-col>
-              <v-btn class="ml-0 ma-2" @click="clickAddCart(item.product.productId)">장바구니</v-btn>
-              <v-btn @click="cancelFavorite(item.product.productId)">찜 삭제</v-btn>
+              <v-btn class="ml-0 ma-2" @click="clickAddCart(item.productId)">장바구니</v-btn>
+              <v-btn @click="cancelFavorite(item.productId)">찜 삭제</v-btn>
             </v-col>
           </div>
         </div>
@@ -35,9 +35,9 @@ const productModule = 'productModule'
 const memberModule = 'memberMoudle'
 export default {
   name: "MyFavoriteForm",
-  mounted() {
+  async mounted() {
     if (this.$store.state.memberModule.memberInfoAboutSignIn && this.$store.state.memberModule.memberInfoAboutSignIn.userId) {
-    this.requestFavoriteListToSpring();
+    await this.requestFavoriteListToSpring();
   }
   },
   computed: {
@@ -67,7 +67,7 @@ export default {
         this.$emit('addCart', {productId, quantity})
     },
     productView(item) {
-      this.$router.push({name: 'ProductReadPage', params: {productId: String(item.product.productId)}})
+      this.$router.push({name: 'ProductReadPage', params: {productId: String(item.productId)}})
     }
   },
   filters: {

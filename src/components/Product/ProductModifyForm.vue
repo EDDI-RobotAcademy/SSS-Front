@@ -29,6 +29,26 @@
               </td>
           </tr>
           <tr>
+                <td>영양정보</td>
+                <td>
+                    <label for="calorie">열량</label>
+                    <input type="number" name="calorie" v-model="product.productDetail.calorie" step="0.01" class="short-input"/>
+                    <label for="carbohydrate">탄수화물</label>
+                    <input type="number" name="carbohydrate" v-model="product.productDetail.carbohydrate" step="0.01" class="short-input"/>
+                    <label for="sugars">당류</label>
+                    <input type="number" name="sugars" v-model="product.productDetail.sugars" step="0.01" class="short-input"/>
+                    <label for="protein">단백질</label>
+                    <input type="number" name="protein" v-model="product.productDetail.protein" step="0.01" class="short-input"/>
+                    <br>
+                    <label for="fat">지방</label>
+                    <input type="number" name="fat" v-model="product.productDetail.fat" step="0.01" class="short-input"/>
+                    <label for="aturatedFat">포화지방</label>
+                    <input type="number" name="aturatedFat" v-model="product.productDetail.aturatedFat" step="0.01" class="short-input"/>
+                    <label for="natrium">나트륨</label>
+                    <input type="number" name="natrium" v-model="product.productDetail.natrium" step="0.01" class="short-input"/>
+                </td>
+          </tr>
+          <tr>
               <td>사진 변경</td>
               <td>
               <input type="file" id="files" ref="files"
@@ -40,7 +60,7 @@
     </v-col>
     <v-col>
         <p>수정 전</p>
-        <v-col v-for="(imagePath, idx) in product.productImgs" :key="idx" md="3">
+        <v-col v-for="(imagePath, idx) in product.productImgList" :key="idx" md="3">
             <v-img :src="require(`@/assets/product/${imagePath.editedImg}`)" aspect-ratio="1">
             </v-img>
         </v-col>
@@ -66,7 +86,8 @@
   
   <script>
 import axios from 'axios'
-  
+import axiosInst from '@/utility/axiosObject'
+
   export default {
       name: "ProductModifyForm",
       props: {
@@ -116,7 +137,7 @@ import axios from 'axios'
               if(this.files.length == 0) {
                 console.log("파일 없이 수정")
 
-                axios.put(`http://localhost:7777/products/modify-text/${productId}`, productInfo)
+                axiosInst.put(`/products/modify-text/${productId}`, productInfo)
                     .then(res => {
                         if(res.data) {
                             alert("수정 완료")
@@ -163,5 +184,8 @@ import axios from 'axios'
 td {
     padding: 5px;
     border: 2px solid black;
+}
+.short-input {
+    width: 5em;
 }
   </style>

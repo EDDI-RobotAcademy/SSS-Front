@@ -4,8 +4,8 @@
   <div>
     <v-row>
       <v-col cols="5">
-        <v-img :src="require(`@/assets/product/${product.productImgs[this.idx].editedImg}`)" 
-                aspect-ratio="1" width="500" height="500">
+        <v-img :src="require(`@/assets/product/${product.productImgList[this.idx].editedImg}`)" 
+                aspect-ratio="1" width="500" height="500" contain>
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" justify="center">
               <v-progress-circular indeterminate color="grey lightesn-5"/>
@@ -96,7 +96,7 @@
                 <v-col cols="2" style="background-color: #9DC08B;">
                   <span><h2 style="color:white">채소 구성</h2></span>
                 </v-col>
-                <v-col align="center" v-for="(image, index) in product.productImgs.slice(1)" :key="index" cols="2">
+                <v-col align="center" v-for="(image, index) in product.productImgList.slice(1)" :key="index" cols="2">
                   <v-img :src="require(`@/assets/product/${image.editedImg}`)" max-width="200" contain></v-img>
                 </v-col>
               </v-row>
@@ -213,7 +213,7 @@ export default {
       } else {
         alert("로그인한 사용자만 가능합니다.")
       }
-    }
+    },
 },
 }
 </script>
