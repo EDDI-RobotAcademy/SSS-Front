@@ -1,28 +1,26 @@
 <template>
   <nav>
-    <v-app-bar color="white" style="height: 170px; margin-top:-20px">
-      <div style="display:flex; flex-direction:column; align-items:center;">
-      <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <v-app-bar color="white">
+      <div style="position: absolute; left: 50%; transform: translateX(-50%); margin-top: 15px;">
         <router-link :to="{ name: 'home' }">
-          <img src="@/assets/logo/long_sss.jpg" height="auto" width="500px">
+          <img src="@/assets/logo/long_sss.jpg" width="220">
         </router-link>
       </div>
-      </div>
       <v-spacer></v-spacer>
-      <div class="menu" style="margin-top: 20px;">
+      <div class="menu">
       <template v-if="!signInValue">
         <button style="margin-right: 15px;">
-          <router-link :to="{ name: 'SignIn' }" style="font-size: 25px;">Login</router-link>
+          <router-link :to="{ name: 'SignIn' }">Login</router-link>
         </button>  
         <button>
-          <router-link :to="{ name: 'SignUp' }" style="font-size: 25px;">Join</router-link>
+          <router-link :to="{ name: 'SignUp' }">Login</router-link>
         </button>  
       </template>
       <template v-else>
-          <button style="margin-right: 15px; font-size: 25px;">
-            <router-link :to="{ name: 'MyPage' }">Mypage</router-link>
+        <button style="margin-right: 15px;">
+          <router-link :to="{ name: 'MyPage' }">Mypage</router-link>
           </button> 
-          <button @click="logoutBtn" style="font-weight: 600; font-size: 25px;">
+          <button @click="logoutBtn" style="font-weight: 600">
             <span>logout</span>
           </button>
         </template>
@@ -67,14 +65,11 @@ export default {
 
 <style scoped>
 .menu a {
+  color: black;
   font-weight: 600;
 }
 a {
   text-decoration: none;
 }
-
-*{
-    color: #40513B;
-  }
 
 </style>
