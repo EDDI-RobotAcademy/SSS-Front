@@ -45,8 +45,7 @@
         <div>
           <v-btn type="submit" color="blue">수정 완료</v-btn>
           <router-link :to="{
-            name: 'SideProductReadPage',
-            params: { sideProductId: sideProduct.sideProductId }
+            name: 'SideProductListPage',
           }">
             <v-btn color="red">취소</v-btn>
           </router-link>
