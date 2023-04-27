@@ -18,7 +18,7 @@
       </template>
       <template v-else>
         <button style="margin-right: 15px;">
-          <router-link :to="{ name: 'MyPage' }">Mypage</router-link>
+          <router-link :to="{ name: 'MyInfoAccountPage' }">Mypage</router-link>
           </button> 
           <button @click="logoutBtn" style="font-weight: 600">
             <span>logout</span>
