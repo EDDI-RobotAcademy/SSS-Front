@@ -52,7 +52,7 @@
   </div>
     <v-col cols="6">
       <div style="text-align: right;">
-      <p style="margin:0; font-size: 25px;">내가 만든 샐러드의 가격: {{ totalPrice }}</p>
+      <p style="margin:0; font-size: 25px;">내가 만든 샐러드의 가격: {{ totalPrice | comma }}</p>
       <div class="d-flex justify-end">
         <div class="d-flex align-items-center">
         <v-btn class="mr-2" elevation="0" color="#40513B" small @click="qtyDesc">
@@ -64,7 +64,7 @@
         </v-btn>
       </div>
       </div>
-      <p style="margin:0; font-size: 25px;">총 금액: {{ totalPrice* quantity }}</p>
+      <p style="margin:0; font-size: 25px;">총 금액: {{ totalPrice* quantity | comma}}</p>
     </div>
   </v-col>
   </div>
@@ -201,8 +201,11 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
       }
     },
   },
-
-
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+  }
 }
 </script>
 
