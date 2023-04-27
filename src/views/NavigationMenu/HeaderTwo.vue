@@ -19,16 +19,11 @@
           </li>
         </ul>
       </v-app-bar>
-         
   </nav>
-  
 </template>
 
 <script>
-
-
 export default {
- 
 }
 </script>
 

@@ -45,13 +45,6 @@
       <span style="color: white;">닫기</span>
     </v-btn>
   </div>
-  <div class="d-flex justify-center align-center justify-space-between mt-5">
-    <router-link :to="{ name: 'SideProductModifyPage',
-          params: { sideProductId: sideProduct.sideProductId.toString() } }">
-      <v-btn width="150" height="40" color="blue" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">수정하기</v-btn>
-    </router-link>
-          <v-btn width="150" height="40" color="red" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'" @click="onDelete">삭제</v-btn>
-  </div>
 </v-col>
         </v-row>
         </v-card-text>
@@ -64,6 +57,13 @@
     />
     <p style="text-align: center;" class="product-title">{{ sideProduct.title }}</p>
     <p style="text-align: center;" class="product-price">{{ sideProduct.price | comma }} 원</p>
+    <div class="d-flex justify-center align-center mt-5">
+      <router-link :to="{ name: 'SideProductModifyPage',
+            params: { sideProductId: sideProduct.sideProductId.toString() } }">
+        <v-btn width="50" height="40" color="blue" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">수정하기</v-btn>
+      </router-link>
+            <v-btn width="30" height="40" color="red" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'" @click="onDelete">삭제</v-btn>
+    </div>
   </v-container>
 </template>
 
@@ -99,9 +99,7 @@ methods:{
       ...mapActions(ordercartModule, [        
           'requestAddCartToSpring'    
     ]),
-    ...mapState(memberModule, [
-        'memberInfoAboutSignIn'
-      ]),
+
       async onDelete() {
         await this.requestDeleteSideProductToSpring(this.sideProduct.sideProductId)
         await this.$router.push({name : 'SideProductListPage'}).catch(()=>{});
@@ -138,6 +136,11 @@ methods:{
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
+  },
+  computed:{
+    ...mapState(memberModule, [
+        'memberInfoAboutSignIn'
+      ]),
   }
 }
 </script>
