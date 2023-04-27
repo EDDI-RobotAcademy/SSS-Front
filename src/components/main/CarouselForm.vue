@@ -8,18 +8,16 @@
 					<video class="main-top-promotion-video" autoplay="autoplay" loop="loop" muted="muted">
             <source src="@/assets/carousel/SSS.mp4" type="video/mp4">
 					</video>
-					<div class="container">
-						<div class="row align-items-center">
-							<div class="col-sm-12 col-md-6 text-md-start"/>
+					<div class="carousel-text">
+						<div class="d-flex justify-end">
 							<div class="col-sm-12 col-md-6 text-md-start">
-								<div class="py-5" style="text-align: right;">
-									<h1 class="text-white fw-bold">
+								<div class="py-5" style="text-align: right; margin-right: 25px; min-width: 700px;" >
+									<h1 style="font-size: 80px;" class="text-white fw-bold">
 										Welcome to <br>Self Salade Sell
 									</h1>
-									<p class="text-white mb-4 fs-5">
+									<p  class="text-white mb-4 fs-2">
 										당신의 샐러드로 건강한 하루를 시작하세요.
 									</p>
-                  <router-link :to="{name:'IngredientRegisterPage'}" class="btn btn-success text-white">Choose my salad</router-link>
 								</div>
 							</div>
 						</div>
@@ -31,18 +29,16 @@
 					<video class="main-top-promotion-video" autoplay="autoplay" loop="loop" muted="muted">
             <source src="@/assets/carousel/SSS2.mp4" type="video/mp4">
 					</video>
-					<div class="container">
-						<div class="row align-items-center">
-							<div class="col-sm-12 col-md-6 text-md-start"/>
+					<div class="carousel-text">
+						<div class="d-flex justify-end">
 							<div class="col-sm-12 col-md-6 text-md-start">
-								<div class="py-5" style="text-align: right;">
-									<h1 class="text-white fw-bold">
-										Welcome to <br>Self Salade Sell
+								<div class="py-5" style="text-align: right; margin-right: 25px;">
+									<h1 style="font-size: 80px;" class="text-white fw-bold">
+										Welcome to <br>Self Salade Sell	
 									</h1>
-									<p class="text-white mb-4 fs-5">
+									<p class="text-white mb-4 fs-2">
 										당신의 샐러드로 건강한 하루를 시작하세요.
 									</p>
-                  <router-link :to="{name:'IngredientRegisterPage'}" class="btn btn-success text-white">Choose my salad</router-link>
 								</div>
 							</div>
 						</div>
@@ -79,7 +75,7 @@ export default {
   object-fit: cover;
 }
 
-.main-top-promotion>.container {
+.carousel-text{
 	position: relative;
 	
 }

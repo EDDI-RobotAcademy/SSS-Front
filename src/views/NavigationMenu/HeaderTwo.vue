@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-app-bar class="flex-grow-0" color="white" elevation="0" style="display: flex; justify-content: center;">
+    <v-app-bar class="flex-grow-0" color="white" elevation="0" style="display: flex; justify-content: center; min-width: 1000px;">
       <ul class="menu mt-5">
           <li>
             <router-link :to="{ name: 'IngredientListPage' }">Self Salad</router-link>
@@ -20,27 +20,20 @@
         </ul>
       </v-app-bar>
   </nav>
-  
 </template>
 
 <script>
-
 export default {
-  name: "HeaderTwo",
-  data() {
-    return {
-    }
-  }
 }
 </script>
 
 <style scoped>
   ul.menu li{ display: inline;}
   .menu a:hover {
-    color: #3d7e27 !important;
+    color: #9cc490 !important;
   }
   .menu a {
-    color: black;
+    color: #40513B;
     font-weight: 600;
     margin-right: 80px;
     transition: all 0.3s ease 0s;
@@ -48,4 +41,9 @@ export default {
 a {
     text-decoration: none;
   }
+  li{
+    font-size: 20px;
+    color: #40513B;
+  }
+
 </style>

@@ -6,7 +6,7 @@
         <p class="saladPageName">Salad</p> 
         <div>
           <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-            상품 등록
+            <v-btn color="#40513B" style="width:150px; height:40px; font-size:20px; color:white;">상품 등록</v-btn>
         </router-link>
         </div>
         <div class="search-bar">
@@ -98,8 +98,9 @@
   </script>
   
   <style scoped>
-  .saladPageName{
-    font-size: 60px;
+  
+.saladPageName{
+    font-size: 70px;
     text-align: left;
     color: #40513B;
     
@@ -138,8 +139,9 @@ font-size: 20px;
 
 .longline{
     width: 100%;
-    border-bottom: 3px solid #40513B;
+    border-bottom: 4px solid #40513B;
     margin: 10px 0;
+    margin-top: -10px;
 }
 .search-bar {
   display: flex;

@@ -7,7 +7,7 @@
         <p class="saladPageName">Side</p> 
         <div>
           <router-link :to="{ name: 'SideProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-              상품 등록
+              <v-btn color="#40513B" style="width:150px; height:40px; font-size:20px; color:white;">상품 등록</v-btn>
           </router-link>
       </div>
       <div class="search-bar">
