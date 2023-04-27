@@ -1,7 +1,8 @@
 <template>
   <v-container>
-    <div align="center">
-      <h2>게시판 읽기</h2>
+    <div align="center" style="margin-top: 20px;">
+      <h2>자유게시판</h2>
+      <p>고객 여러분들의 다양한 이야기를 들려주세요</p>
       <qna-board-read v-if="board" :board="board"/>
       <p v-else>로딩중 ......... </p>
       <router-link :to="{ name: 'QnaBoardModifyPage', params: { boardId } }">
@@ -13,13 +14,8 @@
       </router-link>
     <table>
       <tr>
-        <div>
-          <h5>댓글</h5>
-        </div>
-        <div>
-          <reply-list :replys="replys"/>
-        </div>
-          <reply-register-form @submit="onSubmit"/>
+        <reply-register-form @submit="onSubmit"/>
+        <reply-list :replys="replys"/>
       </tr>
     </table>
     </div>
@@ -81,6 +77,5 @@ export default {
 
 </script>
 
-<style>
-
+<style scoped>
 </style>
