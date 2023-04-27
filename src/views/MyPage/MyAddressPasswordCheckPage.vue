@@ -13,7 +13,7 @@
           <v-layout align-center style="width: 400px;">
             <v-text-field style="width: 100%; margin-right: 20px; font-family: Arial;" type="password" v-model="password" label="비밀번호"/>
             
-            <v-btn style="background-color: #609966; color: white;" type="submit" @click="openModal()">
+            <v-btn style="background-color: #609966; color: white;" type="submit">
               확인
             </v-btn>
           </v-layout>
@@ -65,12 +65,13 @@
           alert("비밀번호를 입력하세요.");
           return;
         }
+      
         this.requestCheckPasswordToSpring(password)
             .then((res) => {
               if (res === false) {
                 this.showModal = false;
               } else {
-  
+                this.showModal = true;
               }
             });
           },

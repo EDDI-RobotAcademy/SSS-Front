@@ -25,8 +25,6 @@
         <div class="d-flex justify-end">
           <p class="totalCalorie"><span> : {{ totalCalorie }} </span> ( 총 KCAL )</p>
   </div>
-
-      <div style="display: flex; justify-content: center; height: 150px; " class="background-category">{{ category }}</div>
       
       <div class="cardSession">
       <v-col v-if="!ingredients || (Array.isArray(ingredients) && ingredients.length === 0)">
@@ -44,48 +42,72 @@
   </div>
   <div class="line"></div>
   <v-col cols="12">
-    <div class="d-flex justify-center align-center justify-space-between">
-      <div style="font-size: 24px" class="d-flex align-items-center">
-        <div class="d-flex align-items-center">
-      <p style="font-size: 30px;">볼에 담긴 재료 <br>{{ names }}</p>
+    <div class="d-flex justify-center">
+      <v-col cols="6" style="align-self: start;">
+        <v-card class="selectingredientcard">
+          <div class="d-flex justify-center">  
+            <h4 style="margin-top:15px;">샐러드 재료</h4>
+          </div>  
+          <div class="cardline"></div>
+        <div style="text-align: left; margin-top:20px; margin-left:30px;">
+        <h4 v-html="names.join('<br>')"></h4>
       </div>
-  </div>
-    <v-col cols="6">
-      <div style="text-align: right;">
-      <p style="margin:0; font-size: 25px;">내가 만든 샐러드의 가격: {{ totalPrice | comma }}</p>
-      <div class="d-flex justify-end">
-        <div class="d-flex align-items-center">
-        <v-btn class="mr-2" elevation="0" color="#40513B" small @click="qtyDesc">
-          <v-icon color="white" size="25">mdi-minus</v-icon>
-        </v-btn>
-        <div style="font-size: 25px; padding:10px;">{{ quantity }}</div>
-        <v-btn class="ml-2" elevation="0" color="#40513B" small @click="qtyInc">
-          <v-icon color="white" size="25">mdi-plus</v-icon>
-        </v-btn>
-      </div>
-      </div>
-      <p style="margin:0; font-size: 25px;">총 금액: {{ totalPrice* quantity | comma}}</p>
-    </div>
-  </v-col>
-  </div>
+      </v-card>
+      </v-col>
+      
+
+
+      <v-col cols="6" style="margin-top: 30px">           
+        <div class="product-info">
+        <div class="d-flex justify-content-between align-items-center" style="margin-top: 15px">
+          <h4>판매가</h4>
+          <h4>{{ totalPrice | comma }}원</h4>
+        </div>
+          <div class="d-flex justify-content-between align-items-center" style="border-radius: 8px; background-color: #EDF1D6; padding: 10px; height: 50px; margin-top: 10px;">
+            구매수량
+            <div class="d-flex align-items-center">
+              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" small @click="qtyDesc">
+                <v-icon size="15" color="white">mdi-minus</v-icon>
+              </v-btn>
+              <div>{{  totalPrice | comma }}</div>
+              <v-btn style="background-color: #9DC08B;" rounded class="ml-2" elevation="0" small @click="qtyInc">
+                <v-icon size="15" color="white">mdi-plus</v-icon>
+              </v-btn>
+            </div>
+          </div>
+          <div class="row">
+            <div class="d-flex justify-content-between align-items-center" style="margin-top: 20px;"  >
+              <h4 style="text-align: left">총 합계</h4>
+              <h4 style="text-align: right">{{ totalPrice* quantity | comma }}원</h4>
+            </div>
+          </div>
+        </div>
+        
 
 
 
-  <v-col cols="12">
-      <div class="d-flex justify-end" style="margin-top: 20px;">
-        <div class="btn-group">
-      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white; padding: 10px;" @click="resetAll">
-        재료 다시 담기
-      </v-btn>
-    </div>
-    <div class="btn-group">
-      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white;" type="submit">바로 주문하기</v-btn>
-    </div>
-    <div class="btn-group">
-      <v-btn color="#40513B" style="width:170px; height:40px; font-size:20px; color:white;" @click="clickAddCart"><v-icon>mdi-cart-variant</v-icon><span style="color:white;">장바구니</span></v-btn>
-    </div>
+
+        <v-row class="justify-content-center" style="margin-top:20px">
+  <v-col class="text-center">       
+            <v-btn
+            @click="resetAll"
+                width="240px"
+                x-large style="background-color: rgb(54, 109, 50); color: white;"><v-icon>restart-alt</v-icon><span style="color:white">다시담기</span></v-btn>
+          </v-col>  
+          <v-col class="text-center"> 
+            <v-btn
+            @click="clickAddCart"
+                width="240px"
+                x-large style="background-color: rgb(54, 109, 50); color: white;"><v-icon>mdi-cart-variant</v-icon><span style="color:white">장바구니</span></v-btn>
+          </v-col>
+        </v-row>  
+      </v-col>
+
+
+
+   
   </div>
-</v-col>
+
 </v-col>
   </v-row>
 </form>
@@ -111,7 +133,7 @@ export default {
       names: [],
       quantity: 1,
       // 장바구니에 보내 줄 재료 정보 배열
-      selfSaladList: []
+      selfSaladList: [],
 
     }   
   },
@@ -210,21 +232,6 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 </script>
 
 <style scoped>
-  .background-category{
-    font-size: 12rem;
-    position: flex;
-    font-weight: bolder;
-    color:  rgba(240, 242, 237);
-    letter-spacing: -15px;
-    padding: 0; 
-    margin-top: -60px;
-    
-    -ms-user-select: none; 
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-  }
   table{
     width: 100%;
   }
@@ -280,6 +287,13 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
     border-bottom: 4px solid #40513B;
     margin-top: 100px;
 }
+.cardline {
+  border-bottom: 4px solid #40513B;
+  margin: 10px 10% 0 10%;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
 *{
     color: #40513B;
   }
@@ -297,4 +311,10 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 .btn-ingroup{
   background-color: #40513B;
 }
+.selectingredientcard{
+  width:400px;
+  min-height: 400px;
+  background-color: #EDF1D6;
+}
+
 </style>
