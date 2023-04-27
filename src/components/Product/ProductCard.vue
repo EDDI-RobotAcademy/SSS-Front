@@ -2,10 +2,13 @@
   <v-container class="text-center">
     <v-row>
     <div class="productCard">
-      <div class="thumbnail">
+      <div class="thumbnail-wrapper">
         <router-link :to="{ name: 'ProductReadPage',
               params: { productId: product.productId.toString() }}">
-        <img :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
+        <img class="thumbnail" :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
+        <div class="buttonContainer" >
+          <v-btn class="cartButton" @click="clickAddCart"><v-icon >mdi-cart-variant</v-icon></v-btn>
+        </div>
       </router-link>
 
       </div>
@@ -21,7 +24,7 @@
       name: "ProductCard",
       data() {
           return {
-              idx: 0
+              idx: 0,
           }
       },
       filters: {
@@ -34,6 +37,15 @@
               type: Object,
               required: true,
           }
+      },
+      methods: {
+        clickAddCart(event) {
+          event.preventDefault();
+        const productId = this.product.productId
+        const quantity = 1
+        console.log('addCart event emitted with payload:', {productId, quantity});
+        this.$emit('addCart', {productId, quantity})
+    },
       }
   }
 </script>
@@ -45,7 +57,7 @@
   flex-direction: column;
  }
 
-  .thumbnail img{
+  .thumbnail {
     width: 100%;
     height: 250px;
     object-fit: cover;
@@ -65,4 +77,22 @@
   *{
     color: #40513B;
   }
+
+  .thumbnail-wrapper {
+  position: relative;
+}
+.buttonContainer {
+  position: absolute;
+  top: 80%;
+  left: 70%;
+  transform: translate(-20%, -30%);
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.cartButton {
+  background-color: transparent;
+  color: #40513B;
+}
+
 </style>
