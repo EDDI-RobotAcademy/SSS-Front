@@ -13,7 +13,7 @@
           <router-link :to="{ name: 'SignIn' }">Login</router-link>
         </button>  
         <button>
-          <router-link :to="{ name: 'SignUp' }">Login</router-link>
+          <router-link :to="{ name: 'SignUp' }">Join</router-link>
         </button>  
       </template>
       <template v-else>
