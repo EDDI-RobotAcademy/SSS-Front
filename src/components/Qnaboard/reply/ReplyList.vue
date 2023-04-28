@@ -1,27 +1,31 @@
 <template>
   <v-container>
-    <table class="reply"
-           style="background-color: #eeeeee; border-radius: 10px"
+    <table class="empty-reply"
+           style=" border-radius: 10px"
            v-if="!replys || (Array.isArray(replys) && replys.length === 0)">
       <div style="padding: 10px">
-        <p>현재 등록된 댓글이 없습니다!</p>
+        <p>댓글을 남겨주세요.</p>
       </div>
     </table>
     <table class="reply"
-           style="background-color: #eeeeee; border-radius: 10px"
+           style=" border-radius: 10px"
            v-else
            v-for="(reply, index) in replys" :key="reply.replyId">
       <tbody>
       <!--      댓글 리스트-->
       <tr>
         <div class="comment">
-          <p>작성자 : {{ reply.replyWriter }}</p>      
-          <p> 내용 : {{ reply.replyContent }}</p>
-          <v-text-field v-model="reply.replyContent" label="댓글 수정" v-show="replyModify === index"></v-text-field>
-          <button v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
-          <button v-if="reply.replyWriter && replyModify !== index" @click="startModify(index)">수정 | </button>
-          <button v-if="reply.replyWriter && replyModify === index" @click="saveReply(reply)">수정 완료 | </button>
+          <div class="reply-info">
+          <p class="reply-writer">작성자 : {{ reply.replyWriter }}</p>      
+          <p class="reply-content"> 내용 : {{ reply.replyContent }}</p>
         </div>
+        <div class="reply-actions">
+          <v-text-field v-model="reply.replyContent" label="댓글 수정" v-show="replyModify === index"></v-text-field>
+          <button class="delete-button" v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
+          <button class="modify-button" v-if="reply.replyWriter && replyModify !== index" @click="startModify(index)">수정 </button>
+          <button class="save-button" v-if="reply.replyWriter && replyModify === index" @click="saveReply(reply)">수정 완료 </button>
+        </div>
+      </div>
       </tr>
       </tbody>
     </table>
@@ -74,33 +78,71 @@ export default {
         const { replyId } = payload
         console.log(replyId + "33333")
         await this.requestReplyDeleteToSpring({replyId})
-        await this.$router.go(this.$router.currentRoute)
+        this.$router.go(this.$router.currentRoute)
     },
   },
 }
 </script>
 
 <style scoped>
-
-table.reply {
-  text-align: left;
-  line-height: 1.5;
-  border: 1px solid rgba(189, 189, 189, 0.5);
-  border-left-color: white;
-  border-right-color: white;
-  width: 80%;
-  table-layout: fixed;
+.reply {
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%
 }
 
-.reply .comment {
-  padding-left: 20px;
-  padding-top: 15px;
-  margin: 10px;
+.empty-reply {
+  padding: 10px;
 }
 
-.reply .comment button {
-  float: right;
-  margin-left: 1px;
-  padding-right: 10px;
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(189, 189, 189, 0.5);
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin: 10px auto;
+}
+
+.reply-writer {
+  margin: 0;
+  font-weight: bold;
+}
+
+.reply-content {
+  margin: 0;
+}
+
+.reply-info {
+  flex-grow: 1;
+}
+.reply-actions {
+  display: flex;
+  align-items: center;
+}
+
+.delete-button,
+.modify-button,
+.save-button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  background-color: #40513B;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.delete-button:hover,
+.modify-button:hover,
+.save-button:hover {
+  background-color: #728c69;
+}
+
+.reply-buttons .save-button {
+  background-color: rgb(54, 109, 50);
 }
 </style>
