@@ -69,7 +69,7 @@ export default {
             if (res === false) {
               this.showModal = false;
             } else {
-
+              this.showModal = true;
             }
           });
         },
