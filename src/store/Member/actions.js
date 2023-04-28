@@ -4,6 +4,7 @@ import {
     SIGN_IN_VALUE,
     IS_AUTHENTICATED,
     MEMBER_INFO_MODIFY,
+    ADDRESS_INFO_MODIFY,
     LOG_OUT,
 } from './mutation-types'
 
@@ -80,7 +81,7 @@ async requestMemberSignInToSpring({ commit }, payload) {
                   // 성공적으로 회원 정보를 수정했을 경우
                   console.log(res.data);           
                   alert('주소가 성공적으로 수정되었습니다.');
-                  commit(MEMBER_INFO_MODIFY, payload);
+                  commit(ADDRESS_INFO_MODIFY, payload);
                 })
                 .catch((err) => {
                   // 회원 정보 수정에 실패했을 경우
