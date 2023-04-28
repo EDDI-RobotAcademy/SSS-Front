@@ -1,14 +1,10 @@
 <template>
   <v-container>
-    <div class="box">
+    <div class="box" style="margin-top: 20px;">
       <h2>자유게시판</h2>
+      <p>고객 여러분들의 다양한 이야기를 들려주세요</p>
     </div>
     <div class="center">
-    <router-link :to="{ name: 'QnaBoardRegisterPage' }">
-      <p>게시물 작성</p>
-    </router-link>
-    </div>
-    <div class="outer">
       <div class="inner">
         <select v-model="searchBy">
           <option value="title">제목</option>
@@ -17,10 +13,17 @@
         <input type="text" v-model="searchQuery" placeholder="검색" @keyup.enter="searchBoards">
         <button @click="searchBoards">검색</button>
       </div>
-      <div class="list">
-        <qna-board-list :boards="boardList" :current-page="currentPage" />
-      </div>
+      <router-link :to="{ name: 'QnaBoardRegisterPage' }">
+        <p>글쓰기</p>
+      </router-link>
+
     </div>
+
+    <div class="list">
+      <qna-board-list :boards="boardList" :current-page="currentPage" />
+    </div>
+ 
+    
   </v-container>
 </template>
 
@@ -89,19 +92,19 @@ export default {
 
 .box {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .center {
   display: flex;
   justify-content: right;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .center p {
   color: #fff;
-  background-color: #739e42;
-  padding: 10px 15px;
+  background-color: #374627;
+  padding: 7px 13px;
   border-radius: 5px;
   font-weight: 500;
   font-size: 15px;
@@ -109,20 +112,8 @@ export default {
   text-decoration: none;
 }
 
-.center p:hover {
-  background-color: #739e42;
-}
-
-.outer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .inner {
   display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
 }
 
 .inner select {
@@ -151,9 +142,10 @@ export default {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  margin-right: 30px;
 }
 
-.inner button:hover {
-  background-color: #739e42;
+a {
+  text-decoration: none;
 }
 </style>
