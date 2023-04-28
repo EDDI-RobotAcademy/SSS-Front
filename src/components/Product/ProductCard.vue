@@ -9,11 +9,38 @@
         <div class="buttonContainer" >
           <v-btn class="cartButton" @click="clickAddCart"><v-icon >mdi-cart-variant</v-icon></v-btn>
         </div>
-      </router-link>
-
+        </router-link>
       </div>
       <p style="text-align: center;" class="product-title">{{ product.title }}</p>
       <p style="text-align: center;" class="product-price">{{ product.price | comma }}원</p>
+
+      <v-dialog v-model="quantityModal" max-width="500">
+        <v-card>
+          <v-card-actions>
+            <v-card-title class="text-h5">수량 선택</v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn text @click="quantityModal = false"><v-icon>mdi-close</v-icon></v-btn>
+          </v-card-actions>
+          <v-card-text>
+            <div class="d-flex align-items-center">
+              <div>{{ product.title }}</div>
+              <v-spacer></v-spacer>
+              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+                <v-icon size="15" color="white">mdi-minus</v-icon>
+              </v-btn>
+              <div>{{ quantity }}</div>
+              <v-btn style="background-color: #9DC08B;" rounded class="ml-2 mr-6" elevation="0" color="lightengray" small @click="qtyInc">
+                <v-icon size="15" color="white">mdi-plus</v-icon>
+              </v-btn>
+              {{ product.price * quantity | comma }}원
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="checkQuantity">담기</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </v-row>
   </v-container>
@@ -25,6 +52,8 @@
       data() {
           return {
               idx: 0,
+              quantityModal: false,
+              quantity: 1
           }
       },
       filters: {
@@ -41,11 +70,23 @@
       methods: {
         clickAddCart(event) {
           event.preventDefault();
-        const productId = this.product.productId
-        const quantity = 1
-        console.log('addCart event emitted with payload:', {productId, quantity});
-        this.$emit('addCart', {productId, quantity})
-    },
+          this.quantityModal = true
+        },
+        checkQuantity() {
+            const productId = this.product.productId
+            const quantity = this.quantity
+            console.log('addCart event emitted with payload:', {productId, quantity});
+            this.$emit('addCart', {productId, quantity})
+            this.quantityModal = false
+        },
+        qtyDesc() {
+          if (this.quantity > 1) {
+            this.quantity--;
+          }
+        },
+        qtyInc() {
+          this.quantity++;
+        },
       }
   }
 </script>
