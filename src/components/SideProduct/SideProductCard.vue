@@ -50,13 +50,17 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <div class="product-container">
     <v-img
       :src="require(`@/assets/product/${sideProduct.sideProductImg.editedImg}`)"
       @click="showPreview = true"
       aspect-ratio="1"
-    />
-    <p style="text-align: center;" class="product-title">{{ sideProduct.title }}</p>
-    <p style="text-align: center;" class="product-price">{{ sideProduct.price | comma }} 원</p>
+      class="hover-read"/>
+    <div class="product-info">
+      <p style="text-align: center;" class="title">{{ sideProduct.title }}</p>
+      <p style="text-align: center;" class="price">{{ sideProduct.price | comma }} 원</p>
+    </div>
+    </div>
     <div class="d-flex justify-center align-center mt-5">
       <router-link :to="{ name: 'SideProductModifyPage',
             params: { sideProductId: sideProduct.sideProductId.toString() } }">
@@ -147,17 +151,26 @@ methods:{
 
 <style scoped>
 
+.title {
+  color: beige;
+  font-size: 25px;
+  font-weight: bold;
+}
+.price {
+  color: beige;
+  font-size: 20px;
+}
 .product-title {
-    font-size: 25px;
-    text-align: center;
-    margin-top: 30px;
-  }
-  .product-price {
-    font-size: 20px;
-    padding: 10px 0;
-    text-align: center;
-    margin-top: 10px;
-  }
+  font-size: 25px;
+  text-align: center;
+  margin-top: 30px;
+}
+.product-price {
+  font-size: 20px;
+  padding: 10px 0;
+  text-align: center;
+  margin-top: 10px;
+}
 .v-card {
   position: fixed;
   top: 40px;
@@ -168,5 +181,24 @@ methods:{
   max-width: 400px;
   margin: auto;
 }
+.product-container {
+  position: relative;
+}
 
+.hover-read:hover {
+  filter: brightness(40%);
+}
+
+.product-info {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.product-container:hover .product-info {
+  display: block;
+}
 </style>
