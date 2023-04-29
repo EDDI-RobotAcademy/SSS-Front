@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+const qnaModule = 'qnaModule'
 
 export default {
   name: "MyQnaForm",
@@ -42,11 +44,17 @@ export default {
           privateCheck: false,
         }
       },
-      props: {
-        boards: {
-          type: Array
-        }
-      }
+  props: {
+      boards: Array
+  },
+  methods: {
+    ...mapActions(qnaModule, [
+      'requestReadMyBoardToSpring'
+    ])
+  },
+  async mounted() {
+    await this.requestReadMyBoardToSpring()
+  }    
   }
   </script>
   

@@ -96,4 +96,16 @@ async requestReplyDeleteToSpring ({}, payload) {
             alert("문제 발생!")
     })
 },
+
+async requestReadMyBoardToSpring({commit}) {
+    return await axiosInst.get(`/board/list-myBoard`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken")        
+        }
+    })
+        .then((res) => {
+            commit(REQUEST_BOARD_LIST_TO_SPRING, res.data)
+        })
+}
 }
