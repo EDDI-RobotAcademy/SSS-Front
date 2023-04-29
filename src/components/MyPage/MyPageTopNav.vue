@@ -14,7 +14,6 @@
     <v-row>
       <v-col v-for="(item, index) in myPageCategoryItems" :key="index">
         <v-card :to="item.route" class="d-flex" @click="$router.push(item.route)"
-        :class="{ 'selected': selected === index }"
         style="justify-content: space-between;"
       >
           <v-card-title class="text-start">
@@ -22,7 +21,7 @@
             <h4>{{ item.title }}</h4>
           </v-card-title>
           <v-card-title class="text-end">
-            <h5 style="font-size: 33px; color: #e8d7c1">{{item.count}}</h5>
+            <h5 style="font-size: 33px; color: rgb(54, 109, 50)">{{item.count}}</h5>
           </v-card-title>
         </v-card>
       </v-col>
@@ -102,13 +101,7 @@ export default {
     color: black;
     font-weight: bold
   }
-.selected {
-  border: 2px solid #e8d7c1;
-  background-color: #e8d7c1;
-  color: #fff;
+h4, h5{
+  margin: 0px;
 }
-.col {
-  padding: 2px;
-}
-
 </style>
