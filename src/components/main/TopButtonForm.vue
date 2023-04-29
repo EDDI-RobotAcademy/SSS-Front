@@ -20,21 +20,22 @@ export default {
 a.go-to-top{
   position:absolute;
   bottom:100px;
-  right:100px;
+  right:70px;
   z-index:99;
-
   display: inline-block;
   width:30px;
   height:30px;
   border-radius: 15px;
-
   line-height:30px;
   text-align:center;
   text-decoration:none;
-
-  background: #ccc;
+  background: rgb(54, 109, 50);
   opacity: 0.7;
   color:#fff;
-}
 
+  transition: background-color 0.3s ease-in-out;
+}
+a.go-to-top:hover {
+  background-color: #5e9a4b;
+}
 </style>

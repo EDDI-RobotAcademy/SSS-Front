@@ -21,15 +21,15 @@
             <v-card-text>
               <table>
                 <thead>
-                  <tr style="margin-top: 20px;">
+                  <tr >
                     <th>전체 {{cartItems.length}} 개</th>
-                    <th class="itemCheck ms-8 mt-14">
+                    <th style="width: 5px;">
                       <v-checkbox class="allCheckbox" v-model="allChecked" />
                     </th>
-                    <th colspan="2">상품명</th>
-                    <th>판매가</th>
+                    <th>상품명</th>
+                    <th style="width: 5px;">판매가</th>
                     <th>수량</th>
-                    <th>주문관리</th>
+                    <th style="width: 10px;">주문관리</th>
                     <th>배송비/배송 형태</th>
                   </tr>
                 </thead>
@@ -40,15 +40,14 @@
                     <td class="itemCheck" align="left">
                       <v-checkbox class="itemCheckbox" v-model="checkedValues" :value="cartItem.cartItemId" :title="cartItem.title" />
                     </td>
-                    <td>
-                      <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                      </router-link>
-                      <v-img :src="cartItem.category.includes('SELF') ?
-                      require(`@/assets/logo/3sss.jpg`) :
-                      require(`@/assets/product/${cartItem.editedImg}`)"
-                      style="max-width: 100px; max-height: 100px;" />
-                    </td>
-                    <td>{{ cartItem.title }}</td>
+                      <td style="text-align: center;">
+                        <!-- <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
+                        </router-link> -->
+                        <v-img :src="cartItem.category.includes('SELF') ? require(`@/assets/logo/3sss.jpg`) : require(`@/assets/product/${cartItem.editedImg}`)"
+                          style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;" />
+                        <div style="font-weight: bold;">{{ cartItem.title }}</div>
+                      </td>
+                      
                     <td>
                       <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
                     </td>
@@ -63,7 +62,7 @@
                       <p>{{ cartItem.totalPrice | comma }}원</p>
                     </td>
                     <td>
-                      <v-btn @click="removeItem(idx)">
+                      <v-btn @click="removeItem(idx)" class="mb-1">
                         삭제하기
                       </v-btn>
                       <v-btn v-if="cartItem.category === 'SELF'" @click="openModal(cartItem.cartItemId, cartItem.title)" >
@@ -90,7 +89,7 @@
       
           <div class="sticky-nav">
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; width: 800px; margin: 0 auto;">
-              <div>
+              <div style="text-align: center;">
                 <h5 style="font-weight: normal; color: white;">선택 상품금액</h5>
                 <span style="font-size: 30px; font-weight: bold; color: white;">
                   {{ totalPrice | comma }}
@@ -98,8 +97,8 @@
                 <span style="color: white;">원</span>
               </div>
               <h2 style="margin-top: 10px; color: white;">+</h2>
-              <div>
-                <h5 style="font-weight: normal; color: white;">배송비</h5>
+              <div style="text-align: center;">
+              <h5 style="font-weight: normal; color: white;">배송비</h5>
                 <div v-if="checkedValues.length === 0">
                   <span style="font-size: 30px; font-weight: bold; color: white;">
                     0
@@ -116,8 +115,7 @@
                   <span style="font-size: 30px; font-weight: bold; color: white;">무료배송</span>
                 </div>
               </div>
-              <div style="border-left: 2px solid white; margin-left: 50px; color: white;"></div>
-              <div style="display: flex; align-items: center;">
+              <div style="display: flex; text-align: center;">
                 <div v-if="checkedValues.length === 0">
                   <h5 style="font-weight: normal; color: white;">총 주문금액</h5>
                   <span style="font-size: 30px; font-weight: bold; color: white;">
@@ -139,11 +137,11 @@
                   </span>
                   <span style="color: white;">원</span>
                 </div>
-                <div style="margin-left: 50px;">
-                  <v-btn>
-                    <h4>{{ checkedValues.length }}건 주문하기</h4>
-                  </v-btn>
-                </div>
+              </div>
+              <div class="order-btn-container">
+                <v-btn class="orderBtn">
+                  <h4>{{ checkedValues.length }}건 주문하기</h4>
+                </v-btn>
               </div>
             </div>
           </div>
@@ -299,6 +297,16 @@ table th {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: hsl(204, 12%, 58%);
+  background-color: rgb(54, 109, 50);
+}
+.orderBtn {
+  border-radius: 25px;
+  transition: background-color 0.3s ease-in-out;
+}
+.order-btn-container {
+  margin-right: -100px;
+}
+p, h4{
+  margin: 0px;
 }
 </style>
