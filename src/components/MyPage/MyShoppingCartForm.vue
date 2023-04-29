@@ -27,7 +27,7 @@
                       <v-checkbox class="allCheckbox" v-model="allChecked" />
                     </th>
                     <th>상품명</th>
-                    <th style="width: 5px;">판매가</th>
+                    <th>판매가</th>
                     <th>수량</th>
                     <th style="width: 10px;">주문관리</th>
                     <th>배송비/배송 형태</th>
