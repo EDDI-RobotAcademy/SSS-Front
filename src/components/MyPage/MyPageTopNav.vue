@@ -70,7 +70,7 @@ export default {
       'requestFavoriteListToSpring',
     ]),
     ...mapActions(qnaModule, [
-      'requestBoardListToSpring'
+      'requestReadMyBoardToSpring'
     ]),
     handleClick(index) {
       this.selected = index;
@@ -79,7 +79,7 @@ export default {
   async created() {
   await this.requestAddCartListToSpring()
   await this.requestFavoriteListToSpring()
-  await this.requestBoardListToSpring()
+  await this.requestReadMyBoardToSpring()
 
   console.log(this.boards.length)
 

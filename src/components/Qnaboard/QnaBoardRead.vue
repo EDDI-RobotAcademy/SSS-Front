@@ -26,13 +26,16 @@
             <input type="text" :value="board.regDate" readonly/>
           </td>
         </tr>
-        <tr>
-            <div class="content">
-              <!-- <textarea cols="12" :value="board.content" readonly/> -->
-              {{ board.content }}
-            </div>
+        <tr class="spacer-row">
+          <td colspan="2"></td>
         </tr>
-    </table>
+        <tr>
+          <td colspan="2" class="content">
+            <!-- <textarea cols="12" :value="board.content" readonly/> -->
+            {{ board.content }}
+          </td>         
+        </tr>
+      </table>
   </div>
 </template>
 
@@ -86,6 +89,10 @@ export default {
   height: 150px; /* Adjust the height of the textarea if necessary */
 }
 .content {
-  margin-top: 50px
+  width: 100%;
+}
+
+.spacer-row {
+  height: 20px; /* Adjust the height to create the desired space */
 }
 </style>

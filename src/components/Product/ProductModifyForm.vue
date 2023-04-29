@@ -32,20 +32,20 @@
                 <td>영양정보</td>
                 <td>
                     <label for="calorie">열량</label>
-                    <input type="number" name="calorie" v-model="product.productDetail.calorie" step="0.01" class="short-input"/>
+                    <input type="number" name="calorie" v-model="productDetail.calorie" step="0.01" class="short-input"/>
                     <label for="carbohydrate">탄수화물</label>
-                    <input type="number" name="carbohydrate" v-model="product.productDetail.carbohydrate" step="0.01" class="short-input"/>
+                    <input type="number" name="carbohydrate" v-model="productDetail.carbohydrate" step="0.01" class="short-input"/>
                     <label for="sugars">당류</label>
-                    <input type="number" name="sugars" v-model="product.productDetail.sugars" step="0.01" class="short-input"/>
+                    <input type="number" name="sugars" v-model="productDetail.sugars" step="0.01" class="short-input"/>
                     <label for="protein">단백질</label>
-                    <input type="number" name="protein" v-model="product.productDetail.protein" step="0.01" class="short-input"/>
+                    <input type="number" name="protein" v-model="productDetail.protein" step="0.01" class="short-input"/>
                     <br>
                     <label for="fat">지방</label>
-                    <input type="number" name="fat" v-model="product.productDetail.fat" step="0.01" class="short-input"/>
+                    <input type="number" name="fat" v-model="productDetail.fat" step="0.01" class="short-input"/>
                     <label for="aturatedFat">포화지방</label>
-                    <input type="number" name="aturatedFat" v-model="product.productDetail.aturatedFat" step="0.01" class="short-input"/>
+                    <input type="number" name="aturatedFat" v-model="productDetail.aturatedFat" step="0.01" class="short-input"/>
                     <label for="natrium">나트륨</label>
-                    <input type="number" name="natrium" v-model="product.productDetail.natrium" step="0.01" class="short-input"/>
+                    <input type="number" name="natrium" v-model="productDetail.natrium" step="0.01" class="short-input"/>
                 </td>
           </tr>
           <tr>
@@ -85,7 +85,6 @@
   </template>
   
   <script>
-import axios from 'axios'
 import axiosInst from '@/utility/axiosObject'
 
   export default {
@@ -108,6 +107,15 @@ import axiosInst from '@/utility/axiosObject'
               title: '',
               content: '',
               price: 0,
+              productDetail: {
+                calorie: '',
+                carbohydrate: '',
+                sugars: '',
+                protein: '',
+                fat: '',
+                aturatedFat: '',
+                natrium: '',
+              },
               files: '',
             imageUrls: [],
           }
@@ -116,6 +124,8 @@ import axiosInst from '@/utility/axiosObject'
           this.title = this.product.title
           this.content = this.product.content
           this.price = this.product.price
+          this.productDetail = this.product.productDetail
+          console.log("rrrr : " + JSON.stringify(this.product.productDetail))
       },
       methods: {
           onSubmit () {
@@ -125,11 +135,12 @@ import axiosInst from '@/utility/axiosObject'
                 formData.append('productImgList', this.files[idx])
               }
   
-              const { title, content, price, productId } = this
+              const { title, content, price, productId, productDetail } = this
               let productInfo = {
                 title: title,
                 content: content,
                 price: price,
+                productDetail: productDetail
               }
   
               console.log('productInfo: ' + JSON.stringify(productInfo))
@@ -144,7 +155,7 @@ import axiosInst from '@/utility/axiosObject'
                             this.$router.push('/product-list')
                         }
                     })
-                    .catch(res => {
+                    .catch(() => {
                         alert("수정 오류")
                     })
               } else {

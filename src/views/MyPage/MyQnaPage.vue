@@ -36,7 +36,7 @@ export default {
     ...mapState(qnaModule, ['boards']),
   },
   mounted () {
-    this.requestBoardListToSpring()
+    this.requestReadMyBoardToSpring()
   },
   created() {
     //브라우저 새로고침 해도 게시물 목록 계속 보이게 수정
@@ -61,14 +61,12 @@ export default {
       } else {
         if (this.searchBy === 'title') {
           this.boardList = this.boards.filter(board => board.title.toLowerCase().includes(query));
-        } else if (this.searchBy === 'writer') {
-          this.boardList = this.boards.filter(board=> board.writer.toLowerCase().includes(query));
         }
       }
       this.currentPage = 1;
     },
     ...mapActions(qnaModule, [
-      'requestBoardListToSpring'
+      'requestReadMyBoardToSpring'
     ]),
   },
 }

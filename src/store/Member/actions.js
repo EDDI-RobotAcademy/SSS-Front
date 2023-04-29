@@ -79,6 +79,9 @@ async requestMemberSignInToSpring({ commit }, payload) {
                 .then((res) => {
                   // 성공적으로 회원 정보를 수정했을 경우
                   console.log(res.data);           
+                  const modifiedAddress = res.data; // 수정된 주소 정보
+                  const addressId = modifiedAddress.id; // 수정된 주소의 ID
+                  payload.addressId = addressId; // payload 객체에 주소 ID 추가   
                   alert('주소가 성공적으로 수정되었습니다.');
                   commit(MEMBER_INFO_MODIFY, payload);
                 })

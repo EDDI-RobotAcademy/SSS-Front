@@ -4,9 +4,8 @@
         <tr>
           <th align="center" width="200">No</th>
           <th align="center" width="840">제목</th>
-          <th align="center" width="300">작성자</th>
-          <th align="center" width="800">등록일자</th>
-          <th align="center" width="500">비밀글 확인</th>
+          <th align="center" width="200">작성자</th>
+          <th align="center" width="300">등록일자</th>
         </tr>
         <tr v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
           <td colspan="4">
@@ -18,17 +17,14 @@
             {{ board.boardId }}
           </td>
           <td align="left"  @click="redirectToBoard(board)">
-                <p class="title">{{ board.title }}</p>
+                <p class="title">{{ board.title }}<span v-if="board.privateCheck === true"><v-icon>mdi-lock</v-icon></span></p>
+                
           </td>
           <td align="center">
             {{ board.writer }}
           </td>
           <td align="center">
             {{ board.regDate }}
-          </td>
-          <td align="center">
-            <span v-if="board.privateCheck === false">일반 게시물</span>
-            <span v-else>비밀</span>
           </td>
         </tr>
       </table>
