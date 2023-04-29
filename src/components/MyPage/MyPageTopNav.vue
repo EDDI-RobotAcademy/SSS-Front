@@ -43,7 +43,6 @@ export default {
   name: "MyPageTopNav",
   data() {
     return {
-      selected: null,
       nickname : this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
       myPageCategoryItems: [],
     }
@@ -71,10 +70,7 @@ export default {
     ]),
     ...mapActions(qnaModule, [
       'requestReadMyBoardToSpring'
-    ]),
-    handleClick(index) {
-      this.selected = index;
-    }
+    ])
   },
   async created() {
   await this.requestAddCartListToSpring()
