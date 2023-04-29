@@ -2,7 +2,6 @@ import {
     REQUEST_SIGN_IN_TOKEN_FROM_SPRING,
     SIGN_IN_VALUE,
     MEMBER_INFO_MODIFY,
-    ADDRESS_INFO_MODIFY,
     USER_TOKEN,
     IS_AUTHENTICATED,
     LOG_OUT,
@@ -23,9 +22,6 @@ export default {
     },
     [MEMBER_INFO_MODIFY] (state, memberInfoModify) {
         state.memberInfoModify = memberInfoModify
-    },
-    [ADDRESS_INFO_MODIFY] (state, addressInfoModify) {
-        state.addressInfoModify = addressInfoModify
     },
     [LOG_OUT] (state) {
         state.signInValue = false;

@@ -4,5 +4,4 @@ export default {
     userToken: "",
     isAuthenticated: false,
     memberInfoModify: {},
-    addressInfoModify: {},
 }
