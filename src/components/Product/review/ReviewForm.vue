@@ -7,8 +7,8 @@
             </v-col>
             <v-col cols="6">
                 <p style="font-size: 20px" v-if="!reviews || (Array.isArray(reviews) && reviews.length === 0)">
-                    리뷰 평점 {{ 0 }}</p>
-                <p style="font-size: 15px" v-else>리뷰 평점 {{ totalRate }}</p>
+                    후기 평점 {{ 0 }}</p>
+                <p style="font-size: 15px" v-else>후기 평점 {{ totalRate }}</p>
                 <v-rating
                     :value="totalRate"
                     background-color="grey"
@@ -23,14 +23,25 @@
         <v-divider></v-divider>
     </div>
     <div class="review-container">
-        <li v-if="!reviews || (Array.isArray(reviews) && reviews.length === 0)">
-          <p class="mb-7">작성된 리뷰가 없습니다.</p>
-          <v-divider width="1070px"></v-divider>
-        </li>
-        <li v-for="review in reviews" :key="review.reviewId" v-else>
-          <review-content
-              :review="review" :reviewImgs="reviewImgs"/>
-        </li>
+        <v-row>
+            <v-col v-if="!reviews || (Array.isArray(reviews) && reviews.length === 0)">
+              <p class="mb-7">작성된 후기가 없습니다.</p>
+              <v-divider width="1070px"></v-divider>
+            </v-col>
+            <v-row v-for="review in paginated('reviews')" :key="review.reviewId" v-else>
+                <v-col>
+                  <review-content 
+                      :review="review"/>
+                </v-col>
+            </v-row>
+        </v-row>
+        <v-pagination
+      v-model="curPageNum"
+      :length="numOfPages"
+      color="#2c4636"
+      class="mt-10 pagination-wrapper"
+      flat
+    ></v-pagination>
     </div>
   </div>
 
@@ -47,10 +58,10 @@ export default {
     components: {ReviewContent},
     data() {
         return {
-            review: {
-                type: Object
-            },
-            totalRate: 0
+            paginate: ['reviews'],
+            totalRate: 0,
+            curPageNum: 1,
+            perPage: 3,
         }
     },
     props: {
@@ -62,7 +73,10 @@ export default {
     methods: {
         ...mapActions(productModule, [
             'requestReadReviewToSpring',
-        ])
+        ]),
+        paginated(name) {
+            return this[name].slice(this.startOffset, this.endOffset);
+    },
     },
     created() {
         const productId = this.product.productId
@@ -77,8 +91,20 @@ export default {
     },
     computed: {
         ...mapState(productModule, [
-            'reviews', 'reviewImgs'
-        ])
+            'reviews'
+        ]),
+        startOffset() {
+        return (this.curPageNum - 1) * this.perPage;
+        },
+        endOffset() {
+        return this.startOffset + this.perPage;
+        },
+        numOfPages() {
+        return Math.ceil(this.reviews.length / this.perPage);
+        },
+        paginatedReviews() {
+        return this.reviews.slice(this.startOffset, this.endOffset);
+        },
     }
 }
 </script>
@@ -89,5 +115,8 @@ export default {
 }
 .review-header {
     margin: 30px;
+}
+.pagination {
+  text-align: center;
 }
 </style>
