@@ -15,6 +15,7 @@
       <v-col v-for="(item, index) in myPageCategoryItems" :key="index">
         <v-card :to="item.route" class="d-flex" @click="$router.push(item.route)"
         :class="{ 'selected': selected === index }"
+        style="justify-content: space-between;"
       >
           <v-card-title class="text-start">
             <v-icon>{{ item.icon }}</v-icon>
@@ -22,7 +23,6 @@
           </v-card-title>
           <v-card-title class="text-end">
             <h5 style="font-size: 33px; color: #e8d7c1">{{item.count}}</h5>
-            <span>개</span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -34,6 +34,11 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
+const ordercartModule = 'ordercartModule'
+const productModule = 'productModule'
+const qnaModule = 'qnaModule'
 
 export default {
   name: "MyPageTopNav",
@@ -41,42 +46,52 @@ export default {
     return {
       selected: null,
       nickname : this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
-      myPageCategoryItems: [
-        {
-          title: "장바구니",
-          icon: "mdi-cart-variant",
-          route: "/my-info-cart",
-          count: 8
-        },
-        {
-          title: "찜찜",
-          icon: "mdi-star-circle",
-          route: "/my-info-favorite",
-          count: 15
-        },
-        {
-          title: "리뷰",
-          icon: "mdi-fountain-pen-tip",
-          route: "/my-info-review",
-          count: 2
-        },
-        {
-          title: "문의 사항",
-          route: "/my-info-Qna",
-          count: 1
-        },
-        {
-          title: "주문",
-          route: "/my-info-delivery",
-          count: 4
-        }
-      ]
+      myPageCategoryItems: [],
     }
   },
+  computed:{
+    ...mapState(ordercartModule, [
+      'cartItems',
+    ]),
+    ...mapState(productModule, [
+      'favoriteList'
+    ]),
+    ...mapState(productModule, [
+      'reviews'
+    ]),
+    ...mapState(qnaModule, [
+      'boards'
+    ]),
+  },
   methods: {
+    ...mapActions(ordercartModule, [
+      'requestAddCartListToSpring',
+    ]),
+    ...mapActions(productModule, [
+      'requestFavoriteListToSpring',
+    ]),
+    ...mapActions(qnaModule, [
+      'requestBoardListToSpring'
+    ]),
     handleClick(index) {
       this.selected = index;
     }
+  },
+  async created() {
+  await this.requestAddCartListToSpring()
+  await this.requestFavoriteListToSpring()
+  await this.requestBoardListToSpring()
+
+  console.log(this.boards.length)
+
+    const CategoryItem = new Array
+    CategoryItem.push({title: "장바구니", icon: "mdi-cart-variant", route: "/my-info-cart", count: this.cartItems.length})
+    CategoryItem.push({title: "주문내역", icon: "mdi-calendar-clock", route: "/my-info-delivery", count: 0})
+    CategoryItem.push({title: "구매 리뷰", icon: "mdi-fountain-pen-tip", route: "/my-info-review", count: 0})
+    CategoryItem.push({title: "좋아요", icon: "mdi-star-circle", route: "/my-info-favorite", count: this.favoriteList.length})
+    CategoryItem.push({title: "내가 쓴 글", icon: "mdi-human-greeting", route: "/my-info-Qna", count: this.boards.length})
+
+    this.myPageCategoryItems = CategoryItem
   }
 }
 </script>
@@ -92,4 +107,8 @@ export default {
   background-color: #e8d7c1;
   color: #fff;
 }
+.col {
+  padding: 2px;
+}
+
 </style>

@@ -7,7 +7,6 @@
           <tr>
             <th align="center" width="200">No</th>
             <th align="center" width="840">제목</th>
-            <th align="center" width="300">작성자</th>
             <th align="center" width="800">등록일자</th>
           </tr>
           <tr v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
@@ -21,9 +20,6 @@
             </td>
             <td align="left"  @click="redirectToBoard(board)">
                   <p class="title">{{ board.title }}</p>
-            </td>
-            <td align="center">
-              {{ board.writer }}
             </td>
             <td align="center">
               {{ board.regDate }}

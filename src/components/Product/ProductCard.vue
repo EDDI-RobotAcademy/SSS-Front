@@ -2,15 +2,45 @@
   <v-container class="text-center">
     <v-row>
     <div class="productCard">
-      <div class="thumbnail">
+      <div class="thumbnail-wrapper">
         <router-link :to="{ name: 'ProductReadPage',
               params: { productId: product.productId.toString() }}">
-        <img :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
-      </router-link>
-
+        <img class="thumbnail" :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
+        <div class="buttonContainer" >
+          <v-btn class="cartButton" @click="clickAddCart"><v-icon >mdi-cart-variant</v-icon></v-btn>
+        </div>
+        </router-link>
       </div>
       <p style="text-align: center;" class="product-title">{{ product.title }}</p>
       <p style="text-align: center;" class="product-price">{{ product.price | comma }}원</p>
+
+      <v-dialog v-model="quantityModal" max-width="500">
+        <v-card>
+          <v-card-actions>
+            <v-card-title class="text-h5">수량 선택</v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn text @click="quantityModal = false"><v-icon>mdi-close</v-icon></v-btn>
+          </v-card-actions>
+          <v-card-text>
+            <div class="d-flex align-items-center">
+              <div>{{ product.title }}</div>
+              <v-spacer></v-spacer>
+              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" color="lightengray" small @click="qtyDesc">
+                <v-icon size="15" color="white">mdi-minus</v-icon>
+              </v-btn>
+              <div>{{ quantity }}</div>
+              <v-btn style="background-color: #9DC08B;" rounded class="ml-2 mr-6" elevation="0" color="lightengray" small @click="qtyInc">
+                <v-icon size="15" color="white">mdi-plus</v-icon>
+              </v-btn>
+              {{ product.price * quantity | comma }}원
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="checkQuantity">담기</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </v-row>
   </v-container>
@@ -21,7 +51,9 @@
       name: "ProductCard",
       data() {
           return {
-              idx: 0
+              idx: 0,
+              quantityModal: false,
+              quantity: 1
           }
       },
       filters: {
@@ -34,6 +66,27 @@
               type: Object,
               required: true,
           }
+      },
+      methods: {
+        clickAddCart(event) {
+          event.preventDefault();
+          this.quantityModal = true
+        },
+        checkQuantity() {
+            const productId = this.product.productId
+            const quantity = this.quantity
+            console.log('addCart event emitted with payload:', {productId, quantity});
+            this.$emit('addCart', {productId, quantity})
+            this.quantityModal = false
+        },
+        qtyDesc() {
+          if (this.quantity > 1) {
+            this.quantity--;
+          }
+        },
+        qtyInc() {
+          this.quantity++;
+        },
       }
   }
 </script>
@@ -45,7 +98,7 @@
   flex-direction: column;
  }
 
-  .thumbnail img{
+  .thumbnail {
     width: 100%;
     height: 250px;
     object-fit: cover;
@@ -65,4 +118,22 @@
   *{
     color: #40513B;
   }
+
+  .thumbnail-wrapper {
+  position: relative;
+}
+.buttonContainer {
+  position: absolute;
+  top: 80%;
+  left: 70%;
+  transform: translate(-20%, -30%);
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.cartButton {
+  background-color: transparent;
+  color: #40513B;
+}
+
 </style>

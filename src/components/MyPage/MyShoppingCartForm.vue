@@ -125,10 +125,17 @@
                   </span>
                   <span style="color: white;">원</span>
                 </div>
-                <div v-else>
+                <div v-else-if="totalPrice < 50000">
                   <h5 style="font-weight: normal; color: white;">총 주문금액</h5>
                   <span style="font-size: 30px; font-weight: bold; color: white;">
                     {{ totalPrice+deliveryFee | comma }}
+                  </span>
+                  <span style="color: white;">원</span>
+                </div>
+                <div v-else>
+                  <h5 style="font-weight: normal; color: white;">총 주문금액</h5>
+                  <span style="font-size: 30px; font-weight: bold; color: white;">
+                    {{ totalPrice | comma }}
                   </span>
                   <span style="color: white;">원</span>
                 </div>

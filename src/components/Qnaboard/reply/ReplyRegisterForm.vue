@@ -1,58 +1,41 @@
 <template>
-  <v-container>
+  <v-container style="margin-top: 30px">
     <form @submit="onSubmit()">
-      <v-card>
-        <v-card-title></v-card-title>
-        <div class="reply-title">
-          <p style="font-size: 22px; font-weight: bold">댓글등록</p>
-        </div>
-        <v-divider style="border-color: black; border-width: 1px"></v-divider>
-        <div class="reply-container">
-          <div class="reply-items">
-            <v-row>
-              <v-col cols="2">
-                <p>작성자</p>
-              </v-col>
-              <v-col cols="2">
-                <td>
-                  {{this.$store.state.memberModule.memberInfoAboutSignIn.userNickName}}
-                </td>
-              </v-col>
-          </v-row>
-            <v-row>
-                <v-col cols="2">
-                  <p>댓글작성</p>
+      <p class="reply-title">댓글 등록</p>
+      <v-card class="reply-card">
+        <v-card-text>
+          <v-row>
+            <v-col cols="9">
+
+              <p class="reply-writer">
+                {{this.$store.state.memberModule.memberInfoAboutSignIn.userNickName}}
+              </p>
+            </v-col>
+                <v-col cols="3" align="right">
+
+                  <v-btn class="reply-button"
+                        btn-name="등록하기"
+                        type="submit">
+                      등록하기
+                    </v-btn>
                 </v-col>
-                <v-col cols="10">
+              </v-row>
                   <v-textarea
-                      color="black"
-                      height="50px"
+                  placeholder="댓글을 입력해주세요."
+                      class="custom-text"
                       v-model="replyContent"
-                      outlined>
-                  </v-textarea>
-                </v-col>
-            </v-row>
-            <v-row align="center">
-              <v-col>
-                <div align="center" class="mb-10">
-                  <v-btn
-                      btn-name="등록하기"
-                      type="submit"
-                      style="width: 200px; height: 50px; font-size: 15px">
-                    등록하기
-                  </v-btn>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-        </div>
+                      rows="3">
+                    </v-textarea>
+   
+                
+        
+      </v-card-text>
       </v-card>
     </form>
   </v-container>
   </template>
   
   <script> 
-  import {mapActions, mapState} from "vuex";
   
   export default {
     name: "ReplyRegisterForm",
@@ -77,27 +60,34 @@
   }
   </script>
   
-  <style scoped>
-  
-  .reply-title {
-    margin-left: 30px;
-  }
-  
-  .reply-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .reply-items {
-    margin-top: 10px;
-    text-align: right;
-    padding-right: 50px;
-    width: 1000px;
-  }
-  
-  .board-items p {
-    margin-top: 10px;
-    margin-right: 50px;
-  }
-  
-  </style>
+  <style scoped>  
+.reply-card {
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 10px;
+  width: 1000px;
+  height: 200px;
+}
+
+.reply-title {
+  font-size: 22px;
+  font-weight: bold;
+
+}
+
+.reply-writer {
+  font-weight: bold;
+}
+
+.reply-content {
+  border-radius: 5px;
+  margin: auto
+}
+.custom-text{
+  margin: 0
+}
+.reply-button {
+  background-color: #1EC800;
+}
+
+</style>
