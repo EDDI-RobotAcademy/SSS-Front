@@ -5,19 +5,20 @@
       <p>고객 여러분들의 다양한 이야기를 들려주세요</p>
       <qna-board-read v-if="board" :board="board"/>
       <p v-else>로딩중 ......... </p>
-      <router-link :to="{ name: 'QnaBoardModifyPage', params: { boardId } }">
+      <v-btn style="background-color: #40513B;" v-if="isWriter">
+      <router-link style="color: white;" :to="{ name: 'QnaBoardModifyPage', params: { boardId } }">
         게시물 수정
-      </router-link>
-      <button @click="onDelete">삭제</button>
-      <router-link :to="{ name: 'QnaBoardListPage' }">
-        돌아가기
-      </router-link>
-    <table>
-      <tr>
-        <reply-register-form @submit="onSubmit"/>
-        <reply-list :replys="replys"/>
-      </tr>
-    </table>
+      </router-link></v-btn>   
+      <v-btn style="background-color: #40513B; color: white" v-if="isWriter" @click="onDelete">삭제</v-btn>
+      <table>
+        <tr>
+          <reply-register-form @submit="onSubmit"/>
+          <reply-list :replys="replys"/>
+        </tr>
+      </table>
+      <v-btn style="background-color: #40513B;"><router-link style="color: white;" :to="{ name: 'QnaBoardListPage' }">
+        목록
+      </router-link></v-btn>
     </div>
   </v-container>
 </template>
@@ -30,6 +31,7 @@ import ReplyRegisterForm from '@/components/Qnaboard/reply/ReplyRegisterForm.vue
 import ReplyList from '@/components/Qnaboard/reply/ReplyList.vue'
 
 const qnaModule = 'qnaModule'
+const memberModule = 'memberModule'
 
 export default {
   components: { QnaBoardRead, ReplyRegisterForm, ReplyList },
@@ -44,6 +46,12 @@ export default {
         ...mapState(qnaModule, [
           'board', 'replys'
         ]),
+        ...mapState(memberModule, [
+          'memberInfoAboutSignIn'
+        ]),
+        isWriter() {
+          return this.memberInfoAboutSignIn.userNickName === this.board.writer
+        }
     },
     methods: {
         ...mapActions(qnaModule,[
@@ -78,4 +86,7 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 </style>
