@@ -1,4 +1,8 @@
 export default {
     cartItems: [],
-    selfSalad: []
+    selfSalad: [],
+    orderList: [],
+    cartItem: {},
+
+
 }

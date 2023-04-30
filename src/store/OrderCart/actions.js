@@ -1,7 +1,8 @@
 import {
     REQUEST_ADD_CART_LIST_TO_SPRING,
     REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING,
-    REQUEST_SELFSALAD_TO_SPRING
+    REQUEST_SELFSALAD_TO_SPRING,
+    
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -142,5 +143,28 @@ async requestSelectDeleteCartToSpring ({}, payload) {
         .catch(() => {
         alert("문제 발생!")
         })
+    },
+// 주문성공시 주문 정보 저장
+async reqRegisterOrderToSpring({}, payload) {
+    const {totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList} = payload;
+
+    try {
+        await axiosInst.post("order/register",
+    {totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList},
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            'Content-Type': 'application/json'
+        }
+    });
+}
+    // }   .then((res) => {
+    //     console.log(res)
+    //     this.$router.push('/purchase-complete');
+    //     // window.location.href = "http://localhost:8080/purchase-complete"
+    // })
+    catch (error) {
+        alert("오류발생 !!!")
     }
+}
 }
