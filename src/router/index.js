@@ -39,8 +39,8 @@ import MyDeliveryPage from "@/views/MyPage/MyDeliveryPage"
 import MyAddressPasswordCheckPage from "@/views/MyPage/MyAddressPasswordCheckPage.vue"
 import MyInfoPasswordCheckPage from "@/views/MyPage/MyInfoPasswordCheckPage.vue"
 
-import PaymentInfoPage from '@/views/Payment/PaymentInfoPage.vue'
-import PaymentAddress from '@/views/Payment/PaymentAddress.vue'
+import PaymentInfoPage from '@/views/MyPage/PaymentInfoPage.vue'
+import PurchaseCompletePage from "@/views/MyPage/PurchaseCompletePage.vue"
 
 Vue.use(VueRouter)
 
@@ -259,13 +259,18 @@ const routes = [
 {
   path: '/payment-info-page',
   name: 'PaymentInfoPage',
-  component: PaymentInfoPage
+  components: {
+    default: PaymentInfoPage
+  },
+  props: {
+    default: true,
+  }
+},{
+  path: '/purchase-complete',
+  name: 'PurchaseCompletePage',
+  components: PurchaseCompletePage
 },
-{
-  path: '/payment-address',
-  name: 'PaymentAddress',
-  component: PaymentAddress
-},
+
 
 ]
 
