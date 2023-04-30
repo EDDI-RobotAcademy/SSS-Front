@@ -7,13 +7,15 @@
               params: { productId: product.productId.toString() }}">
         <img class="thumbnail" :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
       </router-link>
-        <div class="buttonContainer" >
-          <v-btn class="cartButton" @click="clickAddCart"><v-icon >mdi-cart-variant</v-icon></v-btn>
+        <div>
+          <v-btn icon @click="clickAddCart">
+            <v-icon >mdi-cart-variant</v-icon>
+          </v-btn>
+          <v-btn icon @click="clickFavorite">
+            <v-icon v-if="!isLiked">mdi-heart-outline</v-icon>
+            <v-icon v-else color="red">mdi-heart</v-icon>
+          </v-btn>
         </div>
-        <v-btn icon @click="clickFavorite">
-          <v-icon v-if="!isLiked">mdi-heart-outline</v-icon>
-          <v-icon v-else color="red">mdi-heart</v-icon>
-        </v-btn>
       </div>
       <p style="text-align: center;" class="product-title">{{ product.title }}</p>
       <p style="text-align: center;" class="product-price">{{ product.price | comma }}원</p>
