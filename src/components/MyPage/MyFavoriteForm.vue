@@ -6,20 +6,19 @@
       <h2 style="margin-left: 50px">찜 목록</h2>
       <div align="right" class="mr-3 mb-3">총 {{ favoriteList.length }} 건</div>
       <v-divider style="margin-top: 30px"></v-divider>
-      <div class="item-container">
-        <div class="item-info" v-for="(item, index) in favoriteList" :key="index">
-          <img :src="require(`@/assets/product/${item.productImgList[0].editedImg}`)"
-            max-width="100%" max-height="250" contain/>
+      <v-row>
+        <v-col class="col" v-for="(item, index) in favoriteList" :key="index" cols="3">
+          <v-img :src="require(`@/assets/product/${item.productImgList[0].editedImg}`)"/>
           <p class="content" @click="productView(item)">{{ item.title }}</p>
           <p class="price" @click="productView(item)">{{ item.price | comma }} 원</p>
           <div class="button">
-            <v-col>
+            <v-col style="  text-align: center;            ">
               <v-btn class="ml-0 ma-2" @click="clickAddCart(item.productId)">장바구니</v-btn>
               <v-btn @click="cancelFavorite(item.productId)">찜 삭제</v-btn>
             </v-col>
           </div>
-        </div>
-      </div>  
+        </v-col>
+      </v-row>  
       <div class="item-info" v-if="!favoriteList || (Array.isArray(favoriteList) && favoriteList.length === 0)">
         <p align="center" class="mt-15 mb-15">찜한 상품이 없습니다.</p>
       </div>
@@ -79,25 +78,9 @@ export default {
 </script>
 
 <style scoped>
-.item-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item-info {
-  display: flex;
-  flex-direction: column;
-  width: 25%;
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-
-.content {
-  margin-top: 5px;
-  font-weight: bold;
+.content{
   text-align: center;
 }
-
 .price {
   color: green;
   text-align: center;
@@ -105,6 +88,5 @@ export default {
 
 .item-info .button {
   margin-top: 40px;
-  margin-left: 10%;
 }
 </style>

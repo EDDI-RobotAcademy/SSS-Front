@@ -22,6 +22,9 @@
     </div>
     <div class="longline"/>
   </div>
+  <div class="total">
+    총 {{sideList.length}}개
+  </div>
       </v-col>
       <side-product-list-form :sideProducts="sideList" :current-page="currentPage"/>
   </v-container>
@@ -117,6 +120,11 @@ font-size: 20px;
 *{
     color: #40513B;
   }
-
+.total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 59px;
+  margin-left: 20px;
+}
 
 </style>
