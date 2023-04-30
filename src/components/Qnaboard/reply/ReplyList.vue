@@ -16,14 +16,14 @@
       <tr>
         <div class="comment">
           <div class="reply-info">
-          <p class="reply-writer">작성자 : {{ reply.replyWriter }}</p>      
+          <p class="reply-writer">작성자 : {{ reply.replyWriter }}</p>
           <p class="reply-content"> 내용 : {{ reply.replyContent }}</p>
         </div>
         <div class="reply-actions">
           <v-text-field v-model="reply.replyContent" label="댓글 수정" v-show="replyModify === index"></v-text-field>
-          <button class="delete-button" v-if="reply.replyWriter" @click="deleteReply(reply)">삭제</button>
-          <button class="modify-button" v-if="reply.replyWriter && replyModify !== index" @click="startModify(index)">수정 </button>
-          <button class="save-button" v-if="reply.replyWriter && replyModify === index" @click="saveReply(reply)">수정 완료 </button>
+          <button class="delete-button" v-if="isWriter(reply)" @click="deleteReply(reply)">삭제</button>
+          <button class="modify-button" v-if="isWriter(reply) && replyModify !== index" @click="startModify(index)">수정 </button>
+          <button class="save-button" v-if="isWriter(reply) && replyModify === index" @click="saveReply(reply)">수정 완료 </button>
         </div>
       </div>
       </tr>
@@ -38,6 +38,7 @@ import axios from "axios";
 import {mapActions, mapState} from "vuex";
 
 const qnaModule = 'qnaModule'
+const memberModule = 'memberModule'
 
 export default {
   name: "ReplyList",
@@ -53,6 +54,11 @@ export default {
     reply: {
         type: Object
     },
+  },
+  computed: {
+    ...mapState(memberModule, [
+      'memberInfoAboutSignIn'
+    ]),
   },
   methods: {
     ...mapActions(qnaModule, [
@@ -80,6 +86,9 @@ export default {
         await this.requestReplyDeleteToSpring({replyId})
         this.$router.go(this.$router.currentRoute)
     },
+    isWriter(reply) {
+      return this.memberInfoAboutSignIn.userNickName === reply.replyWriter
+    }
   },
 }
 </script>
