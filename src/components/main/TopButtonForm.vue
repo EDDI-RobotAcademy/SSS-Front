@@ -18,9 +18,9 @@ export default {
   font-size: 12px;
 }
 a.go-to-top{
-  position:absolute;
-  bottom:100px;
-  right:70px;
+  position:fixed;
+  bottom:50px;
+  right:30px;
   z-index:99;
   display: inline-block;
   width:30px;

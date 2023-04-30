@@ -6,10 +6,16 @@
         <router-link :to="{ name: 'ProductReadPage',
               params: { productId: product.productId.toString() }}">
         <img class="thumbnail" :src="require(`@/assets/product/${product.productImgList[0].editedImg}`)">
-        <div class="buttonContainer" >
-          <v-btn class="cartButton" @click="clickAddCart"><v-icon >mdi-cart-variant</v-icon></v-btn>
+      </router-link>
+        <div>
+          <v-btn icon @click="clickAddCart">
+            <v-icon >mdi-cart-variant</v-icon>
+          </v-btn>
+          <v-btn icon @click="clickFavorite">
+            <v-icon v-if="!isLiked">mdi-heart-outline</v-icon>
+            <v-icon v-else color="red">mdi-heart</v-icon>
+          </v-btn>
         </div>
-        </router-link>
       </div>
       <p style="text-align: center;" class="product-title">{{ product.title }}</p>
       <p style="text-align: center;" class="product-price">{{ product.price | comma }}원</p>
@@ -65,9 +71,34 @@
           product: {
               type: Object,
               required: true,
-          }
+          },
+          favoriteInfo: {
+              type: Object,
+              required: true,
+        },
+          favoriteList: {
+                type: Array,
+                required: true,
+        }
       },
       methods: {
+        clickFavorite() {
+      // 찜(좋아요) 클릭 이벤트
+      if(this.$store.state.memberModule.isAuthenticated) {
+        const productId = this.product.productId
+        const isLike = !this.favoriteInfo.isLike
+        console.log("productId: "+productId)
+        console.log("isLike: "+isLike)
+        
+        const memberId = this.$store.state.memberModule.memberInfoAboutSignIn.userId
+        console.log("memberId: "+memberId)
+        localStorage.setItem(`${memberId}_${productId}_like`, JSON.stringify({ memberId, productId, isLike }));
+    
+        this.$emit('saveFavorite', {productId, isLike})
+      } else {
+        alert("로그인한 사용자만 가능합니다.")
+      }
+    },
         clickAddCart(event) {
           event.preventDefault();
           this.quantityModal = true
@@ -87,6 +118,13 @@
         qtyInc() {
           this.quantity++;
         },
+      },
+    computed:{
+      //favoriteList에 담긴 productId와 card에 담긴 productId가 일치하는지 확인
+      isLiked() {
+        const favorite = this.favoriteList.some(item => item.productId === this.product.productId);
+      return favorite;
+    },
       }
   }
 </script>
