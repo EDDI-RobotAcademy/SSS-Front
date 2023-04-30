@@ -1,6 +1,7 @@
 +<template>
     <v-container>
-      <h2>재료 작성</h2>
+      <h2>재료등록 페이지</h2>
+      <div class="line"/>
       <ingredient-register-form @submit="onSubmit"/>
     </v-container>
   </template>
@@ -29,5 +30,14 @@
   
   </script>
   
-  <style>
+  <style scoped>
+  .line{
+    width: 100%;
+    border-bottom: 2px solid #40513B;
+    margin-top: 15px;
+}
+*{
+    /* color: #40513B; */
+    color: #40513B;
+  }
   </style>

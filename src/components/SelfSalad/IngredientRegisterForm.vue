@@ -1,80 +1,144 @@
 <template>
-    <form @submit.prevent="onSubmit">
-      <table>
-        <tr>
-          <td>
-            <h3>카테고리</h3>
-            <hr>
-            <div id="flex-box">
-              <div>
-                <input type="radio" v-model="category" name="radioBtn" value="VEGETABLE">
-                <label for="r1">채소</label>
-              </div>
-              <div>
-                <input type="radio" v-model="category" name="radioBtn" value="MEAT">
-                <label for="r2">육류</label>
-              </div>
-              <div>
-                <input type="radio" v-model="category" name="radioBtn" value="TOPPING">
-                <label for="r3">토핑</label>
-              </div>
+  <v-container>
+    <v-row>
+      <form @submit.prevent="onSubmit">
+   
+        
+      <v-row>
+        <v-col cols="6" class="d-flex flex-column justify-content-center" style="min-width: 500px;">
+    <div class="d-flex justify-content-center">
+      <v-col v-for="(url, index) in imageUrls" :key="index" cols="6">
+        <div class="d-flex justify-content-center">
+        <img style="width: 500px;" :src="url" :alt="'Image ' + index" aspect-ratio="1"></img>
+      </div>
+      </v-col>
+    </div>
+    <div class="d-flex justify-content-center">
+      <v-col cols="12">
+        <div class="d-flex justify-content-center">
+        <div class="input-group mb-3" style="width: 70%;">
+          <input type="file" class="form-control" id="inputGroupFile01" ref="files" multiple @change="handleFileUpload" aria-describedby="inputGroupFileAddon01">
+        </div>
+      </div>
+      </v-col>
+
+    </div>
+  </v-col>
+   
+
+      <v-col cols="6" class="justify-end" >
+
+
+            <h2>재료 유형</h2>
+   
+            <div id="categoryButton">
+              <v-btn class="categoryButton"
+              :class="{ active: category === 'VEGETABLE' }"
+              @click.prevent="category = 'VEGETABLE'">채소</v-btn>
+            <v-btn class="categoryButton"
+              :class="{ active: category === 'MEAT' }"
+              @click.prevent="category = 'MEAT'">육류</v-btn>
+            <v-btn class="categoryButton"
+              :class="{ active: category === 'TOPPING' }"
+              @click.prevent="category = 'TOPPING'">토핑</v-btn>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3>관련 정보</h3>
-            <hr>
-            <div id="flex-box">
-              <div>
-                <label>재료명</label>
-                <input type="text" v-model="name"/>
-              </div>
-              <div>
-                <label>가격<p>최소 단위당 가격</p></label>             
-                <input type="text" value="put price" v-model="price"/>
-              </div>
-              <div>
-                <label>칼로리<p>최소 단위당 가격</p></label>             
-                <input type="text" value="put calaory" v-model="calorie"/>KCAL
-              </div>
-                <label>재료 이미지</label>
-                <input type="file" id="files" ref="files" multiple @change="handleFileUpload"/>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3>단위</h3>
-            <hr>
-            <div id="flex-box">
-              <div>
-                <label>최대수량</label>
-                <input type="text" v-model="max" value="put max"/>
-              </div>
-              <div>
-                <label>수량 단위</label>             
-                <input type="text" v-model="unit" value="put unit"/>
-              </div>
-              <div>
-                <label>측정 단위</label>
-                <select v-model="measure">
-                  <option selected value="GRAM">g</option>
-                  <option value="COUNT">개</option>
-                </select>
-              </div>
-            </div>
-          </td>
-        </tr>  
-      </table>
-  
-      <div>
-        <v-btn type="submit" color="blue">등록</v-btn>
+            <div class="line"/>
+
+            <h2>재료 정보</h2>
+           
+            <v-col cols="12" id="ingredientInfo">
+                  <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">재료명</span>
+                    <input type="text" 
+                    class="form-control" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default" 
+                    v-model="name" 
+                    id="inputGroup-sizing-default">
+                  </div>
+
+
+
+
+      
+
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">가격</span>
+                    <input type="text" 
+                    class="form-control" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default" 
+                    v-model="price" 
+                    id="inputGroup-sizing-default">
+                  </div>
+
+
+
+
+
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">칼로리</span>
+                    <input type="text" 
+                    class="form-control" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default" 
+                    v-model="calorie" 
+                    id="inputGroup-sizing-default">
+                  </div>
+
+
+            </v-col>
+       
+            <div class="line"/>
+
+            <h2>수량 정보</h2>
+   
+            <v-col id="ingredientInfo">
+              
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">수량 단위</span>
+                    <input type="text" 
+                    class="form-control" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default" 
+                    v-model="unit" 
+                    id="inputGroup-sizing-default">
+
+                    <div>
+      <!-- 옵션 설정 -->
+      <select class="form-select" v-model="measure">
+        <option selected value="GRAM">g</option>
+        <option value="COUNT">개</option>
+      </select>
+    </div>
+                  </div>
+
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">최대 수량</span>
+                    <input type="text" 
+                    class="form-control" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default" 
+                    v-model="max" 
+                    id="inputGroup-sizing-default">
+                  </div>
+
+
+            </v-col>
+
+          </v-col>
+
+        </v-row>
+
+      <div class="d-flex justify-content-center">
+        <v-btn style="background-color: rgb(54, 109, 50); color:white; width: 150px;" type="submit">등록</v-btn>
         <router-link :to="{ name: 'IngredientListPage' }">
-          <v-btn color="red">취소</v-btn>
+          <v-btn style="background-color: red; color:white; width: 150px;">취소</v-btn>
         </router-link>
       </div>
     </form>
+  </v-row>
+  </v-container>
   </template>
   
   <script>
@@ -83,7 +147,7 @@
       name: "IngredientRegisterForm",
       data () {
           return {
-              name: 'put name',
+              name: '',
               category: 'VEGETABLE',
               measure: 'GRAM',
               max: '10',
@@ -91,6 +155,7 @@
               price:'2000',
               calorie:'10', 
               files: '',  
+              imageUrls: [],
           }
       },
       methods: {
@@ -121,20 +186,69 @@
           },
           handleFileUpload () {
             this.files = this.$refs.files.files
+            this.imageUrls = Array.from(this.files).map((file) => URL.createObjectURL(file))
         },
       }
   }
   
   </script>
   
-  <style >
-  hr{
-    width: 100%;
+  <style scoped>
+  
+  #categoryButton .categoryButton{
+    background-color: rgb(54, 109, 50);
+      border-radius: 5px;
+      color: lightgray;
+      text-align: center;
+      font-size: 18px;
+      margin:5px;
+      width: 30%;
+      height: 40px;
+      font-weight: bold;
   }
-  #flex-box{
-    display:flex;
-    justify-content: space-between;
-
+  #categoryButton .categoryButton.active{
+    background-color: #4caf50;
+      color: white;
   }
   
+
+  .ingredientSetting{
+    display: flex;
+    align-items: center;
+  }
+
+h2{
+  margin-top:30px;
+  font-weight: bold;
+}
+  
+  *{
+    /* color: #40513B; */
+    color: #40513B;
+  }
+.ingredientSelectButton{
+  width: 200px;
+}
+
+  .line{
+    width: 100%;
+    border-bottom: 2px solid #40513B;
+    margin-top: 15px;
+}
+p {
+  font-size: 20px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.input-group-text{
+  background-color:rgb(54, 109, 50);
+  color: white;
+  align-items: center;
+}
+.completionButton{
+  background-color: #4caf50;
+  color: white;
+}
   </style>
