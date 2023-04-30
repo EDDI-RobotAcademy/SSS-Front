@@ -67,6 +67,7 @@ export default {
     ]),
     ...mapActions(productModule, [
       'requestFavoriteListToSpring',
+      'requestReadMyReviewToSpring'
     ]),
     ...mapActions(qnaModule, [
       'requestReadMyBoardToSpring'
@@ -76,13 +77,14 @@ export default {
   await this.requestAddCartListToSpring()
   await this.requestFavoriteListToSpring()
   await this.requestReadMyBoardToSpring()
+  await this.requestReadMyReviewToSpring()
 
   console.log(this.boards.length)
 
     const CategoryItem = new Array
     CategoryItem.push({title: "장바구니", icon: "mdi-cart-variant", route: "/my-info-cart", count: this.cartItems.length})
     CategoryItem.push({title: "주문내역", icon: "mdi-calendar-clock", route: "/my-info-delivery", count: 0})
-    CategoryItem.push({title: "구매 리뷰", icon: "mdi-fountain-pen-tip", route: "/my-info-review", count: 0})
+    CategoryItem.push({title: "구매 리뷰", icon: "mdi-fountain-pen-tip", route: "/my-info-review", count: this.reviews.length})
     CategoryItem.push({title: "좋아요", icon: "mdi-star-circle", route: "/my-info-favorite", count: this.favoriteList.length})
     CategoryItem.push({title: "내가 쓴 글", icon: "mdi-human-greeting", route: "/my-info-Qna", count: this.boards.length})
 
