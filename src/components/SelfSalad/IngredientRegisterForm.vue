@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-center">
       <v-col v-for="(url, index) in imageUrls" :key="index" cols="6">
         <div class="d-flex justify-content-center">
-        <img style="width: 500px;" :src="url" :alt="'Image ' + index" aspect-ratio="1"/>
+        <img style="width: 500px;" :src="url" :alt="'Image ' + index" aspect-ratio="1"></img>
       </div>
       </v-col>
     </div>
@@ -46,80 +46,91 @@
 
             <h2>재료 정보</h2>
            
-            <div class="ingredientInfo">
-                  <div class="input-group mb-3" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-default">재료명</span>
+            <v-col cols="12" id="ingredientInfo">
+                  <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">재료명</span>
                     <input type="text" 
                     class="form-control" 
                     aria-label="Sizing example input" 
                     aria-describedby="inputGroup-sizing-default" 
                     v-model="name" 
-                    id="inputGroup-sizing-lg">
+                    id="inputGroup-sizing-default">
                   </div>
-              <div class="input-group mb-3" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-default">가격</span>
+
+
+
+
+      
+
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">가격</span>
                     <input type="text" 
                     class="form-control" 
                     aria-label="Sizing example input" 
                     aria-describedby="inputGroup-sizing-default" 
                     v-model="price" 
-                    id="inputGroup-sizing-lg">
+                    id="inputGroup-sizing-default">
                   </div>
-           <div class="input-group mb-3" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-default">칼로리</span>
+
+
+
+
+
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">칼로리</span>
                     <input type="text" 
                     class="form-control" 
                     aria-label="Sizing example input" 
                     aria-describedby="inputGroup-sizing-default" 
                     v-model="calorie" 
-                    id="inputGroup-sizing-lg">
+                    id="inputGroup-sizing-default">
                   </div>
 
 
-                </div>
+            </v-col>
        
             <div class="line"/>
 
             <h2>수량 정보</h2>
    
-            <div class="ingredientInfo">
+            <v-col id="ingredientInfo">
               
-              <div class="input-group mb-3" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-default">수량 단위</span>
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">수량 단위</span>
                     <input type="text" 
                     class="form-control" 
                     aria-label="Sizing example input" 
                     aria-describedby="inputGroup-sizing-default" 
                     v-model="unit" 
-                    id="inputGroup-sizing-lg">
+                    id="inputGroup-sizing-default">
 
                     <div>
       <!-- 옵션 설정 -->
-      <select class="form-select" style="height: 51px;" v-model="measure">
+      <select class="form-select" v-model="measure">
         <option selected value="GRAM">g</option>
         <option value="COUNT">개</option>
       </select>
     </div>
                   </div>
 
-              <div class="input-group mb-3" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-default">최대 수량</span>
+              <div class="input-group mb-3" style="width: 400px;">
+                    <span style="width: 100px; display: inline-block; text-align: center;" class="input-group-text" id="inputGroup-sizing-default">최대 수량</span>
                     <input type="text" 
                     class="form-control" 
                     aria-label="Sizing example input" 
                     aria-describedby="inputGroup-sizing-default" 
                     v-model="max" 
-                    id="inputGroup-sizing-lg">
+                    id="inputGroup-sizing-default">
                   </div>
 
 
-                </div>
             </v-col>
 
+          </v-col>
 
         </v-row>
 
-      <div class="d-flex justify-content-center" style="margin-top: 50px">
+      <div class="d-flex justify-content-center">
         <v-btn style="background-color: rgb(54, 109, 50); color:white; width: 150px;" type="submit">등록</v-btn>
         <router-link :to="{ name: 'IngredientListPage' }">
           <v-btn style="background-color: red; color:white; width: 150px;">취소</v-btn>
@@ -139,10 +150,10 @@
               name: '',
               category: 'VEGETABLE',
               measure: 'GRAM',
-              max: '',
-              unit: '',
-              price:'',
-              calorie:'', 
+              max: '10',
+              unit: '2',
+              price:'2000',
+              calorie:'10', 
               files: '',  
               imageUrls: [],
           }
@@ -185,14 +196,14 @@
   <style scoped>
   
   #categoryButton .categoryButton{
-    background-color: #739E42;
+    background-color: rgb(54, 109, 50);
       border-radius: 5px;
       color: lightgray;
       text-align: center;
-      font-size: 23px;
+      font-size: 18px;
       margin:5px;
       width: 30%;
-      height: 50px;
+      height: 40px;
       font-weight: bold;
   }
   #categoryButton .categoryButton.active{
@@ -207,7 +218,7 @@
   }
 
 h2{
-  margin-top:80px;
+  margin-top:30px;
   font-weight: bold;
 }
   
@@ -222,16 +233,22 @@ h2{
   .line{
     width: 100%;
     border-bottom: 2px solid #40513B;
-    margin-top: 40px;
+    margin-top: 15px;
 }
-
+p {
+  font-size: 20px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 .input-group-text{
-  background-color:#739E42;
+  background-color:rgb(54, 109, 50);
   color: white;
   align-items: center;
 }
-.ingredientInfo {
-  margin-top: 30px;
-  margin-left: -13px;
+.completionButton{
+  background-color: #4caf50;
+  color: white;
 }
   </style>

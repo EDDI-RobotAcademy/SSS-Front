@@ -1,54 +1,6 @@
 <template>
-  <v-container>
+    <div>
       <form @submit.prevent="onSubmit">
-        <v-row>
-
-        <v-col cols="6" class="d-flex flex-column justify-content-center" style="min-width: 500px;">
-    <div class="d-flex justify-content-center">
-      <v-col v-for="(url, index) in imageUrls" :key="index" cols="6">
-        <div class="d-flex justify-content-center">
-        <img style="width: 500px;" :src="url" :alt="'Image ' + index" aspect-ratio="1"></img>
-      </div>
-      </v-col>
-    </div>
-    <div class="d-flex justify-content-center">
-      <v-col cols="12">
-        <div class="d-flex justify-content-center">
-        <div class="input-group mb-3" style="width: 70%;">
-          <input type="file" class="form-control" id="inputGroupFile01" ref="files" multiple @change="handleFileUpload" aria-describedby="inputGroupFileAddon01">
-        </div>
-      </div>
-      </v-col>
-
-    </div>
-  </v-col>
-
-
-
-  <div id="categoryButton">
-              <v-btn class="categoryButton"
-              :class="{ active: category === 'VEGETABLE' }"
-              @click.prevent="category = 'VEGETABLE'">채소</v-btn>
-            <v-btn class="categoryButton"
-              :class="{ active: category === 'MEAT' }"
-              @click.prevent="category = 'MEAT'">육류</v-btn>
-            <v-btn class="categoryButton"
-              :class="{ active: category === 'TOPPING' }"
-              @click.prevent="category = 'TOPPING'">토핑</v-btn>
-            </div>
-            <div class="line"/>
-
-            <div class="input-group input-group-lg" style="width: 400px; margin: 10px;">
-                    <span style="width: 150px; display: inline-block; text-align: center; font-weight: bold; font-size: 23px;" class="input-group-text" id="inputGroup-sizing-lg">재료명</span>
-                    <input type="text" 
-                    class="form-control" 
-                    aria-label="Sizing example input" 
-                    aria-describedby="inputGroup-sizing-lg" 
-                    v-model="name" 
-                    id="inputGroup-sizing-lg">
-            </div>
-
-
         <table>
           <tr>
               <div>
@@ -101,10 +53,8 @@
               <v-btn color="red">취소</v-btn>
             </router-link>
         </div>
-        
-      </v-row>
-    </form>
-  </v-container>
+      </form>
+    </div>
   </template>
   
   <script>
