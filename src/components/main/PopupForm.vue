@@ -1,21 +1,16 @@
 <template>
   <v-container>
     <div class="popup" v-if="popup">
-      <p>{{ title }}</p>
-      <div class="close-btn">
-        <button @click="popup = false">
-          <v-icon>mdi-close</v-icon>
+      <v-img src="@/assets/popup/popup.png" style="max-width: 600px;"/>
+      <div class="d-flex justify-content-between m-1">
+        <label for="not-open">
+          <input id="not-open" type="checkbox" v-model="notOpenToday">
+          오늘 하루 이 창 열지 않음
+        </label>      
+        <button @click="closePopup">
+          X 닫기
         </button>
       </div>
-    <v-img src="@/assets/popup/SSS.jpeg" style="max-width: 300px; max-height: 180px;">
-    </v-img>
-    <p>샐러드 설명</p>
-    <p>샐러드 설명</p>
-    <p>샐러드 설명</p>
-    <router-link to="/member/sign-up">
-      <v-btn>회원가입 하러...</v-btn>
-    </router-link>
-    <v-btn>이벤트 자세히...</v-btn>
     </div>
   </v-container>
 </template>
@@ -25,32 +20,34 @@ export default {
 	name: 'PopupForm',
   data() {
     return {
-      title: '팝업 창 입니다.',
       popup: true,
+      notOpenToday: false
     }
   },
+  methods: {
+    closePopup() {
+      if (this.notOpenToday) {
+        localStorage.setItem("popupClosedToday", "true");
+      }
+      this.popup = false;
+    },
+  },
+  created() {
+    console.log(this.notOpenToday)
+    console.log()
+    if (localStorage.getItem("popupClosedToday") === "true") {
+      this.popup = false;
+    }
+  }
 }
 </script>
 
 <style scoped>
 .popup {
-  background-color: rgb(245, 250, 248);
-  position: fixed;
-  top: 280px;
-  right: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px;
-  z-index: 9999;
-
-}
-
-.close-btn {
-  position: absolute;
+  background-color: white;
+  position:absolute;
   top: 10px;
-  right: 10px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
+  left: 15px;
+  box-shadow: 0px 0px 5px;
 }
 </style>

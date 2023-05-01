@@ -190,10 +190,14 @@ export default {
     },
     clickAddCart() {
       // 장바구니 클릭 이벤트
+      if(this.$store.state.memberModule.isAuthenticated) {
         const productId = this.product.productId
         const quantity = this.quantity
 
         this.$emit('addCart', {productId, quantity})
+      } else {
+        alert("로그인한 사용자만 가능합니다.")
+      }
     },
     btnDirectPurchase() {
       // 바로구매 클릭 이벤트

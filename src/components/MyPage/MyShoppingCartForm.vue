@@ -28,7 +28,7 @@
                     <v-checkbox class="allCheckbox" v-model="allChecked" />
                   </th>
                   <th>상품명</th>
-                  <th style="width: 5px;">판매가</th>
+                  <th>판매가</th>
                   <th>수량</th>
                   <th style="width: 10px;">주문관리</th>
                   <th>배송비/배송 형태</th>
@@ -70,36 +70,6 @@
                     수정하기
                   </v-btn>
                 </td>
-
-                  <td style="text-align: center;">
-                    <!-- <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                    </router-link> -->
-                    <v-img :src="cartItem.category.includes('SELF') ? require(`@/assets/logo/3sss.jpg`) : require(`@/assets/product/${cartItem.editedImg}`)"
-                      style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;" />
-                    <div style="font-weight: bold;">{{ cartItem.title }}</div>
-                  </td>
-                    
-                  <td>
-                    <p>{{ cartItem.totalPrice / cartItem.quantity | comma }}원</p>
-                  </td>
-                  <td>
-                    <v-btn class="mr-2" icon small @click="descQuantity(idx)">
-                      <v-icon>mdi-minus</v-icon>
-                    </v-btn>
-                    {{ cartItem.quantity }}
-                    <v-btn class="ml-2" icon small @click="incQuantity(idx)">
-                      <v-icon>mdi-plus</v-icon>
-                    </v-btn>
-                    <p>{{ cartItem.totalPrice | comma }}원</p>
-                  </td>
-                  <td>
-                    <v-btn @click="removeItem(idx)" class="mb-1">
-                      삭제하기
-                    </v-btn>
-                    <v-btn v-if="cartItem.category === 'SELF'" @click="openModal(cartItem.cartItemId, cartItem.title)" >
-                      수정하기
-                    </v-btn>
-                  </td>
                   <td style="text-align: center;">
                     <p>택배배송<br>
                     <span style="font-weight: bold;">3,000원</span><br>

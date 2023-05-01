@@ -104,11 +104,16 @@
           this.quantityModal = true
         },
         checkQuantity() {
+          if(this.$store.state.memberModule.isAuthenticated) {
+
             const productId = this.product.productId
             const quantity = this.quantity
             console.log('addCart event emitted with payload:', {productId, quantity});
             this.$emit('addCart', {productId, quantity})
+          } else {
+            alert("로그인한 사용자만 가능합니다.")
             this.quantityModal = false
+      }
         },
         qtyDesc() {
           if (this.quantity > 1) {

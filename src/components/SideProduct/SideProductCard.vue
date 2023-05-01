@@ -124,6 +124,8 @@ methods:{
     },
     clickAddCart() {
       // 장바구니 클릭 이벤트
+      if(this.$store.state.memberModule.isAuthenticated) {
+
         const itemId = this.sideProduct.sideProductId
         const quantity = this.quantity
         const category = 'SIDE'
@@ -131,6 +133,11 @@ methods:{
         console.log('SIDE quantity: '+ quantity )
         console.log('SIDE category: '+ category )
         this.requestAddCartToSpring({ itemId, category, quantity})
+      } else {
+        alert("로그인한 사용자만 가능합니다.")
+        this.showPreview = false
+      }
+      },
       }
     },
     beforeUpdate() {

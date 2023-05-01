@@ -210,6 +210,8 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
     },
     clickAddCart() {
       // 장바구니 클릭 이벤트
+      if(this.$store.state.memberModule.isAuthenticated) {
+
       if(this.totalCalorie !== 0 ){
       const title = window.prompt('저장할 샐러드 명을 입력해주세요. *5자 이하로 입력해주세요')
       const quantity = this.quantity
@@ -221,7 +223,10 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 
       this.$emit('addCart', { title, quantity, totalPrice, totalCalorie, selfSaladRequestList })
       }
-    },
+  } else {
+        alert("로그인한 사용자만 가능합니다.")
+      }
+    }
   },
   filters: {
     comma(val) {
