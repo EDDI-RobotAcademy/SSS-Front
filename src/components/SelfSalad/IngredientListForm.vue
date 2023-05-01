@@ -5,7 +5,7 @@
       <v-col cols="12">
           <div class="d-flex justify-center align-center justify-space-between">
         <div>
-          <p class="saladPageName">SelfSalad</p>
+          <p class="saladPageName">Self Salad</p>
         </div>
         <div>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
@@ -38,7 +38,7 @@
                       @change="onChange"
                       :change-value="Number(changeValue)"
                       @click="onDelete" />
-  </div>
+    </div>
   </div>
   <div class="line"></div>
   <v-col cols="12">
@@ -279,8 +279,8 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 
   .longline{
     width: 100%;
-    border-bottom: 4px solid #40513B;
-    margin-top: -50x;
+    border-bottom: 7px solid #40513B;
+    margin-top: 0px;
 }
 .line{
     width: 100%;
@@ -301,8 +301,10 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
   .saladPageName{
     font-size: 70px;
     text-align: left;
+    font-weight: bold;
     color: #40513B;
-    
+    font-family: 'HSBombaram';
+    margin-bottom: -39px;
   }
   .btn-group {
   display: flex;
@@ -314,7 +316,12 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 .selectingredientcard{
   width:400px;
   min-height: 400px;
-  background-color: #EDF1D6;
+  background-color: rgba(246, 242, 232, 0.854);
 }
-
+@font-face {
+    font-family: 'HSBombaram';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 </style>
