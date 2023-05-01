@@ -9,7 +9,7 @@
 <script>
 import PaymentInfoForm from "@/components/MyPage/PaymentInfoForm"
 import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
-// const paymentModule = 'paymentModule'
+
 const ordercartModule = 'ordercartModule'
 
 import { mapActions, mapState } from 'vuex';
