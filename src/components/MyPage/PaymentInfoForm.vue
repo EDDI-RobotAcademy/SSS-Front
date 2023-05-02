@@ -47,9 +47,9 @@
                       style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;" />
                       <div style="font-weight: bold;">{{ Item.title }}</div>
                     </td>
-                    <td>{{ Item.totalPrice | comma }}원</td>
+                    <td>{{ Item.totalPrice / Item.quantity | comma }}원</td>
                     <td>{{ Item.quantity }}</td>
-                    <td>{{ Item.totalPrice * Item.quantity | comma }}원</td>
+                    <td>{{ Item.totalPrice | comma }}원</td>
                   </tr>
                 </template>
             </tbody>
