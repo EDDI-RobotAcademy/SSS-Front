@@ -5,10 +5,10 @@
           <div class="search-bar">
         <p class="saladPageName">Salad</p> 
         <div>
-          <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
-            <v-btn color="#40513B" style="width:150px; height:40px; font-size:20px; color:white;">상품 등록</v-btn>
-        </router-link>
-        </div>
+            <router-link :to="{ name: 'ProductRegisterPage' }" v-if="memberInfoAboutSignIn.authorityType === 'ADMIN'">
+              <v-btn color="#40513B" style="width:150px; height:40px; font-size:20px; color:white;">상품 등록</v-btn>
+          </router-link>
+          </div>
         <div class="search-bar">
               <select v-model="searchBy" style="padding-right: 10px;">
                 <option value="title">제품명</option>
