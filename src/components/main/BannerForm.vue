@@ -40,18 +40,18 @@
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="main-top-promotion row">
+            <v-row>
               <v-col v-for="product in products.slice(0, 4)" :key="product.productId">
-                <product-card :product="product"/>
+                <product-card :product="product" @addCart="addCart" :favoriteInfo="favoriteInfo" :favoriteList="favoriteList" @saveFavorite="saveFavorite"/>
               </v-col>
-            </div>
-          </div>
+            </v-row>
+              </div>
           <div class="carousel-item">
-            <div class="main-top-promotion row">
+            <v-row>
               <v-col v-for="product in products.slice(4,8)" :key="product.productId">
-                <product-card :product="product"/>
+                <product-card :product="product" @addCart="addCart" :favoriteInfo="favoriteInfo" :favoriteList="favoriteList" @saveFavorite="saveFavorite"/>
               </v-col>
-            </div>
+            </v-row>
           </div>
         </div>
           <span class="carousel-control-prev-icon carousel-control-prev" aria-hidden="true" data-bs-target="#mainTopCarousel-1" data-bs-slide="prev"></span>
@@ -87,6 +87,7 @@ import { mapActions, mapState } from 'vuex'
 
 const productModule = 'productModule'
 const sideProductModule = 'sideProductModule'
+const ordercartModule = 'ordercartModule'
 
 export default {
   components: {ProductCard, SideProductCard},
@@ -98,18 +99,64 @@ export default {
     ...mapState(sideProductModule, [
       'sideProducts'
     ]),
+    ...mapState(productModule, [
+      'favoriteInfo',
+      'favoriteList'
+    ]),
+    favoriteInfo: {
+      get() {
+        return this.$store.state.productModule.favoriteInfo;
+      },
+      set(value) {
+        this.$store.commit('productModule/SET_FAVORITE_INFO', value);
+      }
+    },
+    favoriteList: {
+      get() {
+        return this.$store.state.productModule.favoriteList;
+      },
+      set(value) {
+        this.$store.commit('productModule/SET_FAVORITE_INFO', value);
+      }
+    }
   },
+  async created (){
+        await this.requestFavoriteListToSpring()
+      },
   async mounted (){
     await this.requestProductListToSpring()
     await this.requestSideProductListToSpring()
+    await this.requestSortFavoriteToSpring()
   },
   methods:{
     ...mapActions(productModule, [
-      'requestProductListToSpring'
-    ])
+      'requestProductListToSpring',
+      'requestSortFavoriteToSpring'
+    ]),
     ...mapActions(sideProductModule, [
       'requestSideProductListToSpring'
     ]),
+    ...mapActions(productModule, [
+      'requestSaveFavoriteToSpring',
+      'requestFavoriteListToSpring'
+    ]),
+    async saveFavorite(payload) {
+      const productId = payload.productId
+      await this.requestSaveFavoriteToSpring(productId)
+      await this.requestFavoriteListToSpring()
+    },
+    ...mapActions(ordercartModule, [        
+      'requestAddCartToSpring'    
+  ]),
+    async addCart(payload) {
+      const itemId = payload.productId
+      const quantity = payload.quantity
+      const category = 'PRODUCT'
+      console.log('productId: '+ itemId )
+      console.log('quantity: '+ quantity )
+      console.log('category: '+ category )
+      await this.requestAddCartToSpring({ itemId, category, quantity})
+    },
   }
 }
 </script>
