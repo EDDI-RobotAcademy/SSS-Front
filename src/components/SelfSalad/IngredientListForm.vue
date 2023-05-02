@@ -5,7 +5,7 @@
       <v-col cols="12">
           <div class="d-flex justify-center align-center justify-space-between">
         <div>
-          <p class="saladPageName">SelfSalad</p>
+          <p class="saladPageName">Self Salad</p>
         </div>
         <div>
         <router-link :to="{ name: 'IngredientRegisterPage' }">
@@ -22,10 +22,7 @@
       </div>
       </v-col>
       <div class="longline"></div>
-        <div class="d-flex justify-end">
-          <p class="totalCalorie"><span> : {{ totalCalorie }} </span> ( 총 KCAL )</p>
-  </div>
-      
+ 
       <div class="cardSession">
       <v-col v-if="!ingredients || (Array.isArray(ingredients) && ingredients.length === 0)">
         <p colspan="4">
@@ -59,18 +56,21 @@
 
       <v-col cols="6" style="margin-top: 30px">           
         <div class="product-info">
+          <div class="d-flex justify-end">
+          <p class="totalCalorie"><span> : {{ totalCalorie }} </span> ( 1 세트당 KCAL )</p>
+  </div>
         <div class="d-flex justify-content-between align-items-center" style="margin-top: 15px">
           <h4>판매가</h4>
           <h4>{{ totalPrice | comma }}원</h4>
         </div>
-          <div class="d-flex justify-content-between align-items-center" style="border-radius: 8px; background-color: #EDF1D6; padding: 10px; height: 50px; margin-top: 10px;">
+          <div class="d-flex justify-content-between align-items-center" style="border-radius: 8px; background-color: rgba(246, 242, 232, 0.854); padding: 10px; height: 50px; margin-top: 10px;">
             구매수량
             <div class="d-flex align-items-center">
-              <v-btn style="background-color: #9DC08B;" rounded class="mr-2" elevation="0" small @click="qtyDesc">
+              <v-btn style="background-color: #739E42;" rounded class="mr-2" elevation="0" small @click="qtyDesc">
                 <v-icon size="15" color="white">mdi-minus</v-icon>
               </v-btn>
-              <div>{{  totalPrice | comma }}</div>
-              <v-btn style="background-color: #9DC08B;" rounded class="ml-2" elevation="0" small @click="qtyInc">
+              <div style="font-size: 25px; padding:10px;">{{ quantity }}</div>
+              <v-btn style="background-color: #739E42;" rounded class="ml-2" elevation="0" small @click="qtyInc">
                 <v-icon size="15" color="white">mdi-plus</v-icon>
               </v-btn>
             </div>
@@ -260,14 +260,14 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
     font-size: 1.2rem;
   }
   .totalCalorie span{
-    color: rgb(133, 173, 83);
+    color: #739E42;
     font-size: 3rem;
     font-weight: bold;
   }
   .totalCalorie{
     font-size: 17px;
     text-align: right;
-    margin-top: 20px;    
+    margin-top: 20px; 
   }
   
   .cardSession{
@@ -284,13 +284,15 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 
   .longline{
     width: 100%;
-    border-bottom: 4px solid #40513B;
-    margin-top: -50x;
+    border-bottom: 7px solid #40513B;
+    margin-top: 0px;
+    margin-bottom: 40px;
 }
 .line{
     width: 100%;
     border-bottom: 4px solid #40513B;
     margin-top: 100px;
+    margin-bottom: 40px;
 }
 .cardline {
   border-bottom: 4px solid #40513B;
@@ -306,8 +308,10 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
   .saladPageName{
     font-size: 70px;
     text-align: left;
+    font-weight: bold;
     color: #40513B;
-    
+    font-family: 'HSBombaram';
+    margin-bottom: -39px;
   }
   .btn-group {
   display: flex;
@@ -319,7 +323,12 @@ this.selfSaladList.push({ingredientId: ingredientId, selectedAmount: selectedAmo
 .selectingredientcard{
   width:400px;
   min-height: 400px;
-  background-color: #EDF1D6;
+  background-color: rgba(246, 242, 232, 0.854);
 }
-
+@font-face {
+    font-family: 'HSBombaram';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 </style>

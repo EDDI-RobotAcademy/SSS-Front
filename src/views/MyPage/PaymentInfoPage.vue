@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-15">
     <my-shopping-cart-form @selectPurchase="selectPurchase"/>
-    <payment-info-form :selectedItems="selectedItems" v-on:payment-success="payment"/>
+    <payment-info-form :selectedItems="selectedItems" v-on:payment-success="payment" @submit="onSubmit"/>
     
   </v-container>
 </template>
@@ -31,6 +31,11 @@ export default {
     ])
   },
   methods: {
+    async onSubmit(payload) {
+        const{zipcode, city, street, addressDetail}= payload
+        console.log('payload=' + zipcode, city, street, addressDetail);
+        await this.reqMyPageRegisterDeliveryToSpring(payload);
+    },
     selectPurchase(items) {
       for(i=0; i < items.length; i++ ){
         this.selectedItems.push(items[i])
@@ -54,7 +59,7 @@ export default {
     },
     ...mapActions( ordercartModule, [
 
-    'reqRegisterOrderToSpring',
+    'reqMyPageRegisterDeliveryToSpring',
 
     ]),
     async payment(payload) {

@@ -111,6 +111,7 @@
                 <span>기본</span>
               </div>
             </div>
+
             <div class="shipping_box1_line2">
               <label for="name" class="form-label">받으시는 분<span style="color: red;">*</span></label>
               <input type="text" id="name" class="form-input"/>
@@ -173,8 +174,6 @@
           </div>
           </div>
         </div>
-
-      
       
         <v-card>
         <v-list-item three-line>
@@ -288,50 +287,50 @@ export default {
       document.querySelector('.bye').style.display = 'flex';
     },
     },
+    // 신규 배송지 주소 등록
     registerAddress() {
-      const data= {
-        userId: '',
-        address: {
-          name: this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
-          phone: this.phone,
-          address: this.address
-        }
-      }
-      axios.put('/member/profile-address/register/' + data.userId, data.address)
-      .thes(response => {
-        console.log('Address registered:', response.data)
-      })
-      .catch(error => {
-        console.log('등록실패:', error)
-      })
+      const zipcode= this.zipcode
+      const city= this.city
+      const street= this.street
+      const addressDetail= this.addressDetail
+      
+      this.$emit("submit", { zipcode, city, street, addressDetail });
     },
     setDeliveryRequest () {
-      const addressId = 1
-      const recipient = '김창주'
-      const deliveryMemo= '배송 메모'
-      const zipcode = '01303'
-      const city = '서울 강북구 삼양로 123길 1(수유동)'
-      const street = '서울 강북구 수유동 287'
-      const addressDetail = '14'
+      // const addressId = 1
+      // const recipient = '김창주'
+      // const deliveryMemo= '배송 메모'
+      const addressId = ''
+      const recipient = ''
+      const deliveryMemo= ''
+      const recipientPhone=''
+
+
+      // const zipcode = '01303'
+      // const city = '서울 강북구 삼양로 123길 1(수유동)'
+      // const street = '서울 강북구 수유동 287'
+      // const addressDetail = '14'
 
       let deliveryRegisterRequest = {
         addressId: null,
-        recipient: null,
-        deliveryMemo: null,
-        zipcode: null,
-        city: null,
-        street: null,
-        addressDetail: null,
+        // recipient: null,
+        // deliveryMemo: null,
+        // recipientPhone: null,
+        // zipcode: null,
+        // city: null,
+        // street: null,
+        // addressDetail: null,
       };
       // 배송정보 주소id, recipient, deliverymemo = deliveryRegisterRequest
       return deliveryRegisterRequest = {
         addressId,
-        recipient,
-        deliveryMemo,
-        zipcode,
-        city,
-        street,
-        addressDetail,
+        recipient: '',
+        deliveryMemo:'',
+        recipientPhone:'',
+        // zipcode,
+        // city,
+        // street,
+        // addressDetail,
        }
     },
     setOrderItemRequest() {
@@ -468,6 +467,7 @@ export default {
             //결제정보
             const paymentRequest = this.setPaymentRequest()
             paymentRequest.pay_method = 'kakaoPay'
+                        
             // 배송지 정보 
             const deliveryRegisterRequest = this.setDeliveryRequest()
             // 상품정보 
@@ -571,10 +571,8 @@ export default {
       totalCount: 0,
       nonDiscountPrice: 0,
       person: '',
-      name: '',
       address: '',
       addressDetail: '',
-      phone: '',
       product: [],
       defaultDelivery: true, // 기본 배송지 선택 여부
       showNew: false,
@@ -584,6 +582,14 @@ export default {
       addressDetailDefault: this.$store.state.memberModule.memberInfoModify.addressDetail,
       zipcodeDefault: this.$store.state.memberModule.memberInfoModify.zipcode ,
       addressPass: false,
+      city: '',
+      street: '',
+      street: '',
+      addressDetail: '',
+      buyer_name: '',
+
+      phoneNumber: '',
+      recipient: '',
 
   },
 }
