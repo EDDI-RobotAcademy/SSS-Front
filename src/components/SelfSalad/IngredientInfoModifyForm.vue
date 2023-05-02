@@ -3,8 +3,6 @@
     <v-row>
       <form @submit.prevent="onSubmit">
         <v-row>
-
-
           <v-col>
             <h2>재료 정보</h2>
             <div class="input-group input-group-lg" style="width: 500px; margin: 10px; margin-left:0px;">
@@ -13,11 +11,9 @@
             text-align: center; 
             font-weight: bold; 
             font-size: 23px;" class="input-group-text" id="inputGroup-sizing-lg">재료명</span>
-
               <input type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-lg" v-model="ingredientInfo.name" id="inputGroup-sizing-lg">
             </div>
-
             <div class="line"></div>
             <h2>재료 유형</h2>
             <div id="categoryButton">
@@ -28,12 +24,9 @@
               <v-btn class="categoryButton" :class="{ active: ingredientInfo.categoryType === 'TOPPING' }"
                 @click.prevent="ingredientInfo.categoryType = 'TOPPING'">토핑</v-btn>
             </div>
-
-
             <div class="line" />
           </v-col>
         </v-row>
-
         <v-row>
           <v-col cols="6">
             <span class="ingredientImage">기존 제품사진</span>
@@ -47,8 +40,6 @@
             <div class="d-flex justify-content-center">
               <img style="width: 500px; height: 500px" v-if="thumbnail" :src="thumbnail" :alt="'Image ' + index" />
             </div>
-
-
             <v-col>
               <div class="d-flex justify-content-center">
                 <v-col cols="12">
@@ -62,10 +53,6 @@
               </div>
             </v-col>
           </v-col>
-
-
-
-
         </v-row>
         <div class="d-flex justify-content-center" style="margin-top: 50px">
           <v-btn style="background-color: rgb(54, 109, 50); color:white; width: 150px;" type="submit">등록</v-btn>
@@ -76,8 +63,7 @@
       </form>
     </v-row>
   </v-container>
-</template>
-  
+</template>  
 <script>
 
 export default {
@@ -148,7 +134,6 @@ export default {
   height: auto;
 }
 
-
 .input-group-text {
   background-color: #739E42;
   color: white;
@@ -196,7 +181,7 @@ export default {
 h2 {
   margin-top: 50px;
   margin-bottom: 30px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .line {
