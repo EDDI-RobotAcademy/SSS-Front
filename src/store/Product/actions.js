@@ -81,20 +81,20 @@ async requestProductModifyToSpring ({}, payload) {
         })
     },
 
-    // requestRegisterReviewToSpring(_, payload) {
-    //     return axiosInst.post('/review/register', payload)
-    //         .then(() => {
-    //         })
-    // },
-    // requestRegisterReviewWithImgToSpring(_, payload) {
-    //     return axiosInst.post('/review/registerWithImg', payload)
-    //         .then((res) => {
-    //             console.log(res.data)
-    //         })
-    //         .catch((res) => {
-    //             console.log(res.message)
-    //         })
-    // },
+async requestRegisterReviewTextToSpring({}, payload) {
+        return await axiosInst.post('/review/registerText', payload)
+            .then(() => {
+                alert('리뷰가 등록되었습니다.')
+            })
+    },
+async requestRegisterReviewToSpring({}, payload) {
+    try {
+        await axiosInst.post('/review/register', payload)
+        alert('리뷰가 등록되었습니다.')
+    } catch {
+        alert('문제 발생!')
+    }
+    },
 async requestReadReviewToSpring({commit}, productId) {
     return await axiosInst.get(`/review/list/${productId}`)
             .then((res) => {
@@ -102,9 +102,14 @@ async requestReadReviewToSpring({commit}, productId) {
             })
     },
 async requestReadMyReviewToSpring({commit}) {
-    return await axiosInst.get(`/review/list-myReview`)
+    return await axiosInst.get(`/review/list-myReview`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),         
+        }
+    })
             .then((res) => {
-                console.log(res.data)
+                console.log("내 후기: "+res.data)
                 commit(REQUEST_READ_REVIEW_TO_SPRING, res.data)
             })
 },    
@@ -145,11 +150,11 @@ async requestFavoriteListToSpring({commit})  {
     return await axiosInst.get(`/products/favorite/myFavorite`,
     {
         headers: {
-            'Authorization': 'Bearer '+localStorage.getItem("userToken"),            
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),         
         }
     })
             .then((res) => {
-                console.log("목록" + JSON.stringify(res.data))
+                console.log("좋아요")
                 commit(REQUEST_FAVORITE_LIST_TO_SPRING, res.data)
             })
 },   
