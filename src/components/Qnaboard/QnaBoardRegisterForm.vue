@@ -1,40 +1,42 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <table>
-      <tr>
-        <td>제목</td>
-        <td>
-          <input placeholder="제목을 입력하세요." type="text" v-model="title"/>
-        </td>
-      </tr>
-      <tr>
-        <td>작성자</td>
-        <td>
-          {{this.$store.state.memberModule.memberInfoAboutSignIn.userNickName}}
-        </td>
-      </tr>
-      <tr>
-        <td>본문</td>
-        <td>
-          <textarea placeholder="내용을 입력하세요." cols="50" rows="20" v-model="content"/>
-        </td>
-      </tr>
-    </table>
-    <div align="center">
-      <v-checkbox
-      @click="click"
-        label="비밀글 문의"
-        color="#205C37"
-        v-model="privateCheck">
-      </v-checkbox>
-    </div>
-    <div class="bottom">
-      <button type="submit">등록</button>
-      <router-link to="{ name: 'QnaBoardListPage' }">
-        취소
-      </router-link>
-    </div>
-  </form>
+  <div class="qna-board-register-form">
+    <form @submit.prevent="onSubmit">
+      <table>
+        <tr>
+          <td>제목</td>
+          <td>
+            <input placeholder="제목을 입력하세요." type="text" v-model="title"/>
+          </td>
+        </tr>
+        <tr>
+          <td>작성자</td>
+          <td>
+            {{this.$store.state.memberModule.memberInfoAboutSignIn.userNickName}}
+          </td>
+        </tr>
+        <tr>
+          <td>본문</td>
+          <td>
+            <textarea placeholder="내용을 입력하세요." cols="50" rows="20" v-model="content"/>
+          </td>
+        </tr>
+      </table>
+      <div align="center">
+        <v-checkbox
+        @click="click"
+          label="비밀글 문의"
+          color="#205C37"
+          v-model="privateCheck">
+        </v-checkbox>
+      </div>
+      <div class="bottom">
+        <button type="submit" class="submit-button">등록</button>
+        <router-link to="{ name: 'QnaBoardListPage' }">
+          취소
+        </router-link>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -82,79 +84,55 @@ export default {
 </script>
 
 <style scoped>
+.qna-board-register-form {
+  margin: 20px auto;
+  max-width: 700px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 table {
-  margin: 0 auto;
+  width: 100%;
   border-collapse: collapse;
-  border: 1px solid black;
-  margin-bottom: 10px;
-  background-color: white;
+  margin-top: 20px;
 }
 
 td {
-  padding: 10px;
-  border: 2px solid black;
-}
-
-input[type="text"], textarea {
-  width: 100%;
-  border: none;
-  padding: 10px;
-  margin-bottom: 0px;
-  font-size: 16px;
-  background-color: white;
-}
-
-.bottom {
-  margin-top: 20px;
-  text-align: center;
-}
-
-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #205C37;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #3D8745;
-}
-
-v-checkbox {
-  margin-top: 10px;
-}
-
-label {
-  color: #205C37;
+  padding: 10px 0;
   font-weight: bold;
 }
 
+input[type="text"],
 textarea {
-  resize: none;
-  height: 300px;
-}
-
-h1 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 30px;
-  color: #205C37;
-}
-
-.alert {
-  margin-top: 20px;
+  width: 100%;
   padding: 10px;
-  background-color: #f44336;
-  color: white;
-  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
 }
 
-.privateCheck {
-  color: #205C37;
+input[disabled] {
+  background-color: #f2f2f2;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
+.submit-button {
+  background-color: #008000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-</style>
+.submit-button:hover {
+  background-color: #006600;
+}
+  </style>

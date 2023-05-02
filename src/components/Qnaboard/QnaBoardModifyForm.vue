@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="qna-board-modify-form">
       <form @submit.prevent="onSubmit">
         <table>
           <tr>
@@ -13,7 +13,7 @@
               <td>
                   <input type="text" v-model="title"/>
               </td>
-          </tr>s
+          </tr>
           <tr>
               <td>작성자</td>
               <td>
@@ -35,10 +35,10 @@
         </table>
   
         
-        <div>
-          <button type="submit">수정 완료</button>
+        <div class="buttons">
+          <button type="submit" class="submit-button">수정 완료</button>
           <router-link :to="{ name: 'QnaBoardReadPage',
-                              params: { boardId: board.boardId.toString() }}">
+                              params: { boardId: board.boardId.toString() }}" class="cancel-button">
             취소
           </router-link>
         </div>
@@ -80,6 +80,56 @@
   
   </script>
   
-  <style>
-  
+  <style scoped>
+  .qna-board-modify-form {
+  margin: 20px auto;
+  max-width: 700px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+td {
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+input[disabled] {
+  background-color: #f2f2f2;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-button {
+  background-color: #008000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #006600;
+}
   </style>
