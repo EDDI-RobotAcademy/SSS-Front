@@ -353,6 +353,28 @@ export default {
             category: selectedItems[i].category,
             quantity: selectedItems[i].quantity
         });
+
+      let itemId;
+      switch (selectedItems[i].category) {
+        case "PRODUCT":
+          itemId = selectedItems[i].productId;
+          break;
+        case "SIDE":
+          itemId = selectedItems[i].sideProductId;
+          break;
+        case "SELF":
+          itemId = selectedItems[i].selfSaladId;
+          break;
+        default:
+          itemId = null;
+          break;
+      }
+
+      this.orderItemRegisterRequestList.push({
+          itemId,
+          category: selectedItems[i].category,
+          quantity: selectedItems[i].quantity
+      });
       }
     },
     setPaymentRequest() {
