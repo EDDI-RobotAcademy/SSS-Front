@@ -221,6 +221,7 @@
             <strong>결제하기</strong>
         </v-btn>
       </div>
+      </v-container>
 </template>
 
 <script>
@@ -246,7 +247,17 @@ export default {
     ...mapActions( memberModule, [
     'requestUpdateMemberInfoToSpring',
     ]),
-
+    showAddresList() {
+      const addressList = document.createElement("div");
+      addressList.id = "address-list";
+      addressList.innerHTML = `
+      <ul>
+        <li>${this.$store.state.memberModule.memberInfoModify.city}</li>
+      </ul>
+      `;
+      const newWindow = window.open("", "배송지 목록", "width=300, height=200");
+      newWindow.document.body.appendChild(addressList);
+    },
     incQuantity(idx) {
       this.cartItems[idx].quantity++
       const itemId = this.cartItems[idx].cartItemId
@@ -285,7 +296,6 @@ export default {
       this.defaultDelivery = false;
       document.querySelector('.hi').style.display = 'none';
       document.querySelector('.bye').style.display = 'flex';
-    },
     },
     // 신규 배송지 주소 등록
     registerAddress() {
@@ -511,17 +521,17 @@ export default {
 
         }
       }).open()
-  },  
+  }
+},
   filters: {
   comma(val) {
     return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   },
   computed : {
-    ...mapState([ordercartModule, [
-      'orderList',
-      'orderDeliveryList'
-    ]]),
+    ...mapState(ordercartModule,[
+      'orderList'
+    ]),
     ...mapState(memberModule,[
       'MemberProfile',
       'memberInfoModify'
@@ -590,9 +600,8 @@ export default {
 
       phoneNumber: '',
       recipient: '',
-
-  },
-}
+  }
+  }
 }
 </script>
 
