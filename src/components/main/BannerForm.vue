@@ -36,7 +36,7 @@
     </div>
 
     <div class="py-5">
-      <p>수동 이미지 슬라이드 샐러드 메뉴</p>
+      <h4 style="text-align: center;">지금 가장 핫한 샐러드</h4>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -60,6 +60,21 @@
           <span class="visually-hidden">Next</span>
       </div>
     </div>
+
+    <div class="py-5">
+      <h4 style="text-align: center;">샐러드와 든든함을 더해봐요</h4>
+      <div id="mainTopCarousel-1" class=" container carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <v-row>
+              <v-col v-for="sideProduct in sideProducts.slice(0, 3)" :key="sideProduct.sideProductId">
+                <side-product-card :sideProduct="sideProduct"/>
+              </v-col>
+            </v-row>
+              </div>
+        </div>
+      </div>
+    </div>
     
   </v-container>
 </template>
@@ -67,35 +82,34 @@
 <script>
 
 import ProductCard from '@/components/Product/ProductCard.vue'
+import SideProductCard from '@/components/SideProduct/SideProductCard.vue';
 import { mapActions, mapState } from 'vuex'
 
 const productModule = 'productModule'
+const sideProductModule = 'sideProductModule'
 
 export default {
-  components: {ProductCard},
+  components: {ProductCard, SideProductCard},
   name: 'BannerForm',
-  data() {
-    return {
-      // 백엔드에서 리스트 받을 꺼 생각하고 예시로 만듬
-      boardList: [
-        { title: 'title1', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title2', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title3', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-      ]
-    }
-  },
   computed:{
     ...mapState(productModule, [
       'products'
-    ])
+    ]),
+    ...mapState(sideProductModule, [
+      'sideProducts'
+    ]),
   },
   async mounted (){
     await this.requestProductListToSpring()
+    await this.requestSideProductListToSpring()
   },
   methods:{
     ...mapActions(productModule, [
       'requestProductListToSpring'
     ])
+    ...mapActions(sideProductModule, [
+      'requestSideProductListToSpring'
+    ]),
   }
 }
 </script>
