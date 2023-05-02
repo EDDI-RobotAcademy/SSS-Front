@@ -52,46 +52,54 @@
                     <td>{{ Item.totalPrice * Item.quantity | comma }}원</td>
                   </tr>
                 </template>
-            <div class="my-tabs">
+            </tbody>
+          </table>
+        </v-card-text>
+      </v-card>
+        
+          <v-dialog v-model="showModal" width="800"  @change="showNewDelivery">
+            <v-card>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12">
+                      <div class="text-h4 font-weight-black">신규 배송지 등록</div>
+                    <v-btn @click="KakaoAddressApi" color="#609966" dark>주소검색</v-btn>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">우편 번호</p>
+                      <v-text-field v-model="zipcode" type="text" :disabled="false" outlined dense required style="width: auto; max-width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">도로명 주소</p>
+                      <v-text-field v-model="city" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">지번 주소</p>
+                      <v-text-field v-model="street" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">상세 주소</p>
+                      <v-text-field v-model="addressDetail" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>            
+                    </div>
+                  </v-col>
+                  <v-btn @click="registerAddress">주소등록</v-btn>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
 
-                  <span>
-                    <input type="radio" id="defaultType" name="deliveryType" checked @change="showDefaultDelivery">
-                    <label for="defaultType">기본배송지</label>
-                  </span>
-                  
-                  <span>
-                    <input type="radio" id="deliveryTypeNew" name="deliveryType" @change="showNewDelivery">
-                    <label for="deliveryTypeNew">신규배송지</label>
-                  </span>
-            </div>
-            <button @click="showAddresList">배송지 목록</button>
-        </v-row>
+        <div style="margin-top: 20px;">
+          <v-btn @click="showAddresList">배송지 목록 확인하기</v-btn>
+        </div>
 
-          <v-row class="hi">
-            <v-col cols="12">
-              <v-text-field label="도로명" v-model="cityDefault" readonly></v-text-field>
-              <v-text-field label="지번" v-model="streetDefault" readonly></v-text-field>
-              <v-text-field label="상세주소" v-model="addressDetailDefault" readonly></v-text-field>
-              <v-text-field label="우편번호" v-model="zipcodeDefault" readonly></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row class="bye" style="display:none">
-            <v-col cols="12">
-              <div class="btn-address">
-                <v-btn @click="KakaoAddressApi" color="#609966" dark>주소검색</v-btn>
-              </div>
-              <v-text-field label="도로명" v-model="city" readonly></v-text-field>
-              <v-text-field label="지번" v-model="street" readonly></v-text-field>
-              <v-text-field label="우편번호" v-model="zipcode" readonly></v-text-field>
-              <v-text-field label="상세주소" v-model="addressDetail"  type="text"></v-text-field>
-              <v-text-field label="수령인" v-model="name"></v-text-field>
-              <v-text-field label="연락처" v-model="phone"></v-text-field>
-            <v-btn @click="registerAddress">등록</v-btn>
 
-            </v-col>
-          </v-row>
-
-        <v-divider class="mb-10"/>
 
       
       
