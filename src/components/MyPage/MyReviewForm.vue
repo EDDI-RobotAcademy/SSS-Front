@@ -17,9 +17,9 @@
                       <router-link
                           :to="{ name: 'ProductReadPage',
                                     params: { productId: review.productId.toString()}}">
-                        <v-img 
+                        <v-img
                             style="margin: auto"
-                            :src="require(`@/assets/product/${review.product.productImgs[0].editedImg}`)"
+                            :src="require(`@/assets/product/${review.product.productImgList[0].editedImg}`)"
                             max-height="50px"
                             max-width="50px"
                             contain/>
