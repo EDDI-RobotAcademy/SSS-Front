@@ -52,31 +52,6 @@
                     <td>{{ Item.totalPrice * Item.quantity | comma }}원</td>
                   </tr>
                 </template>
-              </tbody>
-            </table>
-          </v-card-text>
-        </v-card>
-      </v-container>
-
-      <h3>주문/결제 하기</h3>
-      <v-divider class="mt-3 mb-3"/>
-
-
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left" >주문하는분 닉네임 
-            : [ {{ this.$store.state.memberModule.memberInfoAboutSignIn.userNickName }} ]
-          </p>
-        </v-row>
-        <v-divider class="mt-1 mb-3"/>
-
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left">이메일
-          : [ {{ this.$store.state.memberModule.memberInfoAboutSignIn.userEmail }} ] </p>
-        </v-row>
-        <v-divider class="mt-1 mb-3"/>
-      
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left" >배송지</p>
             <div class="my-tabs">
 
                   <span>
@@ -118,7 +93,6 @@
 
         <v-divider class="mb-10"/>
 
-      <v-divider class="mt-3 mb-3"/>
       
       
         <v-card>
@@ -150,8 +124,6 @@
         </v-list-item>
       </v-card>
       
-
-
         <div class="pay">
           <v-btn color=#d333  @click="KakaoPay()">
             <v-icon>mdi-credit-card-check-outline</v-icon>
@@ -166,7 +138,6 @@
             <strong>결제하기</strong>
           </v-btn> -->
         </div>
-  </div>
 </template>
 
 <script>
@@ -187,19 +158,12 @@ import PaymentInfoPage from "@/views/MyPage/PaymentInfoPage.vue";
 export default {
   name: "PaymentInfoForm",
   components: { PaymentInfoPage },
-  props: {
-    selectedItems: {
-      type: Array,
-      required: true
-    }
-  },
+
   methods: {
-    ...mapActions(ordercartModule, [
-              // "reqOrderPageDeliveryListToSpring"
+    ...mapActions( memberModule, [
+    'requestUpdateMemberInfoToSpring',
     ]),
-    ...mapState(ordercartModule, [
-      'orderList'
-    ]),
+
     incQuantity(idx) {
       this.cartItems[idx].quantity++
       const itemId = this.cartItems[idx].cartItemId
@@ -234,27 +198,11 @@ export default {
     closeModal() {
       this.showModal = false;
     },
-    // 라디오버튼 'hi', 'bye' 클릭
-    showDefaultDelivery() {
-      this.defaultDelivery = true;
-      document.querySelector('.hi').style.display = 'flex';
-      document.querySelector('.bye').style.display = 'none';
-    },
     showNewDelivery() {
       this.defaultDelivery = false;
       document.querySelector('.hi').style.display = 'none';
       document.querySelector('.bye').style.display = 'flex';
     },
-    showAddresList() {
-      const addressList = document.createElement("div");
-      addressList.id = "address-list";
-      addressList.innerHTML = `
-      <ul>
-        <li>${this.$store.state.memberModule.memberInfoModify.city}</li>
-      </ul>
-      `;
-      const newWindow = window.open("", "배송지 목록", "width=300, height=200");
-      newWindow.document.body.appendChild(addressList);
     },
     registerAddress() {
       const data= {
@@ -427,19 +375,6 @@ export default {
   comma(val) {
     return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
-  // created() {
-  //   if(this.$route.query.selectedItems){
-  //     try { 
-  //       let selectedItems = JSON.parse(this.$route.query.selectedItems);
-  //       console.log(selectedItems);
-  //     } catch (e) {
-  //       console.error("selectedItems 데이터가 유효하지 않습니다.", e);
-  //     }
-  //   } else {
-  //     console.log("selectedItems 데이터가 전달되지 않았습니다.")
-  //   }
-    
-  // },
   computed : {
 
     ...mapState(ordercartModule,[
@@ -455,17 +390,12 @@ export default {
       orderItemRegisterRequestList : [],
       selectedPayment: null,
         dialog: false,
-        selectedOption: "",
         merchant_uid : 'ORD',
         randomNumber : 0,
         usedNum : [],
         lsDeliveryList: [],
         selectedAddress: null,
 
-      cartItems: {
-        type: arrayExpression,
-        require: true,
-      },
       checkedValues: [],
       showModal: false,
       cartItemId: 0,
@@ -591,10 +521,6 @@ table th {
   font-weight: bold;
   text-align: center;
 }
-.sticky-nav {
-  position: sticky;
-  bottom: 0;
-  left: 0;
   width: 100%;
   background-color: hsl(204, 12%, 58%);
 }
