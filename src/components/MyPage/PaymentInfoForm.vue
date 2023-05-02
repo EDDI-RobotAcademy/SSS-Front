@@ -1,23 +1,17 @@
 <template>
-  <div class="white" style="font-family: Arial" ref="form">
-      <div class="fly">
-        <p style="font-weight: bold; font-size: 17px">
-          결제정보
-        </p>
-        <v-card class="pt-3 pl-3 pb-3" style="background-color: #F2F2F2; font-size: 15px" outlined>
-          <span>상품금액<span style="text-align:right;display: inline-block; width: 150px">{{ this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span></span><br>
-          <span class="ml-3 mt-3" style="display: inline-block; font-size: 12px; color: #A4A4A4">⨽ 상품금액 <span style="text-align:right;display: inline-block; width: 134px">{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span></span><br>
-          <span class="ml-3" style="font-size: 12px; color: #A4A4A4">⨽ 할인금액 <span style="text-align:right;display: inline-block; width: 134px">{{nonDiscountPrice}}원</span></span><br>
+  <v-container>
+    <div class="fly">
+      <v-card class="pt-3 pl-3 pb-3" outlined style="background-color: #F2F2F2; font-size: 15px;">
+        <div v-for="(Items, id) in orderList" :key="id">
+          <span>주문 금액<span style="text-align:right;display: inline-block; width: 150px">{{Items.totalPrice | comma}}원</span></span><br>
+          <span class="ml-3 mt-3" style="display: inline-block; font-size: 12px; color: #A4A4A4">⨽ 상품개수 <span style="text-align:right;display: inline-block; width: 134px">{{Items.selectedItems.length}}개</span></span><br>
+          <span class="ml-3" style="font-size: 12px; color: #A4A4A4">⨽ 할인금액 <span style="text-align:right;display: inline-block; width: 134px">0원</span></span><br>
           <span class="pt-3 pb-3" style="display: inline-block;">배송비
-            <span v-if="this.$store.state.ordercartModule.orderList.orderSave.totalPrice  >= 50000" style="text-align:right;display: inline-block; width: 160px">0원</span>
-            <span v-else style="text-align:right;display: inline-block; width: 160px">{{ deliveryFee }}원</span>
+            <span v-if="Items.totalPrice >= 50000" style="text-align:right;display: inline-block; width: 160px">0원</span>
+            <span v-else style="text-align:right;display: inline-block; width: 160px">3,000원</span>
           </span><br>
-          <v-divider/>
+          <v-divider />
           <span class="pt-3" style="display: inline-block;">총 결제금액
-            <span v-if="this.$store.state.ordercartModule.orderList.orderSave.totalPrice  >= 50000" style="text-align:right;display: inline-block; width: 126px">{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span>
-            <span v-else style="text-align:right;display: inline-block; width: 126px">{{ this.$store.state.ordercartModule.orderList.orderSave.totalPrice  + deliveryFee }}원</span></span>
-        </v-card>
-      </div>
 
       
 
@@ -449,24 +443,14 @@ export default {
     
   // },
   computed : {
-    // totalPrice() {
-    //   // return this.selectedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    //   let sum = 0;
-    //   for (let i = 0; i < this.cartItems.length; i++) {
-    //     if (this.checkedValues.includes(this.cartItems[i].cartItemId)) {
-    //     sum += this.cartItems[i].totalPrice;
-    //     }
-    //   }
-    //   return sum;
-    // },
-    ...mapState([ordercartModule, [
-      'orderList',
-      'orderDeliveryList'
-    ]]),
-    ...mapState([memberModule, [
-      ' memberInfoAboutSignIn'
-    ]
+
+    ...mapState(ordercartModule,[
+      'orderList'
     ]),
+    ...mapState(memberModule,[
+      'MemberProfile',
+      'memberInfoModify'
+  ]),
   },
   data() {
     return{
@@ -554,13 +538,14 @@ export default {
   min-height: 20px !important;
 }
 .fly {
+  position: fixed;
+  z-index: 9999;
+  left: 40%;
+  top: 1px;
+  width: 250px;
+  height: 210px;
   margin-top: 200px;
-  position:fixed;
-  left:50%;
-  width:250px;
-  top:100px;
-  height:210px;
-  margin-left:650px;
+  margin-left: 650px;
 }
 .my-tabs span + span {
     margin-left: 50px;
