@@ -2,7 +2,7 @@ import {
     REQUEST_ADD_CART_LIST_TO_SPRING,
     REQUEST_SELFSALAD_ADD_CART_LIST_TO_SPRING,
     REQUEST_SELFSALAD_TO_SPRING,
-    
+    REQUEST_COMPLETE_ORDER_TO_SPRING
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -149,14 +149,15 @@ async reqRegisterOrderToSpring({}, payload) {
     const {totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList} = payload;
 
     try {
-        await axiosInst.post("order/register",
-    {totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList},
-    {
-        headers: {
-            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
-            'Content-Type': 'application/json'
-        }
-    });
+        await axiosInst.post(`/order/register`,
+        {totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList},
+        {
+            headers: {
+                'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log("배송정보: " + JSON.stringify(orderItemRegisterRequestList))
 }
     // }   .then((res) => {
     //     console.log(res)
@@ -166,5 +167,17 @@ async reqRegisterOrderToSpring({}, payload) {
     catch (error) {
         alert("오류발생 !!!")
     }
+},
+async reqMyOrderListToSpring({commit}) {
+    return await axiosInst.get(`/order/list`,
+    {
+        headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),         
+        }
+    })
+    .then((res) => {
+        console.log("내 주문정보: " + res.data)
+        commit(REQUEST_COMPLETE_ORDER_TO_SPRING, res.data)
+    })
 }
 }
