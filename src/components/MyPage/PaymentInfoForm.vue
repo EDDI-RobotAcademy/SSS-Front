@@ -12,51 +12,45 @@
           </span><br>
           <v-divider />
           <span class="pt-3" style="display: inline-block;">총 결제금액
-
-      
-
-      <v-container>
-        <v-card>
-          <v-card-title style="background-color: white">
-            <span style="font-size: 30px; font-weight: bold; color: black;">Delivery</span>
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-card-text>
-            <table>
-              <thead>
-                <tr style="margin-top: 20px;">
-                  <th>전체 개</th>
-                  <th colspan="2">상품명</th>
-                  <th>판매가</th>
-                  <th>배송비/배송 형태</th>
-                  <th>총 결제 금액</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template>
-                  <tr>
-                    <td>{{this.$store.state.ordercartModule.orderList.orderSave.selectedItems.length}}</td>
-                    <!-- {{this.$store.state.ordercartModule.orderList.orderSave.selectedItems}} -->
-                  
-                  <td>
-                    <!-- <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                    </router-link> -->
-                    <!-- <v-img :src="cartItem.category.includes('SELF') ?
-                    require(`@/assets/logo/3sss.jpg`) :
-                    require(`@/assets/product/${cartItem.editedImg}`)"
-                    style="max-width: 100px; max-height: 100px;" /> -->
-                  </td>
-                  <td>{{this.$store.state.ordercartModule.orderList.orderSave.selectedItems[0].title}}</td>
-                  <td>
-                    <p>{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</p>
-                  </td>
-                  <td>
-                    3000 원
-                  </td>
-                  <td>
-                    <p>{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice + deliveryFee }}원</p>
-                  </td>
-                </tr>
+            <span v-if="Items.totalPrice >= 50000" style="text-align:right;display: inline-block; width: 126px">{{Items.totalPrice | comma}}원</span>
+            <span v-else style="text-align:right;display: inline-block; width: 126px">{{Items.totalPrice + 3000 | comma}}원</span>
+          </span>
+        </div>
+      </v-card>
+    </div>
+    
+    <v-card>
+        <v-card-title style="background-color: white; align-items: center;">
+          <span style="font-size: 30px; font-weight: bold; color: black;">Order / Payment</span>
+          <v-spacer></v-spacer>
+          <router-link :to="{name: 'MyShoppingCartPage'}" style="text-decoration: none;">
+            <p style="font-size: 10px; font-weight: bold; color: black; margin-right: 5px;">장바구니 > </p>
+          </router-link>
+            <p style="font-size: 12px; font-weight: bold; color: black; margin-right: 5px;"> 주문서 </p>
+            <p style="font-size: 10px; font-weight: bold; color: black;"> > 주문완료</p>
+        </v-card-title>
+        <v-card-text>
+          <table>
+            <thead>
+              <tr style="margin-top: 20px;">
+                <th>상품명</th>
+                <th>판매가</th>
+                <th>수량</th>
+                <th>주문 금액</th>
+              </tr>
+            </thead>
+            <tbody>
+                <template v-for="(Items) in orderList">
+                  <tr v-for="(Item, idx) in Items.selectedItems" :key=idx>
+                    <td style="text-align: center;">
+                      <v-img :src="Item.category.includes('SELF') ? require(`@/assets/logo/3sss.jpg`) : require(`@/assets/product/${Item.editedImg}`)"
+                      style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;" />
+                      <div style="font-weight: bold;">{{ Item.title }}</div>
+                    </td>
+                    <td>{{ Item.totalPrice | comma }}원</td>
+                    <td>{{ Item.quantity }}</td>
+                    <td>{{ Item.totalPrice * Item.quantity | comma }}원</td>
+                  </tr>
                 </template>
               </tbody>
             </table>
