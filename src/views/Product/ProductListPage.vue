@@ -101,9 +101,11 @@
   
 .saladPageName{
     font-size: 70px;
+    font-weight: bold;
     text-align: left;
     color: #40513B;
-    
+    font-family: 'HSBombaram';
+    margin-bottom:-4px;
   }
   .search-bar {
   font-size: 20px; /* 폰트 크기를 20px로 설정 */
@@ -139,9 +141,9 @@ font-size: 20px;
 
 .longline{
     width: 100%;
-    border-bottom: 4px solid #40513B;
+    border-bottom: 7px solid #40513B;
     margin: 10px 0;
-    margin-top: -10px;
+    margin-top: -25px;
 }
 .search-bar {
   display: flex;
@@ -157,5 +159,10 @@ font-size: 20px;
 *{
     color: #40513B;
   }
-
+  @font-face {
+    font-family: 'HSBombaram';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
   </style>
