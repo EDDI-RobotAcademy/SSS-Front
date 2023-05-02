@@ -200,26 +200,28 @@
               </v-sheet>
             </v-row>
 
+            
+
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-card>
-      
-        <div class="pay">
-          <v-btn color=#d333  @click="KakaoPay()">
+
+
+      <div class="pay">
+        <v-btn color=#d333 v-if="selectedPayment === 'kakao'" @click="KakaoPay()">
+          <v-icon>mdi-credit-card-check-outline</v-icon>
+          <strong>결제하기</strong>
+        </v-btn>
+        <v-btn color=#d333 v-else-if="selectedPayment === 'creditCard'" @click="cardPay()">
+          <v-icon>mdi-credit-card-check-outline</v-icon>
+          <strong>결제하기</strong>
+        </v-btn>
+        <v-btn block color="teal" v-else disabled>
             <v-icon>mdi-credit-card-check-outline</v-icon>
             <strong>결제하기</strong>
-          </v-btn>
-          <!-- <v-btn color=#d333 v-else-if="selectedPayment === 'credit-card'" @click="cardPay">
-            <v-icon>mdi-credit-card-check-outline</v-icon>
-            <strong>결제하기</strong>
-          </v-btn>
-          <v-btn color=#d333 v-else disabled>
-            <v-icon>mdi-credit-card-check-outline</v-icon>
-            <strong>결제하기</strong>
-          </v-btn> -->
-        </div>
-        </v-container>
+        </v-btn>
+      </div>
 </template>
 
 <script>
@@ -354,14 +356,72 @@ export default {
 
       const merchant_uid = this.merchant_uid
       const imp_uid = 'imp38785014'
-      const pay_method = 'kakaoPay'
+      const pay_method = ''
       const paid_amount = this.$store.state.ordercartModule.orderList.orderSave.totalPrice + this.deliveryFee
-
-     
+           
        // 결제정보 merchant_id, imp_uid, pay_method, paid_amount, paid_at = paymentRequest
       return paymentRequest = {
         merchant_uid, imp_uid, pay_method, paid_amount
       }
+    },
+    cardPay: function () {
+      this.randomNumber = Math.floor(Math.random() * 100000000);
+      while (this.usedNum.includes(this.randomNumber)) {
+          this.randomNumber = Math.floor(Math.random() * 100000000);
+      }
+      this.usedNum.push(this.randomNumber);
+
+      // 결제 금액 totalPrice + deliveryFee = totalOrderPrice
+      const totalPrice = this.$store.state.ordercartModule.orderList.orderSave.totalPrice
+      const deliveryFee = totalPrice < 50000 ? 3000 : 0;
+
+      const email = this.$store.state.memberModule.memberInfoAboutSignIn.userEmail
+            
+      IMP.request_pay({ // param
+          pg: "html5_inicis.INIpayTest",
+          pay_method: "card",
+          merchant_uid: this.merchant_uid + this.randomNumber,
+          name: 'SSS',
+          amount : totalPrice + deliveryFee, // 결제금액 this.totalPrice + this.deliveryFee
+          buyer_email: email, //this.$store.state.memberModule.memberInfoAboutSignIn.userEmail,
+          buyer_name: this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
+          buyer_tel: '010-1212-1212',
+          buyer_addr: "서울특별시 강남구 신사동",
+          buyer_postcode: "001-181",
+      }, rsp => { // callback
+          if (rsp.success) {
+              // 결제 성공 시
+              let imp_uid = rsp.imp_uid
+              this.merchant_uid += this.randomNumber
+              this.usedNum.push(this.randomNumber)
+
+              
+              this.setOrderItemRequest()
+              
+
+              const totalPrice = this.$store.state.ordercartModule.orderList.orderSave.totalPrice  
+              const deliveryFee = totalPrice < 50000 ? 3000 : 0;
+
+              //결제 총 금액
+              const totalOrderPrice = totalPrice + deliveryFee
+
+              //결제정보
+              const paymentRequest = this.setPaymentRequest()
+              paymentRequest.pay_method = 'card'
+
+              // 배송지 정보 
+              const deliveryRegisterRequest = this.setDeliveryRequest()
+              // 상품정보 
+              const orderItemRegisterRequestList = this.orderItemRegisterRequestList
+
+
+              this.$emit("payment-success", { totalOrderPrice, deliveryRegisterRequest, paymentRequest, orderItemRegisterRequestList })
+      
+              } else {
+                  // 결제 실패 시
+                  alert ("결제에 실패했습니다. 다시 시도해주세요.")
+              }
+        });
     },
     KakaoPay: function () {
       this.randomNumber = Math.floor(Math.random() * 100000000);
@@ -407,7 +467,7 @@ export default {
 
             //결제정보
             const paymentRequest = this.setPaymentRequest()
-
+            paymentRequest.pay_method = 'kakaoPay'
             // 배송지 정보 
             const deliveryRegisterRequest = this.setDeliveryRequest()
             // 상품정보 
@@ -451,21 +511,21 @@ export default {
 
         }
       }).open()
-    },
   },  
   filters: {
   comma(val) {
     return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   },
   computed : {
-
-    ...mapState(ordercartModule,[
-      'orderList'
-    ]),
+    ...mapState([ordercartModule, [
+      'orderList',
+      'orderDeliveryList'
+    ]]),
     ...mapState(memberModule,[
       'MemberProfile',
       'memberInfoModify'
-  ]),
+    ]),
   },
   data() {
     return{
@@ -525,8 +585,8 @@ export default {
       zipcodeDefault: this.$store.state.memberModule.memberInfoModify.zipcode ,
       addressPass: false,
 
-    }
   },
+}
 }
 </script>
 
