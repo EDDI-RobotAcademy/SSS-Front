@@ -100,6 +100,79 @@
         </div>
 
 
+        <div class="d-flex justify-content-between">
+          <div class="shipping_box1" style="width: 48%; display: inline-block;">
+            <div class="shipping_box1_line1">
+              <div class="shipping_txt">
+                <span>
+                  <input type="radio" name="radio" checked>
+                  <label for="defaultType">기본 배송지</label>
+                </span>
+                <span>기본</span>
+              </div>
+            </div>
+            <div class="shipping_box1_line2">
+              <label for="name" class="form-label">받으시는 분<span style="color: red;">*</span></label>
+              <input type="text" id="name" class="form-input"/>
+              <label for="phone" class="form-label">연락처<span style="color: red;">*</span></label>
+              <input type="tel" id="phone" class="form-input"/>
+              <span>[{{ zipcodeDefault }}] {{ cityDefault }} {{addressDetailDefault}}</span>
+            </div>
+            <div class="shipping_delivery_detail">
+              <select id="selection" class="form-select" v-model="selectedOption">
+                <option hidden>배송 메모를 선택해주세요.</option>
+              <option>부재시 핸드폰으로 연락주세요.</option>
+              <option>부재시 경비실에 맡겨주세요.</option>
+              <option>배송전에 연락주세요.</option>
+              <option>택배보관함에 보관해주세요.</option>
+              <option disabled></option>
+              <option value="direct">직접 입력</option>
+            </select>
+              <textarea v-if="selectedOption === 'direct'"
+              style="width: 100%; height: 70px; border: 1px solid #ccc;
+              border-radius: 5px; margin-top: 10px;"
+              maxlength="20"
+              placeholder="최대 20자까지 입력 가능합니다."
+              v-model="directEntryText"
+              ></textarea>
+          </div>
+          </div>
+          <div class="shipping_box1" style="width: 48%; display: inline-block;" @click="openModal()">
+            <div class="shipping_box1_line1">
+              <div class="shipping_txt">
+                <span>
+                  <input type="radio" name="radio">
+                  <label for="defaultType">신규 배송지</label>
+                </span>
+              </div>
+            </div>
+            <div class="shipping_box1_line2">
+              <label for="name" class="form-label">받으시는 분<span style="color: red;">*</span></label>
+              <input type="text" id="name" class="form-input"/>
+              <label for="phone" class="form-label">연락처<span style="color: red;">*</span></label>
+              <input type="tel" id="phone" class="form-input"/>
+              <span> </span>
+            </div>
+            <div class="shipping_delivery_detail">
+              <select id="selection" class="form-select" v-model="selectedOption2">
+                <option hidden>배송 메모를 선택해주세요.</option>
+              <option>부재시 핸드폰으로 연락주세요.</option>
+              <option>부재시 경비실에 맡겨주세요.</option>
+              <option>배송전에 연락주세요.</option>
+              <option>택배보관함에 보관해주세요.</option>
+              <option disabled></option>
+              <option value="direct2">직접 입력</option>
+            </select>
+              <textarea v-if="selectedOption2 === 'direct2'"
+              style="width: 100%; height: 70px; border: 1px solid #ccc;
+              border-radius: 5px; margin-top: 10px;"
+              maxlength="20"
+              placeholder="최대 20자까지 입력 가능합니다."
+              v-model="directEntryText2"
+              ></textarea>
+          </div>
+          </div>
+        </div>
 
       
       
@@ -146,6 +219,7 @@
             <strong>결제하기</strong>
           </v-btn> -->
         </div>
+        </v-container>
 </template>
 
 <script>
@@ -395,6 +469,10 @@ export default {
   },
   data() {
     return{
+      selectedOption: '배송 메모를 선택해주세요.',
+      directEntryText: '',
+      selectedOption2: '배송 메모를 선택해주세요.',
+      directEntryText2: '',
       orderItemRegisterRequestList : [],
       selectedPayment: null,
         dialog: false,
@@ -423,6 +501,10 @@ export default {
         phone: "",
         address: "",
       },
+      zipcode: '',
+      city: '',
+      street: '',
+      addressDetail: '',
       setAddress: false,
       setDestination: true,
       paymentPrice: 0,
@@ -529,7 +611,77 @@ table th {
   font-weight: bold;
   text-align: center;
 }
+.shipping_box1 {
+  padding: 24px 20px;
+  border: 2px solid #dddddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.shipping_box1_line1 {
+  border-bottom: 2px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  background-color: hsl(204, 12%, 58%);
+}
+
+.shipping_box1_line2 {
+  display: block;
+  margin-top: 5px;
+}
+
+.shipping_delivery_detail {
+  margin-top: 10px;
+  padding-top: 10px;
+  display: block;
+}
+
+.shipping_txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px ;
+}
+
+.shipping_txt span:nth-child(1),
+.shipping_font {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: -.6px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.shipping_txt span:nth-child(2),
+.shipping_txt span:nth-child(3) {
+  display: inline-block;
+  height: 16px;
+  border: 1px solid #11b082;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -.5px;
+  color: #fff;
+  padding: 0 10px;
+  margin-right: 5px;
+  background-color: #11b082;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 </style>
