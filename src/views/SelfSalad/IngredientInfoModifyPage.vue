@@ -1,12 +1,13 @@
 <template>
     <v-container>
-      <div align="center">
-        <h2>재료정보 수정</h2>
+      <v-col cols="12" style="margin-bottom:-10px">
+      <span style="font-size: 60px; font-weight: bold; margin-top: 30px; font-family:'HSBombaram';">REGISTER</span>
+      <div class="line"/>
         <div>
             <ingredient-info-modify-form :id="id" v-if="ingredientInfo" :ingredientInfo="ingredientInfo" @submit="onSubmit"/>         
         <p v-else>로딩중 .......</p>
       </div>
-      </div>
+    </v-col>
     </v-container>
   </template>
   
@@ -54,6 +55,20 @@ const selfSaladModule = 'selfSaladModule'
   
   </script>
   
-  <style>
-  
+  <style scoped>
+    .line{
+    width: 100%;
+    border-bottom: 7px solid #40513B;
+    margin-top: -24px;
+}
+*{
+    /* color: #40513B; */
+    color: #40513B;
+  }
+  @font-face {
+    font-family: 'HSBombaram';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
   </style>

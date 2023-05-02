@@ -36,28 +36,43 @@
     </div>
 
     <div class="py-5">
-      <p>수동 이미지 슬라이드 샐러드 메뉴</p>
+      <h4 style="text-align: center;">지금 가장 핫한 샐러드</h4>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="main-top-promotion row">
+            <v-row>
               <v-col v-for="product in products.slice(0, 4)" :key="product.productId">
-                <product-card :product="product"/>
+                <product-card :product="product" @addCart="addCart" :favoriteInfo="favoriteInfo" :favoriteList="favoriteList" @saveFavorite="saveFavorite"/>
               </v-col>
-            </div>
-          </div>
+            </v-row>
+              </div>
           <div class="carousel-item">
-            <div class="main-top-promotion row">
+            <v-row>
               <v-col v-for="product in products.slice(4,8)" :key="product.productId">
-                <product-card :product="product"/>
+                <product-card :product="product" @addCart="addCart" :favoriteInfo="favoriteInfo" :favoriteList="favoriteList" @saveFavorite="saveFavorite"/>
               </v-col>
-            </div>
+            </v-row>
           </div>
         </div>
           <span class="carousel-control-prev-icon carousel-control-prev" aria-hidden="true" data-bs-target="#mainTopCarousel-1" data-bs-slide="prev"></span>
           <span class="visually-hidden">Previous</span>
           <span class="carousel-control-next-icon carousel-control-next" aria-hidden="true" data-bs-target="#mainTopCarousel-1" data-bs-slide="next"></span>
           <span class="visually-hidden">Next</span>
+      </div>
+    </div>
+
+    <div class="py-5">
+      <h4 style="text-align: center;">샐러드와 든든함을 더해봐요</h4>
+      <div id="mainTopCarousel-1" class=" container carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <v-row>
+              <v-col v-for="sideProduct in sideProducts.slice(0, 3)" :key="sideProduct.sideProductId">
+                <side-product-card :sideProduct="sideProduct"/>
+              </v-col>
+            </v-row>
+              </div>
+        </div>
       </div>
     </div>
     
@@ -67,35 +82,81 @@
 <script>
 
 import ProductCard from '@/components/Product/ProductCard.vue'
+import SideProductCard from '@/components/SideProduct/SideProductCard.vue';
 import { mapActions, mapState } from 'vuex'
 
 const productModule = 'productModule'
+const sideProductModule = 'sideProductModule'
+const ordercartModule = 'ordercartModule'
 
 export default {
-  components: {ProductCard},
+  components: {ProductCard, SideProductCard},
   name: 'BannerForm',
-  data() {
-    return {
-      // 백엔드에서 리스트 받을 꺼 생각하고 예시로 만듬
-      boardList: [
-        { title: 'title1', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title2', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-        { title: 'title3', name: '살안찌는 샐러드', img: require('@/assets/popup/SSS.jpeg'), price: '11000' },
-      ]
-    }
-  },
   computed:{
     ...mapState(productModule, [
       'products'
-    ])
+    ]),
+    ...mapState(sideProductModule, [
+      'sideProducts'
+    ]),
+    ...mapState(productModule, [
+      'favoriteInfo',
+      'favoriteList'
+    ]),
+    favoriteInfo: {
+      get() {
+        return this.$store.state.productModule.favoriteInfo;
+      },
+      set(value) {
+        this.$store.commit('productModule/SET_FAVORITE_INFO', value);
+      }
+    },
+    favoriteList: {
+      get() {
+        return this.$store.state.productModule.favoriteList;
+      },
+      set(value) {
+        this.$store.commit('productModule/SET_FAVORITE_INFO', value);
+      }
+    }
   },
+  async created (){
+        await this.requestFavoriteListToSpring()
+      },
   async mounted (){
     await this.requestProductListToSpring()
+    await this.requestSideProductListToSpring()
+    await this.requestSortFavoriteToSpring()
   },
   methods:{
     ...mapActions(productModule, [
-      'requestProductListToSpring'
-    ])
+      'requestProductListToSpring',
+      'requestSortFavoriteToSpring'
+    ]),
+    ...mapActions(sideProductModule, [
+      'requestSideProductListToSpring'
+    ]),
+    ...mapActions(productModule, [
+      'requestSaveFavoriteToSpring',
+      'requestFavoriteListToSpring'
+    ]),
+    async saveFavorite(payload) {
+      const productId = payload.productId
+      await this.requestSaveFavoriteToSpring(productId)
+      await this.requestFavoriteListToSpring()
+    },
+    ...mapActions(ordercartModule, [        
+      'requestAddCartToSpring'    
+  ]),
+    async addCart(payload) {
+      const itemId = payload.productId
+      const quantity = payload.quantity
+      const category = 'PRODUCT'
+      console.log('productId: '+ itemId )
+      console.log('quantity: '+ quantity )
+      console.log('category: '+ category )
+      await this.requestAddCartToSpring({ itemId, category, quantity})
+    },
   }
 }
 </script>

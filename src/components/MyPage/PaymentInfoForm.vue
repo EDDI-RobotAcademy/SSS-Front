@@ -1,137 +1,179 @@
 <template>
-  <div class="white" style="font-family: Arial" ref="form">
-      <div class="fly">
-        <p style="font-weight: bold; font-size: 17px">
-          결제정보
-        </p>
-        <v-card class="pt-3 pl-3 pb-3" style="background-color: #F2F2F2; font-size: 15px" outlined>
-          <span>상품금액<span style="text-align:right;display: inline-block; width: 150px">{{ this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span></span><br>
-          <span class="ml-3 mt-3" style="display: inline-block; font-size: 12px; color: #A4A4A4">⨽ 상품금액 <span style="text-align:right;display: inline-block; width: 134px">{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span></span><br>
-          <span class="ml-3" style="font-size: 12px; color: #A4A4A4">⨽ 할인금액 <span style="text-align:right;display: inline-block; width: 134px">{{nonDiscountPrice}}원</span></span><br>
+  <v-container>
+    <div class="fly">
+      <v-card class="pt-3 pl-3 pb-3" outlined style="background-color: #F2F2F2; font-size: 15px;">
+        <div v-for="(Items, id) in orderList" :key="id">
+          <span>주문 금액<span style="text-align:right;display: inline-block; width: 150px">{{Items.totalPrice | comma}}원</span></span><br>
+          <span class="ml-3 mt-3" style="display: inline-block; font-size: 12px; color: #A4A4A4">⨽ 상품개수 <span style="text-align:right;display: inline-block; width: 134px">{{Items.selectedItems.length}}개</span></span><br>
+          <span class="ml-3" style="font-size: 12px; color: #A4A4A4">⨽ 할인금액 <span style="text-align:right;display: inline-block; width: 134px">0원</span></span><br>
           <span class="pt-3 pb-3" style="display: inline-block;">배송비
-            <span v-if="this.$store.state.ordercartModule.orderList.orderSave.totalPrice  >= 50000" style="text-align:right;display: inline-block; width: 160px">0원</span>
-            <span v-else style="text-align:right;display: inline-block; width: 160px">{{ deliveryFee }}원</span>
+            <span v-if="Items.totalPrice >= 50000" style="text-align:right;display: inline-block; width: 160px">0원</span>
+            <span v-else style="text-align:right;display: inline-block; width: 160px">3,000원</span>
           </span><br>
-          <v-divider/>
+          <v-divider />
           <span class="pt-3" style="display: inline-block;">총 결제금액
-            <span v-if="this.$store.state.ordercartModule.orderList.orderSave.totalPrice  >= 50000" style="text-align:right;display: inline-block; width: 126px">{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</span>
-            <span v-else style="text-align:right;display: inline-block; width: 126px">{{ this.$store.state.ordercartModule.orderList.orderSave.totalPrice  + deliveryFee }}원</span></span>
-        </v-card>
-      </div>
-
-      
-
-      <v-container>
-        <v-card>
-          <v-card-title style="background-color: white">
-            <span style="font-size: 30px; font-weight: bold; color: black;">Delivery</span>
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-card-text>
-            <table>
-              <thead>
-                <tr style="margin-top: 20px;">
-                  <th>전체 개</th>
-                  <th colspan="2">상품명</th>
-                  <th>판매가</th>
-                  <th>배송비/배송 형태</th>
-                  <th>총 결제 금액</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template>
-                  <tr>
-                    <td>{{this.$store.state.ordercartModule.orderList.orderSave.selectedItems.length}}</td>
-                    <!-- {{this.$store.state.ordercartModule.orderList.orderSave.selectedItems}} -->
-                  
-                  <td>
-                    <!-- <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                    </router-link> -->
-                    <!-- <v-img :src="cartItem.category.includes('SELF') ?
-                    require(`@/assets/logo/3sss.jpg`) :
-                    require(`@/assets/product/${cartItem.editedImg}`)"
-                    style="max-width: 100px; max-height: 100px;" /> -->
-                  </td>
-                  <td>{{this.$store.state.ordercartModule.orderList.orderSave.selectedItems[0].title}}</td>
-                  <td>
-                    <p>{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice }}원</p>
-                  </td>
-                  <td>
-                    3000 원
-                  </td>
-                  <td>
-                    <p>{{this.$store.state.ordercartModule.orderList.orderSave.totalPrice + deliveryFee }}원</p>
-                  </td>
-                </tr>
+            <span v-if="Items.totalPrice >= 50000" style="text-align:right;display: inline-block; width: 126px">{{Items.totalPrice | comma}}원</span>
+            <span v-else style="text-align:right;display: inline-block; width: 126px">{{Items.totalPrice + 3000 | comma}}원</span>
+          </span>
+        </div>
+      </v-card>
+    </div>
+    
+    <v-card>
+        <v-card-title style="background-color: white; align-items: center;">
+          <span style="font-size: 30px; font-weight: bold; color: black;">Order / Payment</span>
+          <v-spacer></v-spacer>
+          <router-link :to="{name: 'MyShoppingCartPage'}" style="text-decoration: none;">
+            <p style="font-size: 10px; font-weight: bold; color: black; margin-right: 5px;">장바구니 > </p>
+          </router-link>
+            <p style="font-size: 12px; font-weight: bold; color: black; margin-right: 5px;"> 주문서 </p>
+            <p style="font-size: 10px; font-weight: bold; color: black;"> > 주문완료</p>
+        </v-card-title>
+        <v-card-text>
+          <table>
+            <thead>
+              <tr style="margin-top: 20px;">
+                <th>상품명</th>
+                <th>판매가</th>
+                <th>수량</th>
+                <th>주문 금액</th>
+              </tr>
+            </thead>
+            <tbody>
+                <template v-for="(Items) in orderList">
+                  <tr v-for="(Item, idx) in Items.selectedItems" :key=idx>
+                    <td style="text-align: center;">
+                      <v-img :src="Item.category.includes('SELF') ? require(`@/assets/logo/3sss.jpg`) : require(`@/assets/product/${Item.editedImg}`)"
+                      style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;" />
+                      <div style="font-weight: bold;">{{ Item.title }}</div>
+                    </td>
+                    <td>{{ Item.totalPrice / Item.quantity | comma }}원</td>
+                    <td>{{ Item.quantity }}</td>
+                    <td>{{ Item.totalPrice | comma }}원</td>
+                  </tr>
                 </template>
-              </tbody>
-            </table>
-          </v-card-text>
-        </v-card>
-      </v-container>
+            </tbody>
+          </table>
+        </v-card-text>
+      </v-card>
+        
+          <v-dialog v-model="showModal" width="800"  @change="showNewDelivery">
+            <v-card>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12">
+                      <div class="text-h4 font-weight-black">신규 배송지 등록</div>
+                    <v-btn @click="KakaoAddressApi" color="#609966" dark>주소검색</v-btn>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">우편 번호</p>
+                      <v-text-field v-model="zipcode" type="text" :disabled="false" outlined dense required style="width: auto; max-width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">도로명 주소</p>
+                      <v-text-field v-model="city" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">지번 주소</p>
+                      <v-text-field v-model="street" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="d-flex" style="width: auto;">
+                      <p style="font-size: 17px; color: #40513B; padding-right: 30px; padding-top: 7px; min-width: 120px;">상세 주소</p>
+                      <v-text-field v-model="addressDetail" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>            
+                    </div>
+                  </v-col>
+                  <v-btn @click="registerAddress">주소등록</v-btn>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
 
-      <h3>주문/결제 하기</h3>
-      <v-divider class="mt-3 mb-3"/>
+        <div style="margin-top: 20px;">
+          <v-btn @click="showAddresList">배송지 목록 확인하기</v-btn>
+        </div>
 
 
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left" >주문하는분 닉네임 
-            : [ {{ this.$store.state.memberModule.memberInfoAboutSignIn.userNickName }} ]
-          </p>
-        </v-row>
-        <v-divider class="mt-1 mb-3"/>
-
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left">이메일
-          : [ {{ this.$store.state.memberModule.memberInfoAboutSignIn.userEmail }} ] </p>
-        </v-row>
-        <v-divider class="mt-1 mb-3"/>
-      
-        <v-row class="member-row" >
-          <p class="member-tool" style="text-align: left" >배송지</p>
-            <div class="my-tabs">
-
-                  <span>
-                    <input type="radio" id="defaultType" name="deliveryType" checked @change="showDefaultDelivery">
-                    <label for="defaultType">기본배송지</label>
-                  </span>
-                  
-                  <span>
-                    <input type="radio" id="deliveryTypeNew" name="deliveryType" @change="showNewDelivery">
-                    <label for="deliveryTypeNew">신규배송지</label>
-                  </span>
-            </div>
-            <button @click="showAddresList">배송지 목록</button>
-        </v-row>
-
-          <v-row class="hi">
-            <v-col cols="12">
-              <v-text-field label="도로명" v-model="cityDefault" readonly></v-text-field>
-              <v-text-field label="지번" v-model="streetDefault" readonly></v-text-field>
-              <v-text-field label="상세주소" v-model="addressDetailDefault" readonly></v-text-field>
-              <v-text-field label="우편번호" v-model="zipcodeDefault" readonly></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row class="bye" style="display:none">
-            <v-col cols="12">
-              <div class="btn-address">
-                <v-btn @click="KakaoAddressApi" color="#609966" dark>주소검색</v-btn>
+        <div class="d-flex justify-content-between">
+          <div class="shipping_box1" style="width: 48%; display: inline-block;">
+            <div class="shipping_box1_line1">
+              <div class="shipping_txt">
+                <span>
+                  <input type="radio" name="radio" checked>
+                  <label for="defaultType">기본 배송지</label>
+                </span>
+                <span>기본</span>
               </div>
-              <v-text-field label="도로명" v-model="city" readonly></v-text-field>
-              <v-text-field label="지번" v-model="street" readonly></v-text-field>
-              <v-text-field label="우편번호" v-model="zipcode" readonly></v-text-field>
-              <v-text-field label="상세주소" v-model="addressDetail"  type="text"></v-text-field>
-              <v-text-field label="수령인" v-model="name"></v-text-field>
-              <v-text-field label="연락처" v-model="phone"></v-text-field>
-            <v-btn @click="registerAddress">등록</v-btn>
+            </div>
 
-            </v-col>
-          </v-row>
-
-        <v-divider class="mb-10"/>
-
-      <v-divider class="mt-3 mb-3"/>
-      
+            <div class="shipping_box1_line2">
+              <label for="name" class="form-label">받으시는 분<span style="color: red;">*</span></label>
+              <input type="text" id="name" class="form-input"/>
+              <label for="phone" class="form-label">연락처<span style="color: red;">*</span></label>
+              <input type="tel" id="phone" class="form-input"/>
+              <span>[{{ zipcodeDefault }}] {{ cityDefault }} {{addressDetailDefault}}</span>
+            </div>
+            <div class="shipping_delivery_detail">
+              <select id="selection" class="form-select" v-model="selectedOption">
+                <option hidden>배송 메모를 선택해주세요.</option>
+              <option>부재시 핸드폰으로 연락주세요.</option>
+              <option>부재시 경비실에 맡겨주세요.</option>
+              <option>배송전에 연락주세요.</option>
+              <option>택배보관함에 보관해주세요.</option>
+              <option disabled></option>
+              <option value="direct">직접 입력</option>
+            </select>
+              <textarea v-if="selectedOption === 'direct'"
+              style="width: 100%; height: 70px; border: 1px solid #ccc;
+              border-radius: 5px; margin-top: 10px;"
+              maxlength="20"
+              placeholder="최대 20자까지 입력 가능합니다."
+              v-model="directEntryText"
+              ></textarea>
+          </div>
+          </div>
+          <div class="shipping_box1" style="width: 48%; display: inline-block;" @click="openModal()">
+            <div class="shipping_box1_line1">
+              <div class="shipping_txt">
+                <span>
+                  <input type="radio" name="radio">
+                  <label for="defaultType">신규 배송지</label>
+                </span>
+              </div>
+            </div>
+            <div class="shipping_box1_line2">
+              <label for="name" class="form-label">받으시는 분<span style="color: red;">*</span></label>
+              <input type="text" id="name" class="form-input"/>
+              <label for="phone" class="form-label">연락처<span style="color: red;">*</span></label>
+              <input type="tel" id="phone" class="form-input"/>
+              <span> </span>
+            </div>
+            <div class="shipping_delivery_detail">
+              <select id="selection" class="form-select" v-model="selectedOption2">
+                <option hidden>배송 메모를 선택해주세요.</option>
+              <option>부재시 핸드폰으로 연락주세요.</option>
+              <option>부재시 경비실에 맡겨주세요.</option>
+              <option>배송전에 연락주세요.</option>
+              <option>택배보관함에 보관해주세요.</option>
+              <option disabled></option>
+              <option value="direct2">직접 입력</option>
+            </select>
+              <textarea v-if="selectedOption2 === 'direct2'"
+              style="width: 100%; height: 70px; border: 1px solid #ccc;
+              border-radius: 5px; margin-top: 10px;"
+              maxlength="20"
+              placeholder="최대 20자까지 입력 가능합니다."
+              v-model="directEntryText2"
+              ></textarea>
+          </div>
+          </div>
+        </div>
       
         <v-card>
         <v-list-item three-line>
@@ -164,6 +206,7 @@
         </v-list-item>
       </v-card>
 
+
       <div class="pay">
         <v-btn color=#d333 v-if="selectedPayment === 'kakao'" @click="KakaoPay()">
           <v-icon>mdi-credit-card-check-outline</v-icon>
@@ -178,7 +221,6 @@
             <strong>결제하기</strong>
         </v-btn>
       </div>
-  </div>
 </template>
 
 <script>
@@ -199,19 +241,12 @@ import PaymentInfoPage from "@/views/MyPage/PaymentInfoPage.vue";
 export default {
   name: "PaymentInfoForm",
   components: { PaymentInfoPage },
-  props: {
-    selectedItems: {
-      type: Array,
-      required: true
-    }
-  },
+
   methods: {
-    ...mapActions(ordercartModule, [
-              // "reqOrderPageDeliveryListToSpring"
+    ...mapActions( memberModule, [
+    'requestUpdateMemberInfoToSpring',
     ]),
-    ...mapState(ordercartModule, [
-      'orderList'
-    ]),
+
     incQuantity(idx) {
       this.cartItems[idx].quantity++
       const itemId = this.cartItems[idx].cartItemId
@@ -246,72 +281,56 @@ export default {
     closeModal() {
       this.showModal = false;
     },
-    // 라디오버튼 'hi', 'bye' 클릭
-    showDefaultDelivery() {
-      this.defaultDelivery = true;
-      document.querySelector('.hi').style.display = 'flex';
-      document.querySelector('.bye').style.display = 'none';
-    },
     showNewDelivery() {
       this.defaultDelivery = false;
       document.querySelector('.hi').style.display = 'none';
       document.querySelector('.bye').style.display = 'flex';
     },
-    showAddresList() {
-      const addressList = document.createElement("div");
-      addressList.id = "address-list";
-      addressList.innerHTML = `
-      <ul>
-        <li>${this.$store.state.memberModule.memberInfoModify.city}</li>
-      </ul>
-      `;
-      const newWindow = window.open("", "배송지 목록", "width=300, height=200");
-      newWindow.document.body.appendChild(addressList);
     },
+    // 신규 배송지 주소 등록
     registerAddress() {
-      const data= {
-        userId: '',
-        address: {
-          name: this.$store.state.memberModule.memberInfoAboutSignIn.userNickName,
-          phone: this.phone,
-          address: this.address
-        }
-      }
-      axios.put('/member/profile-address/register/' + data.userId, data.address)
-      .thes(response => {
-        console.log('Address registered:', response.data)
-      })
-      .catch(error => {
-        console.log('등록실패:', error)
-      })
+      const zipcode= this.zipcode
+      const city= this.city
+      const street= this.street
+      const addressDetail= this.addressDetail
+      
+      this.$emit("submit", { zipcode, city, street, addressDetail });
     },
     setDeliveryRequest () {
-      const addressId = 1
-      const recipient = '김창주'
-      const deliveryMemo= '배송 메모'
-      const zipcode = '01303'
-      const city = '서울 강북구 삼양로 123길 1(수유동)'
-      const street = '서울 강북구 수유동 287'
-      const addressDetail = '14'
+      // const addressId = 1
+      // const recipient = '김창주'
+      // const deliveryMemo= '배송 메모'
+      const addressId = ''
+      const recipient = ''
+      const deliveryMemo= ''
+      const recipientPhone=''
+
+
+      // const zipcode = '01303'
+      // const city = '서울 강북구 삼양로 123길 1(수유동)'
+      // const street = '서울 강북구 수유동 287'
+      // const addressDetail = '14'
 
       let deliveryRegisterRequest = {
         addressId: null,
-        recipient: null,
-        deliveryMemo: null,
-        zipcode: null,
-        city: null,
-        street: null,
-        addressDetail: null,
+        // recipient: null,
+        // deliveryMemo: null,
+        // recipientPhone: null,
+        // zipcode: null,
+        // city: null,
+        // street: null,
+        // addressDetail: null,
       };
       // 배송정보 주소id, recipient, deliverymemo = deliveryRegisterRequest
       return deliveryRegisterRequest = {
         addressId,
-        recipient,
-        deliveryMemo,
-        zipcode,
-        city,
-        street,
-        addressDetail,
+        recipient: '',
+        deliveryMemo:'',
+        recipientPhone:'',
+        // zipcode,
+        // city,
+        // street,
+        // addressDetail,
        }
     },
     setOrderItemRequest() {
@@ -448,6 +467,7 @@ export default {
             //결제정보
             const paymentRequest = this.setPaymentRequest()
             paymentRequest.pay_method = 'kakaoPay'
+                        
             // 배송지 정보 
             const deliveryRegisterRequest = this.setDeliveryRequest()
             // 상품정보 
@@ -491,34 +511,37 @@ export default {
 
         }
       }).open()
-    },
+  },  
+  filters: {
+  comma(val) {
+    return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   },
   computed : {
     ...mapState([ordercartModule, [
       'orderList',
       'orderDeliveryList'
     ]]),
-    ...mapState([memberModule, [
-      ' memberInfoAboutSignIn'
-    ]
+    ...mapState(memberModule,[
+      'MemberProfile',
+      'memberInfoModify'
     ]),
   },
   data() {
     return{
+      selectedOption: '배송 메모를 선택해주세요.',
+      directEntryText: '',
+      selectedOption2: '배송 메모를 선택해주세요.',
+      directEntryText2: '',
       orderItemRegisterRequestList : [],
       selectedPayment: null,
         dialog: false,
-        selectedOption: "",
         merchant_uid : 'ORD',
         randomNumber : 0,
         usedNum : [],
         lsDeliveryList: [],
         selectedAddress: null,
 
-      cartItems: {
-        type: arrayExpression,
-        require: true,
-      },
       checkedValues: [],
       showModal: false,
       cartItemId: 0,
@@ -538,16 +561,18 @@ export default {
         phone: "",
         address: "",
       },
+      zipcode: '',
+      city: '',
+      street: '',
+      addressDetail: '',
       setAddress: false,
       setDestination: true,
       paymentPrice: 0,
       totalCount: 0,
       nonDiscountPrice: 0,
       person: '',
-      name: '',
       address: '',
       addressDetail: '',
-      phone: '',
       product: [],
       defaultDelivery: true, // 기본 배송지 선택 여부
       showNew: false,
@@ -557,9 +582,17 @@ export default {
       addressDetailDefault: this.$store.state.memberModule.memberInfoModify.addressDetail,
       zipcodeDefault: this.$store.state.memberModule.memberInfoModify.zipcode ,
       addressPass: false,
+      city: '',
+      street: '',
+      street: '',
+      addressDetail: '',
+      buyer_name: '',
 
-    }
+      phoneNumber: '',
+      recipient: '',
+
   },
+}
 }
 </script>
 
@@ -589,13 +622,14 @@ export default {
   min-height: 20px !important;
 }
 .fly {
+  position: fixed;
+  z-index: 9999;
+  left: 40%;
+  top: 1px;
+  width: 250px;
+  height: 210px;
   margin-top: 200px;
-  position:fixed;
-  left:50%;
-  width:250px;
-  top:100px;
-  height:210px;
-  margin-left:650px;
+  margin-left: 650px;
 }
 .my-tabs span + span {
     margin-left: 50px;
@@ -643,11 +677,77 @@ table th {
   font-weight: bold;
   text-align: center;
 }
-.sticky-nav {
-  position: sticky;
-  bottom: 0;
-  left: 0;
+.shipping_box1 {
+  padding: 24px 20px;
+  border: 2px solid #dddddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.shipping_box1_line1 {
+  border-bottom: 2px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  background-color: hsl(204, 12%, 58%);
+}
+
+.shipping_box1_line2 {
+  display: block;
+  margin-top: 5px;
+}
+
+.shipping_delivery_detail {
+  margin-top: 10px;
+  padding-top: 10px;
+  display: block;
+}
+
+.shipping_txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px ;
+}
+
+.shipping_txt span:nth-child(1),
+.shipping_font {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: -.6px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.shipping_txt span:nth-child(2),
+.shipping_txt span:nth-child(3) {
+  display: inline-block;
+  height: 16px;
+  border: 1px solid #11b082;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -.5px;
+  color: #fff;
+  padding: 0 10px;
+  margin-right: 5px;
+  background-color: #11b082;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 </style>

@@ -138,7 +138,8 @@ methods:{
         this.showPreview = false
       }
       },
-      }
+      
+    
     },
     beforeUpdate() {
     this.totalPrice = this.sideProduct.price * this.quantity

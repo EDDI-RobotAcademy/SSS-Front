@@ -2,7 +2,7 @@
   <form @submit.prevent="onSubmit">
     <div>
       <div class="selfSalad">My SelfSalad : <span>{{ this.saladTitle }}</span></div>
-      <div class="price"><span>{{ totalPrice }} </span>(총가격) </div>
+      <div class="price"><span>{{ totalPrice | comma }}원</span>(총 가격) </div>
       <div class="calorie"><span>{{ totalCalorie }} </span>(총 Kcal)</div>
       <p class="name">
         <span id="ingredientName">재료명 : </span>
@@ -18,7 +18,7 @@
     <template #item="{ item }">
       <tr :key="item.ingredientId">
         <td class="header">{{ item.name }}</td>
-        <td class="header">{{ item.price }}</td>
+        <td class="header">{{ item.price | comma}}원</td>
         <td class="header">{{ item.calorie }}</td>
         <td>
           <select v-model="item.selectedAmount"
@@ -83,6 +83,11 @@ const ordercartModule = 'ordercartModule'
         calorieList: [],
       }   
     },
+    filters: {
+    comma(val) {
+    return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
     computed: {
       ...mapState(ordercartModule, [
         'selfSalad'

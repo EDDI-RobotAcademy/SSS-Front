@@ -168,6 +168,27 @@ async reqRegisterOrderToSpring({}, payload) {
         alert("오류발생 !!!")
     }
 },
+// 신규 배송지 등록
+async reqMyPageRegisterDeliveryToSpring({}, payload) {
+    const { zipcode, city, street, addressDetail } = payload
+    console.log(payload);
+    try {
+        await axiosInst.put(`/member/profile-address/register`, 
+        { zipcode, city, street, addressDetail },
+        {
+            headers: {
+            'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+            }
+        })          
+        console.log("신규 배송지 등록 : "+ JSON.stringify(payload))
+        alert('신규 배송지가 성공적으로 등록되었습니다.');
+    } catch {
+        alert('신규 배송지 등록되지 않았다!')
+    }
+          
+          
+},
+
 async reqMyOrderListToSpring({commit}) {
     return await axiosInst.get(`/order/list`,
     {
@@ -180,4 +201,6 @@ async reqMyOrderListToSpring({commit}) {
         commit(REQUEST_COMPLETE_ORDER_TO_SPRING, res.data)
     })
 }
-}
+
+
+

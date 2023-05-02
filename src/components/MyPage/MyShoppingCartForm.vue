@@ -12,7 +12,7 @@
       <v-container>
         <v-card>
           <v-card-title style="background-color: white">
-            <span style="font-size: 30px; font-weight: bold; color: black;">Order / Payment</span>
+            <span style="font-size: 30px; font-weight: bold; color: black;">My Cart</span>
             <v-spacer></v-spacer>
             <v-btn style="color: black;" text @click="selectRemoveItem">
               <v-icon>mdi-delete-outline</v-icon>
