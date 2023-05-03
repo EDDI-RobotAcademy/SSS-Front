@@ -89,7 +89,7 @@
                       <v-text-field v-model="addressDetail" type="text" :disabled="false" outlined dense required style="width: 600px; font-size: 17px;"/>            
                     </div>
                   </v-col>
-                  <v-btn @click="registerAddress">주소등록</v-btn>
+                  <v-btn @click="clickaddAdress">주소등록</v-btn>
                 </v-row>
               </v-card-text>
             </v-card>
@@ -242,11 +242,27 @@ import PaymentInfoPage from "@/views/MyPage/PaymentInfoPage.vue";
 export default {
   name: "PaymentInfoForm",
   components: { PaymentInfoPage },
-
+  props: {
+  memberInfoAdd: {
+    type: Object,
+    require: true,
+  }
+},
   methods: {
     ...mapActions( memberModule, [
     'requestUpdateMemberInfoToSpring',
     ]),
+    clickaddAdress() {
+      const zipcode = this.zipcode
+      const city = this.city
+      const street = this.street
+      const addressDetail = this.addressDetail
+
+      console.log(zipcode, city, street, addressDetail);
+
+      this.$emit("addAdress", { zipcode, city, street, addressDetail });
+
+    },
     showAddresList() {
       const addressList = document.createElement("div");
       addressList.id = "address-list";
@@ -348,11 +364,6 @@ export default {
       const selectedItems = this.$store.state.ordercartModule.orderList.orderSave.selectedItems;
       const orderItemRegisterRequestList = [] 
       for (let i = 0; i < selectedItems.length; i++) {
-        this.orderItemRegisterRequestList.push({
-            itemId: selectedItems[i].cartItemId,
-            category: selectedItems[i].category,
-            quantity: selectedItems[i].quantity
-        });
 
       let itemId;
       switch (selectedItems[i].category) {
@@ -360,10 +371,10 @@ export default {
           itemId = selectedItems[i].productId;
           break;
         case "SIDE":
-          itemId = selectedItems[i].sideProductId;
+          itemId = selectedItems[i].productId;
           break;
         case "SELF":
-          itemId = selectedItems[i].selfSaladId;
+          itemId = selectedItems[i].productId;
           break;
         default:
           itemId = null;

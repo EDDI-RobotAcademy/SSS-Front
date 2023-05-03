@@ -5,6 +5,7 @@ import {
     IS_AUTHENTICATED,
     MEMBER_INFO_MODIFY,
     LOG_OUT,
+    MEMBER_INFO_ADD
 } from './mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -140,5 +141,25 @@ async requestDeleteMember({ commit }) {
         }
       },
 
+// 신규 배송지 등록
+async requestRegisterAddressToSpring({commit}, payload) {
+  axiosInst.put(`/member/profile-info/update`, payload,{
+    headers: {
+      'Authorization': 'Bearer '+localStorage.getItem("userToken"),
+    }
+  })
+      .then((res) => {
+        // 성공적으로 회원 정보를 수정했을 경우
+        console.log(res.data);           
+          alert('신규 배송지 등록 완');
+      commit(MEMBER_INFO_ADD, payload);
+      })
+      .catch((err) => {
+        // 회원 정보 수정에 실패했을 경우
+        console.error('Address object is undefined.');
+        console.log(err.response.data.message);
+          alert('신규 배송지 등록 실패')
+  });
+},
 
   };

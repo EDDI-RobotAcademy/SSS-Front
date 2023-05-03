@@ -1,42 +1,64 @@
 <template>
   <v-container>
 
-    <div class="py-5">
-      <div class="container">
-        <p>이달의 샐러드 </p>
-        <!-- 반복문 돌려서 예시로 틀 잡아뒀습니다. -->
-        <v-row>
-          <div class="main-top-promotion row">
-          <v-col v-for="(boardItem, idx) in boardList" :key="idx">
-            <router-link :to="{ name: 'home' }">
-              <v-img :src="boardItem.img" aspect-ratio="1" class="light gray-2">
-                <template v-slot:placeholder>
-                  <v-progress-circular indeterminate color="lighten-5-grey" />
-                </template>
-              </v-img>
-            </router-link>
-            <p class="product-title">{{ boardItem.name }}</p>
-            <p class="product-price">{{ boardItem.price  }} 원</p>
-          </v-col>
-        </div>
-        </v-row>
+    <p class="saladPageName">To Make Self Salad </p> 
+    <div align="right" style="margin-right: 194px;">
+      <router-link to="/selfsalad/ingredient-list-page">
+        <span>Let's go make</span>
+      </router-link>
+    </div>  
+    <div class="line"></div>
+    <div class="row">
+      <div class="col-2"></div>
+        <img src="@/assets/popup/SSS.jpeg" class="col-3" >
+      <div class="col-6">
+        <h4>SELF</h4>
+        <p><sapn>자신만의 개성있는 샐러드를 만들어보세요.</sapn> <br><br>
+          SelfSalad로 새로운 맛과 영양소를 담은 개성 넘치는 샐러드를 즐겨보세요. <br>
+          샐러드의 이름을 직접 지정할 수도 있으니, 당신의 창의력만 있으면 됩니다.</p>
       </div>
     </div>
-
-
-    <div class="py-5">
-      <p>promotion </p>
-      <div class="container">
-        <div class="row">
-          <div class="col" style="padding:200px; border:solid 1px black; background-color:white;">
-            promotion
-          </div>
-        </div>
+    <div class="line"></div>
+    <div class="row">
+      <div class="col-2"></div>
+        <img src="@/assets/Introduction/Kcal.jpg" class="col-3" >
+      <div class="col-6">
+        <h4>CALORIE</h4>
+        <p><sapn>재료 선택할 때마다 해당 재료의 칼로리 정보를 함께 제공합니다.</sapn> <br> <br>
+          건강한 식습관을 유지하면서도 영양소를 충분히 섭취할 수 있는 방법을 제공하기 <br> 
+          때문에 당신이 선택한 재료의 칼로리 정보를 확인하고 적절한 양을 조절하여 건강한 <br>
+          샐러드를 만들어보세요.
+          </p>
       </div>
     </div>
+    <div class="line"></div>
+    <div class="row">
+      <div class="col-2"></div>
+      <img src="@/assets/Introduction/Category1.jpg" class="col-3" >
+      <div class="col-6">
+        <h4>CATEGORY</h4>
+          <p><sapn>당신만의 샐러드를 만들기 위해 필요한 다양한 신선한 재료들을 준비했습니다.</sapn><br><br>
+              시즌에 따라 변화하는 계절 채소부터 신선한 과일, 고단백 식재료까지 다양한 옵션을 <br>
+              제공하기 때문에 원하는 토핑을 얹어 샐러드를 만들어 보세요.
+        </p>
+      </div>
+    </div>
+    <div class="line"></div>
+
+
+    
 
     <div class="py-5">
-      <h4 style="text-align: center;">지금 가장 핫한 샐러드</h4>
+      <div>
+        <div align="left" style="font-weight: bold; font-size: 24px;">
+          <h4>지금 가장 핫한 샐러드</h4>
+        </div>
+        <div align="right">
+          <router-link to="/product-list" class="ifno-black">
+            <span>더보기</span>
+          </router-link>
+        </div>    
+      </div>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -62,12 +84,21 @@
     </div>
 
     <div class="py-5">
-      <h4 style="text-align: center;">샐러드와 든든함을 더해봐요</h4>
+      <div>
+        <div align="left" style="font-weight: bold; font-size: 24px;">
+          <h4>샐러드와 든든함을 더해봐요</h4>
+        </div>
+        <div align="right">
+          <router-link to="/side-Product-list" class="ifno-black">
+            <span>더보기</span>
+          </router-link>
+        </div>    
+      </div>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <v-row>
-              <v-col v-for="sideProduct in sideProducts.slice(0, 3)" :key="sideProduct.sideProductId">
+              <v-col v-for="sideProduct in sideProducts.slice(0, 4)" :key="sideProduct.sideProductId">
                 <side-product-card :sideProduct="sideProduct"/>
               </v-col>
             </v-row>
@@ -176,12 +207,20 @@ export default {
   margin-right: -70px;
   margin-top: 190px;
 }
-.product-title {
-  margin-top: 5px;
-  font-weight: bold;
+.saladPageName{
+  font-size: 70px;
+  text-align: center;
+  color: #40513B; 
+  margin: 70px 70px;
+}
+.line{
+  width: 70%;
+  border-bottom: 3px solid #40513B;
+  margin: 20px auto;
+}
+img {
+  max-width: 300px;
+  height: auto;
 }
 
-.product-price {
-  color: green;
-} 
 </style>
