@@ -1,7 +1,6 @@
 <template>
     <v-container>
-        <v-row>
-            <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <v-row style="min-width: 500px;">
                     <v-col cols="6" class="d-flex flex-column justify-content-center" style="min-width: 500px;">
                         <div class="d-flex justify-content-center">
@@ -20,15 +19,14 @@
                                     </div>
                                 </div>
                             </v-col>
-
                         </div>
                     </v-col>
                     <v-col cols="6" class="justify-end">
-
+                        <h2>제품 정보</h2>
                         <div class="input-group mb-3" style="width: 550px; margin: 10px;">
-                            <span style="width: 150px;" class="input-group-text" id="inputGroup-sizing-default">재료명</span>
+                            <span style="width: 150px;" class="input-group-text" id="inputGroup-sizing-default">상품명</span>
                             <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-default" v-model="name" id="inputGroup-sizing-lg">
+                                aria-describedby="inputGroup-sizing-default" v-model="title" id="inputGroup-sizing-lg">
                         </div>
                         <div class="input-group mb-3" style="width: 550px; margin: 10px;">
                             <span style="width: 150px;" class="input-group-text" id="inputGroup-sizing-default">가격</span>
@@ -41,11 +39,9 @@
                             <input type="text" class="form-control" aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default" v-model="content" id="inputGroup-sizing-lg">
                         </div>
-
                         <v-row>
                             <div class="ingredientInfo">
                                 <v-col cols="12" class="foodInfoGroup">
-
                                     <div class="input-group mb-3" style="width: 250px; margin: 5px;">
                                         <span class="input-group-text" id="inputGroup-sizing-default">열량</span>
                                         <input type="number" class="form-control" aria-label="Sizing example input"
@@ -58,11 +54,8 @@
                                             aria-describedby="inputGroup-sizing-default"
                                             v-model="productDetail.carbohydrate" id="inputGroup-sizing-lg">
                                     </div>
-
                                 </v-col>
-
                                 <v-col cols="12" class="foodInfoGroup">
-
                                     <div class="input-group mb-3" style="width: 250px; margin: 5px;">
                                         <span class="input-group-text" id="inputGroup-sizing-default">당류</span>
                                         <input type="number" class="form-control" aria-label="Sizing example input"
@@ -75,11 +68,8 @@
                                             aria-describedby="inputGroup-sizing-default" v-model="productDetail.protein"
                                             id="inputGroup-sizing-lg">
                                     </div>
-
                                 </v-col>
-
                                 <v-col cols="12" class="foodInfoGroup">
-
                                     <div class="input-group mb-3" style="width: 250px; margin: 5px;">
                                         <span class="input-group-text" id="inputGroup-sizing-default">지방</span>
                                         <input type="number" class="form-control" aria-label="Sizing example input"
@@ -92,9 +82,7 @@
                                             aria-describedby="inputGroup-sizing-default" v-model="productDetail.aturatedFat"
                                             id="inputGroup-sizing-lg">
                                     </div>
-
                                 </v-col>
-
                                 <v-col cols="12" class="foodInfoGroup">
 
                                     <div class="input-group mb-3" style="width: 250px; margin: 5px;">
@@ -106,25 +94,17 @@
                                 </v-col>
                             </div>
                         </v-row>
-
                     </v-col>
-
                 </v-row>
-
-
                 <div class="d-flex justify-content-center" style="margin-top: 50px">
                     <v-btn style="background-color: rgb(54, 109, 50); color:white; width: 150px;" type="submit">등록</v-btn>
                     <router-link :to="{ name: 'ProductListPage' }">
                         <v-btn style="background-color: red; color:white; width: 150px;">취소</v-btn>
                     </router-link>
                 </div>
-
-
             </form>
-        </v-row>
     </v-container>
-</template>
-  
+</template>  
 <script>
 
 export default {
@@ -200,4 +180,11 @@ export default {
     margin-top: -20px;
     align-items: center;
 }
+h2 {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  margin-left:7px;
+}
+
 </style>

@@ -1,9 +1,10 @@
 <template>
   <v-container>
-    <div align="center">
-      <P><mark>등록한 상품을 수정하는 페이지 입니다.</mark></P>
+    <v-col cols="12" style="margin-bottom:-10px">
+      <span style="font-size: 60px; font-weight: bold; margin-top: 30px; font-family:'HSBombaram';">REGISTER</span>
+      <div class="line"/>
       <side-product-modify-form :sideProduct="sideProduct" :sideProductId="sideProductId" @submit="onSubmit" />
-    </div>
+    </v-col>
   </v-container>
 </template>
 
@@ -47,4 +48,21 @@ export default {
 }
 </script>
 
-<style></style>
+  
+<style scoped>
+.line{
+width: 100%;
+border-bottom: 7px solid #40513B;
+margin-top: -24px;
+}
+*{
+/* color: #40513B; */
+color: #40513B;
+}
+@font-face {
+font-family: 'HSBombaram';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+</style>
