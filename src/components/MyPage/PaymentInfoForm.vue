@@ -364,11 +364,6 @@ export default {
       const selectedItems = this.$store.state.ordercartModule.orderList.orderSave.selectedItems;
       const orderItemRegisterRequestList = [] 
       for (let i = 0; i < selectedItems.length; i++) {
-        this.orderItemRegisterRequestList.push({
-            itemId: selectedItems[i].cartItemId,
-            category: selectedItems[i].category,
-            quantity: selectedItems[i].quantity
-        });
 
       let itemId;
       switch (selectedItems[i].category) {
@@ -376,10 +371,10 @@ export default {
           itemId = selectedItems[i].productId;
           break;
         case "SIDE":
-          itemId = selectedItems[i].sideProductId;
+          itemId = selectedItems[i].productId;
           break;
         case "SELF":
-          itemId = selectedItems[i].selfSaladId;
+          itemId = selectedItems[i].productId;
           break;
         default:
           itemId = null;
