@@ -17,9 +17,9 @@
                       <router-link
                           :to="{ name: 'ProductReadPage',
                                     params: { productId: review.productId.toString()}}">
-                        <v-img 
+                        <v-img
                             style="margin: auto"
-                            :src="require(`@/assets/product/${review.product.productImgs[0].editedImg}`)"
+                            :src="require(`@/assets/product/${review.product.productImgList[0].editedImg}`)"
                             max-height="50px"
                             max-width="50px"
                             contain/>
@@ -48,7 +48,7 @@
                   </v-col>
                   <v-col>
                     <v-card-text>
-                      <p>{{ review.regDate }}</p>
+                      <p>{{ review.regDate | formatDate }}</p>
                       <v-rating
                           :value="review.rating"
                           background-color="grey"
@@ -127,6 +127,22 @@ export default {
     ...mapState(productModule, [
       'reviews'
     ])
+  },
+  filters: {
+      formatDate(value) {
+        const date = new Date(value);
+        const year = date.getFullYear();
+        
+        let month = date.getMonth() + 1;
+        month = month > 9 ? month : `0${month}`;
+
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+        let hours = date.getHours();
+        hours = hours > 9 ? hours : `0${hours}`;
+        const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }  
   },
 }
 </script>
