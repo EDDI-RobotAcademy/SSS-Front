@@ -25,18 +25,16 @@
 
 
     <div class="py-5">
-      <p>promotion </p>
-      <div class="container">
-        <div class="row">
-          <div class="col" style="padding:200px; border:solid 1px black; background-color:white;">
-            promotion
-          </div>
+      <div>
+        <div align="left" style="font-weight: bold; font-size: 24px;">
+          <h4>지금 가장 핫한 샐러드</h4>
         </div>
+        <div align="right">
+          <router-link to="/product-list" class="ifno-black">
+            <span>더보기</span>
+          </router-link>
+        </div>    
       </div>
-    </div>
-
-    <div class="py-5">
-      <h4 style="text-align: center;">지금 가장 핫한 샐러드</h4>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -62,12 +60,21 @@
     </div>
 
     <div class="py-5">
-      <h4 style="text-align: center;">샐러드와 든든함을 더해봐요</h4>
+      <div>
+        <div align="left" style="font-weight: bold; font-size: 24px;">
+          <h4>샐러드와 든든함을 더해봐요</h4>
+        </div>
+        <div align="right">
+          <router-link to="/side-Product-list" class="ifno-black">
+            <span>더보기</span>
+          </router-link>
+        </div>    
+      </div>
       <div id="mainTopCarousel-1" class=" container carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <v-row>
-              <v-col v-for="sideProduct in sideProducts.slice(0, 3)" :key="sideProduct.sideProductId">
+              <v-col v-for="sideProduct in sideProducts.slice(0, 4)" :key="sideProduct.sideProductId">
                 <side-product-card :sideProduct="sideProduct"/>
               </v-col>
             </v-row>
