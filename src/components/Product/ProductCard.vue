@@ -156,6 +156,7 @@
     padding: 10px 0;
     text-align: center;
     margin-top: 10px;
+    color: green;
   }
   
   *{

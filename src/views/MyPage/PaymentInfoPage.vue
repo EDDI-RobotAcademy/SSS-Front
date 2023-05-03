@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-15">
     <my-shopping-cart-form @selectPurchase="selectPurchase"/>
-    <payment-info-form :selectedItems="selectedItems" v-on:payment-success="payment" @submit="onSubmit"/>
+    <payment-info-form :selectedItems="selectedItems" v-on:payment-success="payment" @addAdress="addAdress" :memberInfoAdd="memberInfoAdd"/>
     
   </v-container>
 </template>
@@ -11,6 +11,7 @@ import PaymentInfoForm from "@/components/MyPage/PaymentInfoForm"
 import MyShoppingCartForm from "@/components/MyPage/MyShoppingCartForm";
 
 const ordercartModule = 'ordercartModule'
+const memberModule = 'memberModule'
 
 import { mapActions, mapState } from 'vuex';
 
@@ -30,12 +31,19 @@ export default {
       'orderList'
     ])
   },
+  ...mapState(memberModule, [
+            'memberInfoAdd'
+          ]),
   methods: {
-    async onSubmit(payload) {
-        const{zipcode, city, street, addressDetail}= payload
-        console.log('payload=' + zipcode, city, street, addressDetail);
-        await this.reqMyPageRegisterDeliveryToSpring(payload);
-    },
+    ...mapActions(memberModule, [
+          'requestRegisterAddressToSpring'
+        ]),
+        addAdress(payload) {
+          const{zipcode, city, street, addressDetail}= payload
+          console.log(zipcode, city, street, addressDetail);          
+          this.requestRegisterAddressToSpring(payload);
+          this.$emit('close');
+  },
     selectPurchase(items) {
       for(i=0; i < items.length; i++ ){
         this.selectedItems.push(items[i])
