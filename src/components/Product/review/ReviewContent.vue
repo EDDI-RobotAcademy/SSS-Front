@@ -12,7 +12,7 @@
                         readonly
                         dense
                         ></v-rating>
-                        <p>{{ review.regDate }}</p>
+                        <p>{{ review.regDate | formatDate }}</p>
                     </div>
                 </v-col>
                 <v-col cols="8" align="left">
@@ -53,7 +53,7 @@
                         <v-col cols="12" md="6">
                             <p style="font-weight: bold;">{{ review.nickName | comma }} 님</p>
                             <p>{{ review.content }}</p>
-                            <p>{{ review.regDate }}</p>
+                            <p>{{ review.regDate | formatDate }}</p>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -111,9 +111,23 @@ export default {
         }
     },
     filters: {
-    comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    },
+        comma(val) {
+            return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        },
+        formatDate(value) {
+        const date = new Date(value);
+        const year = date.getFullYear();
+        
+        let month = date.getMonth() + 1;
+        month = month > 9 ? month : `0${month}`;
+
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+        let hours = date.getHours();
+        hours = hours > 9 ? hours : `0${hours}`;
+        const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;  
+        },
     watch: {
         dialog(val) {
             if (!val) {

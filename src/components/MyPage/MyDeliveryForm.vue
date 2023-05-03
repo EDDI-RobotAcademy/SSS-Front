@@ -35,12 +35,13 @@
                     <th>주문 상품</th>
                     <th>결제 금액</th>
                     <th>주문 상태</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody v-for="completeOrder in completeOrders" :key="completeOrder.orderId">
                   <td>{{ completeOrder.merchant_uid }}</td>
                   <td>{{ completeOrder.paid_at | formatDate }}</td>
-                  <!-- <td>{{ completeOrder.itemResponse[0].title }}</td> -->
+                  <td>{{ completeOrder.itemResponse[0].title }}</td>
                   <td>{{ completeOrder.paid_amount | comma }}원</td>
                   <td>{{ completeOrder.orderStateType == "PAYMENT_COMPLETE" ? "결제완료" : completeOrder.orderStateType }}
                  
