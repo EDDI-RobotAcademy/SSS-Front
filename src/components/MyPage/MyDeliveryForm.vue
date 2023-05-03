@@ -16,86 +16,110 @@
     </div>
 
     <v-card-text>
-      <!-- <v-container style="width: 1000px">
-        <div style="margin-top: 50px" align="center">
+      <v-container style="width: 1000px">
+        <div v-if="!completeOrders || (Array.isArray(completeOrders) && completeOrders.length === 0)" style="margin-top: 50px" align="center">
           <h2>주문 내역이 없습니다.</h2>
         </div>
-      </v-container> -->
-
-      <v-container>
-        <v-card>
-          <v-card-title style="background-color: white">
-            <span style="font-size: 30px; font-weight: bold; color: black;">Delivery</span>
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-card-text>
-            <table>
-              <thead>
-                <tr style="margin-top: 20px;">
-                  <th>전체 개</th>
-                  <th colspan="2">상품 정보</th>
-                  <th>주문 일자</th>
-                  <th>주문 금액(수량)</th>
-                  <th>주문 상태</th>
-                  <th>배송비/배송 형태</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template>
+        <div v-else>
+          <v-card>
+            <v-card-title style="background-color: white">
+              <span style="font-size: 30px; font-weight: bold; color: black;">주문 내역</span>
+              <v-spacer></v-spacer>
+            </v-card-title>
+            <v-card-text>
+              <table> 
+                <thead style="margin-top: 20px; background-color:#739e42; color:white">
                   <tr>
-                    <td></td>
+                    <th>주문 번호</th>
+                    <th>주문 일자</th>
+                    <th>주문 상품</th>
+                    <th>결제 금액</th>
+                    <th>주문 상태</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody v-for="completeOrder in completeOrders" :key="completeOrder.orderId">
+                  <td>{{ completeOrder.merchant_uid }}</td>
+                  <td>{{ completeOrder.paid_at | formatDate }}</td>
+                  <td>{{ completeOrder.itemResponse[0].title }}</td>
+                  <td>{{ completeOrder.paid_amount | comma }}원</td>
+                  <td>{{ completeOrder.orderStateType == "PAYMENT_COMPLETE" ? "결제완료" : completeOrder.orderStateType }}
+                 
+                  </td>
                   <td>
-                    <!-- <router-link :to="{ name: 'ProductReadPage', params: { productId: cartItem.productId.toString() } }">
-                    </router-link> -->
-                    <!-- <v-img :src="cartItem.category.includes('SELF') ?
-                    require(`@/assets/logo/3sss.jpg`) :
-                    require(`@/assets/product/${cartItem.editedImg}`)"
-                    style="max-width: 100px; max-height: 100px;" /> -->
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <p></p>
-                  </td>
-                  <td>
-                  </td>
-                  <td style="text-align: center;">
-                  </td>
-                </tr>
-                </template>
-              </tbody>
-            </table>
-          </v-card-text>
-        </v-card>
+                    <my-delivery-detail-form :completeOrder="completeOrder"/><br>
+                    <v-btn v-if="completeOrder.orderStateType == 'PAYMENT_COMPLETE'" 
+                        @click="writeReview(completeOrder.itemResponse[0].perId)" color="#739e42" small dark>후기작성</v-btn>
+                      <v-dialog v-if="completeOrder.orderStateType == 'PAYMENT_COMPLETE'" v-model="reviewDialog" width="650">
+                        <review-register-form :product="product" :completeOrder="completeOrder"/>
+                      </v-dialog>
+                    </td>
+                 
+                            
+                </tbody>
+              </table>
+            </v-card-text>
+            <!--주문 상세 내역 폼 만들기-->
+          </v-card>
+        </div>
       </v-container>
+
   </v-card-text>
   </v-card>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import ReviewRegisterForm from '@/components/Product/review/ReviewRegisterForm.vue'
+import MyDeliveryDetailForm from '@/components/MyPage/MyDeliveryDetailForm.vue'
+
+const ordercartModule = 'ordercartModule'
+const productModule = 'productModule'
 
 export default {
   name: "MyDeliveryForm",
-  // components: {ReviewModifyForm},
+  components: {ReviewRegisterForm, MyDeliveryDetailForm },
   data() {
     return {
+      reviewDialog: false,
       searchQuery: '',
       searchBy: 'title',
       dateRange: {
         start: null,
         end: null
-      }
+      },
     }
   },
+  computed: {
+    ...mapState(ordercartModule, [
+      'completeOrders'
+    ]),
+    ...mapState(productModule, [
+      'product'
+    ])
+  },
   mounted() {
-    flatPickr(this.$refs.datepicker, {
-      mode: 'range',
-      dateFormat: 'Y.m.d',
-      onClose: this.searchByDate
-    })
+    this.reqMyOrderListToSpring()
+    console.log("주문내역")
+    // flatPickr(this.$refs.datepicker, {
+    //   mode: 'range',
+    //   dateFormat: 'Y.m.d',
+    //   onClose: this.searchByDate
+    // }),
   },
   methods: {
+    ...mapActions(ordercartModule, [
+      'reqMyOrderListToSpring'
+    ]),
+    ...mapActions(productModule, [
+      'requestProductToSpring'
+    ]),
+    async showOrderDetails(orderId, index) {
+      this.orderId = orderId
+      this.completeOrderIndex = index
+      this.showOrderDetail = true
+      await this.reqOrderedListFromSpring(paymentId)
+    },
     searchByDate(selectedDates) {
       // 선택한 날짜 범위로 검색 로직
     },
@@ -119,7 +143,11 @@ export default {
           }
         }
         this.currentPage = 1;
-      }
+      },
+      writeReview(productId) {
+        this.reviewDialog = true
+        this.requestProductToSpring(productId)
+      },
   },
   created () {
       if (this.products && this.products.length > 0) {
@@ -132,7 +160,26 @@ export default {
           this.searchProducts();
         }
       },
-    }
+    },
+  filters: {
+      comma(val) {
+        return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      },
+      formatDate(value) {
+        const date = new Date(value);
+        const year = date.getFullYear();
+        
+        let month = date.getMonth() + 1;
+        month = month > 9 ? month : `0${month}`;
+
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+        let hours = date.getHours();
+        hours = hours > 9 ? hours : `0${hours}`;
+        const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }  
+  },
 }
 </script>
 
@@ -142,10 +189,6 @@ table {
   width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
-}
-
-table tr:hover {
-  background-color: #f5f5f5;
 }
 
 th,
