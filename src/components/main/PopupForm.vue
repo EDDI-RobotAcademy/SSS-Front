@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="popup" v-if="popup">
-      <v-img src="@/assets/popup/popup.png" style="max-width: 600px;"/>
+      <v-img src="@/assets/popup/popup.jpg" style="max-width: 400px;"/>
       <div class="d-flex justify-content-between m-1">
         <label for="not-open">
           <input id="not-open" type="checkbox" v-model="notOpenToday">
@@ -46,8 +46,8 @@ export default {
 .popup {
   background-color: white;
   position:absolute;
-  top: 10px;
-  left: 15px;
+  top: 30px;
+  left: 45px;
   box-shadow: 0px 0px 5px;
 }
 </style>
