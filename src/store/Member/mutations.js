@@ -5,6 +5,7 @@ import {
     USER_TOKEN,
     IS_AUTHENTICATED,
     LOG_OUT,
+    MEMBER_INFO_ADD
 } from './mutation-types'
 
 export default {
@@ -32,4 +33,7 @@ export default {
     },
 
 
+    [MEMBER_INFO_ADD] (state, memberInfoAdd) {
+        state.memberInfoAdd = memberInfoAdd
+    },
 }
